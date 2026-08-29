@@ -2,7 +2,7 @@
 ;;; gtk4.scale.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -221,14 +221,14 @@ scale[.fine-tune][.marks-before][.marks-after]
 (setf (liber:alias-for-function 'scale-digits)
       "Accessor"
       (documentation 'scale-digits 'function)
- "@version{2025-08-20}
+ "@version{2026-08-18}
   @syntax{(gtk:scale-digits object) => digits}
   @syntax{(setf (gtk:scale-digits object) digits)}
   @argument[object]{a @class{gtk:scale} widget}
   @argument[digits]{an integer for the number of decimal places to display}
   @begin{short}
-    The accessor for the @slot[gtk:scale]{digits} slot of the @class{gtk:scale}
-    class gets or sets the number of decimal places that are displayed.
+    The accessor for the @slot[gtk:scale]{digits} slot gets or sets the number
+    of decimal places that are displayed.
   @end{short}
   Also causes the value of the adjustment to be rounded off to this number of
   @arg{digits}, so the retrieved value matches the value the user saw.
@@ -246,15 +246,14 @@ scale[.fine-tune][.marks-before][.marks-after]
 (setf (liber:alias-for-function 'scale-draw-value)
       "Accessor"
       (documentation 'scale-draw-value 'function)
- "@version{2025-08-20}
+ "@version{2026-08-18}
   @syntax{(gtk:scale-draw-value object) => setting}
   @syntax{(setf (gtk:scale-digits object) setting)}
   @argument[object]{a @class{gtk:scale} widget}
   @argument[setting]{@em{true} to draw the value}
   @begin{short}
-    The accessor for the @slot[gtk:scale]{draw-value} slot of the
-    @class{gtk:scale} class gets or sets whether the current value is displayed
-    as a string next to the slider.
+    The accessor for the @slot[gtk:scale]{draw-value} slot gets or sets whether
+    the current value is displayed as a string next to the slider.
   @end{short}
   @see-class{gtk:scale}")
 
@@ -270,14 +269,14 @@ scale[.fine-tune][.marks-before][.marks-after]
 (setf (liber:alias-for-function 'scale-has-origin)
       "Accessor"
       (documentation 'scale-has-origin 'function)
- "@version{2025-08-20}
+ "@version{2026-08-18}
   @syntax{(gtk:scale-has-origin object) => setting}
   @syntax{(setf (gtk:scale-digits object) setting)}
   @argument[object]{a @class{gtk:scale} widget}
   @argument[setting]{@em{true} if the scale has an origin}
   @begin{short}
-    The accessor for the @slot[gtk:scale]{has-origin} slot of the
-    @class{gtk:scale} class gets or sets whether the scale has an origin.
+    The accessor for the @slot[gtk:scale]{has-origin} slot gets or sets whether
+    the scale has an origin.
   @end{short}
 
   If the @slot[gtk:scale]{has-origin} property is set to @em{true}, the default,
@@ -298,16 +297,15 @@ scale[.fine-tune][.marks-before][.marks-after]
 (setf (liber:alias-for-function 'scale-value-pos)
       "Accessor"
       (documentation 'scale-value-pos 'function)
- "@version{2025-08-20}
+ "@version{2026-08-18}
   @syntax{(gtk:scale-value-pos object) => pos}
   @syntax{(setf (gtk:scale-digits object) pos)}
   @argument[object]{a @class{gtk:scale} widget}
   @argument[pos]{a @sym{gtk:position-type} value for the position in which the
     current value is displayed}
   @begin{short}
-    The accessor for the @slot[gtk:scale]{value-pos} slot of the
-    @class{gtk:scale} class gets or sets the position in which the current value
-    is displayed.
+    The accessor for the @slot[gtk:scale]{value-pos} slot gets or sets the
+    position in which the current value is displayed.
   @end{short}
   @see-class{gtk:scale}
   @see-symbol{gtk:position-type}")

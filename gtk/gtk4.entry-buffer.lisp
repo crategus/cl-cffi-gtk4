@@ -2,7 +2,7 @@
 ;;; gtk4.entry-buffer.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -155,14 +155,13 @@ lambda (buffer pos chars nchars)    :run-first
 (setf (liber:alias-for-function 'entry-buffer-length)
       "Accessor"
       (documentation 'entry-buffer-length 'function)
- "@version{2025-08-09}
+ "@version{2026-07-28}
   @syntax{(gtk:entry-buffer-length object) => length}
   @argument[object]{a @class{gtk:entry-buffer} object}
   @argument[length]{an unsigned integer for the length of the text}
   @begin{short}
-    The accessor for the @slot[gtk:entry-buffer]{length} slot of the
-    @class{gtk:entry-buffer} class gets or sets the length in characters of
-    the entry buffer.
+    The accessor for the @slot[gtk:entry-buffer]{length} slot gets or sets the
+    length in characters of the entry buffer.
   @end{short}
   @see-class{gtk:entry-buffer}
   @see-function{gtk:entry-buffer-bytes}")
@@ -180,7 +179,7 @@ lambda (buffer pos chars nchars)    :run-first
 (setf (liber:alias-for-function 'entry-buffer-max-length)
       "Accessor"
       (documentation 'entry-buffer-max-length 'function)
- "@version{2025-08-09}
+ "@version{2026-07-28}
   @syntax{(gtk:entry-buffer-max-length object) => length}
   @syntax{(setf (gtk:entry-buffer-max-length object) length)}
   @argument[object]{a @class{gtk:entry-buffer} object}
@@ -188,9 +187,8 @@ lambda (buffer pos chars nchars)    :run-first
     or 0 for no maximum, the value passed in will be clamped to the range
     [0, 65536]}
   @begin{short}
-    The accessor for the @slot[gtk:entry-buffer]{max-length} slot of the
-    @class{gtk:entry-buffer} class gets or sets the maximum number of
-    characters allowed in the entry buffer.
+    The accessor for the @slot[gtk:entry-buffer]{max-length} slot gets or sets
+    the maximum number of characters allowed in the entry buffer.
   @end{short}
   Returns 0 if there is no maximum. If the current content is longer than
   the given length, it will be truncated to fit.
@@ -208,15 +206,14 @@ lambda (buffer pos chars nchars)    :run-first
 (setf (liber:alias-for-function 'entry-buffer-text)
       "Accessor"
       (documentation 'entry-buffer-text 'function)
- "@version{2025-08-09}
+ "@version{2026-07-28}
   @syntax{(gtk:entry-buffer-text object) => text}
   @syntax{(setf (gtk:entry-buffer-text object) text)}
   @argument[object]{a @class{gtk:entry-buffer} object}
   @argument[text]{a string for the contents of the entry buffer}
   @begin{short}
-    The accessor for the @slot[gtk:entry-buffer]{text} slot of the
-    @class{gtk:entry-buffer} class gets or sets the contents of the entry
-    buffer.
+    The accessor for the @slot[gtk:entry-buffer]{text} slot gets or sets the
+    contents of the entry buffer.
   @end{short}
   This is roughly equivalent to calling the @fun{gtk:entry-buffer-delete-text}
   and @fun{gtk:entry-buffer-insert-text} functions.

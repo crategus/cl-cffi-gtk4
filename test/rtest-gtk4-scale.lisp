@@ -46,25 +46,26 @@
   (is (eq :slider (gtk:widget-class-accessible-role "GtkScale")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkScale" GTK:SCALE
-                       (:SUPERCLASS GTK:RANGE
-                        :EXPORT T
-                        :INTERFACES
-                        ("GtkAccessible" "GtkAccessibleRange" "GtkBuildable"
-                         "GtkConstraintTarget" "GtkOrientable")
-                        :TYPE-INITIALIZER "gtk_scale_get_type")
-                       ((DIGITS SCALE-DIGITS "digits" "gint" T T)
-                        (DRAW-VALUE SCALE-DRAW-VALUE
-                         "draw-value" "gboolean" T T)
-                        (HAS-ORIGIN SCALE-HAS-ORIGIN
-                         "has-origin" "gboolean" T T)
-                        (VALUE-POS SCALE-VALUE-POS
-                         "value-pos" "GtkPositionType" T T)))
+                      (:SUPERCLASS GTK:RANGE
+                       :EXPORT T
+                       :INTERFACES
+                       ("GtkAccessible" "GtkAccessibleRange" "GtkBuildable"
+                        "GtkConstraintTarget" "GtkOrientable")
+                       :TYPE-INITIALIZER "gtk_scale_get_type")
+                      ((DIGITS SCALE-DIGITS "digits" "gint" T T)
+                       (DRAW-VALUE SCALE-DRAW-VALUE
+                        "draw-value" "gboolean" T T)
+                       (HAS-ORIGIN SCALE-HAS-ORIGIN
+                        "has-origin" "gboolean" T T)
+                       (VALUE-POS SCALE-VALUE-POS
+                        "value-pos" "GtkPositionType" T T)))
              (gobject:get-gtype-definition "GtkScale"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-scale-properties
-  (let ((scale (make-instance 'gtk:scale)))
+  (glib-test:with-check-memory (scale)
+    (setf scale (make-instance 'gtk:scale))
     (is (= 1 (gtk:scale-digits scale)))
     (is-false (gtk:scale-draw-value scale))
     (is-true (gtk:scale-has-origin scale))
@@ -75,29 +76,23 @@
 ;;;     gtk_scale_new
 
 (test gtk-scale-new
-  (let (scale adjustment)
+  (glib-test:with-check-memory (scale adjustment)
     (is (typep (setf scale
                      (gtk:scale-new :vertical
                                     (make-instance 'gtk:adjustment)))
                'gtk:scale))
-    ;; Check memory management
     (is (typep (setf adjustment (gtk:range-adjustment scale)) 'gtk:adjustment))
-    (is-false (setf (gtk:range-adjustment scale) nil))
-    (is (= 1 (g:object-ref-count adjustment)))
-    (is (= 1 (g:object-ref-count scale)))))
+    (is-false (setf (gtk:range-adjustment scale) nil))))
 
 ;;;     gtk_scale_new_with_range
 
 (test gtk-scale-new-with-range
-  (let (scale adjustment)
+  (glib-test:with-check-memory (scale adjustment)
     (is (typep (setf scale
                      (gtk:scale-new-with-range :vertical 5.0 10.0 1.0))
                'gtk:scale))
-    ;; Check memory management
     (is (typep (setf adjustment (gtk:range-adjustment scale)) 'gtk:adjustment))
-    (is-false (setf (gtk:range-adjustment scale) nil))
-    (is (= 1 (g:object-ref-count adjustment)))
-    (is (= 1 (g:object-ref-count scale)))))
+    (is-false (setf (gtk:range-adjustment scale) nil))))
 
 ;;;     GtkScaleFormatValueFunc
 ;;;     gtk_scale_set_format_value_func
@@ -105,35 +100,29 @@
 ;;;     gtk_scale_get_layout
 
 (test gtk-scale-layout
-  (let ((scale (gtk:scale-new-with-range :horizontal 0 10 1))
-        (adjustment nil)
-        (layout nil))
+  (glib-test:with-check-memory (scale adjustment layout)
+    (setf scale (gtk:scale-new-with-range :horizontal 0 10 1))
     (is-true (setf (gtk:scale-draw-value scale) t))
     (is (typep (setf layout
                      (gtk:scale-layout scale)) 'pango:layout))
-    ;; Check memory management
+    ;; Renoce references
     (is (typep (setf adjustment (gtk:range-adjustment scale)) 'gtk:adjustment))
     (is-false (setf (gtk:range-adjustment scale) nil))
-    (is-false (setf (gtk:scale-draw-value scale) nil))
-    (is (= 1 (g:object-ref-count adjustment)))
-    (is (= 1 (g:object-ref-count layout)))
-    (is (= 1 (g:object-ref-count scale)))))
+    (is-false (setf (gtk:scale-draw-value scale) nil))))
 
 ;;;     gtk_scale_get_layout_offsets
 
 (test gtk-scale-layout-offsets
-  (let ((scale (gtk:scale-new-with-range :horizontal 0 10 1))
-        (adjustment nil))
+  (glib-test:with-check-memory (scale adjustment)
+    (setf scale (gtk:scale-new-with-range :horizontal 0 10 1))
     (is-true (setf (gtk:scale-draw-value scale) t))
     (is (equal '(0 0)
                (multiple-value-list (gtk:scale-layout-offsets scale))))
-    ;; Check memory management
+    ;; Remove references
     (is (typep (setf adjustment (gtk:range-adjustment scale)) 'gtk:adjustment))
-    (is-false (setf (gtk:range-adjustment scale) nil))
-    (is (= 1 (g:object-ref-count adjustment)))
-    (is (= 1 (g:object-ref-count scale)))))
+    (is-false (setf (gtk:range-adjustment scale) nil))))
 
 ;;;     gtk_scale_add_mark
 ;;;     gtk_scale_clear_marks
 
-;;; 2025-4-26
+;;; 2026-08-18

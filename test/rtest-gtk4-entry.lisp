@@ -115,16 +115,13 @@
                         "invisible-char" "guint" T T)
                        (INVISIBLE-CHAR-SET ENTRY-INVISIBLE-CHAR-SET
                         "invisible-char-set" "gboolean" T T)
-
                        (MAX-LENGTH ENTRY-MAX-LENGTH "max-length" "gint" T T)
-
                        (MENU-ENTRY-ICON-PRIMARY-TEXT
                         ENTRY-MENU-ENTRY-ICON-PRIMARY-TEXT
                         "menu-entry-icon-primary-text" "gchararray" T T)
                        (MENU-ENTRY-ICON-SECONDARY-TEXT
                         ENTRY-MENU-ENTRY-ICON-SECONDARY-TEXT
                         "menu-entry-icon-secondary-text" "gchararray" T T)
-
                        (OVERWRITE-MODE ENTRY-OVERWRITE-MODE
                         "overwrite-mode" "gboolean" T T)
                        (PLACEHOLDER-TEXT ENTRY-PLACEHOLDER-TEXT
@@ -334,23 +331,152 @@
     (is (= 0.5 (gtk:entry-alignment entry)))))
 
 ;;;     gtk_entry_progress_pulse
+
 ;;;     gtk_entry_reset_im_context
-;;;     gtk_entry_set_icon_from_paintable
+
+(test gtk-entry-reset-im-context
+  (glib-test:with-check-memory (entry)
+    (setf entry (gtk:entry-new))
+    (is-false (gtk:entry-reset-im-context entry))
+    (is-false (gtk:entry-im-module entry))))
+
 ;;;     gtk_entry_set_icon_from_icon_name
-;;;     gtk_entry_set_icon_from_gicon
 ;;;     gtk_entry_get_icon_storage_type
-;;;     gtk_entry_get_icon_paintable
 ;;;     gtk_entry_get_icon_name
+
+(test gtk-entry-set-icon-from-icon-name.1
+  (glib-test:with-check-memory (entry)
+    (setf entry (gtk:entry-new))
+    (is-false (gtk:entry-set-icon-from-icon-name entry :primary "gtk-ok"))
+    (is (eq :icon-name (gtk:entry-icon-storage-type entry :primary)))
+    (is (string= "gtk-ok" (gtk:entry-icon-name entry :primary)))))
+
+(test gtk-entry-set-icon-from-icon-name.2
+  (glib-test:with-check-memory (entry)
+    (setf entry (gtk:entry-new))
+    (is-false (gtk:entry-set-icon-from-icon-name entry :secondary "gtk-ok"))
+    (is (eq :icon-name (gtk:entry-icon-storage-type entry :secondary)))
+    (is (string= "gtk-ok" (gtk:entry-icon-name entry :secondary)))))
+
+;;;     gtk_entry_set_icon_from_paintable
+;;;     gtk_entry_get_icon_paintable
+
+(test gtk-entry-set-icon-from-paintable.1
+  (glib-test:with-check-memory (entry paintable)
+    (let ((path (glib-sys:sys-path "test/resource/gtk-logo-24.png")))
+      (setf entry (gtk:entry-new))
+      (is (typep (setf paintable
+                       (gdk:texture-new-from-filename path)) 'gdk:paintable))
+      (is-false (gtk:entry-set-icon-from-paintable entry :primary paintable))
+      (is (eq :paintable (gtk:entry-icon-storage-type entry :primary)))
+      (is (eq paintable (gtk:entry-icon-paintable entry :primary)))
+      ;; Remove references
+      (is-false (gtk:entry-set-icon-from-paintable entry :primary nil)))))
+
+(test gtk-entry-set-icon-from-paintable.2
+  (glib-test:with-check-memory (entry paintable)
+    (let ((path (glib-sys:sys-path "test/resource/gtk-logo-24.png")))
+      (setf entry (gtk:entry-new))
+      (is (typep (setf paintable
+                       (gdk:texture-new-from-filename path)) 'gdk:paintable))
+      (is-false (gtk:entry-set-icon-from-paintable entry :secondary paintable))
+      (is (eq :paintable (gtk:entry-icon-storage-type entry :secondary)))
+      (is (eq paintable (gtk:entry-icon-paintable entry :secondary)))
+      ;; Remove references
+      (is-false (gtk:entry-set-icon-from-paintable entry :secondary nil)))))
+
+;;;     gtk_entry_set_icon_from_gicon
 ;;;     gtk_entry_get_icon_gicon
+
+(test gtk-entry-set-icon-from-gicon.1
+  (glib-test:with-check-memory (entry gicon)
+    (setf entry (gtk:entry-new))
+    (setf gicon (g:icon-new-for-string "gtk-ok"))
+    (is-false (gtk:entry-set-icon-from-gicon entry :primary gicon))
+    (is (eq :gicon (gtk:entry-icon-storage-type entry :primary)))
+    (is (eq gicon (gtk:entry-icon-gicon entry :primary)))
+    ;; Remove references
+    (is-false (gtk:entry-set-icon-from-gicon entry :primary nil))))
+
+(test gtk-entry-set-icon-from-gicon.2
+  (glib-test:with-check-memory (entry gicon)
+    (setf entry (gtk:entry-new))
+    (setf gicon (g:icon-new-for-string "gtk-ok"))
+    (is-false (gtk:entry-set-icon-from-gicon entry :secondary gicon))
+    (is (eq :gicon (gtk:entry-icon-storage-type entry :secondary)))
+    (is (eq gicon (gtk:entry-icon-gicon entry :secondary)))
+    ;; Remove references
+    (is-false (gtk:entry-set-icon-from-gicon entry :secondary nil))))
+
 ;;;     gtk_entry_set_icon_activatable
 ;;;     gtk_entry_get_icon_activatable
 ;;;     gtk_entry_set_icon_sensitive
 ;;;     gtk_entry_get_icon_sensitive
+
+(test gtk-entry-icon-activatable/sensitive.1
+  (glib-test:with-check-memory (entry)
+    (setf entry (gtk:entry-new))
+    (is-true (gtk:entry-icon-activatable entry :primary))
+    (is-false (setf (gtk:entry-icon-activatable entry :primary) nil))
+    (is-false (gtk:entry-icon-activatable entry :primary))
+    (is-true (gtk:entry-icon-sensitive entry :primary))
+    (is-false (setf (gtk:entry-icon-sensitive entry :primary) nil))
+    (is-false (gtk:entry-icon-sensitive entry :primary))))
+
+(test gtk-entry-icon-activatable/sensitive.2
+  (glib-test:with-check-memory (entry)
+    (setf entry (gtk:entry-new))
+    (is-true (gtk:entry-icon-activatable entry :secondary))
+    (is-false (setf (gtk:entry-icon-activatable entry :secondary) nil))
+    (is-false (gtk:entry-icon-activatable entry :secondary))
+    (is-true (gtk:entry-icon-sensitive entry :secondary))
+    (is-false (setf (gtk:entry-icon-sensitive entry :secondary) nil))
+    (is-false (gtk:entry-icon-sensitive entry :secondary))))
+
 ;;;     gtk_entry_get_icon_at_pos
+
 ;;;     gtk_entry_set_icon_tooltip_text
 ;;;     gtk_entry_get_icon_tooltip_text
+
+(test gtk-entry-icon-tooltip-text.1
+  (glib-test:with-check-memory (entry)
+    (setf entry (gtk:entry-new))
+    (is-false (gtk:entry-icon-tooltip-text entry :primary))
+    (is (string= "tooltip"
+                 (setf (gtk:entry-icon-tooltip-text entry :primary) "tooltip")))
+    (is (string= "tooltip" (gtk:entry-icon-tooltip-text entry :primary)))
+    (is-false (setf (gtk:entry-icon-tooltip-text entry :primary) nil))))
+
+(test gtk-entry-icon-tooltip-text.2
+  (glib-test:with-check-memory (entry)
+    (setf entry (gtk:entry-new))
+    (is-false (gtk:entry-icon-tooltip-text entry :secondary))
+    (is (string= "tooltip"
+                 (setf (gtk:entry-icon-tooltip-text entry :secondary) "tooltip")))
+    (is (string= "tooltip" (gtk:entry-icon-tooltip-text entry :secondary)))
+    (is-false (setf (gtk:entry-icon-tooltip-text entry :secondary) nil))))
+
 ;;;     gtk_entry_set_icon_tooltip_markup
 ;;;     gtk_entry_get_icon_tooltip_markup
+
+(test gtk-entry-icon-tooltip-markup.1
+  (glib-test:with-check-memory (entry)
+    (setf entry (gtk:entry-new))
+    (is-false (gtk:entry-icon-tooltip-markup entry :primary))
+    (is (string= "tooltip"
+                 (setf (gtk:entry-icon-tooltip-markup entry :primary) "tooltip")))
+    (is (string= "tooltip" (gtk:entry-icon-tooltip-markup entry :primary)))
+    (is-false (setf (gtk:entry-icon-tooltip-markup entry :primary) nil))))
+
+(test gtk-entry-icon-tooltip-markup.2
+  (glib-test:with-check-memory (entry)
+    (setf entry (gtk:entry-new))
+    (is-false (gtk:entry-icon-tooltip-markup entry :secondary))
+    (is (string= "tooltip"
+                 (setf (gtk:entry-icon-tooltip-markup entry :secondary) "tooltip")))
+    (is (string= "tooltip" (gtk:entry-icon-tooltip-markup entry :secondary)))
+    (is-false (setf (gtk:entry-icon-tooltip-markup entry :secondary) nil))))
+
 ;;;     gtk_entry_set_icon_drag_source
 ;;;     gtk_entry_get_current_icon_drag_source
 ;;;     gtk_entry_get_icon_area
@@ -362,11 +488,15 @@
 (test gtk-entry-menu-entry-icon-text
   (glib-test:with-check-memory (entry)
     (is (typep (setf entry (gtk:entry-new)) 'gtk:entry))
+    (is-false (gtk:entry-menu-entry-icon-text entry :primary))
     (is (string= "text"
                  (setf (gtk:entry-menu-entry-icon-text entry :primary) "text")))
     (is (string= "text" (gtk:entry-menu-entry-icon-text entry :primary)))
+    (is-false (setf (gtk:entry-menu-entry-icon-text entry :primary) nil))
+    (is-false (gtk:entry-menu-entry-icon-text entry :secondary))
     (is (string= "text"
                  (setf (gtk:entry-menu-entry-icon-text entry :secondary) "text")))
-    (is (string= "text" (gtk:entry-menu-entry-icon-text entry :secondary)))))
+    (is (string= "text" (gtk:entry-menu-entry-icon-text entry :secondary)))
+    (is-false (setf (gtk:entry-menu-entry-icon-text entry :secondary) nil))))
 
-;;; 2026-02-05
+;;; 2026-08-18

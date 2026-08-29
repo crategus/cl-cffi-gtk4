@@ -2,7 +2,7 @@
 ;;; gtk4.search-bar.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -186,15 +186,14 @@ searchbar
 (setf (liber:alias-for-function 'search-bar-child)
       "Accessor"
       (documentation 'search-bar-child 'function)
- "@version{2025-08-11}
+ "@version{2026-08-17}
   @syntax{(gtk:search-bar-child object) => child}
   @syntax{(setf (gtk:search-bar-child object) child)}
   @argument[object]{a @class{gtk:search-bar} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{short}
-    The accessor for the @slot[gtk:search-bar]{child} slot of the
-    @class{gtk:search-bar} class gets or sets the child widget of the search
-    bar.
+    The accessor for the @slot[gtk:search-bar]{child} slot gets or sets the
+    child widget of the search bar.
   @end{short}
   @see-class{gtk:search-bar}
   @see-class{gtk:widget}")
@@ -212,15 +211,14 @@ searchbar
 (setf (liber:alias-for-function 'search-bar-key-capture-widget)
       "Accessor"
       (documentation 'search-bar-key-capture-widget 'function)
- "@version{2025-08-11}
+ "@version{2026-08-17}
   @syntax{(gtk:search-bar-key-capture-widget object) => widget}
   @syntax{(setf (gtk:search-bar-key-capture-widget object) widget)}
   @argument[object]{a @class{gtk:search-bar} widget}
   @argument[widget]{a @class{gtk:widget} key capture widget}
   @begin{short}
-    The accessor for the @slot[gtk:search-bar]{key-capture-widget} slot of the
-    @class{gtk:search-bar} class gets or sets the widget that the search bar is
-    capturing key events from.
+    The accessor for the @slot[gtk:search-bar]{key-capture-widget} slot gets or
+    sets the widget that the search bar is capturing key events from.
   @end{short}
 
   If key events are handled by the search bar, the search bar will be shown,
@@ -242,15 +240,14 @@ searchbar
 (setf (liber:alias-for-function 'search-bar-search-mode-enabled)
       "Accessor"
       (documentation 'search-bar-search-mode-enabled 'function)
- "@version{2025-08-11}
+ "@version{2026-08-17}
   @syntax{(gtk:search-bar-search-mode-enabled object) => mode}
   @syntax{(setf (gtk:search-bar-search-mode-enabled object) mode)}
   @argument[object]{a @class{gtk:search-bar} widget}
   @argument[mode]{a boolean for the state of the search mode}
   @begin{short}
-    The accessor for the @slot[gtk:search-bar]{search-mode-enabled} slot of the
-    @class{gtk:search-bar} class gets or sets whether the search mode is on and
-    the search bar shown.
+    The accessor for the @slot[gtk:search-bar]{search-mode-enabled} slot gets
+    or sets whether the search mode is on and the search bar shown.
   @end{short}
   @see-class{gtk:search-bar}")
 
@@ -268,14 +265,14 @@ searchbar
 (setf (liber:alias-for-function 'search-bar-show-close-button)
       "Accessor"
       (documentation 'search-bar-show-close-button 'function)
- "@version{2025-08-11}
+ "@version{2026-08-17}
   @syntax{(gtk:search-bar-show-close-button object) => visible}
   @syntax{(setf (gtk:search-bar-show-close-button object) visible)}
   @argument[object]{a @class{gtk:search-bar} widget}
   @argument[visible]{a boolean whether the Close button will be shown or not}
   @begin{short}
-    The accessor for the @slot[gtk:search-bar]{show-close-button} slot of the
-    @class{gtk:search-bar} class gets or sets whether the Close button is shown.
+    The accessor for the @slot[gtk:search-bar]{show-close-button} slot gets or
+    sets whether the Close button is shown.
   @end{short}
 
   Applications that already have a search toggle button should not show a Close

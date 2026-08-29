@@ -2,7 +2,7 @@
 ;;; gtk4.editable-label.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -150,15 +150,14 @@ editablelabel[.editing]
 (setf (liber:alias-for-function 'editable-label-editing)
       "Accessor"
       (documentation 'editable-label-editing 'function)
- "@version{2025-09-25}
+ "@version{2026-08-20}
   @syntax{(gtk:editable-label-editing object) => setting}
   @syntax{(setf (gtk:editable-label-editing object) setting)}
   @argument[object]{a @class{gtk:editable-label} widget}
   @argument[setting]{a boolean whether the label is currently in editing mode}
   @begin{short}
-    The accessor for the @slot[gtk:editable-label]{editing} slot of the
-    @class{gtk:editable-label} class returns whether the label is currently in
-    editing mode.
+    The accessor for the @slot[gtk:editable-label]{editing} slot returns
+    whether the label is currently in editing mode.
   @end{short}
   @see-class{gtk:editable-label}")
 

@@ -271,16 +271,16 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'search-entry-activates-default)
       "Accessor"
       (documentation 'search-entry-activates-default 'function)
- "@version{2026-05-17}
+ "@version{2026-08-17}
   @syntax{(gtk:search-entry-activates-default object) => setting}
   @syntax{(setf (gtk:search-entry-activates-default object) setting)}
   @argument[object]{a @class{gtk:search-entry} widget}
   @argument[setting]{@em{true} to activate the default widget of the window on
     @kbd{Enter} keypress}
   @begin{short}
-    The accessor for the @slot[gtk:search-entry]{activates-default} slot of the
-    @class{gtk:search-entry} class gets or sets whether to activate the default
-    widget, when the @kbd{Enter} key is pressed.
+    The accessor for the @slot[gtk:search-entry]{activates-default} slot gets
+    or sets whether to activate the default widget, when the @kbd{Enter} key is
+    pressed.
   @end{short}
 
   If the @arg{setting} argument is @em{true}, pressing the @kbd{Enter} key in
@@ -304,15 +304,14 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'search-entry-input-hints)
       "Accessor"
       (documentation 'search-entry-input-hints 'function)
- "@version{2026-05-17}
+ "@version{2026-08-17}
   @syntax{(gtk:search-entry-input-hints object) => hints}
   @syntax{(setf (gtk:search-entry-input-hints object) hints)}
   @argument[object]{a @class{gtk:search-entry} widget}
   @argument[hints]{a @sym{gtk:input-hints} value}
   @begin{short}
-    The accessor for the @slot[gtk:search-entry]{input-hints} slot of the
-    @class{gtk:search-entry} class gets or sets the input hints for the search
-    entry.
+    The accessor for the @slot[gtk:search-entry]{input-hints} slot gets or sets
+    the input hints for the search entry.
   @end{short}
 
   Since 4.14
@@ -333,15 +332,14 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'search-entry-input-purpose)
       "Accessor"
       (documentation 'search-entry-input-purpose 'function)
- "@version{2026-05-17}
+ "@version{2026-08-17}
   @syntax{(gtk:search-entry-input-purpose object) => purpose}
   @syntax{(setf (gtk:search-entry-input-purpose object) purpose)}
   @argument[object]{a @class{gtk:search-entry} widget}
   @argument[purpose]{a @sym{gtk:input-purpose} value}
   @begin{short}
-    The accessor for the @slot[gtk:search-entry]{input-purpose} slot of the
-    @class{gtk:search-entry} class gets or sets the input purpose of the search
-    entry.
+    The accessor for the @slot[gtk:search-entry]{input-purpose} slot gets or
+    sets the input purpose of the search entry.
   @end{short}
 
   Since 4.14
@@ -363,15 +361,15 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'search-key-capture-widget)
       "Accessor"
       (documentation 'search-entry-key-capture-widget 'function)
- "@version{2026-05-17}
+ "@version{2026-08-17}
   @syntax{(gtk:search-entry-key-capture-widget object) => widget}
   @syntax{(setf (gtk:search-entry-key-capture-widget object) widget)}
   @argument[object]{a @class{gtk:search-entry} widget}
   @argument[widget]{a @class{gtk:widget} widget}
   @begin{short}
-    The accessor for the @slot[gtk:search-entry]{key-capture-widget} slot of the
-    @class{gtk:search-entry} class gets or sets @arg{widget} as the widget that
-    the search entry will capture key events from.
+    The accessor for the @slot[gtk:search-entry]{key-capture-widget} slot gets
+    or sets @arg{widget} as the widget that the search entry will capture key
+    events from.
   @end{short}
   Key events are consumed by the search entry to start or continue a search.
 
@@ -408,16 +406,16 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'search-entry-placeholder-text)
       "Accessor"
       (documentation 'search-entry-placeholder-text 'function)
- "@version{2026-05-17}
+ "@version{2026-08-17}
   @syntax{(gtk:search-entry-placeholder-text object) => text}
   @syntax{(setf (gtk:search-entry-placeholder-text object) text)}
   @argument[object]{a @class{gtk:search-entry} widget}
   @argument[text]{a string to be displayed when @arg{entry} is empty and
     unfocused, or @code{nil}}
   @begin{short}
-    The accessor for the @slot[gtk:search-entry]{placeholder-text} slot of the
-    @class{gtk:search-entry} class gets or sets the text that will be displayed
-    when the search entry is empty and unfocused.
+    The accessor for the @slot[gtk:search-entry]{placeholder-text} slot gets or
+    sets the text that will be displayed when the search entry is empty and
+    unfocused.
   @end{short}
   This can be used to give a visual hint of the expected contents of the search
   entry.
@@ -441,16 +439,15 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'search-entry-search-delay)
       "Accessor"
       (documentation 'search-entry-search-delay 'function)
- "@version{2026-05-17}
+ "@version{2026-08-17}
   @syntax{(gtk:search-entry-search-delay object) => delay}
   @syntax{(setf (gtk:search-entry-search-delay object) delay)}
   @argument[object]{a @class{gtk:search-entry} widget}
   @argument[delay]{an unsigned integer for the delay in milliseconds}
   @begin{short}
-    The accessor for the @slot[gtk:search-entry]{search-delay} slot of the
-    @class{gtk:search-entry} class gets or sets the delay to be used between the
-    last keypress and the @sig[gtk:search-entry]{search-changed} signal being
-    emitted.
+    The accessor for the @slot[gtk:search-entry]{search-delay} slot gets or
+    sets the delay to be used between the last keypress and the
+    @sig[gtk:search-entry]{search-changed} signal being emitted.
   @end{short}
 
   Since 4.8

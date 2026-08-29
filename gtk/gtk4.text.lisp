@@ -2,7 +2,7 @@
 ;;; gtk4.text.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -469,16 +469,15 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-activates-default)
       "Accessor"
       (documentation 'text-activates-default 'function)
- "@version{2025-08-11}
+ "@version{2026-07-28}
   @syntax{(gtk:text-activates-default object) => setting}
   @syntax{(setf (gtk:text-activates-default object) setting)}
   @argument[object]{a @class{gtk:text} widget}
   @argument[setting]{a boolean whether to activate the default widget, when
     @kbd{Enter} is pressed}
   @begin{short}
-    The accessor for the @slot[gtk:text]{activates-default} slot of the
-    @class{gtk:text} class gets or sets whether to activate the default widget,
-    when @kbd{Enter} is pressed.
+    The accessor for the @slot[gtk:text]{activates-default} slot gets or sets
+    whether to activate the default widget, when @kbd{Enter} is pressed.
   @end{short}
   If the @slot[gtk:text]{activates-default} property is @em{true}, pressing
   @kbd{Enter} in the text entry will activate the default widget for the window
@@ -503,14 +502,14 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-attributes)
       "Accessor"
       (documentation 'text-attributes 'function)
- "@version{2025-08-11}
+ "@version{2026-07-28}
   @syntax{(gtk:text-attributes object) => attributes}
   @syntax{(setf (gtk:text-attributes object) attributes)}
   @argument[object]{a @class{gtk:text} widget}
   @argument[attributes]{a @class{pango:attr-list} instance}
   @begin{short}
-    The accessor for the @slot[gtk:text]{attributes} slot of the
-    @class{gtk:text} class gets or sets the attribute list of the text entry.
+    The accessor for the @slot[gtk:text]{attributes} slot gets or sets the
+    attribute list of the text entry.
   @end{short}
   The attributes in the list are applied to the text.
   @see-class{gtk:text}
@@ -528,15 +527,14 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-buffer)
       "Accessor"
       (documentation 'text-buffer 'function)
- "@version{2025-08-11}
+ "@version{2026-07-28}
   @syntax{(gtk:text-buffer object) => buffer}
   @syntax{(setf (gtk:text-buffer object) buffer)}
   @argument[object]{a @class{gtk:text} widget}
   @argument[buffer]{a @class{gtk:entry-buffer} object}
   @begin{short}
-    The accessor for the @slot[gtk:text]{buffer} slot of the @class{gtk:text}
-    class gets or sets the entry buffer which actually stores the text of the
-    text entry.
+    The accessor for the @slot[gtk:text]{buffer} slot gets or sets the entry
+    buffer which actually stores the text of the text entry.
   @end{short}
   @see-class{gtk:text}
   @see-class{gtk:entry-buffer}")
@@ -555,15 +553,14 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-enable-emoji-completion)
       "Accessor"
       (documentation 'text-enable-emoji-completion 'function)
- "@version{2025-08-11}
+ "@version{2026-07-28}
   @syntax{(gtk:text-enable-emoji-completion object) => setting}
   @syntax{(setf (gtk:text-enable-emoji-completion object) setting)}
   @argument[object]{a @class{gtk:text} widget}
   @argument[setting]{a boolean whether to enable Emoji completion}
   @begin{short}
-    The accessor for the @slot[gtk:text]{enable-emoji-completion} slot of the
-    @class{gtk:text} class get or sets whether Emoji completion is enabled for
-    the text entry.
+    The accessor for the @slot[gtk:text]{enable-emoji-completion} slot gets or
+    sets whether Emoji completion is enabled for the text entry.
   @end{short}
   If it is, typing ':', followed by a recognized keyword, will pop up a window
   with suggested Emojis matching the keyword.
@@ -581,15 +578,14 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-extra-menu)
       "Accessor"
       (documentation 'text-extra-menu 'function)
- "@version{2025-08-11}
+ "@version{2026-07-28}
   @syntax{(gtk:text-extra-menu object) => menu}
   @syntax{(setf (gtk:text-extra-menu object) menu)}
   @argument[object]{a @class{gtk:text} widget}
   @argument[menu]{a @class{g:menu-model} object}
   @begin{short}
-    The accessor for the @slot[gtk:text]{extra-menu} slot of the
-    @class{gtk:text} class gets or sets the menu model to add when constructing
-    the context menu for the text entry.
+    The accessor for the @slot[gtk:text]{extra-menu} slot gets or sets the menu
+    model to add when constructing the context menu for the text entry.
   @end{short}
   @see-class{gtk:text}
   @see-class{g:menu-model}")
@@ -609,15 +605,14 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-im-module)
       "Accessor"
       (documentation 'text-im-module 'function)
- "@version{2025-08-11}
+ "@version{2026-07-28}
   @syntax{(gtk:text-im-module object) => module}
   @syntax{(setf (gtk:text-im-module object) module)}
   @argument[object]{a @class{gtk:text} widget}
   @argument[module]{a string for the IM (input method) module}
   @begin{short}
-    The accessor for the @slot[gtk:text]{im-module} slot of the @class{gtk:text}
-    class gets or sets the IM (Input Method) module that should be used for the
-    text entry.
+    The accessor for the @slot[gtk:text]{im-module} slot gets or sets the
+    IM (Input Method) module that should be used for the text entry.
   @end{short}
   See the @class{gtk:im-context} documentation. Setting this to a non-@code{nil}
   value overrides the system-wide IM module setting. See the
@@ -639,16 +634,15 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-input-hints)
       "Accessor"
       (documentation 'text-input-hints 'function)
- "@version{2025-08-11}
+ "@version{2026-07-28}
   @syntax{(gtk:text-input-hints object) => hints}
   @syntax{(setf (gtk:text-input-hints object) hints)}
   @argument[object]{a @class{gtk:text} widget}
   @argument[hints]{a @sym{gtk:input-hints} value}
   @begin{short}
-    The accessor for the @slot[gtk:text]{input-hints} slot of the
-    @class{gtk:text} class gets or sets the additional hints, beyond the
-    @slot[gtk:text]{input-purpose} property, that allow input methods to
-    fine-tune their behaviour.
+    The accessor for the @slot[gtk:text]{input-hints} slot gets or sets the
+    additional hints, beyond the @slot[gtk:text]{input-purpose} property, that
+    allow input methods to fine-tune their behaviour.
   @end{short}
   @see-class{gtk:text}
   @see-symbol{gtk:input-hints}")
@@ -669,16 +663,15 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-input-purpose)
       "Accessor"
       (documentation 'text-input-purpose 'function)
- "@version{2025-08-11}
+ "@version{2026-07-28}
   @syntax{(gtk:text-input-purpose object) => purpose}
   @syntax{(setf (gtk:text-input-purpose object) purpose)}
   @argument[object]{a @class{gtk:text} widget}
   @argument[purpose]{a @sym{gtk:input-purpose} value}
   @begin{short}
-    The accessor for the @slot[gtk:text]{input-purpose} slot of the
-    @class{gtk:text} class gets or sets the purpose of the text entry, which can
-    be used by on-screen keyboards and other input methods to adjust their
-    behaviour.
+    The accessor for the @slot[gtk:text]{input-purpose} slot gets or sets the
+    purpose of the text entry, which can be used by on-screen keyboards and
+    other input methods to adjust their behaviour.
   @end{short}
   @see-class{gtk:text}
   @see-symbol{gtk:input-purpose}")
@@ -696,15 +689,15 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-invisible-char)
       "Accessor"
       (documentation 'text-invisible-char 'function)
- "@version{2025-08-11}
+ "@version{2026-07-28}
   @syntax{(gtk:text-invisible-char object) => char}
   @syntax{(setf (gtk:text-invisible-char object) char)}
   @argument[object]{a @class{gtk:text} widget}
   @argument[char]{an unsigned integer for an Unicode character}
   @begin{short}
-    The accessor for the @slot[gtk:text]{invisible-char} slot of the
-    @class{gtk:text} class gets or sets the character to use when masking the
-    content of the text entry in \"password mode\".
+    The accessor for the @slot[gtk:text]{invisible-char} slot gets or sets the
+    character to use when masking the content of the text entry in
+    \"password mode\".
   @end{short}
   Note that GTK does not compute this value unless it needs it, so the value
   returned by this function is not very useful unless it has been explicitly
@@ -728,15 +721,14 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-invisible-char-set)
       "Accessor"
       (documentation 'text-invisible-char-set 'function)
- "@version{2025-08-11}
+ "@version{2026-07-28}
   @syntax{(gtk:text-invisible-char-set object) => setting}
   @syntax{(setf (gtk:text-invisible-char-set object) setting)}
   @argument[object]{a @class{gtk:text} widget}
   @argument[setting]{a boolean whether the invisible char has been set}
   @begin{short}
-    The accessor for the @slot[gtk:text]{invisible-char-set} slot of the
-    @class{gtk:text} class gets or sets whether the invisible char has been set
-    for the text entry.
+    The accessor for the @slot[gtk:text]{invisible-char-set} slot gets or sets
+    whether the invisible char has been set for the text entry.
   @end{short}
   @see-class{gtk:text}
   @see-function{gtk:text-invisible-char}")
@@ -754,16 +746,15 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-max-length)
       "Accessor"
       (documentation 'text-max-length 'function)
- "@version{2025-08-11}
+ "@version{2026-07-28}
   @syntax{(gtk:text-max-length object) => length}
   @syntax{(setf (gtk:text-max-length object) length)}
   @argument[object]{a @class{gtk:text} widget}
   @argument[length]{an integer for the maximum length of the text entry or 0
     if there is no maximum}
   @begin{short}
-    The accessor for the @slot[gtk:text]{max-length} slot of the
-    @class{gtk:text} class gets or sets the maximum allowed length of the text
-    in the text entry.
+    The accessor for the @slot[gtk:text]{max-length} slot gets or sets the
+    maximum allowed length of the text in the text entry.
   @end{short}
   This is equivalent to getting the @class{gtk:entry-buffer} object for the text
   entry and calling the @fun{gtk:entry-buffer-max-length} function on it.
@@ -789,15 +780,14 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-overwrite-mode)
       "Accessor"
       (documentation 'text-overwrite-mode 'function)
- "@version{2025-08-11}
+ "@version{2026-07-28}
   @syntax{(gtk:text-overwrite-mode object) => setting}
   @syntax{(setf (gtk:text-overwrite-mode object) setting)}
   @argument[object]{a @class{gtk:text} widget}
   @argument[setting]{a boolean whether the text is overwritten when typing}
   @begin{short}
-    The accessor for the @slot[gtk:text]{overwrite-mode} slot of the
-    @class{gtk:text} class whether the text is overwritten when typing in the
-    text entry.
+    The accessor for the @slot[gtk:text]{overwrite-mode} slot whether the text
+    is overwritten when typing in the text entry.
   @end{short}
   @see-class{gtk:text}")
 
@@ -815,16 +805,15 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-placeholder-text)
       "Accessor"
       (documentation 'text-placeholder-text 'function)
- "@version{2025-08-11}
+ "@version{2026-07-28}
   @syntax{(gtk:text-placeholder-text object) => text}
   @syntax{(setf (gtk:text-placeholder-text object) text)}
   @argument[object]{a @class{gtk:text} widget}
   @argument[text]{a string to be displayed when the text entry is empty and
     unfocused, or @code{nil}}
   @begin{short}
-    The accessor for the @slot[gtk:text]{placeholder-text} slot of the
-    @class{gtk:text} class gets or sets the text that will be displayed when
-    the text entry is empty and unfocused.
+    The accessor for the @slot[gtk:text]{placeholder-text} slot gets or sets
+    the text that will be displayed when the text entry is empty and unfocused.
   @end{short}
   This can be used to give a visual hint for the expected contents of the text
   entry.
@@ -843,16 +832,15 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-propagate-text-width)
       "Accessor"
       (documentation 'text-propagate-text-width 'function)
- "@version{2025-08-11}
+ "@version{2026-07-28}
   @syntax{(gtk:text-propagate-text-width object) => setting}
   @syntax{(setf (gtk:text-propagate-text-width object) setting)}
   @argument[object]{a @class{gtk:text} widget}
   @argument[setting]{a boolean whether the text entry should grow and shrink
     with the content}
   @begin{short}
-    The accessor for the @slot[gtk:text]{propagate-text-width} slot of the
-    @class{gtk:text} class gets or sets whether the text entry will grow and
-    shrink with the content.
+    The accessor for the @slot[gtk:text]{propagate-text-width} slot gets or sets
+    whether the text entry will grow and shrink with the content.
   @end{short}
   @see-class{gtk:text}")
 
@@ -869,16 +857,15 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-scroll-offset)
       "Accessor"
       (documentation 'text-scroll-offset 'function)
- "@version{2025-08-11}
+ "@version{2026-07-28}
   @syntax{(gtk:text-scroll-offset object) => offset}
   @syntax{(setf (gtk:text-scroll-offset object) offset)}
   @argument[object]{a @class{gtk:text} widget}
   @argument[offset]{an integer for the number of pixels the text entry scrolled
     off the screen}
   @begin{short}
-    The accessor for the @slot[gtk:text]{scroll-offset} slot of the
-    @class{gtk:text} class gets or sets the number of pixels the text entry
-    scrolled off the screen to the left.
+    The accessor for the @slot[gtk:text]{scroll-offset} slot gets or sets the
+    number of pixels the text entry scrolled off the screen to the left.
   @end{short}
   @see-class{gtk:text}")
 
@@ -893,15 +880,14 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-tabs)
       "Accessor"
       (documentation 'text-tabs 'function)
- "@version{2025-08-11}
+ "@version{2026-07-28}
   @syntax{(gtk:text-tabs object) => tabs}
   @syntax{(setf (gtk:text-tabs object) tabs)}
   @argument[object]{a @class{gtk:text} widget}
   @argument[tabs]{a @class{pango:tab-array} instance for the tabstops}
   @begin{short}
-    The accessor for the @slot[gtk:text]{tabs} slot of the @class{gtk:text}
-    class gets or sets the list of tabstops to apply to the text of the text
-    entry.
+    The accessor for the @slot[gtk:text]{tabs} slot gets or sets the list of
+    tabstops to apply to the text of the text entry.
   @end{short}
   @see-class{gtk:text}
   @see-class{pango:tab-array}")
@@ -919,16 +905,16 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-truncate-multiline)
       "Accessor"
       (documentation 'text-truncate-multiline 'function)
- "@version{2025-08-11}
+ "@version{2026-07-28}
   @syntax{(gtk:text-truncate-multiline object) => setting}
   @syntax{(setf (gtk:text-truncate-multiline object) setting)}
   @argument[object]{a @class{gtk:text} widget}
   @argument[setting]{a boolean whether the text entry will truncate multi-line
     text}
   @begin{short}
-    The accessor for the @slot[gtk:text]{truncate-multiline} slot of the
-    @class{gtk:text} class gets or sets whether the text entry will truncate
-    multi-line text that is pasted into the widget.
+    The accessor for the @slot[gtk:text]{truncate-multiline} slot gets or sets
+    whether the text entry will truncate multi-line text that is pasted into
+    the widget.
   @end{short}
   @see-class{gtk:text}")
 
@@ -945,15 +931,14 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-visibility)
       "Accessor"
       (documentation 'text-visibility 'function)
- "@version{2025-08-11}
+ "@version{2026-07-28}
   @syntax{(gtk:text-visibility object) => visible}
   @syntax{(setf (gtk:text-visibility object) visible)}
   @argument[object]{a @class{gtk:text} widget}
   @argument[visible]{a boolean whether the text is visible}
   @begin{short}
-    The accessor for the @slot[gtk:text]{visibility} slot of the
-    @class{gtk:text} class gets or sets whether the text in the text entry is
-    visible.
+    The accessor for the @slot[gtk:text]{visibility} slot gets or sets whether
+    the text in the text entry is visible.
   @end{short}
   When visibility is set to @em{false}, characters are displayed as the
   invisible char, and will also appear that way when the text in the text entry

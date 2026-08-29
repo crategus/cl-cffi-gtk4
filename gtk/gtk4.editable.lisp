@@ -2,7 +2,7 @@
 ;;; gtk4.editable.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -273,14 +273,13 @@ lambda (editable text length position)    :run-last
 (setf (liber:alias-for-function 'editable-cursor-position)
       "Accessor"
       (documentation 'editable-cursor-position 'function)
- "@version{2025-09-13}
+ "@version{2026-07-28}
   @syntax{(gtk:editable-cursor-position object) => position}
   @argument[object]{a @class{gtk:editable} widget}
   @argument[position]{an integer for the current cursor position}
   @begin{short}
-    The accessor for the @slot[gtk:editable]{cursor-position} slot of the
-    @class{gtk:editable} class returns the current position of the insertion
-    cursor in chars.
+    The accessor for the @slot[gtk:editable]{cursor-position} slot returns the
+    current position of the insertion cursor in chars.
   @end{short}
   @begin[Notes]{dictionary}
     The @slot[gtk:editable]{cursor-position} slot is not writable. Use the
@@ -301,16 +300,15 @@ lambda (editable text length position)    :run-last
 (setf (liber:alias-for-function 'editable-editable)
       "Accessor"
       (documentation 'editable-editable 'function)
- "@version{2025-08-06}
+ "@version{2026-07-28}
   @syntax{(gtk:editable-editable object) => setting}
   @syntax{(setf (gtk:editable-editable object) setting)}
   @argument[object]{a @class{gtk:editable} widget}
   @argument[setting]{a boolean whether the user is allowed to edit the text in
     the widget}
   @begin{short}
-    The accessor for the @slot[gtk:editable]{editable} slot of the
-    @class{gtk:editable} class gets or sets whether the contents of the editable
-    widget can be edited.
+    The accessor for the @slot[gtk:editable]{editable} slot gets or sets
+    whether the contents of the editable widget can be edited.
   @end{short}
   @see-class{gtk:editable}")
 
@@ -326,17 +324,15 @@ lambda (editable text length position)    :run-last
 (setf (liber:alias-for-function 'editable-enable-undo)
       "Accessor"
       (documentation 'editable-enable-undo 'function)
- "@version{2025-08-06}
+ "@version{2026-07-28}
   @syntax{(gtk:editable-enable-undo object) => setting}
   @syntax{(setf (gtk:editable-enable-undo object) setting)}
   @argument[object]{a @class{gtk:editable} widget}
   @argument[setting]{a boolean whether undo is enabled}
   @begin{short}
-    The accessor for the @slot[gtk:editable]{enable-undo} slot of the
-    @class{gtk:editable} class gets or sets whether undo/redo actions are
-    enabled for the editable widget.
+    The accessor for the @slot[gtk:editable]{enable-undo} slot gets or sets
+    whether undo/redo actions are enabled for the editable widget.
   @end{short}
-
   If enabled, changes to the editable widget will be saved for undo/redo
   actions. This results in an additional copy of text changes and are not
   stored in secure memory. As such, undo is forcefully disabled when the
@@ -359,16 +355,15 @@ lambda (editable text length position)    :run-last
 (setf (liber:alias-for-function 'editable-max-width-chars)
       "Accessor"
       (documentation 'editable-max-width-chars 'function)
- "@version{2025-08-06}
+ "@version{2026-07-28}
   @syntax{(gtk:editable-max-width-chars object) => max}
   @syntax{(setf (gtk:editable-max-width-chars object) max)}
   @argument[object]{a @class{gtk:editable} widget}
   @argument[max]{an integer for the maximum width of the editable widget, in
     characters}
   @begin{short}
-    The accessor for the @slot[gtk:editable]{max-width-chars} slot of the
-    @class{gtk:editable} class gets or sets the desired maximum width of the
-    editable widget, in characters.
+    The accessor for the @slot[gtk:editable]{max-width-chars} slot gets or sets
+    the desired maximum width of the editable widget, in characters.
   @end{short}
   @see-class{gtk:editable}")
 
@@ -386,16 +381,15 @@ lambda (editable text length position)    :run-last
 (setf (liber:alias-for-function 'editable-selection-bound)
       "Accessor"
       (documentation 'editable-selection-bound 'function)
- "@version{2025-08-06}
+ "@version{2026-07-28}
   @syntax{(gtk:editable-selection-bound object) => end}
   @syntax{(setf (gtk:editable-selection-bound object) end)}
   @argument[object]{a @class{gtk:editable} widget}
   @argument[end]{an integer for the position of the opposite end of the
     selection from the cursor in chars}
   @begin{short}
-    The accessor for the @slot[gtk:editable]{selection-bound} slot of the
-    @class{gtk:editable} class gets the position of the opposite end of the
-    selection from the cursor in chars.
+    The accessor for the @slot[gtk:editable]{selection-bound} slot gets the
+    position of the opposite end of the selection from the cursor in chars.
   @end{short}
   @see-class{gtk:editable}")
 
@@ -411,14 +405,14 @@ lambda (editable text length position)    :run-last
 (setf (liber:alias-for-function 'editable-text)
       "Accessor"
       (documentation 'editable-text 'function)
- "@version{2025-08-06}
+ "@version{2026-07-28}
   @syntax{(gtk:editable-text object) => text}
   @syntax{(setf (gtk:editable-text object) text)}
   @argument[object]{a @class{gtk:editable} widget}
   @argument[text]{a string for the contents of the editable widget}
   @begin{short}
-    The accessor for the @slot[gtk:editable]{text} slot of the
-    @class{gtk:editable} class gets or sets the contents of the editable widget.
+    The accessor for the @slot[gtk:editable]{text} slot gets or sets the
+    contents of the editable widget.
   @end{short}
   @see-class{gtk:editable}")
 
@@ -435,16 +429,15 @@ lambda (editable text length position)    :run-last
 (setf (liber:alias-for-function 'editable-width-chars)
       "Accessor"
       (documentation 'editable-width-chars 'function)
- "@version{2025-08-06}
+ "@version{2026-07-28}
   @syntax{(gtk:editable-width-chars object) => width}
   @syntax{(setf (gtk:editable-width-chars object) width)}
   @argument[object]{a @class{gtk:editable} widget}
   @argument[width]{an integer for the width in chars}
   @begin{short}
-    The accessor for the @slot[gtk:editable]{width-chars} slot of the
-    @class{gtk:editable} class gets or sets the value of the width in chars.
+    The accessor for the @slot[gtk:editable]{width-chars} slot gets or sets the
+    value of the width in chars.
   @end{short}
-
   Note that it changes the size request, the size can still be affected by how
   you pack the widget into containers. If the @arg{width} argument is -1, the
   size reverts to the default size.
@@ -464,16 +457,15 @@ lambda (editable text length position)    :run-last
 (setf (liber:alias-for-function 'editable-xalign)
       "Accessor"
       (documentation 'editable-xalign 'function)
- "@version{2025-08-06}
+ "@version{2026-07-28}
   @syntax{(gtk:editable-xalign object) => align}
   @syntax{(setf (gtk:editable-xalign object) align)}
   @argument[object]{a @class{gtk:editable} widget}
   @argument[align]{a number coerced to a single float for the horizontal
     alignmemnt}
   @begin{short}
-    The accessor for the @slot[gtk:editable]{xalign} slot of the
-    @class{gtk:editable} class gets or sets the horizontal alignment, from 0.0
-    (left) to 1.0 (right).
+    The accessor for the @slot[gtk:editable]{xalign} slot gets or sets the
+    horizontal alignment, from 0.0 (left) to 1.0 (right).
   @end{short}
   Reversed for RTL layouts.
   @see-class{gtk:editable}")

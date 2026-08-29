@@ -12,8 +12,7 @@
   (is (g:type-is-enum "GtkSpinButtonUpdatePolicy"))
   ;; Check type initializer
   (is (eq (g:gtype "GtkSpinButtonUpdatePolicy")
-          (g:gtype (cffi:foreign-funcall "gtk_spin_button_update_policy_get_type"
-                                         :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_spin_button_update_policy_get_type" :size))))
   ;; Check registered name
   (is (eq 'gtk:spin-button-update-policy
           (glib:symbol-for-gtype "GtkSpinButtonUpdatePolicy")))
@@ -141,74 +140,92 @@
 ;;;     change-value
 
 (test gtk-spin-button-change-value-signal
-  (let ((query (g:signal-query (g:signal-lookup "change-value"
-                                                "GtkSpinButton"))))
-    (is (string= "change-value" (g:signal-query-signal-name query)))
-    (is (string= "GtkSpinButton"
-                 (g:type-name (g:signal-query-owner-type query))))
+  (let* ((name "change-value")
+         (gtype (g:gtype "GtkSpinButton"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
     (is (equal '(:ACTION :RUN-LAST)
                (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
     (is (equal '("GtkScrollType")
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;;     input
 
 (test gtk-spin-button-input-signal
-  (let ((query (g:signal-query (g:signal-lookup "input" "GtkSpinButton"))))
-    (is (string= "input" (g:signal-query-signal-name query)))
-    (is (string= "GtkSpinButton"
-                 (g:type-name (g:signal-query-owner-type query))))
+  (let* ((name "input")
+         (gtype (g:gtype "GtkSpinButton"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
     (is (equal '(:RUN-LAST)
                (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "gint" (g:type-name (g:signal-query-return-type query))))
+    ;; Check return type
+    (is (eq (g:gtype "gint") (g:signal-query-return-type query)))
+    ;; Check parameter types
     (is (equal '("gpointer")
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;;     output
 
 (test gtk-spin-button-output-signal
-  (let ((query (g:signal-query (g:signal-lookup "output" "GtkSpinButton"))))
-    (is (string= "output" (g:signal-query-signal-name query)))
-    (is (string= "GtkSpinButton"
-                 (g:type-name (g:signal-query-owner-type query))))
+  (let* ((name "output")
+         (gtype (g:gtype "GtkSpinButton"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
     (is (equal '(:RUN-LAST)
                (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "gboolean" (g:type-name (g:signal-query-return-type query))))
+    ;; Check return type
+    (is (eq (g:gtype "gboolean") (g:signal-query-return-type query)))
+    ;; Check parameter types
     (is (equal '()
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;;     value-changed
 
 (test gtk-spin-button-value-changed-signal
-  (let ((query (g:signal-query (g:signal-lookup "value-changed"
-                                                "GtkSpinButton"))))
-    (is (string= "value-changed" (g:signal-query-signal-name query)))
-    (is (string= "GtkSpinButton"
-                 (g:type-name (g:signal-query-owner-type query))))
+  (let* ((name "value-changed")
+         (gtype (g:gtype "GtkSpinButton"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
     (is (equal '(:RUN-LAST)
                (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
     (is (equal '()
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;;     wrapped
 
 (test gtk-spin-button-wrapped-signal
-  (let ((query (g:signal-query (g:signal-lookup "wrapped" "GtkSpinButton"))))
-    (is (string= "wrapped" (g:signal-query-signal-name query)))
-    (is (string= "GtkSpinButton"
-                 (g:type-name (g:signal-query-owner-type query))))
+  (let* ((name "wrapped")
+         (gtype (g:gtype "GtkSpinButton"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
     (is (equal '(:RUN-LAST)
                (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
     (is (equal '()
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -239,7 +256,6 @@
              'gtk:spin-button))
     (is (typep (gtk:spin-button-new nil 2 10) 'gtk:spin-button))
     (is (typep (gtk:spin-button-new nil 1.0d0 10) 'gtk:spin-button))
-    ;; Check memory management
     (is (typep (setf adjustment
                      (gtk:spin-button-adjustment button)) 'gtk:adjustment))
     ;; Remove references
@@ -262,4 +278,4 @@
 ;;;     gtk_spin_button_spin
 ;;;     gtk_spin_button_update
 
-;;; 2025-05-31
+;;; 2026-07-24

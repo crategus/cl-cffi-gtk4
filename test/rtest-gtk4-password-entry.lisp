@@ -45,7 +45,9 @@
 ;;;     gtk_password_entry_buffer_new                      Since 4.4
 
 (test gtk-password-entry-buffer-new
-  (is (typep (gtk:password-entry-buffer-new) 'gtk:password-entry-buffer)))
+  (glib-test:with-check-memory (buffer)
+    (is (typep (setf buffer
+                     (gtk:password-entry-buffer-new)) 'gtk:password-entry-buffer))))
 
 ;;;     GtkPasswordEntry
 
@@ -102,7 +104,8 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-password-entry-properties
-  (let ((entry (make-instance 'gtk:password-entry)))
+  (glib-test:with-check-memory (entry)
+    (setf entry (make-instance 'gtk:password-entry))
     (is-false (gtk:password-entry-activates-default entry))
     (is-false (gtk:password-entry-extra-menu entry))
     (is-false (gtk:password-entry-placeholder-text entry))
@@ -113,11 +116,15 @@
 ;;;     gtk_password_entry_buffer_new
 
 (test gtk-password-entry-buffer-new
-  (is (typep (gtk:password-entry-buffer-new) 'gtk:password-entry-buffer)))
+  (glib-test:with-check-memory (buffer)
+    (is (typep (setf buffer
+                     (gtk:password-entry-buffer-new)) 'gtk:password-entry-buffer))))
 
 ;;;     gtk_password_entry_new
 
 (test gtk-password-entry-new
-  (is (typep (gtk:password-entry-new) 'gtk:password-entry)))
+  (glib-test:with-check-memory (entry)
+    (is (typep (setf entry
+                     (gtk:password-entry-new)) 'gtk:password-entry))))
 
-;;; 2024-12-5
+;;; 2026-08-18
