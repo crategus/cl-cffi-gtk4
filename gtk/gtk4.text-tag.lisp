@@ -2,7 +2,7 @@
 ;;; gtk4.text-tag.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -561,15 +561,14 @@
 (setf (liber:alias-for-function 'text-tag-accumulative-margin)
       "Accessor"
       (documentation 'text-tag-accumulative-margin 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-accumulative-margin object) => setting}
   @syntax{(setf (gtk:text-tag-accumulative-margin object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether the margins accumulate}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{accumulative-margin} slot of the
-    @class{gtk:text-tag} class gets or sets whether the margins accumulate or
-    override each other.
+    The accessor for the @slot[gtk:text-tag]{accumulative-margin} slot gets or
+    sets whether the margins accumulate or override each other.
   @end{short}
   When set to @em{true} the margins of this tag are added to the margins of any
   other non-accumulative margins present. When set to @em{false} the margins
@@ -588,14 +587,14 @@
 (setf (liber:alias-for-function 'text-tag-allow-breaks)
       "Accessor"
       (documentation 'text-tag-allow-breaks 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-allow-breaks object) => setting}
   @syntax{(setf (gtk:text-tag-allow-breaks object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether breaks are allowed}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{allow-breaks} slot of the
-    @class{gtk:text-tag} class gets or sets whether breaks are allowed.
+    The accessor for the @slot[gtk:text-tag]{allow-breaks} slot gets or sets
+    whether breaks are allowed.
   @end{short}
   @see-class{gtk:text-tag}")
 
@@ -612,15 +611,14 @@
 (setf (liber:alias-for-function 'text-tag-allow-breaks-set)
       "Accessor"
       (documentation 'text-tag-allow-breaks-set 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-allow-breaks-set object) => setting}
   @syntax{(setf (gtk:text-tag-allow-breaks-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects line breaks}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{allow-breaks-set} slot of the
-    @class{gtk:text-tag} class gets or sets whether this tag affects line
-    breaks.
+    The accessor for the @slot[gtk:text-tag]{allow-breaks-set} slot gets or
+    sets whether this tag affects line breaks.
   @end{short}
   @see-class{gtk:text-tag}")
 
@@ -636,13 +634,13 @@
 (setf (liber:alias-for-function 'text-tag-background)
       "Accessor"
       (documentation 'text-tag-background 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(setf (gtk:text-tag-background object) background)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[background]{a string for the background color}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{background} slot of the
-    @class{gtk:text-tag} class sets the background color as a string.
+    The accessor for the @slot[gtk:text-tag]{background} slot sets the
+    background color as a string.
   @end{short}
   @begin[Notes]{dictionary}
     The @slot[gtk:text-tag]{background} property is not readable, but writable.
@@ -672,16 +670,16 @@
 (setf (liber:alias-for-function 'text-tag-background-full-height)
       "Accessor"
       (documentation 'text-tag-background-full-height 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-background-full-height object) => setting}
   @syntax{(setf (gtk:text-tag-background-full-height object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether the background fills the entire line
     height}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{background-full-height} slot of the
-    @class{gtk:text-tag} class gets or sets whether the background color fills
-    the entire line height or only the height of the tagged characters.
+    The accessor for the @slot[gtk:text-tag]{background-full-height} slot gets
+    or sets whether the background color fills the entire line height or only
+    the height of the tagged characters.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-background-full-height-set}")
@@ -700,15 +698,14 @@
 (setf (liber:alias-for-function 'text-tag-background-full-height-set)
       "Accessor"
       (documentation 'text-tag-background-full-height-set 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-background-full-height-set object) => setting}
   @syntax{(setf (gtk:text-tag-background-full-height-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects background height}
   @begin{short}
     The accessor for the @slot[gtk:text-tag]{background-full-height-set} slot
-    of the @class{gtk:text-tag} class gets or sets whether this tag affects
-    background height.
+    gets or sets whether this tag affects background height.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-background-full-height}")
@@ -725,14 +722,14 @@
 (setf (liber:alias-for-function 'text-tag-background-rgba)
       "Accessor"
       (documentation 'text-tag-background-rgba 'function)
- "@version{2025-08-13}
+ "@version{2026-08-01}
   @syntax{(gtk:text-tag-background-rgba object) => color}
   @syntax{(setf (gtk:text-tag-background-rgba object) color)}
   @argument[object]{a @class{gtk:text-tag} object}
-  @argument[color]{a @class{gdk:rgba} color}
+  @argument[color]{a @class{gdk:rgba} instance}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{background-rgba} slot of the
-    @class{gtk:text-tag} class gets or sets the background color.
+    The accessor for the @slot[gtk:text-tag]{background-rgba} slot gets or sets
+    the background color.
   @end{short}
   @see-class{gtk:text-tag}
   @see-class{gdk:rgba}
@@ -752,15 +749,14 @@
 (setf (liber:alias-for-function 'text-tag-background-set)
       "Accessor"
       (documentation 'text-tag-background-set 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-background-set object) => setting}
   @syntax{(setf (gtk:text-tag-background-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects the background color}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{background-set} slot of the
-    @class{gtk:text-tag} class gets or sets whether this tag affects the
-    background color.
+    The accessor for the @slot[gtk:text-tag]{background-set} slot gets or sets
+    whether this tag affects the background color.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-background}
@@ -781,14 +777,14 @@
 (setf (liber:alias-for-function 'text-tag-direction)
       "Accessor"
       (documentation 'text-tag-direction 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-direction object) => direction}
   @syntax{(setf (gtk:text-tag-direction object) direction)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[direction]{a @sym{gtk:text-direction} value}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{direction} slot of the
-    @class{gtk:text-tag} class gets or sets the text direction.
+    The accessor for the @slot[gtk:text-tag]{direction} slot gets or sets the
+    text direction.
   @end{short}
   @see-class{gtk:text-tag}
   @see-symbol{gtk:text-direction}")
@@ -805,15 +801,14 @@
 (setf (liber:alias-for-function 'text-tag-editable)
       "Accessor"
       (documentation 'text-tag-editable 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-editable object) => editable}
   @syntax{(setf (gtk:text-tag-editable object) editable)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[editable]{a boolean whether the text can be modified}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{editable} slot of the
-    @class{gtk:text-tag} class gets or sets whether the text can be modified by
-    the user.
+    The accessor for the @slot[gtk:text-tag]{editable} slot gets or sets
+    whether the text can be modified by the user.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-editable-set}")
@@ -830,15 +825,14 @@
 (setf (liber:alias-for-function 'text-tag-editable-set)
       "Accessor"
       (documentation 'text-tag-editable-set 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-editable-set object) => setting}
   @syntax{(setf (gtk:text-tag-editable-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects text editability}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{editable-set} slot of the
-    @class{gtk:text-tag} class gets or sets whether this tag affects text
-    editability.
+    The accessor for the @slot[gtk:text-tag]{editable-set} slot gets or sets
+    whether this tag affects text editability.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-editable}")
@@ -856,14 +850,14 @@
 (setf (liber:alias-for-function 'text-tag-fallback)
       "Accessor"
       (documentation 'text-tag-fallback 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-fallback object) => fallback}
   @syntax{(setf (gtk:text-tag-fallback object) fallback)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[fallback]{a boolean whether font fallback is enabled}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{fallback} slot of the
-    @class{gtk:text-tag} class whether font fallback is enabled.
+    The accessor for the @slot[gtk:text-tag]{fallback} slot whether font
+    fallback is enabled.
   @end{short}
   When set to @em{true}, other fonts will be substituted where the current font
   is missing glyphs.
@@ -882,15 +876,14 @@
 (setf (liber:alias-for-function 'text-tag-fallback-set)
       "Accessor"
       (documentation 'text-tag-fallback-set 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-fallback-set object) => setting}
   @syntax{(setf (gtk:text-tag-fallback-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this affects font fallback}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{fallback-set} slot of the
-    @class{gtk:text-tag} class gets or sets whether this tag affects font
-    fallback.
+    The accessor for the @slot[gtk:text-tag]{fallback-set} slot gets or sets
+    whether this tag affects font fallback.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-fallback}")
@@ -908,15 +901,14 @@
 (setf (liber:alias-for-function 'text-tag-family)
       "Accessor"
       (documentation 'text-tag-family 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-family object) => family}
   @syntax{(setf (gtk:text-tag-family object) family)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[family]{a string for the name of the font family}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{family} slot of the
-    @class{gtk:text-tag} class gets or sets the name of the font family, for
-    example, Sans, Helvetica, Times, Monospace.
+    The accessor for the @slot[gtk:text-tag]{family} slot gets or sets the name
+    of the font family, for example, Sans, Helvetica, Times, Monospace.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-family-set}")
@@ -933,15 +925,14 @@
 (setf (liber:alias-for-function 'text-tag-family-set)
       "Accessor"
       (documentation 'text-tag-family-set 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-family-set object) => setting}
   @syntax{(setf (gtk:text-tag-family-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects the font family}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{family-set} slot of the
-    @class{gtk:text-tag} class gets or sets whether this tag affects the font
-    family.
+    The accessor for the @slot[gtk:text-tag]{family-set} slot gets or sets
+    whether this tag affects the font family.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-family}")
@@ -960,15 +951,14 @@
 (setf (liber:alias-for-function 'text-tag-font)
       "Accessor"
       (documentation 'text-tag-font 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-font object) => font}
   @syntax{(setf (gtk:text-tag-font object) font)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[font]{a string for a font description}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{font} slot of the
-    @class{gtk:text-tag} class gets or sets the font description as string,
-    for example, \"Sans Italic 12\".
+    The accessor for the @slot[gtk:text-tag]{font} slot gets or sets the font
+    description as string, for example, \"Sans Italic 12\".
   @end{short}
   Note that the initial value of this property depends on the internals of the
   @class{pango:font-description} structure.
@@ -987,16 +977,15 @@
 (setf (liber:alias-for-function 'text-tag-font-desc)
       "Accessor"
       (documentation 'text-tag-font-desc 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-font-desc object) => font-desc}
   @syntax{(setf (gtk:text-tag-font object) font-desc)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[font-desc]{a @class{pango:font-description} instance for a font
     description}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{font-desc} slot of the
-    @class{gtk:text-tag} class gets or sets the font description as a Pango
-    font description.
+    The accessor for the @slot[gtk:text-tag]{font-desc} slot gets or sets the
+    font description as a Pango font description.
   @end{short}
   @see-class{gtk:text-tag}
   @see-class{pango:font-description}")
@@ -1013,15 +1002,14 @@
 (setf (liber:alias-for-function 'text-tag-font-features)
       "Accessor"
       (documentation 'text-tag-font-features 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-font-features object) => features}
   @syntax{(setf (gtk:text-tag-font-features object) features)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[features]{a string for the OpenType font features}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{font-features} slot of the
-    @class{gtk:text-tag} class gets or sets the OpenType font features, as a
-    string.
+    The accessor for the @slot[gtk:text-tag]{font-features} slot gets or sets
+    the OpenType font features, as a string.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-font-features-set}")
@@ -1039,15 +1027,14 @@
 (setf (liber:alias-for-function 'text-tag-font-features-set)
       "Accessor"
       (documentation 'text-tag-font-features-set 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-font-features-set object) => setting}
   @syntax{(setf (gtk:text-tag-font-features-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects font features}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{font-features-set} slot of the
-    @class{gtk:text-tag} class gets or sets whether this tag affects font
-    features.
+    The accessor for the @slot[gtk:text-tag]{font-features-set} slot gets or
+    sets whether this tag affects font features.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-font-features}")
@@ -1064,13 +1051,13 @@
 (setf (liber:alias-for-function 'text-tag-foreground)
       "Accessor"
       (documentation 'text-tag-foreground 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(setf (gtk:text-tag-foreground object) color)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[color]{a string for the foreground color}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{foreground} slot of the
-    @class{gtk:text-tag} class gets the foreground color as a string.
+    The accessor for the @slot[gtk:text-tag]{foreground} slot gets the
+    foreground color as a string.
   @end{short}
   @begin[Notes]{dictionary}
     The @slot[gtk:text-tag]{foreground} property is not readable, but writable.
@@ -1097,14 +1084,14 @@
 (setf (liber:alias-for-function 'text-tag-foreground-rgba)
       "Accessor"
       (documentation 'text-tag-foreground-rgba 'function)
- "@version{2025-08-13}
+ "@version{2026-08-01}
   @syntax{(gtk:text-tag-foreground-rgba object) => color}
   @syntax{(setf (gtk:text-tag-foreground-rgba object) color)}
   @argument[object]{a @class{gtk:text-tag} object}
-  @argument[color]{a @class{gdk:rgba} color}
+  @argument[color]{a @class{gdk:rgba} instance}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{foreground-rgba} slot of the
-    @class{gtk:text-tag} class gets or sets the foreground color.
+    The accessor for the @slot[gtk:text-tag]{foreground-rgba} slot gets or sets
+    the foreground color.
   @end{short}
   @see-class{gtk:text-tag}
   @see-class{gdk:rgba}
@@ -1124,15 +1111,14 @@
 (setf (liber:alias-for-function 'text-tag-foreground-set)
       "Accessor"
       (documentation 'text-tag-foreground-set 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-foreground-set object) => setting}
   @syntax{(setf (gtk:text-tag-foreground-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tags affect the foreground color}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{foreground-set} slot of the
-    @class{gtk:text-tag} class gets or sets whether this tag affects the
-    foreground color.
+    The accessor for the @slot[gtk:text-tag]{foreground-set} slot gets or sets
+    whether this tag affects the foreground color.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-foreground}
@@ -1150,15 +1136,14 @@
 (setf (liber:alias-for-function 'text-tag-indent)
       "Accessor"
       (documentation 'text-tag-indent 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-indent object) => indent}
   @syntax{(setf (gtk:text-tag-indent object) indent)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[indent]{an integer for the amount to indent}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{indent} slot of the
-    @class{gtk:text-tag} class gets or sets the amount to indent the paragraph,
-    in pixels.
+    The accessor for the @slot[gtk:text-tag]{indent} slot gets or sets the
+    amount to indent the paragraph, in pixels.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-indent-set}")
@@ -1175,15 +1160,14 @@
 (setf (liber:alias-for-function 'text-tag-indent-set)
       "Accessor"
       (documentation 'text-tag-indent-set 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-indent-set object) => setting}
   @syntax{(setf (gtk:text-tag-indent-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects indentation}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{indent-set} slot of the
-    @class{gtk:text-tag} class gets or sets whether this tag affects
-    indentation.
+    The accessor for the @slot[gtk:text-tag]{indent-set} slot gets or sets
+    whether this tag affects indentation.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-indent}")
@@ -1201,14 +1185,14 @@
 (setf (liber:alias-for-function 'text-tag-insert-hyphens)
       "Accessor"
       (documentation 'text-tag-insert-hyphens 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-insert-hyphens object) => setting}
   @syntax{(setf (gtk:text-tag-insert-hyphens object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether to insert hyphens at breaks}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{insert-hyphens} slot of the
-    @class{gtk:text-tag} class gets or sets whether to insert hyphens at breaks.
+    The accessor for the @slot[gtk:text-tag]{insert-hyphens} slot gets or sets
+    whether to insert hyphens at breaks.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-insert-hyphens-set}")
@@ -1227,15 +1211,14 @@
 (setf (liber:alias-for-function 'text-tag-insert-hyphens-set)
       "Accessor"
       (documentation 'text-tag-insert-hyphens-set 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-insert-hyphens-set object) => setting}
   @syntax{(setf (gtk:text-tag-insert-hyphens-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects insertion of hyphens}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{insert-hyphens-set} slot of the
-    @class{gtk:text-tag} class gets or sets whether this tag affects insertion
-    of hyphens.
+    The accessor for the @slot[gtk:text-tag]{insert-hyphens-set} slot gets or
+    sets whether this tag affects insertion of hyphens.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-insert-hyphens}")
@@ -1254,14 +1237,14 @@
 (setf (liber:alias-for-function 'text-tag-invisible)
       "Accessor"
       (documentation 'text-tag-invisible 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-invisible object) => invisible}
   @syntax{(setf (gtk:text-tag-invisible object) invisible)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[invisible]{a boolean whether this text is hidden}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{invisible} slot of the
-    @class{gtk:text-tag} class gets or sets whether this text is hidden.
+    The accessor for the @slot[gtk:text-tag]{invisible} slot gets or sets
+    whether this text is hidden.
   @end{short}
   Note that there may still be problems with the support for invisible text, in
   particular when navigating programmatically inside a text buffer containing
@@ -1281,15 +1264,14 @@
 (setf (liber:alias-for-function 'text-tag-invisible-set)
       "Accessor"
       (documentation 'text-tag-invisible-set 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-invisible-set object) => setting}
   @syntax{(setf (gtk:text-tag-invisible-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects visibility}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{invisible-set} slot of the
-    @class{gtk:text-tag} class gets or sets Whether this tag affects text
-    visibility.
+    The accessor for the @slot[gtk:text-tag]{invisible-set} slot gets or sets
+    whether this tag affects text visibility.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-invisible}")
@@ -1307,15 +1289,14 @@
 (setf (liber:alias-for-function 'text-tag-justification)
       "Accessor"
       (documentation 'text-tag-justification 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-justification object) => justification}
   @syntax{(setf (gtk:text-tag-justification object) justification)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[justification]{a @sym{gtk:justification} value}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{justification} slot of the
-    @class{gtk:text-tag} class gets or sets the left, right, or center
-    justification.
+    The accessor for the @slot[gtk:text-tag]{justification} slot gets or sets
+    the left, right, or center justification.
   @end{short}
   @see-class{gtk:text-tag}
   @see-symbol{gtk:justification}
@@ -1334,15 +1315,14 @@
 (setf (liber:alias-for-function 'text-tag-justification-set)
       "Accessor"
       (documentation 'text-tag-justification-set 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-justification-set object) => setting}
   @syntax{(setf (gtk:text-tag-justification-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects paragraph justification}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{justification-set} slot of the
-    @class{gtk:text-tag} class gets or sets whether this tag affects paragraph
-    justification.
+    The accessor for the @slot[gtk:text-tag]{justification-set} slot gets or
+    sets whether this tag affects paragraph justification.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-justification}")
@@ -1362,15 +1342,14 @@
 (setf (liber:alias-for-function 'text-tag-language)
       "Accessor"
       (documentation 'text-tag-language 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-language object) => language}
   @syntax{(setf (gtk:text-tag-language object) language)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[language]{a string for language this text is in}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{language} slot of the
-    @class{gtk:text-tag} class gets or sets the language this text is in, as an
-    ISO code.
+    The accessor for the @slot[gtk:text-tag]{language} slot gets or sets the
+    language this text is in, as an ISO code.
   @end{short}
   Pango can use this as a hint when rendering the text. If not set, an
   appropriate default will be used. Note that the initial value of this property
@@ -1392,16 +1371,15 @@
 (setf (liber:alias-for-function 'text-tag-language-set)
       "Accessor"
       (documentation 'text-tag-language-set 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-language-set object) => setting}
   @syntax{(setf (gtk:text-tag-language-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects the language}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{language-set} slot of the
-    @class{gtk:text-tag} class.
+    The accessor for the @slot[gtk:text-tag]{language-set} slot gets or sets
+    whether this tag affects the language the text is rendered as.
   @end{short}
-  Whether this tag affects the language the text is rendered as.
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-language}")
 
@@ -1418,15 +1396,14 @@
 (setf (liber:alias-for-function 'text-tag-left-margin)
       "Accessor"
       (documentation 'text-tag-left-margin 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-left-margin object) => margin}
   @syntax{(setf (gtk:text-tag-left-margin object) margin)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[margin]{an integer for the width of the left margin in pixels}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{left-margin} slot of the
-    @class{gtk:text-tag} class gets or sets the width of the left margin in
-    pixels.
+    The accessor for the @slot[gtk:text-tag]{left-margin} slot gets or sets
+    the width of the left margin in pixels.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-left-margin-set}")
@@ -1444,15 +1421,14 @@
 (setf (liber:alias-for-function 'text-tag-left-margin-set)
       "Accessor"
       (documentation 'text-tag-left-margin-set 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-left-margin-set object) => setting}
   @syntax{(setf (gtk:text-tag-left-margin-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects the left margin}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{left-margin-set} slot of the
-    @class{gtk:text-tag} class gets or sets whether this tag affects the left
-    margin.
+    The accessor for the @slot[gtk:text-tag]{left-margin-set} slot gets or sets
+    whether this tag affects the left margin.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-left-margin}")
@@ -1470,16 +1446,15 @@
 (setf (liber:alias-for-function 'text-tag-letter-spacing)
       "Accessor"
       (documentation 'text-tag-letter-spacing 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-letter-spacing object) => spacing}
   @syntax{(setf (gtk:text-tag-letter-spacing object) spacing)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[spacing]{an integer for extra spacing between graphems in Pango
     units}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{letter-spacing} slot of the
-    @class{gtk:text-tag} class gets or sets the extra spacing between graphemes,
-    in Pango units.
+    The accessor for the @slot[gtk:text-tag]{letter-spacing} slot gets or sets
+    the extra spacing between graphemes, in Pango units.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-letter-spacing-set}")
@@ -1498,15 +1473,14 @@
 (setf (liber:alias-for-function 'text-tag-letter-spacing-set)
       "Accessor"
       (documentation 'text-tag-letter-spacing-set 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-letter-spacing-set object) => setting}
   @syntax{(setf (gtk:text-tag-letter-spacing-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects letter spacing}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{letter-spacing-set} slot of the
-    @class{gtk:text-tag} class gets or sets whether this tag affects letter
-    spacing.
+    The accessor for the @slot[gtk:text-tag]{letter-spacing-set} slot gets or
+    sets whether this tag affects letter spacing.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-letter-spacing}")
@@ -1522,14 +1496,14 @@
 (setf (liber:alias-for-function 'text-tag-line-height)
       "Accessor"
       (documentation 'text-tag-line-height 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-line-height object) => height}
   @syntax{(setf (gtk:text-tag-line-height object) height)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[height]{a single float for the factor to scale line height by}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{line-height} slot of the
-    @class{gtk:text-tag} class gets or sets the factor to scale line height by.
+    The accessor for the @slot[gtk:text-tag]{line-height} slot gets or sets the
+    factor to scale line height by.
   @end{short}
 
   Since 4.6
@@ -1549,15 +1523,14 @@
 (setf (liber:alias-for-function 'text-tag-line-height-set)
       "Accessor"
       (documentation 'text-tag-line-height-set 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-line-height-set object) => setting}
   @syntax{(setf (gtk:text-tag-line-height-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects line height}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{line-height-set} slot of the
-    @class{gtk:text-tag} class gets or sets whether this tag affects line
-    height.
+    The accessor for the @slot[gtk:text-tag]{line-height-set} slot gets or sets
+    whether this tag affects line height.
   @end{short}
 
   Since 4.6
@@ -1577,13 +1550,13 @@
 (setf (liber:alias-for-function 'text-tag-name)
       "Accessor"
       (documentation 'text-tag-name 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-name object) => name}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[name]{a string for the name of the text tag}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{name} slot of the
-    @class{gtk:text-tag} class gets the name used to refer to the text tag.
+    The accessor for the @slot[gtk:text-tag]{name} slot gets the name used to
+    refer to the text tag.
   @end{short}
   Returns @code{nil} for anonymous tags.
   @see-class{gtk:text-tag}")
@@ -1600,14 +1573,14 @@
 (setf (liber:alias-for-function 'text-tag-overline)
       "Accessor"
       (documentation 'text-tag-overline 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-overline object) => setting}
   @syntax{(setf (gtk:text-tag-overline object) setting}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a @sym{pango:overline} value}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{overline} slot of the
-    @class{gtk:text-tag} class gets or sets the style of overline for this text.
+    The accessor for the @slot[gtk:text-tag]{overline} slot gets or sets the
+    style of overline for this text.
   @end{short}
   @see-class{gtk:text-tag}")
 
@@ -1623,14 +1596,14 @@
 (setf (liber:alias-for-function 'text-tag-overline-rgba)
       "Accessor"
       (documentation 'text-tag-overline-rgba 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-overline-rgba object) => rgba}
   @syntax{(setf (gtk:text-tag-overline-rgba object) rgba}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[rgba]{a @class{gdk:rgba} instance for the color}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{overline-rgba} slot of the
-    @class{gtk:text-tag} class gets or sets the color of overline for this text.
+    The accessor for the @slot[gtk:text-tag]{overline-rgba} slot gets or sets
+    the color of overline for this text.
   @end{short}
   @see-class{gtk:text-tag}
   @see-class{gdk:rgba}
@@ -1649,15 +1622,14 @@
 (setf (liber:alias-for-function 'text-tag-overline-rgba-set)
       "Accessor"
       (documentation 'text-tag-overline-rgba-set 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-overline-rgba-set object) => setting}
   @syntax{(setf (gtk:text-tag-overline-rgba-set object) setting}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects overlining color}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{overline-rgba-set} slot of the
-    @class{gtk:text-tag} class gets or sets whether this tag affects overlining
-    color.
+    The accessor for the @slot[gtk:text-tag]{overline-rgba-set} slot gets or
+    sets whether this tag affects overlining color.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-overline-rgba}")
@@ -1674,14 +1646,14 @@
 (setf (liber:alias-for-function 'text-tag-overline-set)
       "Accessor"
       (documentation 'text-tag-overline-set 'function)
- "@version{2024-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-overline-set object) => setting}
   @syntax{(setf (gtk:text-tag-overline-set object) setting}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects overlining}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{overline-set} slot of the
-    @class{gtk:text-tag} class gets or sets whether this tag affects overlining.
+    The accessor for the @slot[gtk:text-tag]{overline-set} slot gets or sets
+    whether this tag affects overlining.
   @end{short}
   @see-class{gtk:text-tag}")
 
@@ -1699,15 +1671,14 @@
 (setf (liber:alias-for-function 'text-tag-paragraph-background)
       "Accessor"
       (documentation 'text-tag-paragraph-background 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-paragraph-background object) => color}
   @syntax{(setf (gtk:text-tag-paragraph-background object) color)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[color]{a string for the paragraph background color}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{paragraph-background} slot of the
-    @class{gtk:text-tag} class gets or sets the paragraph background color as a
-    string.
+    The accessor for the @slot[gtk:text-tag]{paragraph-background} slot gets or
+    sets the paragraph background color as a string.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-paragraph-background-rgba}
@@ -1726,14 +1697,14 @@
 (setf (liber:alias-for-function 'text-tag-paragraph-background-rgba)
       "Accessor"
       (documentation 'text-tag-paragraph-background-rgba 'function)
- "@version{2025-08-13}
+ "@version{2026-08-01}
   @syntax{(gtk:text-tag-paragraph-background-rgba object) => color}
   @syntax{(setf (gtk:text-tag-paragraph-background-rgba object) color)}
   @argument[object]{a @class{gtk:text-tag} object}
-  @argument[color]{a @class{gdk:rgba} color}
+  @argument[color]{a @class{gdk:rgba} instance}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{paragraph-background-rgba} slot of
-    the @class{gtk:text-tag} class gets or sets the paragraph background color.
+    The accessor for the @slot[gtk:text-tag]{paragraph-background-rgba} slot
+    gets or sets the paragraph background color.
   @end{short}
   @see-class{gtk:text-tag}
   @see-class{gdk:rgba}
@@ -1754,16 +1725,15 @@
 (setf (liber:alias-for-function 'text-tag-paragraph-background-set)
       "Accessor"
       (documentation 'text-tag-paragraph-background-set 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-paragraph-background-set object) => setting}
   @syntax{(setf (gtk:text-tag-paragraph-background-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this affects the paragraph background
     color}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{paragraph-background-set} slot of
-    the @class{gtk:text-tag} class gets or sets whether this tag affects the
-    paragraph background color.
+    The accessor for the @slot[gtk:text-tag]{paragraph-background-set} slot
+    gets or sets whether this tag affects the paragraph background color.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-paragraph-background}
@@ -1783,15 +1753,14 @@
 (setf (liber:alias-for-function 'text-tag-pixels-above-lines)
       "Accessor"
       (documentation 'text-tag-pixels-above-lines 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-pixels-above-lines object) => pixels}
   @syntax{(setf (gtk:text-tag-pixels-above-lines object) pixels)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[pixels]{an integer for the pixels of blank space above paragraphs}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{pixels-above-lines} slot of the
-    @class{gtk:text-tag} class gets or sets the pixels of blank space above
-    paragraphs.
+    The accessor for the @slot[gtk:text-tag]{pixels-above-lines} slot gets or
+    sets the pixels of blank space above paragraphs.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-pixels-above-lines-set}")
@@ -1810,16 +1779,15 @@
 (setf (liber:alias-for-function 'text-tag-pixels-above-lines-set)
       "Accessor"
       (documentation 'text-tag-pixels-above-lines-set 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-pixels-above-lines-set object) => setting}
   @syntax{(setf (gtk:text-tag-pixels-above-lines-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects the number of pixels
     above lines}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{pixels-above-lines-set} slot of the
-    @class{gtk:text-tag} class gets or sets whether this tag affects the number
-    of pixels above lines.
+    The accessor for the @slot[gtk:text-tag]{pixels-above-lines-set} slot gets
+    or sets whether this tag affects the number of pixels above lines.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-pixels-above-lines}")
@@ -1838,15 +1806,14 @@
 (setf (liber:alias-for-function 'text-tag-pixels-below-lines)
       "Accessor"
       (documentation 'text-tag-pixels-below-lines 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-pixels-below-lines object) => pixels}
   @syntax{(setf (gtk:text-tag-pixels-below-lines object) pixels)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[pixels]{an integer for the pixels of blank space below paragraphs}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{pixels-below-lines} slot of the
-    @class{gtk:text-tag} class gets or sets the pixels of blank space below
-    paragraphs.
+    The accessor for the @slot[gtk:text-tag]{pixels-below-lines} slot gets or
+    sets the pixels of blank space below paragraphs.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-pixels-below-lines-set}")
@@ -1865,16 +1832,15 @@
 (setf (liber:alias-for-function 'text-tag-pixels-below-lines-set)
       "Accessor"
       (documentation 'text-tag-pixels-below-lines-set 'function)
- "@version{2024-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-pixels-below-lines-set object) => setting}
   @syntax{(setf (gtk:text-tag-pixels-below-lines-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects the number of pixels
     below lines}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{pixels-below-lines-set} slot of the
-    @class{gtk:text-tag} class gets or sets whether this tag affects the number
-    of pixels below lines.
+    The accessor for the @slot[gtk:text-tag]{pixels-below-lines-set} slot gets
+    or sets whether this tag affects the number of pixels below lines.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-pixels-below-lines}")
@@ -1894,16 +1860,15 @@
 (setf (liber:alias-for-function 'text-tag-pixels-inside-wrap)
       "Accessor"
       (documentation 'text-tag-pixels-inside-wrap 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-pixels-inside-wrap object) => pixels}
   @syntax{(setf (gtk:text-tag-pixels-inside-wrap object) pixels)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[pixels]{an integer for the pixels of blank space between wrapped
     lines in a paragraph}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{pixels-inside-wrap} slot of the
-    @class{gtk:text-tag} class gets or sets the pixels of blank space between
-    wrapped lines in a paragraph.
+    The accessor for the @slot[gtk:text-tag]{pixels-inside-wrap} slot gets or
+    sets the pixels of blank space between wrapped lines in a paragraph.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-pixels-inside-wrap-set}")
@@ -1922,16 +1887,15 @@
 (setf (liber:alias-for-function 'text-tag-pixels-inside-wrap-set)
       "Accessor"
       (documentation 'text-tag-pixels-inside-wrap-set 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-pixels-inside-wrap-set object) => setting}
   @syntax{(setf (gtk:text-tag-pixels-inside-wrap-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects the number of pixels
     between wrapped lines}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{pixels-inside-wrap-set} slot of the
-    @class{gtk:text-tag} class gets or sets whether this tag affects the number
-    of pixels between wrapped lines.
+    The accessor for the @slot[gtk:text-tag]{pixels-inside-wrap-set} slot gets
+    or sets whether this tag affects the number of pixels between wrapped lines.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-pixels-inside-wrap}")
@@ -1949,15 +1913,14 @@
 (setf (liber:alias-for-function 'text-tag-right-margin)
       "Accessor"
       (documentation 'text-tag-right-margin 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-right-margin object) => margin}
   @syntax{(setf (gtk:text-tag-right-margin object) margin)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[margin]{an integer for the right margin in pixels}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{right-margin} slot of the
-    @class{gtk:text-tag} class gets or sets the width of the right margin in
-    pixels.
+    The accessor for the @slot[gtk:text-tag]{right-margin} slot gets or sets
+    the width of the right margin in pixels.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-right-margin-set}")
@@ -1975,15 +1938,14 @@
 (setf (liber:alias-for-function 'text-tag-right-margin-set)
       "Accessor"
       (documentation 'text-tag-right-margin-set 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-right-margin-set object) => setting}
   @syntax{(setf (gtk:text-tag-right-margin-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects the right margin}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{right-margin-set} slot of the
-    @class{gtk:text-tag} class gets or sets whether this tag affects the right
-    margin.
+    The accessor for the @slot[gtk:text-tag]{right-margin-set} slot gets or
+    sets whether this tag affects the right margin.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-right-margin}")
@@ -2001,16 +1963,16 @@
 (setf (liber:alias-for-function 'text-tag-rise)
       "Accessor"
       (documentation 'text-tag-rise 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-rise object) => rise}
   @syntax{(setf (gtk:text-tag-rise object) rise)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[rise]{an integer for the offset of text above the baseline in
     Pango units}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{rise} slot of the
-    @class{gtk:text-tag} class gets or sets the offset of text above the
-    baseline, below the baseline if rise is negative, in Pango units.
+    The accessor for the @slot[gtk:text-tag]{rise} slot gets or sets the
+    offset of text above the baseline, below the baseline if rise is negative,
+    in Pango units.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-rise-set}")
@@ -2027,14 +1989,14 @@
 (setf (liber:alias-for-function 'text-tag-rise-set)
       "Accessor"
       (documentation 'text-tag-rise-set 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-rise-set object) => setting}
   @syntax{(setf (gtk:text-tag-rise-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects the rise}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{rise-set} slot of the
-    @class{gtk:text-tag} class gets or sets whether this tag affects the rise.
+    The accessor for the @slot[gtk:text-tag]{rise-set} slot gets or sets
+    whether this tag affects the rise.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-rise}")
@@ -2054,15 +2016,14 @@
 (setf (liber:alias-for-function 'text-tag-scale)
       "Accessor"
       (documentation 'text-tag-scale 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-scale object) => scale}
   @syntax{(setf (gtk:text-tag-scale object) scale)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[scale]{a double float for the font size as a scale factor}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{scale} slot of the
-    @class{gtk:text-tag} class gets or sets the font size as a scale factor
-    relative to the default font size.
+    The accessor for the @slot[gtk:text-tag]{scale} slot gets or sets the
+    font size as a scale factor relative to the default font size.
   @end{short}
   This property adapts to theme changes, and so on, so is recommended. Pango
   predefines some scales such as the @var{pango:+scale-x-large+} value.
@@ -2082,15 +2043,14 @@
 (setf (liber:alias-for-function 'text-tag-scale-set)
       "Accessor"
       (documentation 'text-tag-scale-set 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-scale-set object) => setting}
   @syntax{(setf (gtk:text-tag-scale-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag scales the font size}
   @begin{short}
-    The accessor for the @slot[gtk:text-view]{scale-set} slot of the
-    @class{gtk:text-tag} class gets or sets whether this tag scales the font
-    size by a factor.
+    The accessor for the @slot[gtk:text-view]{scale-set} slot gets or sets
+    whether this tag scales the font size by a factor.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-scale}")
@@ -2108,14 +2068,14 @@
 (setf (liber:alias-for-function 'text-tag-sentence)
       "Accessor"
       (documentation 'text-tag-sentence 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-sentence object) => setting}
   @syntax{(setf (gtk:text-tag-sentence object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag represents a single sentence}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{sentence} slot of the
-    @class{gtk:text-tag} class whether this tag represents a single sentence.
+    The accessor for the @slot[gtk:text-tag]{sentence} slot whether this tag
+    represents a single sentence.
   @end{short}
   This affects cursor movement.
 
@@ -2135,16 +2095,15 @@
 (setf (liber:alias-for-function 'text-tag-sentence-set)
       "Accessor"
       (documentation 'text-tag-sentence-set 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-sentence-set object) => setting}
   @syntax{(setf (gtk:text-tag-sentence-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects the
     @slot[gtk:text-tag]{sentence} property.}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{sentence-set} slot of the
-    @class{gtk:text-tag} class gets or sets whether this tag affects the
-    @slot[gtk:text-tag]{sentence} property.
+    The accessor for the @slot[gtk:text-tag]{sentence-set} slot gets or sets
+    whether this tag affects the @slot[gtk:text-tag]{sentence} property.
   @end{short}
 
   Since 4.6
@@ -2163,14 +2122,14 @@
 (setf (liber:alias-for-function 'text-tag-show-spaces)
       "Accessor"
       (documentation 'text-tag-show-spaces 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-show-spaces object) => setting}
   @syntax{(setf (gtk:text-tag-show-spaces object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a @sym{pango:show-flags} value}
   @begin{short}
-    The accessor for the @slot[gtk:text-view]{show-spaces} slot of the
-    @class{gtk:text-tag} class gets or sets how to render invisible characters.
+    The accessor for the @slot[gtk:text-view]{show-spaces} slot gets or sets
+    how to render invisible characters.
   @end{short}
   @see-class{gtk:text-tag}
   @see-symbol{gtk:show-flags}
@@ -2189,16 +2148,15 @@
 (setf (liber:alias-for-function 'text-tag-show-spaces-set)
       "Accessor"
       (documentation 'text-tag-show-spaces-set 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-show-spaces-set object) => setting}
   @syntax{(setf (gtk:text-tag-show-spaces-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects rendering of invisible
     characters}
   @begin{short}
-    The accessor for the @slot[gtk:text-view]{show-spaces-set} slot of the
-    @class{gtk:text-tag} class gets or sets whether this tag affects rendering
-    of invisible characters.
+    The accessor for the @slot[gtk:text-view]{show-spaces-set} slot gets or
+    sets whether this tag affects rendering of invisible characters.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-show-spaces}")
@@ -2216,14 +2174,14 @@
 (setf (liber:alias-for-function 'text-tag-size)
       "Accessor"
       (documentation 'text-tag-size 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-size object) => size}
   @syntax{(setf (gtk:text-tag-size object) size)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[size]{an integer for the the font size in Pango units}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{size} slot of the
-    @class{gtk:text-tag} class gets or sets the font size in Pango units.
+    The accessor for the @slot[gtk:text-tag]{size} slot gets or sets the font
+    size in Pango units.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-size-points}
@@ -2242,14 +2200,14 @@
 (setf (liber:alias-for-function 'text-tag-size-points)
       "Accessor"
       (documentation 'text-tag-size-points 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-size-points object) => size}
   @syntax{(setf (gtk:text-tag-size-points object) size)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[size]{a double float for the the font size in points}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{size-points} slot of the
-    @class{gtk:text-tag} class gets or sets the font size in points.
+    The accessor for the @slot[gtk:text-tag]{size-points} slot gets or sets
+    the font size in points.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-size}
@@ -2267,15 +2225,14 @@
 (setf (liber:alias-for-function 'text-tag-size-set)
       "Accessor"
       (documentation 'text-tag-size-set 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-size-set object) => setting}
   @syntax{(setf (gtk:text-tag-size-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects the font size}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{size-set} slot of the
-    @class{gtk:text-tag} class gets or sets whether this tag affects the font
-    size.
+    The accessor for the @slot[gtk:text-tag]{size-set} slot gets or sets
+    whether this tag affects the font size.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-size}
@@ -2294,16 +2251,15 @@
 (setf (liber:alias-for-function 'text-tag-stretch)
       "Accessor"
       (documentation 'text-tag-stretch 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-stretch object) => stretch}
   @syntax{(setf (gtk:text-tag-stretch object) stretch)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[stretch]{a @sym{pango:stretch} value}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{stretch} slot of the
-    @class{gtk:text-tag} class gets or sets the font stretch as a value of the
-    @sym{pango:stretch} enumeration, for example, the
-    @val[pango:stretch]{:condensed} value.
+    The accessor for the @slot[gtk:text-tag]{stretch} slot gets or sets the
+    font stretch as a value of the @sym{pango:stretch} enumeration, for example,
+    the @val[pango:stretch]{:condensed} value.
   @end{short}
   @see-class{gtk:text-tag}
   @see-symbol{pango:stretch}
@@ -2321,15 +2277,14 @@
 (setf (liber:alias-for-function 'text-tag-stretch-set)
       "Accessor"
       (documentation 'text-tag-stretch-set 'function)
- "@version{2024-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-stretch-set object) => setting}
   @syntax{(setf (gtk:text-tag-stretch-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag afects the font stretch}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{stretch-set} slot of the
-    @class{gtk:text-tag} class gets or sets whether this tag affects the font
-    stretch.
+    The accessor for the @slot[gtk:text-tag]{stretch-set} slot gets or sets
+    whether this tag affects the font stretch.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-stretch}")
@@ -2346,14 +2301,14 @@
 (setf (liber:alias-for-function 'text-tag-strikethrough)
       "Accessor"
       (documentation 'text-tag-strikethrough 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-strikethrough object) => strikethrough}
   @syntax{(setf (gtk:text-tag-strikethrough object) strikethrough)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[strikethrough]{a boolean whether to strike through the text}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{strikethrough} slot of the
-    @class{gtk:text-tag} class gets or sets whether to strike through the text.
+    The accessor for the @slot[gtk:text-tag]{strikethrough} slot gets or sets
+    whether to strike through the text.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-strikethrough-rgba}
@@ -2373,14 +2328,14 @@
 (setf (liber:alias-for-function 'text-tag-strikethrough-rgba)
       "Accessor"
       (documentation 'text-tag-strikethrough-rgba 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-strikethrough-rgba object) => color}
   @syntax{(setf (gtk:text-tag-strikethrough-rgba object) color)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[color]{a @class{gdk:rgba} instance for the color}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{strikethrough-rgba} slot of the
-    @class{gtk:text-tag} class gets or sets the color of strikeouts.
+    The accessor for the @slot[gtk:text-tag]{strikethrough-rgba} slot gets or
+    sets the color of strikeouts.
   @end{short}
   If not set, strikeouts will use the forground color.
   @see-class{gtk:text-tag}
@@ -2402,16 +2357,16 @@
 (setf (liber:alias-for-function 'text-tag-strikethrough-rgba-set)
       "Accessor"
       (documentation 'text-tag-strikethrough-rgba-set 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-strikethrough-rgba-set object) => setting}
   @syntax{(setf (gtk:text-tag-strikethrough-rgba-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether a @slot[gtk:text-tag]{strikethrough-rgba}
     property has been set}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{strikethrough-rgba-set} slot of the
-    @class{gtk:text-tag} class gets or sets whether the
-    @slot[gtk:text-tag]{strikethrough-rgba} property has been set.
+    The accessor for the @slot[gtk:text-tag]{strikethrough-rgba-set} slot gets
+    or sets whether the @slot[gtk:text-tag]{strikethrough-rgba} property has
+    been set.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-strikethrough-rgba}")
@@ -2429,15 +2384,14 @@
 (setf (liber:alias-for-function 'text-tag-strikethrough-set)
       "Accessor"
       (documentation 'text-tag-strikethrough-set 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-strikethrough-set object) => setting}
   @syntax{(setf (gtk:text-tag-strikethrough-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects strikethrough}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{strikethrough-set} slot of the
-    @class{gtk:text-tag} class gets or sets whether this tag affects
-    strikethrough.
+    The accessor for the @slot[gtk:text-tag]{strikethrough-set} slot gets or
+    sets whether this tag affects strikethrough.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-strikethrough}")
@@ -2454,16 +2408,15 @@
 (setf (liber:alias-for-function 'text-tag-style)
       "Accessor"
       (documentation 'text-tag-style 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-style object) => style}
   @syntax{(setf (gtk:text-tag-style object) style)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[style]{a @sym{pango:style} value}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{style} slot of the
-    @class{gtk:text-tag} class gets or sets the font style as a value of the
-    @sym{pango:style} enumeration, for example, the @val[pango:style]{:italic}
-    value.
+    The accessor for the @slot[gtk:text-tag]{style} slot gets or sets the font
+    style as a value of the @sym{pango:style} enumeration, for example, the
+    @val[pango:style]{:italic} value.
   @end{short}
   @see-class{gtk:text-tag}
   @see-symbol{pango:style}
@@ -2481,15 +2434,14 @@
 (setf (liber:alias-for-function 'text-tag-style-set)
       "Accessor"
       (documentation 'text-tag-style-set 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-style-set object) => setting}
   @syntax{(setf (gtk:text-tag-style-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects the font style}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{style-set} slot of the
-    @class{gtk:text-tag} class gets or sets whether this tag affects the font
-    style.
+    The accessor for the @slot[gtk:text-tag]{style-set} slot gets or sets
+    whether this tag affects the font style.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-style}")
@@ -2505,14 +2457,14 @@
 (setf (liber:alias-for-function 'text-tag-tabs)
       "Accessor"
       (documentation 'text-tag-tabs 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-tabs object) => tabs}
   @syntax{(setf (gtk:text-tag-tabs object) tabs)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[tabs]{a @class{pango:tab-array} instance for the custom tabs}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{tabs} slot of the
-    @class{gtk:text-tag} class gets or sets the custom tabs for this text.
+    The accessor for the @slot[gtk:text-tag]{tabs} slot gets or sets the custom
+    tabs for this text.
   @end{short}
   @see-class{gtk:text-tag}
   @see-class{pango:tab-array}
@@ -2530,14 +2482,14 @@
 (setf (liber:alias-for-function 'text-tag-tabs-set)
       "Accessor"
       (documentation 'text-tag-tabs-set 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-tabs-set object) => setting}
   @syntax{(setf (gtk:text-tag-tabs-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this affects tabs}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{tabs-set} slot of the
-    @class{gtk:text-tag} class gets or sets whether this tag affects tabs.
+    The accessor for the @slot[gtk:text-tag]{tabs-set} slot gets or sets
+    whether this tag affects tabs.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-tabs}")
@@ -2555,15 +2507,14 @@
 (setf (liber:alias-for-function 'text-tag-text-transform)
       "Accessor"
       (documentation 'text-tag-text-transform 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-text-transform object) => transform}
   @syntax{(setf (gtk:text-tag-text-transform object) transform)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[transform]{a @sym{pango:text-transform} value}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{text-transform} slot of the
-    @class{gtk:text-tag} class gets or sets how to transform the text for
-    display.
+    The accessor for the @slot[gtk:text-tag]{text-transform} slot gets or sets
+    how to transform the text for display.
   @end{short}
 
   Since 4.6
@@ -2585,16 +2536,16 @@
 (setf (liber:alias-for-function 'text-tag-text-transform-set)
       "Accessor"
       (documentation 'text-tag-text-transform-set 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-text-transform-set object) => setting}
   @syntax{(setf (gtk:text-tag-text-transform-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects the
     @slot[gtk:text-tag]{text-transform} property.}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{text-transform-set} slot of the
-    @class{gtk:text-tag} class gets or sets whether this tag affects the
-    @slot[gtk:text-tag]{text-transform} property.
+    The accessor for the @slot[gtk:text-tag]{text-transform-set} slot gets or
+    sets whether this tag affects the @slot[gtk:text-tag]{text-transform}
+    property.
   @end{short}
 
   Since 4.6
@@ -2614,15 +2565,14 @@
 (setf (liber:alias-for-function 'text-tag-underline)
       "Accessor"
       (documentation 'text-tag-underline 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-underline object) => underline}
   @syntax{(setf (gtk:text-tag-underline object) underline)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[underline]{a @sym{pango:underline} value}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{underline} slot of the
-    @class{gtk:text-tag} class gets or sets the style of underline for this
-    text.
+    The accessor for the @slot[gtk:text-tag]{underline} slot gets or sets the
+    style of underline for this text.
   @end{short}
   @see-class{gtk:text-tag}
   @see-symbol{pango:underline}
@@ -2645,14 +2595,14 @@
 (setf (liber:alias-for-function 'text-tag-underline-rgba)
       "Accessor"
       (documentation 'text-tag-underline-rgba 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-underline-rgba object) => color}
   @syntax{(setf (gtk:text-tag-underline-rgba object) color)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[color]{a @class{gdk:rgba} instance for the color}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{underline-rgba} slot of the
-    @class{gtk:text-tag} class gets or sets the color of underlines.
+    The accessor for the @slot[gtk:text-tag]{underline-rgba} slot gets or sets
+    the color of underlines.
   @end{short}
   If not set, underlines will use the forground color. If the
   @slot[gtk:text-tag]{underline} property is set to the
@@ -2679,16 +2629,15 @@
 (setf (liber:alias-for-function 'text-tag-underline-rgba-set)
       "Accessor"
       (documentation 'text-tag-underline-rgba-set 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-underline-rgba-set object) => setting}
   @syntax{(setf (gtk:text-tag-underline-rgba-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether the @slot[gtk:text-tag]{underline-rgba}
     property has been set}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{underline-rgba-set} slot of the
-    @class{gtk:text-tag} class gets or sets whether the
-    @slot[gtk:text-tag]{underline-rgba} property has been set.
+    The accessor for the @slot[gtk:text-tag]{underline-rgba-set} slot gets or
+    sets whether the @slot[gtk:text-tag]{underline-rgba} property has been set.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-underline-rgba}")
@@ -2705,15 +2654,14 @@
 (setf (liber:alias-for-function 'text-tag-underline-set)
       "Accessor"
       (documentation 'text-tag-underline-set 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-underline-set object) => setting}
   @syntax{(setf (gtk:text-tag-underline-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects underlining}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{underline-set} slot of the
-    @class{gtk:text-tag} class gets or sets whether this tag affects
-    underlining.
+    The accessor for the @slot[gtk:text-tag]{underline-set} slot gets or sets
+    whether this tag affects underlining.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-underline}
@@ -2732,16 +2680,15 @@
 (setf (liber:alias-for-function 'text-tag-variant)
       "Accessor"
       (documentation 'text-tag-variant 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-variant object) => variant}
   @syntax{(setf (gtk:text-tag-variant object) variant)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[variant]{a @sym{pango:variant} value}
   @begin{short}
-    The accessor for the @slot[gtk:text-view]{variant} slot of the
-    @class{gtk:text-tag} class get or sets the font variant as a value of the
-    @sym{pango:variant} enumeration, for example, the
-    @val[pango:variant]{:small-caps} value.
+    The accessor for the @slot[gtk:text-view]{variant} slot gets or sets the
+    font variant as a value of the @sym{pango:variant} enumeration, for example,
+    the @val[pango:variant]{:small-caps} value.
   @end{short}
   @see-class{gtk:text-tag}
   @see-symbol{pango:variant}
@@ -2759,15 +2706,14 @@
 (setf (liber:alias-for-function 'text-tag-variant-set)
       "Accessor"
       (documentation 'text-tag-variant-set 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-variant-set object) => setting}
   @syntax{(setf (gtk:text-tag-variant-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this affects the font variant}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{variant-set} slot of the
-    @class{gtk:text-tag} class gets or sets whether this tag affects the font
-    variant.
+    The accessor for the @slot[gtk:text-tag]{variant-set} slot gets or sets
+    whether this tag affects the font variant.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-variant}")
@@ -2787,16 +2733,15 @@
 (setf (liber:alias-for-function 'text-tag-weight)
       "Accessor"
       (documentation 'text-tag-weight 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-weight object) => weight}
   @syntax{(setf (gtk:text-tag-weight object) weight)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[weight]{an integer for the font weight}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{weight} slot of the
-    @class{gtk:text-tag} class gets or sets the font weight as an integer, see
-    predefined values in the @sym{pango:weight} enumeration, for example, the
-    @val[pango:weight]{:bold} value.
+    The accessor for the @slot[gtk:text-tag]{weight} slot gets or sets the
+    font weight as an integer, see predefined values in the @sym{pango:weight}
+    enumeration, for example, the @val[pango:weight]{:bold} value.
   @end{short}
   @see-class{gtk:text-tag}
   @see-symbol{pango:weight}
@@ -2814,15 +2759,14 @@
 (setf (liber:alias-for-function 'text-tag-weight-set)
       "Accessor"
       (documentation 'text-tag-weight-set 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-weight-set object) => setting}
   @syntax{(setf (gtk:text-tag-weight-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects the font weight}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{weight-set} slot of the
-    @class{gtk:text-tag} class gets or sets whether this tag affects the font
-    weight.
+    The accessor for the @slot[gtk:text-tag]{weight-set} slot gets or sets
+    whether this tag affects the font weight.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-weight}")
@@ -2839,15 +2783,15 @@
 (setf (liber:alias-for-function 'text-tag-word)
       "Accessor"
       (documentation 'text-tag-word 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-word object) => setting}
   @syntax{(setf (gtk:text-tag-word object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag represents a single word}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{word} slot of the
-    @class{gtk:text-tag} class gets or sets whether this tag represents a single
-    word. This affects line breaks and cursor movement.
+    The accessor for the @slot[gtk:text-tag]{word} slot gets or sets whether
+    this tag represents a single word. This affects line breaks and cursor
+    movement.
   @end{short}
 
   Since 4.6
@@ -2866,16 +2810,15 @@
 (setf (liber:alias-for-function 'text-tag-word-set)
       "Accessor"
       (documentation 'text-tag-word-set 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-word-set object) => setting}
   @syntax{(setf (gtk:text-tag-word-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects the
     @slot[gtk:text-tag]{word} property.}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{word-set} slot of the
-    @class{gtk:text-tag} class gets or sets whether this tag affects the
-    @slot[gtk:text-tag]{word} property.
+    The accessor for the @slot[gtk:text-tag]{word-set} slot gets or sets
+    whether this tag affects the @slot[gtk:text-tag]{word} property.
   @end{short}
 
   Since 4.6
@@ -2895,15 +2838,14 @@
 (setf (liber:alias-for-function 'text-tag-wrap-mode)
       "Accessor"
       (documentation 'text-tag-wrap-mode 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-wrap-mode object) => mode}
   @syntax{(setf (gtk:text-tag-wrap-mode object) mode)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[mode]{a @sym{gtk:wrap-mode} value}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{wrap-mode} slot of the
-    @class{gtk:text-tag} class gets or sets whether to wrap lines never, at word
-    boundaries, or at character boundaries.
+    The accessor for the @slot[gtk:text-tag]{wrap-mode} slot gets or sets
+    whether to wrap lines never, at word boundaries, or at character boundaries.
   @end{short}
   @see-class{gtk:text-tag}
   @see-symbol{gtk:wrap-mode}
@@ -2921,15 +2863,14 @@
 (setf (liber:alias-for-function 'text-tag-wrap-mode-set)
       "Accessor"
       (documentation 'text-tag-wrap-mode-set 'function)
- "@version{2025-08-13}
+ "@version{2026-08-28}
   @syntax{(gtk:text-tag-wrap-mode-set object) => setting}
   @syntax{(setf (gtk:text-tag-wrap-mode-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects line wrap mode}
   @begin{short}
-    The accessor for the @slot[gtk:text-tag]{wrap-mode-set} slot of the
-    @class{gtk:text-tag} class gets or sets whether this tag affects line wrap
-    mode.
+    The accessor for the @slot[gtk:text-tag]{wrap-mode-set} slot gets or sets
+    whether this tag affects line wrap mode.
   @end{short}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-wrap-mode}")
@@ -2981,10 +2922,8 @@
   @argument[tag]{a @class{gtk:text-tag} object}
   @argument[priority]{an integer for the priority of the tag}
   @begin{short}
-    The @fun{gtk:text-tag-priority} function gets the tag priority.
+    Gets or sets the tag priority.
   @end{short}
-  The @setf{gtk:text-tag-priority} function sets the priority.
-
   Valid priorities start at 0 and go to one less than the value of the result
   of the @fun{gtk:text-tag-table-size} function. Each tag in a
   @class{gtk:text-tag-table} object has a unique priority. Setting the priority

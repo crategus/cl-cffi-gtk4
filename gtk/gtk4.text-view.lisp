@@ -2,7 +2,7 @@
 ;;; gtk4.text-view.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -957,7 +957,7 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'text-view-accepts-tab)
       "Accessor"
       (documentation 'text-view-accepts-tab 'function)
- "@version{2025-09-28}
+ "@version{2026-08-29}
   @syntax{(gtk:text-view-accepts-tab object) => accepts}
   @syntax{(setf (gtk:text-view-accepts-tab object) accepts)}
   @argument[object]{a @class{gtk:text-view} widget}
@@ -965,9 +965,8 @@ lambda (view)    :action
     tab character, @em{false}, if pressing the @kbd{Tab} key should move the
     keyboard focus}
   @begin{short}
-    The accessor for the @slot[gtk:text-view]{accepts-tab} slot of the
-    @class{gtk:text-view} class gets or sets the behavior of the text view when
-    the @kbd{Tab} key is pressed.
+    The accessor for the @slot[gtk:text-view]{accepts-tab} slot gets or sets
+    the behavior of the text view when the @kbd{Tab} key is pressed.
   @end{short}
 
   If the @arg{accepts} argument is @em{true}, a tab character is inserted. If
@@ -991,15 +990,14 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'text-view-bottom-margin)
       "Accessor"
       (documentation 'text-view-bottom-margin 'function)
- "@version{2025-09-28}
+ "@version{2026-08-29}
   @syntax{(gtk:text-view-bottom-margin object) => margin}
   @syntax{(setf (gtk:text-view-bottom-margin object) margin)}
   @argument[object]{a @class{gtk:text-view} widget}
   @argument[margin]{an integer for the bottom margin in pixels}
   @begin{short}
-    The accessor for the @slot[gtk:text-view]{bottom-margin} slot of the
-    @class{gtk:text-view} class gets or sets the bottom margin for text in the
-    text view.
+    The accessor for the @slot[gtk:text-view]{bottom-margin} slot gets or sets
+    the bottom margin for text in the text view.
   @end{short}
 
   Note that this function is confusingly named. In CSS terms, the value set
@@ -1018,15 +1016,14 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'text-view-buffer)
       "Accessor"
       (documentation 'text-view-buffer 'function)
- "@version{2025-09-28}
+ "@version{2026-08-29}
   @syntax{(gtk:text-view-buffer object) => buffer}
   @syntax{(setf (gtk:text-view-buffer object) buffer)}
   @argument[object]{a @class{gtk:text-view} widget}
   @argument[buffer]{a @class{gtk:text-buffer} object}
   @begin{short}
-    The accessor for the @slot[gtk:text-view]{buffer} slot of the
-    @class{gtk:text-view} class gets or sets the text buffer being displayed by
-    the text view.
+    The accessor for the @slot[gtk:text-view]{buffer} slot gets or sets the
+    text buffer being displayed by the text view.
   @end{short}
   @see-class{gtk:text-view}
   @see-class{gtk:text-buffer}")
@@ -1044,15 +1041,14 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'text-view-cursor-visible)
       "Accessor"
       (documentation 'text-view-cursor-visible 'function)
- "@version{2025-09-28}
+ "@version{2026-08-29}
   @syntax{(gtk:text-view-cursor-visible object) => setting}
   @syntax{(setf (gtk:text-view-cursor-visible object) setting)}
   @argument[object]{a @class{gtk:text-view} widget}
   @argument[setting]{a boolean whether to show the insertion cursor}
   @begin{short}
-    The accessor for the @slot[gtk:text-view]{cursor-visible} slot of the
-    @class{gtk:text-view} class gets or sets whether the insertion mark is
-    visible.
+    The accessor for the @slot[gtk:text-view]{cursor-visible} slot gets or sets
+    whether the insertion mark is visible.
   @end{short}
 
   A text buffer with no editable text probably should not have a visible cursor,
@@ -1071,15 +1067,14 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'text-view-editable)
       "Accessor"
       (documentation 'text-view-editable 'function)
- "@version{2024-09-28}
+ "@version{2026-08-29}
   @syntax{(gtk:text-view-editable object) => setting}
   @syntax{(setf (gtk:text-view-editable object) setting)}
   @argument[object]{a @class{gtk:text-view} widget}
   @argument[setting]{a boolean whether the text view is editable}
   @begin{short}
-    The accessor for the @slot[gtk:text-view]{editable} slot of the
-    @class{gtk:text-view} class gets or sets the default editability of the text
-    view.
+    The accessor for the @slot[gtk:text-view]{editable} slot gets or sets the
+    default editability of the text view.
   @end{short}
 
   You can override this default setting with tags in the text buffer, using the
@@ -1099,15 +1094,14 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'text-view-extra-menu)
       "Accessor"
       (documentation 'text-view-extra-menu 'function)
- "@version{2025-09-28}
+ "@version{2026-08-29}
   @syntax{(gtk:text-view-extra-menu object) => menu}
   @syntax{(setf (gtk:text-view-extra-menu object) menu)}
   @argument[object]{a @class{gtk:text-view} widget}
   @argument[menu]{a @class{g:menu-model} object}
   @begin{short}
-    The accessor for the @slot[gtk:text-view]{extra-menu} slot of the
-     @class{gtk:text-view} class gets or sets a menu model to add when
-     constructing the context menu for the text view.
+    The accessor for the @slot[gtk:text-view]{extra-menu} slot gets or sets a
+    menu model to add when constructing the context menu for the text view.
   @end{short}
   You can pass @code{nil} to remove a previously set extra menu.
   @see-class{gtk:text-view}
@@ -1128,15 +1122,14 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'text-view-im-module)
       "Accessor"
       (documentation 'text-view-im-module 'function)
- "@version{2025-09-28}
+ "@version{2026-08-29}
   @syntax{(gtk:text-view-im-module object) => module}
   @syntax{(setf (gtk:text-view-im-module object) module)}
   @argument[object]{a @class{gtk:text-view} widget}
   @argument[module]{a string for the IM module to use for the text view}
   @begin{short}
-    The accessor for the @slot[gtk:text-view]{im-module} slot of the
-    @class{gtk:text-view} class gets or sets the IM (input method) module that
-    should be used for the text view.
+    The accessor for the @slot[gtk:text-view]{im-module} slot gets or sets the
+    IM (input method) module that should be used for the text view.
   @end{short}
   See the @class{gtk:im-context} class. Setting this to a non-@code{nil} value
   overrides the system-wide IM module setting. See the
@@ -1157,15 +1150,14 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'text-view-indent)
       "Accessor"
       (documentation 'text-view-indent 'function)
- "@version{2025-09-28}
+ "@version{2026-08-29}
   @syntax{(gtk:text-view-indent object) => indent}
   @syntax{(setf (gtk:text-view-indent object) indent)}
   @argument[object]{a @class{gtk:text-view} widget}
   @argument[indent]{an integer for the indentation in pixels}
   @begin{short}
-    The accessor for the @slot[gtk:text-view]{indent} slot of the
-    @class{gtk:text-view} class gets or sets the default indentation of
-    paragraphs in the text view.
+    The accessor for the @slot[gtk:text-view]{indent} slot gets or sets the
+    default indentation of paragraphs in the text view.
   @end{short}
   Tags in the text buffer of the text view may override the default. The
   indentation may be negative.
@@ -1185,16 +1177,15 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'text-view-input-hints)
       "Accessor"
       (documentation 'text-view-input-hints 'function)
- "@version{2025-09-28}
+ "@version{2026-08-29}
   @syntax{(gtk:text-view-input-hints object) => hints}
   @syntax{(setf (gtk:text-view-input-hints object) hints)}
   @argument[object]{a @class{gtk:text-view} widget}
   @argument[hints]{a @sym{gtk:input-hints} value for the hints}
   @begin{short}
-    The accessor for the @slot[gtk:text-view]{input-hints} slot of the
-    @class{gtk:text-view} class gets or sets the additional hints, beyond the
-    @slot[gtk:text-view]{input-purpose} property, that allow input methods to
-    fine-tune their behaviour.
+    The accessor for the @slot[gtk:text-view]{input-hints} slot gets or sets
+    the additional hints, beyond the @slot[gtk:text-view]{input-purpose}
+    property, that allow input methods to fine-tune their behaviour.
   @end{short}
   @see-class{gtk:text-view}
   @see-symbol{gtk:input-hints}")
@@ -1213,16 +1204,15 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'text-view-input-purpose)
       "Accessor"
       (documentation 'text-view-input-purpose 'function)
- "@version{2025-09-28}
+ "@version{2026-08-29}
   @syntax{(gtk:text-view-input-purpose object) => purpose}
   @syntax{(setf (gtk:text-view-input-purpose object) purpose)}
   @argument[object]{a @class{gtk:text-view} widget}
   @argument[purpose]{a @sym{gtk:input-purpose} value for the purpose}
   @begin{short}
-    The accessor for the @slot[gtk:text-view]{input-purpose} slot of the
-    @class{gtk:text-view} class gets or sets the purpose of the text view,
-    which can be used by on-screen keyboards and other input methods to adjust
-    their behaviour.
+    The accessor for the @slot[gtk:text-view]{input-purpose} slot gets or sets
+    the purpose of the text view, which can be used by on-screen keyboards and
+    other input methods to adjust their behaviour.
   @end{short}
   @see-class{gtk:text-view}
   @see-symbol{gtk:input-purpose}")
@@ -1240,15 +1230,14 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'text-view-justification)
       "Accessor"
       (documentation 'text-view-justification 'function)
- "@version{2025-09-28}
+ "@version{2026-08-29}
   @syntax{(gtk:text-view-justification object) => justification}
   @syntax{(setf (gtk:text-view-justification object) justification)}
   @argument[object]{a @class{gtk:text-view} widget}
   @argument[justification]{a value of the @sym{gtk:justification} enumeration}
   @begin{short}
-    The accessor for the @slot[gtk:text-view]{justification} slot of the
-    @class{gtk:text-view} class gets or sets the default justification of
-    paragraphs in the text view.
+    The accessor for the @slot[gtk:text-view]{justification} slot gets or sets
+    the default justification of paragraphs in the text view.
   @end{short}
   Tags in the text buffer may override the default.
   @see-class{gtk:text-view}
@@ -1268,15 +1257,14 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'text-view-left-margin)
       "Accessor"
       (documentation 'text-view-left-margin 'function)
- "@version{2025-09-28}
+ "@version{2026-08-29}
   @syntax{(gtk:text-view-left-margin object) => margin}
   @syntax{(setf (gtk:text-view-left-margin object) margin)}
   @argument[object]{a @class{gtk:text-view} widget}
   @argument[margin]{an integer for the left margin in pixels}
   @begin{short}
-    The accessor for the @slot[gtk:text-view]{left-margin} slot of the
-    @class{gtk:text-view} class gets or sets the default left margin size of
-    paragraphs in the text view.
+    The accessor for the @slot[gtk:text-view]{left-margin} slot gets or sets
+    the default left margin size of paragraphs in the text view.
   @end{short}
   Tags in the text buffer may override the default.
   @see-class{gtk:text-view}
@@ -1294,14 +1282,14 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'text-view-monospace)
       "Accessor"
       (documentation 'text-view-monospace 'function)
- "@version{2025-09-28}
+ "@version{2026-08-29}
   @syntax{(gtk:text-view-monospace object) => monospace}
   @syntax{(setf (gtk:text-view-monospace object) monospace)}
   @argument[object]{a @class{gtk:text-view} widget}
   @argument[monospace]{@em{true} to request monospace styling}
   @begin{short}
-    The accessor for the @slot[gtk:text-view]{monospace} slot of the
-    @class{gtk:text-view} class gets or sets whether to use a monospace font.
+    The accessor for the @slot[gtk:text-view]{monospace} slot gets or sets
+    whether to use a monospace font.
   @end{short}
   @see-class{gtk:text-view}")
 
@@ -1317,16 +1305,15 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'text-view-overwrite)
       "Accessor"
       (documentation 'text-view-overwrite 'function)
- "@version{2025-09-28}
+ "@version{2026-08-29}
   @syntax{(gtk:text-view-overwrite object) => overwrite}
   @syntax{(setf (gtk:text-view-overwrite object) overwrite)}
   @argument[object]{a @class{gtk:text-view} widget}
   @argument[overwrite]{@em{true} to turn on overwrite mode, @em{false} to turn
     it off}
   @begin{short}
-    The accessor for the @slot[gtk:text-view]{overwrite} slot of the
-    @class{gtk:text-view} class gets or sets whether the text view is in
-    overwrite mode or not.
+    The accessor for the @slot[gtk:text-view]{overwrite} slot gets or sets
+    whether the text view is in overwrite mode or not.
   @end{short}
   @see-class{gtk:text-view}")
 
@@ -1345,15 +1332,14 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'text-view-pixels-above-lines)
       "Accessor"
       (documentation 'text-view-pixels-above-lines 'function)
- "@version{2025-09-28}
+ "@version{2026-08-29}
   @syntax{(gtk:text-view-pixels-above-lines object) => pixels}
   @syntax{(setf (gtk:text-view-pixels-above-lines object) pixels)}
   @argument[object]{a @class{gtk:text-view} widget}
   @argument[pixels]{an integer for the pixels above paragraphs}
   @begin{short}
-    The accessor for the @slot[gtk:text-view]{pixels-above-lines} slot of the
-    @class{gtk:text-view} class gets or sets the default number of pixels to put
-    above paragraphs in the text view.
+    The accessor for the @slot[gtk:text-view]{pixels-above-lines} slot gets or
+    sets the default number of pixels to put above paragraphs in the text view.
   @end{short}
   Tags in the text buffer for the text view may override the defaults.
   @see-class{gtk:text-view}
@@ -1374,15 +1360,14 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'text-view-pixels-below-lines)
       "Accessor"
       (documentation 'text-view-pixels-below-lines 'function)
- "@version{2025-09-28}
+ "@version{2026-08-29}
   @syntax{(gtk:text-view-pixels-below-lines object) => pixels}
   @syntax{(setf (gtk:text-view-pixels-below-lines object) pixels)}
   @argument[object]{a @class{gtk:text-view} widget}
   @argument[pixels]{an integer for the pixels below paragraphs}
   @begin{short}
-    The accessor for the @slot[gtk:text-view]{pixels-below-lines} slot of the
-    @class{gtk:text-view} class gets or sets the default number of pixels to put
-    below paragraphs in the text view.
+    The accessor for the @slot[gtk:text-view]{pixels-below-lines} slot gets or
+    sets the default number of pixels to put below paragraphs in the text view.
   @end{short}
   May be overridden by tags applied to the text buffer of the text view.
   @see-class{gtk:text-view}
@@ -1403,16 +1388,16 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'text-view-pixels-inside-wrap)
       "Accessor"
       (documentation 'text-view-pixels-inside-wrap 'function)
- "@version{2025-09-28}
+ "@version{2026-08-29}
   @syntax{(gtk:text-view-pixels-inside-wrap object) => pixels}
   @syntax{(setf (gtk:text-view-pixels-inside-wrap object) pixels)}
   @argument[object]{a @class{gtk:text-view} widget}
   @argument[pixels]{an integer for the default number of pixels between wrapped
     lines}
   @begin{short}
-    The accessor for the @slot[gtk:text-view]{pixels-inside-wrap} slot of the
-    @class{gtk:text-view} class gets or sets the default number of pixels of
-    blank space to leave between display/wrapped lines within a paragraph.
+    The accessor for the @slot[gtk:text-view]{pixels-inside-wrap} slot gets or
+    sets the default number of pixels of blank space to leave between
+    display/wrapped lines within a paragraph.
   @end{short}
   May be overridden by tags in the text buffer of the text view.
   @see-class{gtk:text-view}
@@ -1431,15 +1416,14 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'text-view-right-margin)
       "Accessor"
       (documentation 'text-view-right-margin 'function)
- "@version{2025-09-28}
+ "@version{2026-08-29}
   @syntax{(gtk:text-view-right-margin object) => margin}
   @syntax{(setf (gtk:text-view-right-margin object) margin)}
   @argument[object]{a @class{gtk:text-view} widget}
   @argument[margin]{an integer for the right margin in pixels}
   @begin{short}
-    The accessor for the @slot[gtk:text-view]{right-margin} slot of the
-    @class{gtk:text-view} class gets or sets the default right margin for text
-    in the text view.
+    The accessor for the @slot[gtk:text-view]{right-margin} slot gets or sets
+    the default right margin for text in the text view.
   @end{short}
   Tags in the text buffer may override the default.
   @see-class{gtk:text-view}
@@ -1456,15 +1440,14 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'text-view-tabs)
       "Accessor"
       (documentation 'text-view-tabs 'function)
- "@version{2025-09-28}
+ "@version{2026-08-29}
   @syntax{(gtk:text-view-tabs object) => tabs}
   @syntax{(setf (gtk:text-view-tabs object) tabs)}
   @argument[object]{a @class{gtk:text-view} widget}
   @argument[tabs]{a @class{pango:tab-array} instance for the tabs}
   @begin{short}
-    The accessor for the @slot[gtk:text-view]{tabs} slot of the
-    @class{gtk:text-view} class gets or sets a copy of the default Pango tab
-    array, or @code{nil} if \"standard\" tabs are used.
+    The accessor for the @slot[gtk:text-view]{tabs} slot gets or sets a copy
+    of the default Pango tab array, or @code{nil} if \"standard\" tabs are used.
   @end{short}
   Tags in the text buffer may override the defaults.
   @see-class{gtk:text-view}
@@ -1487,15 +1470,14 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'text-view-top-margin)
       "Accessor"
       (documentation 'text-view-top-margin 'function)
- "@version{2025-09-28}
+ "@version{2026-08-29}
   @syntax{(gtk:text-view-top-margin object) => margin}
   @syntax{(setf (gtk:text-view-top-margin object) margin)}
   @argument[object]{a @class{gtk:text-view} widget}
   @argument[margin]{an integer for the top margin in pixels}
   @begin{short}
-    The accessor for the @slot[gtk:text-view]{top-margin} slot of the
-    @class{gtk:text-view} class gets or sets the top margin for text in the text
-    view.
+    The accessor for the @slot[gtk:text-view]{top-margin} slot gets or sets the
+    top margin for text in the text view.
   @end{short}
   Note that this function is confusingly named. In CSS terms, the value set
   here is padding.
@@ -1514,15 +1496,14 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'text-view-wrap-mode)
       "Accessor"
       (documentation 'text-view-wrap-mode 'function)
- "@version{2025-09-28}
+ "@version{2026-08-29}
   @syntax{(gtk:text-view-wrap-mode object) => mode}
   @syntax{(setf (gtk:text-view-wrap-mode object) mode)}
   @argument[object]{a @class{gtk:text-view} widget}
   @argument[mode]{a value of the @sym{gtk:wrap-mode} enumeration}
   @begin{short}
-    The accessor for the @slot[gtk:text-view]{wrap-mode} slot of the
-    @class{gtk:text-view} class gets or sets the line wrapping for the text
-    view.
+    The accessor for the @slot[gtk:text-view]{wrap-mode} slot gets or sets the
+    line wrapping for the text view.
   @end{short}
   @see-class{gtk:text-view}
   @see-symbol{gtk:wrap-mode}")

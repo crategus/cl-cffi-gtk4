@@ -2,7 +2,7 @@
 ;;; gtk4.text-iter.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -548,18 +548,17 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_text_iter_get_visible_slice" %text-iter-visible-slice)
-    (:string :free-from-foreign t)
+    :string
   (start (g:boxed text-iter))
   (end (g:boxed text-iter)))
 
-(cffi:defcfun ("gtk_text_iter_get_slice" %text-iter-slice)
-    (:string :free-from-foreign t)
+(cffi:defcfun ("gtk_text_iter_get_slice" %text-iter-slice) :string
   (start (g:boxed text-iter))
   (end (g:boxed text-iter)))
 
 (defun text-iter-slice (start end &key (visible nil))
  #+liber-documentation
- "@version{2025-08-04}
+ "@version{2026-07-14}
   @argument[start]{a @class{gtk:text-iter} instance for the start of a range}
   @argument[end]{a @class{gtk:text-iter} instance for the end of a range}
   @argument[visible]{a boolean keyword argument, the default is @em{false}}
@@ -595,12 +594,11 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_text_iter_get_visible_text" %text-iter-visible-text)
-    (:string :free-from-foreign t)
+    :string
   (start (g:boxed text-iter))
   (end (g:boxed text-iter)))
 
-(cffi:defcfun ("gtk_text_iter_get_text" %text-iter-text)
-    (:string :free-from-foreign t)
+(cffi:defcfun ("gtk_text_iter_get_text" %text-iter-text) :string
   (start (g:boxed text-iter))
   (end (g:boxed text-iter)))
 

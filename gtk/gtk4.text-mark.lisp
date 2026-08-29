@@ -2,7 +2,7 @@
 ;;; gtk4.text-mark.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -129,13 +129,13 @@
 (setf (liber:alias-for-function 'text-mark-left-gravity)
       "Accessor"
       (documentation 'text-mark-left-gravity 'function)
- "@version{2025-08-13}
+ "@version{2026-08-19}
   @syntax{(gtk:text-mark-left-gravity object) => gravity}
   @argument[object]{a @class{gtk:text-mark} object}
   @argument[gravity]{@em{true} if the text mark has left gravity}
   @begin{short}
-    The accessor for the @slot[gtk:text-mark]{left-gravity} slot of the
-    @class{gtk:text-mark} class gets whether the text mark has left gravity.
+    The accessor for the @slot[gtk:text-mark]{left-gravity} slot gets whether
+    the text mark has left gravity.
   @end{short}
   When text is inserted at the current location of the text mark, if the text
   mark has left gravity it will be moved to the left of the newly-inserted text,
@@ -155,14 +155,13 @@
 (setf (liber:alias-for-function 'text-mark-name)
       "Accessor"
       (documentation 'text-mark-name 'function)
- "@version{2025-08-13}
+ "@version{2026-08-19}
   @syntax{(gtk:text-mark-name object) => name}
   @argument[object]{a @class{gtk:text-mark} object}
   @argument[name]{a string for the name of the text mark}
   @begin{short}
-    The accessor for the @slot[gtk:text-mark]{name} slot of the
-    @class{gtk:text-mark} class returns the name of the text mark or @code{nil}
-    for anonymous text marks.
+    The accessor for the @slot[gtk:text-mark]{name} slot returns the name of
+    the text mark or @code{nil} for anonymous text marks.
   @end{short}
   @see-class{gtk:text-mark}")
 
@@ -223,10 +222,9 @@
   @argument[visibility]{a boolean whether the text mark is visible}
   @return{@em{True} if the text mark is visible.}
   @begin{short}
-    The @fun{gtk:text-mark-visible} function returns @em{true} if the text mark
-    is visible, that is a cursor is displayed for it.
+    Gets or sets the visibility of the text mark.
   @end{short}
-  The @setf{gtk:text-mark-visible} function sets the visibility.
+  If @em{true} the text mark is visible, that is a cursor is displayed for it.
 
   The insertion point is normally visible, that is, you can see it as a vertical
   bar. Also, the text widget uses a visible text mark to indicate where a drop
