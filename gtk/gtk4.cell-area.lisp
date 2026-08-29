@@ -6,7 +6,7 @@
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2012 - 2025 Dieter Kaiser
+;;; Copyright (C) 2012 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -552,14 +552,13 @@ lambda (area renderer editable)    :run-first
 (setf (liber:alias-for-function 'cell-area-edit-widget)
       "Accessor"
       (documentation 'cell-area-edit-widget 'function)
- "@version{2025-08-20}
+ "@version{2026-08-17}
   @syntax{(gtk:cell-area-edit-widget object) => widget}
   @argument[object]{a @class{gtk:cell-area} object}
   @argument[widget]{a @class{gtk:cell-editable} widget}
   @begin{short}
-    The accessor for the @slot[gtk:cell-area]{edit-widget} slot of the
-    @class{gtk:cell-area} class returns the widget currently used to edit the
-    currently edited cell.
+    The accessor for the @slot[gtk:cell-area]{edit-widget} slot returns the
+    widget currently used to edit the currently edited cell.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-area} implementation is deprecated since 4.10. List
@@ -581,14 +580,13 @@ lambda (area renderer editable)    :run-first
 (setf (liber:alias-for-function 'cell-area-edited-cell)
       "Accessor"
       (documentation 'cell-area-edited-cell 'function)
- "@version{2025-08-20}
+ "@version{2026-08-17}
   @syntax{(gtk:cell-area-edited-cell object) => renderer}
   @argument[object]{a @class{gtk:cell-area} object}
   @argument[renderer]{a @class{gtk:cell-renderer} object}
   @begin{short}
-  The accessor for the @slot[gtk:cell-area]{edited-cell} slot of the
-    @class{gtk:cell-area} class returns the @class{gtk:cell-renderer} object in
-    the area that is currently being edited.
+  The accessor for the @slot[gtk:cell-area]{edited-cell} slot returns the
+  @class{gtk:cell-renderer} object in the area that is currently being edited.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-area} implementation is deprecated since 4.10. List
@@ -609,15 +607,14 @@ lambda (area renderer editable)    :run-first
 (setf (liber:alias-for-function 'cell-area-focus-cell)
       "Accessor"
       (documentation 'cell-area-focus-cell 'function)
- "@version{2025-08-20}
+ "@version{2026-08-17}
   @syntax{(gtk:cell-area-edited-cell object) => renderer}
   @syntax{(setf (gtk:cell-area-edited-cell object) renderer}
   @argument[object]{a @class{gtk:cell-area} object}
   @argument[renderer]{a @class{gtk:cell-renderer} object to give focus to}
   @begin{short}
-    The accessor for the @slot[gtk:cell-area]{focus-cell} slot of the
-    @class{gtk:cell-area} class gets or sets the cell in the area that currently
-    has focus.
+    The accessor for the @slot[gtk:cell-area]{focus-cell} slot gets or sets the
+    cell in the area that currently has focus.
   @end{short}
 
   This is generally called by implementations of the

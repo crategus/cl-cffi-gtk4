@@ -125,16 +125,15 @@
 (setf (liber:alias-for-function 'cell-area-box-spacing)
       "Accessor"
       (documentation 'cell-area-box-spacing 'function)
- "@version{2026-05-13}
+ "@version{2026-08-20}
   @syntax{(gtk:cell-area-box-spacing object) => spacing}
   @syntax{(setf (gtk:cell-area-box-spacing object) spacing)}
   @argument[object]{a @class{gtk:cell-area-box} object}
   @argument[spacing]{an integer for the space to add between
     @class{gtk:cell-renderer} objects}
   @begin{short}
-    The accessor for the @slot[gtk:cell-area-box]{spacing} slot of the
-    @class{gtk:cell-area-box} class gets or sets the spacing added between cell
-    renderers.
+    The accessor for the @slot[gtk:cell-area-box]{spacing} slot gets or sets
+    the spacing added between cell renderers.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-area-box} implementation is deprecated since 4.10. List
