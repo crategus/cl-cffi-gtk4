@@ -110,35 +110,73 @@
              (glib-test:list-signals "GtkCellRenderer")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkCellRenderer" GTK:CELL-RENDERER
-                       (:SUPERCLASS G:INITIALLY-UNOWNED
-                        :EXPORT T
-                        :INTERFACES NIL
-                        :TYPE-INITIALIZER "gtk_cell_renderer_get_type")
-                       ((CELL-BACKGROUND CELL-RENDERER-CELL-BACKGROUND
-                         "cell-background" "gchararray" NIL T)
-                        (CELL-BACKGROUND-RGBA CELL-RENDERER-CELL-BACKGROUND-RGBA
-                         "cell-background-rgba" "GdkRGBA" T T)
-                        (CELL-BACKGROUND-SET CELL-RENDERER-CELL-BACKGROUND-SET
-                         "cell-background-set" "gboolean" T T)
-                        (EDITING CELL-RENDERER-EDITING
-                         "editing" "gboolean" T NIL)
-                        (HEIGHT CELL-RENDERER-HEIGHT "height" "gint" T T)
-                        (IS-EXPANDED CELL-RENDERER-IS-EXPANDED
-                         "is-expanded" "gboolean" T T)
-                        (IS-EXPANDER CELL-RENDERER-IS-EXPANDER
-                         "is-expander" "gboolean" T T)
-                        (MODE CELL-RENDERER-MODE
-                         "mode" "GtkCellRendererMode" T T)
-                        (SENSITIVE CELL-RENDERER-SENSITIVE
-                         "sensitive" "gboolean" T T)
-                        (VISIBLE CELL-RENDERER-VISIBLE
-                         "visible" "gboolean" T T)
-                        (WIDTH CELL-RENDERER-WIDTH "width" "gint" T T)
-                        (XALIGN CELL-RENDERER-XALIGN "xalign" "gfloat" T T)
-                        (XPAD CELL-RENDERER-XPAD "xpad" "guint" T T)
-                        (YALIGN CELL-RENDERER-YALIGN "yalign" "gfloat" T T)
-                        (YPAD CELL-RENDERER-YPAD "ypad" "guint" T T)))
+                      (:SUPERCLASS G:INITIALLY-UNOWNED
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_cell_renderer_get_type")
+                      ((CELL-BACKGROUND CELL-RENDERER-CELL-BACKGROUND
+                        "cell-background" "gchararray" NIL T)
+                       (CELL-BACKGROUND-RGBA CELL-RENDERER-CELL-BACKGROUND-RGBA
+                        "cell-background-rgba" "GdkRGBA" T T)
+                       (CELL-BACKGROUND-SET CELL-RENDERER-CELL-BACKGROUND-SET
+                        "cell-background-set" "gboolean" T T)
+                       (EDITING CELL-RENDERER-EDITING
+                        "editing" "gboolean" T NIL)
+                       (HEIGHT CELL-RENDERER-HEIGHT "height" "gint" T T)
+                       (IS-EXPANDED CELL-RENDERER-IS-EXPANDED
+                        "is-expanded" "gboolean" T T)
+                       (IS-EXPANDER CELL-RENDERER-IS-EXPANDER
+                        "is-expander" "gboolean" T T)
+                       (MODE CELL-RENDERER-MODE
+                        "mode" "GtkCellRendererMode" T T)
+                       (SENSITIVE CELL-RENDERER-SENSITIVE
+                        "sensitive" "gboolean" T T)
+                       (VISIBLE CELL-RENDERER-VISIBLE
+                        "visible" "gboolean" T T)
+                       (WIDTH CELL-RENDERER-WIDTH "width" "gint" T T)
+                       (XALIGN CELL-RENDERER-XALIGN "xalign" "gfloat" T T)
+                       (XPAD CELL-RENDERER-XPAD "xpad" "guint" T T)
+                       (YALIGN CELL-RENDERER-YALIGN "yalign" "gfloat" T T)
+                       (YPAD CELL-RENDERER-YPAD "ypad" "guint" T T)))
              (gobject:get-gtype-definition "GtkCellRenderer"))))
+
+;;; --- Signals ----------------------------------------------------------------
+
+;;;     editing-canceled
+
+(test gtk-cell-renderer-editing-canceled-signal
+  (let* ((name "editing-canceled")
+         (gtype (g:gtype "GtkCellRenderer"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-FIRST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
+;;;     editing-started
+
+(test gtk-cell-renderer-editing-started-signal
+  (let* ((name "editing-started")
+         (gtype (g:gtype "GtkCellRenderer"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-FIRST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("GtkCellEditable" "gchararray")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -161,41 +199,21 @@
     (is (= 0.5 (gtk:cell-renderer-yalign renderer)))
     (is (= 2 (gtk:cell-renderer-ypad renderer)))))
 
-;;; --- Signals ----------------------------------------------------------------
-
-;;;     editing-canceled
-
-(test gtk-cell-renderer-editing-canceled-signal
-  (let ((query (g:signal-query (g:signal-lookup "editing-canceled"
-                                                "GtkCellRenderer"))))
-    (is (string= "editing-canceled" (g:signal-query-signal-name query)))
-    (is (string= "GtkCellRenderer"
-                 (g:type-name (g:signal-query-owner-type query))))
-    (is (equal '(:RUN-FIRST)
-               (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
-    (is (equal '()
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
-
-;;;     editing-started
-
-(test gtk-cell-renderer-editing-started-signal
-  (let ((query (g:signal-query (g:signal-lookup "editing-started"
-                                                "GtkCellRenderer"))))
-    (is (string= "editing-started" (g:signal-query-signal-name query)))
-    (is (string= "GtkCellRenderer"
-                 (g:type-name (g:signal-query-owner-type query))))
-    (is (equal '(:RUN-FIRST)
-               (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
-    (is (equal '("GtkCellEditable" "gchararray")
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
-
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_cell_renderer_get_aligned_area
+
+#+crategus
+(test gtk-cell-renderer-aligned-area
+  (let ((gtk-init:*warn-deprecated* nil))
+    (glib-test:with-check-memory (renderer widget)
+      (let ((rect (gdk:rectangle-new :width 24 :height 24)))
+        (setf renderer (gtk:cell-renderer-text-new))
+        (setf widget (gtk:button-new-with-label "label"))
+        (is (gdk:rectangle-equal
+                (gdk:rectangle-new :x 0 :y 1 :width 4 :height 21)
+                (gtk:cell-renderer-aligned-area renderer widget 0 rect)))))))
+
 ;;;     gtk_cell_renderer_snapshot
 ;;;     gtk_cell_renderer_activate
 ;;;     gtk_cell_renderer_start_editing
@@ -274,4 +292,4 @@
 ;;;     gtk_cell_renderer_get_preferred_width_for_height
 ;;;     gtk_cell_renderer_get_request_mode
 
-;;; 2026-01-31
+;;; 2026-08-19

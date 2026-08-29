@@ -6,7 +6,7 @@
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2025 Dieter Kaiser
+;;; Copyright (C) 2011 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -141,15 +141,14 @@ lambda (editable)    :run-last
 (setf (liber:alias-for-function 'cell-editable-editing-canceled)
       "Accessor"
       (documentation 'cell-editable-editing-canceled 'function)
- "@version{#2025-08-17}
+ "@version{#2026-08-20}
   @syntax{(gtk:cell-editable-editing-canceled object) => canceled}
   @syntax{(setf (gtk:cell-editable-editing-canceled object) canceled)}
   @argument[object]{a @class{gtk:cell-editable} object}
   @argument[canceled]{a boolean whether editing on the cell has been canceled}
   @begin{short}
-    The accessor for the @slot[gtk:cell-editable]{editing-canceled} slot of the
-    @class{gtk:cell-editable} class gets or sets whether editing on the cell has
-    been canceled.
+    The accessor for the @slot[gtk:cell-editable]{editing-canceled} slot gets
+    or sets whether editing on the cell has been canceled.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-editable} implementation is deprecated since 4.10,

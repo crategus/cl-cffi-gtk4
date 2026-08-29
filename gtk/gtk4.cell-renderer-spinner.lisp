@@ -6,7 +6,7 @@
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2025 Dieter Kaiser
+;;; Copyright (C) 2011 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -121,15 +121,14 @@
 (setf (liber:alias-for-function 'cell-renderer-spinner-active)
       "Accessor"
       (documentation 'cell-renderer-spinner-active 'function)
- "@version{2025-09-21}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-spinner-active object) => active}
   @syntax{(setf (gtk:cell-renderer-spinner-active object) active)}
   @argument[object]{a @class{gtk:cell-renderer-spinner} object}
   @argument[active]{a boolean whether the spinner is active}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-spinner]{active} slot of the
-    @class{gtk:cell-renderer-spinner} class gets or sets whether the spinner is
-    active, that is, shown in the cell.
+    The accessor for the @slot[gtk:cell-renderer-spinner]{active} slot gets or
+    sets whether the spinner is active, that is, shown in the cell.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-spinner} implementation is deprecated since
@@ -153,15 +152,14 @@
 (setf (liber:alias-for-function 'cell-renderer-spinner-pulse)
       "Accessor"
       (documentation 'cell-renderer-spinner-pulse 'function)
- "@version{2025-09-21}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-spinner-pulse object) => pulse}
   @syntax{(setf (gtk:cell-renderer-spinner-pulse object) pulse)}
   @argument[object]{a @class{gtk:cell-renderer-spinner} object}
   @argument[pulse]{an unsigned integer for the pulse of the spinner}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-spinner]{pulse} slot of the
-    @class{gtk:cell-renderer-spinner} class gets or sets the pulse of the
-    spinner.
+    The accessor for the @slot[gtk:cell-renderer-spinner]{pulse} slot gets or
+    sets the pulse of the spinner.
   @end{short}
   Increment this value to draw the next frame of the spinner animation. Usually,
   you would update this value in a timeout. By default, the @class{gtk:spinner}
@@ -186,15 +184,14 @@
 (setf (liber:alias-for-function 'cell-renderer-spinner-size)
       "Accessor"
       (documentation 'cell-renderer-spinner-size 'function)
- "@version{2025-09-21}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-spinner-size object) => size}
   @syntax{(setf (gtk:cell-renderer-spinner-size object) size)}
   @argument[object]{a @class{gtk:cell-renderer-spinner} object}
   @argument[size]{a @sym{gtk:icon-size} value}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-spinner]{size} slot of the
-    @class{gtk:cell-renderer-spinner} class gets or sets the icon size that
-    specifies the size of the rendered spinner.
+    The accessor for the @slot[gtk:cell-renderer-spinner]{size} slot gets or
+    sets the icon size that specifies the size of the rendered spinner.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-spinner} implementation is deprecated since

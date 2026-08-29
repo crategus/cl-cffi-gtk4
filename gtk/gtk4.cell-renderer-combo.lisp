@@ -6,7 +6,7 @@
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2025 Dieter Kaiser
+;;; Copyright (C) 2011 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -153,17 +153,16 @@ lambda (combo path iter)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-combo-has-entry)
       "Accessor"
       (documentation 'cell-renderer-combo-has-entry 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-combo-has-entry object) => has-entry}
   @syntax{(setf (gtk:cell-renderer-combo-has-entry object) has-entry)}
   @argument[object]{a @class{gtk:cell-renderer-combo} object}
   @argument[has-entry]{a boolean whether the cell renderer will include an
     entry}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-combo]{has-entry} slot of the
-    @class{gtk:cell-renderer-combo} class gets or sets whether the cell renderer
-    will include an entry and allow to enter values other than the ones in the
-    popup list.
+    The accessor for the @slot[gtk:cell-renderer-combo]{has-entry} slot gets or
+    sets whether the cell renderer will include an entry and allow to enter
+    values other than the ones in the popup list.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-combo} object is deprecated since 4.10.
@@ -184,15 +183,14 @@ lambda (combo path iter)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-combo-model)
       "Accessor"
       (documentation 'cell-renderer-combo-model 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-combo-model object) => model}
   @syntax{(setf (gtk:cell-renderer-combo-model object) model)}
   @argument[object]{a @class{gtk:cell-renderer-combo} object}
   @argument[model]{a @class{gtk:tree-model} object}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-combo]{model} slot of the
-    @class{gtk:cell-renderer-combo} class gets or sets a tree model containing
-    the possible values for the combo box.
+    The accessor for the @slot[gtk:cell-renderer-combo]{model} slot gets or
+    sets a tree model containing the possible values for the combo box.
   @end{short}
   Use the @slot[gtk:cell-renderer-combo]{text-column} property to specify the
   column holding the values.
@@ -223,16 +221,15 @@ lambda (combo path iter)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-combo-text-column)
       "Accessor"
       (documentation 'cell-renderer-combo-text-column 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-combo-text-column object) => column}
   @syntax{(setf (gtk:cell-renderer-combo-text-column object) column)}
   @argument[object]{a @class{gtk:cell-renderer-combo} object}
   @argument[column]{an integer which specifies the model colum which holds the
     possible values for the combo box}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-combo]{text-column} slot of the
-    @class{gtk:cell-renderer-combo} class gets or sets the model column which
-    holds the possible values for the combo box.
+    The accessor for the @slot[gtk:cell-renderer-combo]{text-column} slot gets
+    or sets the model column which holds the possible values for the combo box.
   @end{short}
   Note that this refers to the model specified in the
   @slot[gtk:cell-renderer-combo]{model} property, not the model backing the

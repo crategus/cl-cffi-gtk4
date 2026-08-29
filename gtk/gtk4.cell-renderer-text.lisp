@@ -6,7 +6,7 @@
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2025 Dieter Kaiser
+;;; Copyright (C) 2011 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -353,15 +353,14 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-align-set)
       "Accessor"
       (documentation 'cell-renderer-text-align-set 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-text-align-set object) => setting}
   @syntax{(setf (gtk:cell-renderer-text-align-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[setting]{a boolean whether this tag affects the alignment mode}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-text]{align-set} slot of the
-    @class{gtk:cell-renderer-text} class gets or sets whether this tag affects
-    the alignment mode.
+    The accessor for the @slot[gtk:cell-renderer-text]{align-set} slot gets or
+    sets whether this tag affects the alignment mode.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
@@ -386,15 +385,14 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-alignment)
       "Accessor"
       (documentation 'cell-renderer-text-alignment 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-text-alignment object) => alignment}
   @syntax{(setf (gtk:cell-renderer-text-alignment object) alignment)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[alignment]{a @sym{pango:alignment} value}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-text]{alignment} slot of the
-    @class{gtk:cell-renderer-text} class gets or sets how to align the lines of
-    text with respect to each other.
+    The accessor for the @slot[gtk:cell-renderer-text]{alignment} slot gets or
+    sets how to align the lines of text with respect to each other.
   @end{short}
   Note that this property describes how to align the lines of text in case there
   are several of them. The @slot[gtk:cell-renderer]{xalign} property, on the
@@ -420,15 +418,14 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-attributes)
       "Accessor"
       (documentation 'cell-renderer-text-attributes 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-text-attributes object) => attributes}
   @syntax{(setf (gtk:cell-renderer-text-attributes object) attributes)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[attributes]{a @class{pango:attr-list} instance}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer]{attributes} slot of the
-    @class{gtk:cell-renderer-text} class gets or sets the list of style
-    attributes to apply to the text of the renderer.
+    The accessor for the @slot[gtk:cell-renderer]{attributes} slot gets or sets
+    the list of style attributes to apply to the text of the renderer.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
@@ -450,13 +447,13 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-background)
       "Accessor"
       (documentation 'cell-renderer-text-background 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(setf (gtk:cell-renderer-text-background object) background)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[background]{a string for the background color}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-text]{background} slot of the
-    @class{gtk:cell-renderer-text} class sets the background color as a string.
+    The accessor for the @slot[gtk:cell-renderer-text]{background} slot sets
+    the background color as a string.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
@@ -477,14 +474,14 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-background-rgba)
       "Accessor"
       (documentation 'cell-renderer-text-background-rgba 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-text-background-rgba object) => background}
   @syntax{(setf (gtk:cell-renderer-text-background-rgba object) background)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[background]{a @class{gdk:rgba} instance for the background color}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-text]{background-rgba} slot of
-    the @class{gtk:cell-renderer-text} class gets or sets the background color.
+    The accessor for the @slot[gtk:cell-renderer-text]{background-rgba} slot
+    gets or sets the background color.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
@@ -507,15 +504,14 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-background-set)
       "Accessor"
       (documentation 'cell-renderer-text-background-set 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-text-background-set object) => setting}
   @syntax{(setf (gtk:cell-renderer-text-background-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[setting]{a boolean whether this tag affects the background color}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-text]{background-set} slot of
-    the @class{gtk:cell-renderer-text} class gets or sets whether this tag
-    affects the background color.
+    The accessor for the @slot[gtk:cell-renderer-text]{background-set} slot
+    gets or sets whether this tag affects the background color.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
@@ -536,15 +532,14 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-editable)
       "Accessor"
       (documentation 'cell-renderer-text-editable 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-text-editable object) => setting}
   @syntax{(setf (gtk:cell-renderer-text-editable object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[setting]{a boolean whether the text can be modified by the user}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-text]{editable} slot of the
-    @class{gtk:cell-renderer-text} class gets or sets whether the text can be
-    modified by the user.
+    The accessor for the @slot[gtk:cell-renderer-text]{editable} slot gets or
+    sets whether the text can be modified by the user.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
@@ -565,15 +560,14 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-editable-set)
       "Accessor"
       (documentation 'cell-renderer-text-editable-set 'function)
- "@version{2025-09-16}
+ "@version{2026-09-19}
   @syntax{(gtk:cell-renderer-text-editable-set object) => setting}
   @syntax{(setf (gtk:cell-renderer-text-editable-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[setting]{a boolean whether this tag affects text editability}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-text]{editable-set} slot of the
-    @class{gtk:cell-renderer-text} class gets or sets whether this tag affects
-    text editability.
+    The accessor for the @slot[gtk:cell-renderer-text]{editable-set} slot gets
+    or sets whether this tag affects text editability.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
@@ -599,16 +593,15 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-ellipsize)
       "Accessor"
       (documentation 'cell-renderer-text-ellipsize 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-text-ellipsize object) => mode}
   @syntax{(setf (gtk:cell-renderer-text-ellipsize object) mode)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[mode]{a @sym{pango:ellipsize-mode} value}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-text]{ellipsize} slot of the
-    @class{gtk:cell-renderer-text} class gets or sets the preferred place to
-    ellipsize the string, if the cell renderer does not have enough room to
-    display the entire string.
+    The accessor for the @slot[gtk:cell-renderer-text]{ellipsize} slot gets or
+    sets the preferred place to ellipsize the string, if the cell renderer does
+    not have enough room to display the entire string.
   @end{short}
   Setting it to the @val[pango:ellipsize-mode]{:none} value turns off
   ellipsizing. See the @slot[gtk:cell-renderer-text]{wrap-width} property for
@@ -634,15 +627,14 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-ellipsize-set)
       "Accessor"
       (documentation 'cell-renderer-text-ellipsize-set 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-text-ellipsize-set object) => setting}
   @syntax{(setf (gtk:cell-renderer-text-ellipsize-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[setting]{a boolean whether this tag affects the ellipsize mode}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-text]{ellipsize-set} slot of
-    the @class{gtk:cell-renderer-text} class gets or sets whether this tag
-    affects the ellipsize mode.
+    The accessor for the @slot[gtk:cell-renderer-text]{ellipsize-set} slot gets
+    or sets whether this tag affects the ellipsize mode.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
@@ -663,15 +655,14 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-family)
       "Accessor"
       (documentation 'cell-renderer-text-family 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-text-family object) => font}
   @syntax{(setf (gtk:cell-renderer-text-family object) font)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[font]{a string for the name of the font family}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-text]{family} slot of the
-    @class{gtk:cell-renderer-text} class gets or sets the name of the font
-    family, for example Sans, Helvetica, Times, Monospace.
+    The accessor for the @slot[gtk:cell-renderer-text]{family} slot gets or sets
+    the name of the font family, for example Sans, Helvetica, Times, Monospace.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
@@ -692,15 +683,14 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-family-set)
       "Accessor"
       (documentation 'cell-renderer-text-family-set 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-text-family-set object) => setting}
   @syntax{(setf (gtk:cell-renderer-text-family-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[setting]{a boolean whether this tag affects the font family}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-text]{family-set} slot of the
-    @class{gtk:cell-renderer-text} class gets or sets whether this tag affects
-    the font family.
+    The accessor for the @slot[gtk:cell-renderer-text]{family-set} slot gets
+    or sets whether this tag affects the font family.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
@@ -722,15 +712,14 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-font)
       "Accessor"
       (documentation 'cell-renderer-text-font 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-text-font object) => font}
   @syntax{(setf (gtk:cell-renderer-text-font object) font)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[font]{a string for the font description}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-text]{font} slot of the
-    @class{gtk:cell-renderer-text} class gets or sets the font description as a
-    string, for example, \"Sans Italic 12\".
+    The accessor for the @slot[gtk:cell-renderer-text]{font} slot gets or sets
+    the font description as a string, for example, \"Sans Italic 12\".
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
@@ -751,15 +740,14 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-font-desc)
       "Accessor"
       (documentation 'cell-renderer-text-font-desc 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-text-font-desc object) => desc}
   @syntax{(setf (gtk:cell-renderer-text-font-desc object) desc)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[desc]{a @class{pango:font-description} instance}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-text]{font-desc} slot of the
-    @class{gtk:cell-renderer-text} class gets or sets the Pango font
-    description.
+    The accessor for the @slot[gtk:cell-renderer-text]{font-desc} slot gets or
+    sets the Pango font description.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
@@ -781,13 +769,13 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-foreground)
       "Accessor"
       (documentation 'cell-renderer-text-foreground 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(setf (gtk:cell-renderer-text-foreground object) foreground)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[foreground]{a string for the foreground color}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-text]{foreground} slot of the
-    @class{gtk:cell-renderer-text} class gets or sets the foreground color.
+    The accessor for the @slot[gtk:cell-renderer-text]{foreground} slot gets or
+    sets the foreground color.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
@@ -808,14 +796,14 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-foreground-rgba)
       "Accessor"
       (documentation 'cell-renderer-text-foreground-rgba 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-text-foreground-rgba object) => foreground}
   @syntax{(setf (gtk:cell-renderer-text-foreground-rgba object) foreground)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[foreground]{a @class{gdk:rgba} instance}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-text]{foreground-rgba} slot of
-    the @class{gtk:cell-renderer-text} class gets or sets the foreground color.
+    The accessor for the @slot[gtk:cell-renderer-text]{foreground-rgba} slot
+    gets or sets the foreground color.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
@@ -838,15 +826,14 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-foreground-set)
       "Accessor"
       (documentation 'cell-renderer-text-foreground-set 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-text-foreground-set object) => setting}
   @syntax{(setf (gtk:cell-renderer-text-foreground-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[setting]{a boolean whether this tag affects the foreground color}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-text]{foreground-set} slot of
-    the @class{gtk:cell-renderer-text} class gets or sets whether this tag
-    affects the foreground color.
+    The accessor for the @slot[gtk:cell-renderer-text]{foreground-set} slot
+    gets or sets whether this tag affects the foreground color.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
@@ -869,15 +856,14 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-language)
       "Accessor"
       (documentation 'cell-renderer-text-language 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-text-language object) => language}
   @syntax{(setf (gtk:cell-renderer-text-language object) language)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[language]{a string for the language this text is in}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-text]{language} slot of the
-    @class{gtk:cell-renderer-text} class gets or sets the language this text is
-    in, as an ISO code.
+    The accessor for the @slot[gtk:cell-renderer-text]{language} slot gets or
+    sets the language this text is in, as an ISO code.
   @end{short}
   Pango can use this as a hint when rendering the text. If you do not
   understand this parameter, you probably do not need it.
@@ -900,15 +886,14 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-language-set)
       "Accessor"
       (documentation 'cell-renderer-text-language-set 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-text-language-set object) => setting}
   @syntax{(setf (gtk:cell-renderer-text-language-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[setting]{a boolean whether this tag affects the language}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-text]{language-set} slot of the
-    @class{gtk:cell-renderer-text} class gets or sets whether this tag affects
-    the language the text is rendered as.
+    The accessor for the @slot[gtk:cell-renderer-text]{language-set} slot gets
+    or sets whether this tag affects the language the text is rendered as.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
@@ -929,13 +914,13 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-markup)
       "Accessor"
       (documentation 'cell-renderer-text-markup 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(setf (gtk:cell-renderer-text-markup object) markup)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[markup]{a string for the marked up text to render}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-text]{markup} slot of the
-    @class{gtk:cell-renderer-text} class sets the marked up text to render.
+    The accessor for the @slot[gtk:cell-renderer-text]{markup} slot sets the
+    marked up text to render.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
@@ -962,15 +947,14 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-max-width-chars)
       "Accessor"
       (documentation 'cell-renderer-text-max-width-chars 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-text-max-width-chars object) => width}
   @syntax{(setf (gtk:cell-renderer-text-max-width-chars object) width)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[width]{an integer for the maximum width of the cell}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-text]{max-width-chars} slot of
-    the @class{gtk:cell-renderer-text} class get or sets the desired maximum
-    width of the cell, in characters.
+    The accessor for the @slot[gtk:cell-renderer-text]{max-width-chars} slot
+    get or sets the desired maximum width of the cell, in characters.
   @end{short}
   If this property is set to -1, the width will be calculated automatically. For
   cell renderers that ellipsize or wrap text. This property controls the maximum
@@ -1000,15 +984,15 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-placeholder-text)
       "Accessor"
       (documentation 'cell-renderer-text-placeholder-text 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-text-placeholder-text object) => text}
   @syntax{(setf (gtk:cell-renderer-text-placeholder-text object) text)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[text]{a string for the placeholder text}
   @begin{short}
     The accessor for the @slot[gtk:cell-renderer-text]{placeholder-text} slot
-    of the @class{gtk:cell-renderer-text} class gets or sets the text that will
-    be displayed in the @class{gtk:cell-renderer} object if the
+    gets or sets the text that will be displayed in the
+    @class{gtk:cell-renderer} object if the
     @slot[gtk:cell-renderer-text]{editable} property is @em{true} and the cell
     is empty.
   @end{short}
@@ -1033,15 +1017,15 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-rise)
       "Accessor"
       (documentation 'cell-renderer-text-rise 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-text-rise object) => rise}
   @syntax{(setf (gtk:cell-renderer-text-rise object) rise)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[rise]{an integer for the offset of text above the baseline}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-text]{rise} slot of the
-    @class{gtk:cell-renderer-text} class gets or sets the offset of text above
-    the baseline, below the baseline if this property is negative.
+    The accessor for the @slot[gtk:cell-renderer-text]{rise} slot gets or sets
+    the offset of text above the baseline, below the baseline if this property
+    is negative.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
@@ -1062,15 +1046,14 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-rise-set)
       "Accessor"
       (documentation 'cell-renderer-text-rise-set 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-text-rise-set object) => setting}
   @syntax{(setf (gtk:cell-renderer-text-rise-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[setting]{a boolean whether this tag affects the rise}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-text]{rise-set} slot of the
-    @class{gtk:cell-renderer-text} class gets or sets whether this tag affects
-    the rise.
+    The accessor for the @slot[gtk:cell-renderer-text]{rise-set} slot gets or
+    sets whether this tag affects the rise.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
@@ -1081,8 +1064,7 @@ lambda (renderer path text)    :run-last
 ;;; --- gtk:cell-renderer-text-scale -------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "scale"
-                                               'cell-renderer-text) t)
+(setf (documentation (liber:slot-documentation "scale" 'cell-renderer-text) t)
  "The @code{scale} property of type @code{:double} (Read / Write) @br{}
   The font scaling factor. @br{}
   Allowed values: >= 0 @br{}
@@ -1092,15 +1074,15 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-scale)
       "Accessor"
       (documentation 'cell-renderer-text-scale 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-text-scale object) => scale}
   @syntax{(setf (gtk:cell-renderer-text-scale object) scale)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[scale]{a number coerced to a double float for the font scaling
     factor}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-text]{scale} slot of the
-    @class{gtk:cell-renderer-text} class gets or sets the font scaling factor.
+    The accessor for the @slot[gtk:cell-renderer-text]{scale} slot gets or sets
+    the font scaling factor.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
@@ -1121,16 +1103,15 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-scale-set)
       "Accessor"
       (documentation 'cell-renderer-text-scale-set 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-text-scale-set object) => setting}
   @syntax{(setf (gtk:cell-renderer-text-scale-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[setting]{a boolean whether this tag scales the font size by a
    factor}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-text]{scale-set} slot of the
-    @class{gtk:cell-renderer-text} class gets or sets whether this tag scales
-    the font size by a factor.
+    The accessor for the @slot[gtk:cell-renderer-text]{scale-set} slot gets or
+    sets whether this tag scales the font size by a factor.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
@@ -1152,15 +1133,14 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-single-paragraph-mode)
       "Accessor"
       (documentation 'cell-renderer-text-single-paragraph-mode 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-text-single-paragraph-mode object) => mode}
   @syntax{(setf (gtk:cell-renderer-text-single-paragraph-mode object) mode)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[mode]{a boolean whether to keep all text in a single paragraph}
   @begin{short}
     The accessor for the @slot[gtk:cell-renderer-text]{single-paragraph-mode}
-    slot of the @class{gtk:cell-renderer-text} class gets or sets whether to
-    keep all text in a single paragraph.
+    slot gets or sets whether to keep all text in a single paragraph.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
@@ -1181,14 +1161,14 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-size)
       "Accessor"
       (documentation 'cell-renderer-text-size 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-text-size object) => size}
   @syntax{(setf (gtk:cell-renderer-text-size object) size)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[size]{an integer for the font size}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-text]{size} slot of the
-    @class{gtk:cell-renderer-text} class gets or sets the font size.
+    The accessor for the @slot[gtk:cell-renderer-text]{size} slot gets or sets
+    the font size.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
@@ -1210,15 +1190,15 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-size-points)
       "Accessor"
       (documentation 'cell-renderer-text-size-points 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-text-size-points object) => size}
   @syntax{(setf (gtk:cell-renderer-text-size-points object) size)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[size]{a number coerced to a double float for the font size in
     points}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-text]{size-points} slot of the
-    @class{gtk:cell-renderer-text} class gets or sets the font size in points.
+    The accessor for the @slot[gtk:cell-renderer-text]{size-points} slot gets
+    or sets the font size in points.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
@@ -1239,15 +1219,14 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-size-set)
       "Accessor"
       (documentation 'cell-renderer-text-size-set 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-text-size-set object) => setting}
   @syntax{(setf (gtk:cell-renderer-text-size-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[setting]{a boolean whether this tag affects the font size}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-text]{size-set} slot of the
-    @class{gtk:cell-renderer-text} class gets or sets whether this tag affects
-    the font size.
+    The accessor for the @slot[gtk:cell-renderer-text]{size-set} slot gets or
+    sets whether this tag affects the font size.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
@@ -1268,14 +1247,14 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-stretch)
       "Accessor"
       (documentation 'cell-renderer-text-stretch 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-text-stretch object) => stretch}
   @syntax{(setf (gtk:cell-renderer-text-stretch object) stretch)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[stretch]{a @sym{pango:stretch} value for the font stretch}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-text]{stretch} slot of the
-    @class{gtk:cell-renderer-text} class gets or sets the font stretch.
+    The accessor for the @slot[gtk:cell-renderer-text]{stretch} slot gets or
+    sets the font stretch.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
@@ -1297,15 +1276,14 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-stretch-set)
       "Accessor"
       (documentation 'cell-renderer-text-stretch-set 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-text-stretch-set object) => setting}
   @syntax{(setf (gtk:cell-renderer-text-stretch-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[setting]{a boolean whether this tag affects the font stretch}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-text]{stretch-set} slot of the
-    @class{gtk:cell-renderer-text} class gets or sets whether this tag affects
-    the font stretch.
+    The accessor for the @slot[gtk:cell-renderer-text]{stretch-set} slot gets
+    or sets whether this tag affects the font stretch.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
@@ -1326,15 +1304,14 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-strikethrough)
       "Accessor"
       (documentation 'cell-renderer-text-strikethrough 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-text-strikethrough object) => setting}
   @syntax{(setf (gtk:cell-renderer-text-strikethrough object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[setting]{a boolean whether to strike through the text}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-text]{strikethrough} slot of
-    the @class{gtk:cell-renderer-text} class gets or sets whether to strike
-    through the text.
+    The accessor for the @slot[gtk:cell-renderer-text]{strikethrough} slot gets
+    or sets whether to strike through the text.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
@@ -1356,15 +1333,14 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-strikethrough-set)
       "Accessor"
       (documentation 'cell-renderer-text-strikethrough-set 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-text-strikethrough-set object) => setting}
   @syntax{(setf (gtk:cell-renderer-text-strikethrough-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[setting]{a boolean whether this tag affects strikethrough}
   @begin{short}
     The accessor for the @slot[gtk:cell-renderer-text]{strikethrough-set} slot
-    of the @class{gtk:cell-renderer-text} class gets or sets whether this tag
-    affects strikethrough.
+    gets or sets whether this tag affects strikethrough.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
@@ -1385,14 +1361,14 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-style)
       "Accessor"
       (documentation 'cell-renderer-text-style 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-text-style object) => style}
   @syntax{(setf (gtk:cell-renderer-text-style object) style)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[style]{a @sym{pango:style} value for the font style}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-text]{style} slot of the
-    @class{gtk:cell-renderer-text} class gets or sets the font style.
+    The accessor for the @slot[gtk:cell-renderer-text]{style} slot gets or sets
+    the font style.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
@@ -1414,15 +1390,14 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-style-set)
       "Accessor"
       (documentation 'cell-renderer-text-style-set 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-text-style-set object) => setting}
   @syntax{(setf (gtk:cell-renderer-text-style-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[setting]{a boolean whether this tag affects the font style}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-text]{style-set} slot of the
-    @class{gtk:cell-renderer-text} class gets or sets whether this tag affects
-    the font style.
+    The accessor for the @slot[gtk:cell-renderer-text]{style-set} slot gets or
+    sets whether this tag affects the font style.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
@@ -1443,14 +1418,14 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-text)
       "Accessor"
       (documentation 'cell-renderer-text-text 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-text-text object) => text}
   @syntax{(setf (gtk:cell-renderer-text-text object) text)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[text]{a string for the text to render}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-text]{text} slot of the
-    @class{gtk:cell-renderer-text} class gets or sets the text to render.
+    The accessor for the @slot[gtk:cell-renderer-text]{text} slot gets or sets
+    the text to render.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
@@ -1472,16 +1447,15 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-underline)
       "Accessor"
       (documentation 'cell-renderer-text-underline 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-text-underline object) => underline}
   @syntax{(setf (gtk:cell-renderer-text-underline object) underline)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[underline]{a @sym{pango:underline} value for the style of underline
     for this text}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-text]{underline} slot of the
-    @class{gtk:cell-renderer-text} class gets or sets the style of underline for
-    this text.
+    The accessor for the @slot[gtk:cell-renderer-text]{underline} slot gets or
+    sets the style of underline for this text.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
@@ -1503,15 +1477,14 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-underline-set)
       "Accessor"
       (documentation 'cell-renderer-text-underline-set 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-text-underline-set object) => setting}
   @syntax{(setf (gtk:cell-renderer-text-underline-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[setting]{a boolean whether this tag affects underlining}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-text]{underline-set} slot of
-    the @class{gtk:cell-renderer-text} class gets or sets whether this tag
-    affects underlining.
+    The accessor for the @slot[gtk:cell-renderer-text]{underline-set} slot gets
+    or sets whether this tag affects underlining.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
@@ -1532,14 +1505,14 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-variant)
       "Accessor"
       (documentation 'cell-renderer-text-variant 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-text-variant object) => variant}
   @syntax{(setf (gtk:cell-renderer-text-variant object) variant)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[variant]{a @sym{pango:variant} value for the font variant}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-text]{variant} slot of the
-    @class{gtk:cell-renderer-text} class gets or sets the font variant.
+    The accessor for the @slot[gtk:cell-renderer-text]{variant} slot gets or
+    sets the font variant.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
@@ -1561,15 +1534,14 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-variant-set)
       "Accessor"
       (documentation 'cell-renderer-text-variant-set 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-text-variant-set object) => setting}
   @syntax{(setf (gtk:cell-renderer-text-variant-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[setting]{a boolean whether this tag affects the font variant}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-text]{variant-set} slot of the
-    @class{gtk:cell-renderer-text} class gets or sets whether this tag affects
-    the font variant.
+    The accessor for the @slot[gtk:cell-renderer-text]{variant-set} slot gets
+    or sets whether this tag affects the font variant.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
@@ -1580,8 +1552,7 @@ lambda (renderer path text)    :run-last
 ;;; --- gtk:cell-renderer-text-weight ------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "weight"
-                                               'cell-renderer-text) t)
+(setf (documentation (liber:slot-documentation "weight" 'cell-renderer-text) t)
  "The @code{weight} property of type @code{:int} (Read / Write) @br{}
   The font weight. @br{}
   Allowed values: >= 0 @br{}
@@ -1591,14 +1562,14 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-weight)
       "Accessor"
       (documentation 'cell-renderer-text-weight 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-text-weight object) => weight}
   @syntax{(setf (gtk:cell-renderer-text-weight object) weight)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[weight]{an integer for the font weight}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-text]{weight} slot of the
-    @class{gtk:cell-renderer-text} class gets or sets the font weight.
+    The accessor for the @slot[gtk:cell-renderer-text]{weight} slot gets or
+    sets the font weight.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
@@ -1619,15 +1590,14 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-weight-set)
       "Accessor"
       (documentation 'cell-renderer-text-weight-set 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-text-weight-set object) => setting}
   @syntax{(setf (gtk:cell-renderer-text-weight-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[setting]{a boolean whether this tag affects the font weight}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-text]{weight-set} slot of the
-    @class{gtk:cell-renderer-text} class gets or sets whether this tag affects
-    the font weight.
+    The accessor for the @slot[gtk:cell-renderer-text]{weight-set} slot gets or
+    sets whether this tag affects the font weight.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
@@ -1651,15 +1621,14 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-width-chars)
       "Accessor"
       (documentation 'cell-renderer-text-width-chars 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-text-width-chars object) => width}
   @syntax{(setf (gtk:cell-renderer-text-width-chars object) width)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[width]{an integer for the width of the cell}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-text]{width-chars} slot of the
-    @class{gtk:cell-renderer-text} class gets or sets the desired width of the
-    cell, in characters.
+    The accessor for the @slot[gtk:cell-renderer-text]{width-chars} slot gets
+    or sets the desired width of the cell, in characters.
   @end{short}
   If this property is set to -1, the width will be calculated automatically,
   otherwise the cell will request either 3 characters or the property value,
@@ -1687,16 +1656,15 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-wrap-mode)
       "Accessor"
       (documentation 'cell-renderer-text-wrap-mode 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-text-wrap-mode object) => mode}
   @syntax{(setf (gtk:cell-renderer-text-wrap-mode object) mode)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[mode]{a @sym{pango:wrap-mode} value}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-text]{wrap-mode} slot of the
-    @class{gtk:cell-renderer-text} class gets or sets how to break the string
-    into multiple lines, if the cell renderer does not have enough room to
-    display the entire string.
+    The accessor for the @slot[gtk:cell-renderer-text]{wrap-mode} slot gets or
+    sets how to break the string into multiple lines, if the cell renderer does
+    not have enough room to display the entire string.
   @end{short}
   This property has no effect unless the
   @slot[gtk:cell-renderer-text]{wrap-width} property is set.
@@ -1724,15 +1692,14 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-wrap-width)
       "Accessor"
       (documentation 'cell-renderer-text-wrap-width 'function)
- "@version{2025-09-16}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-text-wrap-width object) => width}
   @syntax{(setf (gtk:cell-renderer-text-wrap-width object) width)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[width]{an integer for the minimum width at which text is wrapped}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer-text]{wrap-width} slot of the
-    @class{gtk:cell-renderer-text} class gets or sets the minimum width at which
-    the text is wrapped.
+    The accessor for the @slot[gtk:cell-renderer-text]{wrap-width} slot gets or
+    sets the minimum width at which the text is wrapped.
   @end{short}
   The @slot[gtk:cell-renderer-text]{wrap-mode} property can be used to influence
   at what character positions the line breaks can be placed. Setting the

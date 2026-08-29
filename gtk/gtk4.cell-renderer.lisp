@@ -368,13 +368,13 @@ lambda (renderer editable path)    :run-first
 (setf (liber:alias-for-function 'cell-renderer-cell-background)
       "Accessor"
       (documentation 'cell-renderer-cell-background 'function)
- "@version{2025-09-29}
+ "@version{2026-08-19}
   @syntax{(setf (gtk:cell-renderer-cell-background object) background)}
   @argument[object]{a @class{gtk:cell-renderer} object}
   @argument[background]{a string for the cell background color}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer]{cell-background} slot of the
-    @class{gtk:cell-renderer} class sets te cell background color as a string.
+    The accessor for the @slot[gtk:cell-renderer]{cell-background} slot sets
+    the cell background color as a string.
   @end{short}
   This property is not readable.
   @begin[Warning]{dictionary}
@@ -397,15 +397,15 @@ lambda (renderer editable path)    :run-first
 (setf (liber:alias-for-function 'cell-renderer-cell-background-rgba)
       "Accessor"
       (documentation 'cell-renderer-cell-background-rgba 'function)
- "@version{2025-09-29}
+ "@version{2026-08-01}
   @syntax{(gtk:cell-renderer-cell-background-rgba object) => background}
   @syntax{(setf (gtk:cell-renderer-cell-background-rgba object) background)}
   @argument[object]{a @class{gtk:cell-renderer} object}
-  @argument[background]{a @class{gdk:rgba} color for the cell background color}
+  @argument[background]{a @class{gdk:rgba} instance for the cell background
+    color}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer]{cell-background-rgba} slot of
-    the @class{gtk:cell-renderer} class gets or sets the cell background RGBA
-    color.
+    The accessor for the @slot[gtk:cell-renderer]{cell-background-rgba} slot
+    gets or sets the cell background RGBA color.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
@@ -428,16 +428,15 @@ lambda (renderer editable path)    :run-first
 (setf (liber:alias-for-function 'cell-renderer-cell-background-set)
       "Accessor"
       (documentation 'cell-renderer-cell-background-set 'function)
- "@version{2025-09-29}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-cell-background-set object) => setting}
   @syntax{(setf (gtk:cell-renderer-cell-background-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer} object}
   @argument[setting]{a boolean whether this tag affects the cell background
     color}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer]{cell-background-set} slot of
-    the @class{gtk:cell-renderer} class gets or sets whether this tag affects
-    the cell background color.
+    The accessor for the @slot[gtk:cell-renderer]{cell-background-set} slot
+    gets or sets whether this tag affects the cell background color.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
@@ -459,14 +458,13 @@ lambda (renderer editable path)    :run-first
 (setf (liber:alias-for-function 'cell-renderer-editing)
       "Accessor"
       (documentation 'cell-renderer-editing 'function)
- "@version{2025-09-29}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-editing object) => setting}
   @argument[object]{a @class{gtk:cell-renderer} object}
   @argument[setting]{a boolean whether the cell renderer is in editing mode}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer]{editing} slot of the
-    @class{gtk:cell-renderer} class returns whether the cell renderer is
-    currently in editing mode.
+    The accessor for the @slot[gtk:cell-renderer]{editing} slot returns whether
+    the cell renderer is currently in editing mode.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
@@ -487,14 +485,14 @@ lambda (renderer editable path)    :run-first
 (setf (liber:alias-for-function 'cell-renderer-height)
       "Accessor"
       (documentation 'cell-renderer-height 'function)
- "@version{2025-09-29}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-height object) => height}
   @syntax{(setf (gtk:cell-renderer-height object) height)}
   @argument[object]{a @class{gtk:cell-renderer} object}
   @argument[height]{an integer for the fixed height}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer]{height} slot of the
-    @class{gtk:cell-renderer} class gets or sets the fixed height.
+    The accessor for the @slot[gtk:cell-renderer]{height} slot gets or sets
+    the fixed height.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
@@ -515,15 +513,14 @@ lambda (renderer editable path)    :run-first
 (setf (liber:alias-for-function 'cell-renderer-is-expanded)
       "Accessor"
       (documentation 'cell-renderer-is-expanded 'function)
- "@version{2025-09-29}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-is-expanded object) => setting}
   @syntax{(setf (gtk:cell-renderer-is-expanded object) setting)}
   @argument[object]{a @class{gtk:cell-renderer} object}
   @argument[setting]{a boolean whether the row is expanded}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer]{is-expanded} slot of the
-    @class{gtk:cell-renderer} class gets or sets whether the row is an expander
-    row, and is expanded.
+    The accessor for the @slot[gtk:cell-renderer]{is-expanded} slot gets or
+    sets whether the row is an expander row, and is expanded.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
@@ -543,14 +540,14 @@ lambda (renderer editable path)    :run-first
 (setf (liber:alias-for-function 'cell-renderer-is-expander)
       "Accessor"
       (documentation 'cell-renderer-is-expander 'function)
- "@version{2025-09-29}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-is-expander object) => setting}
   @syntax{(setf (gtk:cell-renderer-is-expander object) setting)}
   @argument[object]{a @class{gtk:cell-renderer} object}
   @argument[setting]{a boolean whether the row has children}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer]{is-expander} slot of the
-    @class{gtk:cell-renderer} class gets or sets whether row has children.
+    The accessor for the @slot[gtk:cell-renderer]{is-expander} slot gets or
+    sets whether row has children.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
@@ -571,15 +568,14 @@ lambda (renderer editable path)    :run-first
 (setf (liber:alias-for-function 'cell-renderer-mode)
       "Accessor"
       (documentation 'cell-renderer-mode 'function)
- "@version{2025-09-29}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-mode object) => mode}
   @syntax{(setf (gtk:cell-renderer-mode object) mode)}
   @argument[object]{a @class{gtk:cell-renderer} object}
   @argument[mode]{a value of the @sym{gtk:cell-renderer-mode} enumeration}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer]{mode} slot of the
-    @class{gtk:cell-renderer} class gets or sets the editable mode of the cell
-    renderer.
+    The accessor for the @slot[gtk:cell-renderer]{mode} slot gets or sets
+    the editable mode of the cell renderer.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
@@ -600,15 +596,14 @@ lambda (renderer editable path)    :run-first
 (setf (liber:alias-for-function 'cell-renderer-sensitive)
       "Accessor"
       (documentation 'cell-renderer-sensitive 'function)
- "@version{2025-09-29}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-sensitive object) => sensitive}
   @syntax{(setf (gtk:cell-renderer-sensitive object) sensitive)}
   @argument[object]{a @class{gtk:cell-renderer} object}
   @argument[sensitive]{a boolean for the sensitivity of the cell}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer]{sensitive} slot of the
-    @class{gtk:cell-renderer} class gets or sets the cell sensitivity of the
-    renderer.
+    The accessor for the @slot[gtk:cell-renderer]{sensitive} slot gets or sets
+    the cell sensitivity of the renderer.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
@@ -628,15 +623,14 @@ lambda (renderer editable path)    :run-first
 (setf (liber:alias-for-function 'cell-renderer-visible)
       "Accessor"
       (documentation 'cell-renderer-visible 'function)
- "@version{2025-09-29}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-visible object) => visible}
   @syntax{(setf (gtk:cell-renderer-visible object) visible)}
   @argument[object]{a @class{gtk:cell-renderer} object}
   @argument[visible]{a boolean for the visibility of the cell}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer]{visible} of the
-    @class{gtk:cell-renderer} class gets or sets the cell visibility of the cell
-    renderer.
+    The accessor for the @slot[gtk:cell-renderer]{visible} slot gets or sets
+    the cell visibility of the cell renderer.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
@@ -657,14 +651,14 @@ lambda (renderer editable path)    :run-first
 (setf (liber:alias-for-function 'cell-renderer-width)
       "Accessor"
       (documentation 'cell-renderer-width 'function)
- "@version{2025-09-29}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-width object) => width}
   @syntax{(setf (gtk:cell-renderer-width object) width)}
   @argument[object]{a @class{gtk:cell-renderer} object}
   @argument[width]{an integer for the fixed width}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer]{width} slot of the
-    @class{gtk:cell-renderer} class gets or sets the fixed width.
+    The accessor for the @slot[gtk:cell-renderer]{width} slot gets or sets the
+    fixed width.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
@@ -687,15 +681,14 @@ lambda (renderer editable path)    :run-first
 (setf (liber:alias-for-function 'cell-renderer-xalign)
       "Accessor"
       (documentation 'cell-renderer-xalign 'function)
- "@version{2025-09-29}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-xalign object) => align}
   @syntax{(setf (gtk:cell-renderer-xalign object) align)}
   @argument[object]{a @class{gtk:cell-renderer} object}
   @argument[align]{a single float for the x-align}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer]{xalign} slot of the
-    @class{gtk:cell-renderer} class gets or sets the horizontal alignment, from
-    0.0 (left) to 1.0 (right).
+    The accessor for the @slot[gtk:cell-renderer]{xalign} slot gets or sets
+    the horizontal alignment, from 0.0 (left) to 1.0 (right).
   @end{short}
   Reversed for RTL layouts.
   @begin[Warning]{dictionary}
@@ -717,15 +710,14 @@ lambda (renderer editable path)    :run-first
 (setf (liber:alias-for-function 'cell-renderer-xpad)
       "Accessor"
       (documentation 'cell-renderer-xpad 'function)
- "@version{2025-09-29}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-xpad object) => padding}
   @syntax{(setf (gtk:cell-renderer-xpad object) padding)}
   @argument[object]{a @class{gtk:cell-renderer} object}
   @argument[padding]{an unsigned integer for the padding}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer]{xpad} slot of the
-    @class{gtk:cell-renderer} class gets or sets the amount of space to add on
-    the left and right, in pixels.
+    The accessor for the @slot[gtk:cell-renderer]{xpad} slot gets or sets the
+    amount of space to add on the left and right, in pixels.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
@@ -747,15 +739,14 @@ lambda (renderer editable path)    :run-first
 (setf (liber:alias-for-function 'cell-renderer-yalign)
       "Accessor"
       (documentation 'cell-renderer-yalign 'function)
- "@version{2025-09-29}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-yalign object) => align}
   @syntax{(setf (gtk:cell-renderer-yalign object) align)}
   @argument[object]{a @class{gtk:cell-renderer} object}
   @argument[align]{a single float for the y-align}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer]{yalign} slot of the
-    @class{gtk:cell-renderer} class gets or sets the vertical alignment, from
-    0.0 (top) to 1.0 (bottom).
+    The accessor for the @slot[gtk:cell-renderer]{yalign} slot gets or sets
+    the vertical alignment, from 0.0 (top) to 1.0 (bottom).
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
@@ -776,15 +767,14 @@ lambda (renderer editable path)    :run-first
 (setf (liber:alias-for-function 'cell-renderer-ypad)
       "Accessor"
       (documentation 'cell-renderer-ypad 'function)
- "@version{2025-09-29}
+ "@version{2026-08-19}
   @syntax{(gtk:cell-renderer-ypad object) => padding}
   @syntax{(setf (gtk:cell-renderer-ypad object) padding)}
   @argument[object]{a @class{gtk:cell-renderer} object}
   @argument[padding]{an unsigned integer for the padding}
   @begin{short}
-    The accessor for the @slot[gtk:cell-renderer]{ypad} slot of the
-    @class{gtk:cell-renderer} class gets or sets the amount of space to add on
-    the top and bottom, in pixels.
+    The accessor for the @slot[gtk:cell-renderer]{ypad} slot gets or sets the
+    amount of space to add on the top and bottom, in pixels.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
@@ -807,7 +797,7 @@ lambda (renderer editable path)    :run-first
 
 (defun cell-renderer-aligned-area (cell widget flags area)
  #+liber-documentation
- "@version{#2025-07-22}
+ "@version{2026-08-19}
   @argument[cell]{a @class{gtk:cell-renderer} object}
   @argument[widget]{a @class{gtk:widget} object this cell will be rendering to}
   @argument[flags]{a @sym{gtk:cell-renderer-state} value}
