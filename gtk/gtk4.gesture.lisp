@@ -2,7 +2,7 @@
 ;;; gtk4.gesture.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -328,14 +328,13 @@ lambda (gesture sequence)    :run-last
 (setf (liber:alias-for-function 'gesture-n-points)
       "Accessor"
       (documentation 'gesture-n-points 'function)
- "@version{2025-09-29}
+ "@version{2026-08-30}
   @syntax{(gtk:gesture-n-points object) => n-points}
   @argument[object]{a @class{gtk:gesture} object}
   @argument[n-points]{an integer for the number of touch points}
   @begin{short}
-    The accessor for the @slot[gtk:gesture]{n-points} slot of the
-    @class{gtk:gesture} class returns the number of touch points that trigger
-    recognition on this gesture.
+    The accessor for the @slot[gtk:gesture]{n-points} slot returns the number
+    of touch points that trigger recognition on this gesture.
   @end{short}
   @see-class{gtk:gesture}")
 
@@ -418,11 +417,8 @@ lambda (gesture sequence)    :run-last
   @argument[sequence]{a @class{gdk:event-sequence} instance}
   @argument[state]{a @sym{gtk:event-sequence-state} value}
   @begin{short}
-    The @fun{gtk:gesture-sequence-state} function returns the sequence state,
-    as seen by the gesture.
+    Gets or sets the sequence state, as seen by the gesture.
   @end{short}
-  The @setf{gtk:gesture-sequence-state} function sets the state of
-  @arg{sequence} in the gesture.
   @begin[Warning]{dictionary}
     The @setf{gtk:gesture-sequence-state} function is deprecated since 4.10.
     Use the @fun{gtk:gesture-set-state} function.

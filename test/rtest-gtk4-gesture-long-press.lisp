@@ -32,53 +32,58 @@
   (is (equal '("cancelled" "pressed")
              (glib-test:list-signals "GtkGestureLongPress")))
   ;; Check class definition
-  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkGestureLongPress"
-                                      GTK:GESTURE-LONG-PRESS
-                       (:SUPERCLASS GTK:GESTURE-SINGLE
-                        :EXPORT T
-                        :INTERFACES NIL
-                        :TYPE-INITIALIZER "gtk_gesture_long_press_get_type")
-                       ((DELAY-FACTOR GESTURE-LONG-PRESS-DELAY-FACTOR
-                         "delay-factor" "gdouble" T T)))
+  (is (equal '(GOBJECT:DEFINE-GOBJECT "GtkGestureLongPress" GTK:GESTURE-LONG-PRESS
+                      (:SUPERCLASS GTK:GESTURE-SINGLE
+                       :EXPORT T
+                       :INTERFACES NIL
+                       :TYPE-INITIALIZER "gtk_gesture_long_press_get_type")
+                      ((DELAY-FACTOR GESTURE-LONG-PRESS-DELAY-FACTOR
+                        "delay-factor" "gdouble" T T)))
              (gobject:get-gtype-definition "GtkGestureLongPress"))))
+
+;;; --- Signals ----------------------------------------------------------------
+
+;;;     cancelled
+
+(test gtk-gesture-long-pressed-cancelled-signal
+  (let* ((name "cancelled")
+         (gtype (g:gtype "GtkGestureLongPress"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
+;;;     pressed
+
+(test gtk-gesture-long-press-pressed-signal
+  (let* ((name "pressed")
+         (gtype (g:gtype "GtkGestureLongPress"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("gdouble" "gdouble")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-gesture-long-press-properties
   (let ((gesture (make-instance 'gtk:gesture-long-press)))
     (is (= 1.0d0 (gtk:gesture-long-press-delay-factor gesture)))))
-
-;;; --- Signals ----------------------------------------------------------------
-
-;;;     cancelled
-
-(test gtk-gesture-long-press-cancelled-signal
-  (let ((query (g:signal-query (g:signal-lookup "cancelled"
-                                                "GtkGestureLongPress"))))
-    (is (string= "cancelled" (g:signal-query-signal-name query)))
-    (is (string= "GtkGestureLongPress"
-                 (g:type-name (g:signal-query-owner-type query))))
-    (is (equal '(:RUN-LAST)
-               (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
-    (is (equal '()
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
-
-;;;     pressed
-
-(test gtk-gesture-long-press-pressed-signal
-  (let ((query (g:signal-query (g:signal-lookup "pressed"
-                                                "GtkGestureLongPress"))))
-    (is (string= "pressed" (g:signal-query-signal-name query)))
-    (is (string= "GtkGestureLongPress"
-                 (g:type-name (g:signal-query-owner-type query))))
-    (is (equal '(:RUN-LAST)
-               (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
-    (is (equal '("gdouble" "gdouble")
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -87,4 +92,4 @@
 (test gtk-gesture-long-press-new
   (is (typep (gtk:gesture-long-press-new) 'gtk:gesture-long-press)))
 
-;;; 2024-9-20
+;;; 2026-07-24

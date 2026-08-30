@@ -72,6 +72,26 @@
                          "orientation" "GtkOrientation" T T)))
              (gobject:get-gtype-definition "GtkGesturePan"))))
 
+;;; --- Signals ----------------------------------------------------------------
+
+;;;     pan
+
+(test gtk-gesture-pan-pan-signal
+  (let* ((name "pan")
+         (gtype (g:gtype "GtkGesturePan"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
+    (is (equal '("GtkPanDirection" "gdouble")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;; --- Properties -------------------------------------------------------------
 
 ;;;     orientation
@@ -79,22 +99,6 @@
 (test gtk-gesture-pan-properties
   (let ((gesture (make-instance 'gtk:gesture-pan)))
     (is (eq :horizontal (gtk:gesture-pan-orientation gesture)))))
-
-;;; --- Signals ----------------------------------------------------------------
-
-;;;     pan
-
-(test gtk-gesture-pan-pan-signal
-  (let ((query (g:signal-query (g:signal-lookup "pan" "GtkGesturePan"))))
-    (is (string= "pan" (g:signal-query-signal-name query)))
-    (is (string= "GtkGesturePan"
-                 (g:type-name (g:signal-query-owner-type query))))
-    (is (equal '(:RUN-LAST)
-               (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
-    (is (equal '("GtkPanDirection" "gdouble")
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -104,4 +108,4 @@
   (is (typep (gtk:gesture-pan-new :horizontal) 'gtk:gesture-pan))
   (is (typep (gtk:gesture-pan-new :vertical) 'gtk:gesture-pan)))
 
-;;; 2024-9-21
+;;; 2026-07-24

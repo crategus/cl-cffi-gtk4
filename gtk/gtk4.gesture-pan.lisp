@@ -2,7 +2,7 @@
 ;;; gtk4.gesture-pan.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -173,15 +173,14 @@ lambda (gesture direction offset)    :run-last
 (setf (liber:alias-for-function 'gesture-pan-orientation)
       "Accessor"
       (documentation 'gesture-pan-orientation 'function)
- "@version{2025-08-17}
+ "@version{2026-08-17}
   @syntax{(gtk:gesture-pan-orientation object) => orientation}
   @syntax{(setf (gtk:gesture-pan-orientation object) orientation)}
   @argument[object]{a @class{gtk:gesture} object}
   @argument[orientation]{a @sym{gtk:orientation} value}
   @begin{short}
-    The accessor for the @slot[gtk:gesture-pan]{orientation} slot of the
-    @class{gtk:gesture-pan} class gets or sets the orientation of the pan
-    gestures that this gesture expects.
+    The accessor for the @slot[gtk:gesture-pan]{orientation} slot gets or sets
+    the orientation of the pan gestures that this gesture expects.
   @end{short}
   @see-class{gtk:gesture-pan}
   @see-symbol{gtk:orientation}")
