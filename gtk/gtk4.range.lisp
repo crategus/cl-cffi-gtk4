@@ -2,7 +2,7 @@
 ;;; gtk4.range.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -225,15 +225,14 @@ lambda (range)    :run-last
 (setf (liber:alias-for-function 'range-adjustment)
       "Accessor"
       (documentation 'range-adjustment 'function)
- "@version{2025-08-12}
+ "@version{2026-08-17}
   @syntax{(gtk:range-adjustment object) => adjustement}
   @syntax{(setf (gtk:range-adjustment object) adjustment)}
   @argument[object]{a @class{gtk:range} widget}
   @argument[adjustment]{a @class{gtk:adjustment} object}
   @begin{short}
-    The accessor for the @slot[gtk:range]{adjustment} slot of the
-    @class{gtk:range} class gets or sets the adjustment which is the \"model\"
-    object for the range.
+    The accessor for the @slot[gtk:range]{adjustment} slot gets or sets the
+    adjustment which is the \"model\" object for the range.
   @end{short}
 
   The adjustment indicates the current range value, the minimum and maximum
@@ -257,16 +256,15 @@ lambda (range)    :run-last
 (setf (liber:alias-for-function 'range-fill-level)
       "Accessor"
       (documentation 'range-fill-level 'function)
- "@version{2025-08-12}
+ "@version{2026-08-17}
   @syntax{(range-fill-level object) => fill-level}
   @syntax{(setf (gtk:range-fill-level object) fill-level)}
   @argument[object]{a @class{gtk:range} widget}
   @argument[fill-level]{a double float for the new position of the fill level
     indicator}
   @begin{short}
-    The accessor for the @slot[gtk:range]{fill-level} slot of the
-    @class{gtk:range} class gets or sets the current position of the fill level
-    indicator.
+    The accessor for the @slot[gtk:range]{fill-level} slot gets or sets the
+    current position of the fill level indicator.
   @end{short}
 
   The \"fill level\" is probably best described by its most prominent use case,
@@ -299,14 +297,14 @@ lambda (range)    :run-last
 (setf (liber:alias-for-function 'range-inverted)
       "Accessor"
       (documentation 'range-inverted 'function)
- "@version{2025-08-12}
+ "@version{2026-08-17}
   @syntax{(gtk:range-inverted object) => setting}
   @syntax{(setf (gtk:range-inverted object) setting)}
   @argument[object]{a @class{gtk:range} widget}
   @argument[setting]{@em{true} to invert the range}
   @begin{short}
-    The accessor for the @slot[gtk:range]{inverted} slot of the
-    @class{gtk:range} class gets or sets whether the range is inverted.
+    The accessor for the @slot[gtk:range]{inverted} slot gets or sets whether
+    the range is inverted.
   @end{short}
 
   Ranges normally move from lower to higher values as the slider moves from
@@ -329,15 +327,14 @@ lambda (range)    :run-last
 (setf (liber:alias-for-function 'range-restrict-to-fill-level)
       "Accessor"
       (documentation 'range-restrict-to-fill-level 'function)
- "@version{2025-08-12}
+ "@version{2026-08-17}
   @syntax{(gtk:range-restrict-to-fill-level object) => setting}
   @syntax{(setf (gtk:range-restrict-to-fill-level object) setting)}
   @argument[object]{a @class{gtk:range} widget}
   @argument[setting]{a boolean whether the fill level restricts slider movement}
   @begin{short}
-    The accessor for the @slot[gtk:range]{restrict-to-fill-level} slot of the
-    @class{gtk:range} class gets or sets whether the range is restricted to the
-    fill level.
+    The accessor for the @slot[gtk:range]{restrict-to-fill-level} slot gets or
+    sets whether the range is restricted to the fill level.
   @end{short}
   See the @fun{gtk:range-fill-level} function for a general description of the
   fill level concept.
@@ -358,15 +355,14 @@ lambda (range)    :run-last
 (setf (liber:alias-for-function 'range-round-digits)
       "Accessor"
       (documentation 'range-round-digits 'function)
- "@version{2025-08-12}
+ "@version{2026-08-17}
   @syntax{(gtk:range-round-digits object) => round-digits}
   @syntax{(setf (gtk:range-round-digits object) round-digits)}
   @argument[object]{a @class{gtk:range} widget}
   @argument[round-digits]{an integer for the precision in digits, or -1}
   @begin{short}
-    The accessor for the @slot[gtk:range]{round-digits} slot of the
-    @class{gtk:range} class gets or sets the number of digits to round the
-    value to when it changes.
+    The accessor for the @slot[gtk:range]{round-digits} slot gets or sets the
+    number of digits to round the value to when it changes.
   @end{short}
   See the @sig[gtk:range]{change-value} signal.
   @see-class{gtk:range}")
@@ -385,16 +381,15 @@ lambda (range)    :run-last
 (setf (liber:alias-for-function 'range-show-fill-level)
       "Accessor"
       (documentation 'range-show-fill-level 'function)
- "@version{2025-08-12}
+ "@version{2026-08-17}
   @syntax{(gtk:range-show-fill-level object) => show-fill-level}
   @syntax{(setf (gtk:range-show-fill-level object) show-fill-level)}
   @argument[object]{a @class{gtk:range} widget}
   @argument[show-fill-level]{a boolean whether a fill level indicator graphics
     is shown}
   @begin{short}
-    The accessor for the @slot[gtk:range]{show-fill-level} slot of the
-    @class{gtk:range} class gets or sets whether the range displays the fill
-    level graphically.
+    The accessor for the @slot[gtk:range]{show-fill-level} slot gets or sets
+    whether the range displays the fill level graphically.
   @end{short}
   See the @fun{gtk:range-fill-level} function for a general description of the
   fill level concept.

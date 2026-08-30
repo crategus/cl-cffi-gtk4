@@ -2,7 +2,7 @@
 ;;; gtk4.widget.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -397,14 +397,13 @@
 (setf (liber:alias-for-function 'requisition-height)
       "Accessor"
       (documentation 'requisition-height 'function)
- "@version{2025-08-22}
+ "@version{2026-08-30}
   @syntax{(gtk:requisition-height instance) => height}
   @syntax{(setf (gtk:requisition-height instance) height)}
   @argument[instance]{a @class{gtk:requisition} instance}
   @argument[height]{an integer for the height}
   @begin{short}
-    The accessor for the @arg{height} slot of the @class{gtk:requisition}
-    structure gets or sets the height.
+    The accessor for the @arg{height} slot gets or sets the height.
   @end{short}
   @begin[Examples]{dictionary}
     @begin{pre}
@@ -424,14 +423,13 @@
 (setf (liber:alias-for-function 'requisition-width)
       "Accessor"
       (documentation 'requisition-width 'function)
- "@version{2025-08-22}
+ "@version{2026-08-30}
   @syntax{(gtk:requisition-width instance) => width}
   @syntax{(setf (gtk:requisition-width instance) width)}
   @argument[instance]{a @class{gtk:requisition} instance}
   @argument[width]{an integer for the width}
   @begin{short}
-    The accessor for the @arg{width} slot of the @class{gtk:requisition}
-    structure gets or sets the height.
+    The accessor for the @arg{width} slot gets or sets the height.
   @end{short}
   @begin[Examples]{dictionary}
     @begin{pre}
@@ -1221,16 +1219,15 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-can-focus)
       "Accessor"
       (documentation 'widget-can-focus 'function)
- "@version{2025-08-14}
+ "@version{2026-08-30}
   @syntax{(gtk:widget-can-focus object) => setting}
   @syntax{(setf (gtk:widget-can-focus object) setting)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[setting]{a boolean whether or not @arg{widget} can own the input
     focus}
   @begin{short}
-    The accessor for the @slot[gtk:widget]{can-focus} slot of the
-    @class{gtk:widget} class gets or sets whether the widget can accept the
-    input focus.
+    The accessor for the @slot[gtk:widget]{can-focus} slot gets or sets
+    whether the widget can accept the input focus.
   @end{short}
   Returns @em{true} if the widget can own the input focus, @em{false} otherwise.
 
@@ -1251,16 +1248,15 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-can-target)
       "Accessor"
       (documentation 'widget-can-target 'function)
- "@version{2025-08-17}
+ "@version{2026-08-30}
   @syntax{(gtk:widget-can-target object) => setting}
   @syntax{(setf (gtk:widget-can-target object) setting)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[setting]{a boolean whether or not @arg{widget} can receive pointer
     events}
   @begin{short}
-    The accessor for the @slot[gtk:widget]{can-target} slot of the
-    @class{gtk:widget} class gets or sets whether the widget can receive pointer
-    events.
+    The accessor for the @slot[gtk:widget]{can-target} slot gets or sets
+    whether the widget can receive pointer events.
   @end{short}
   @see-class{gtk:widget}")
 
@@ -1275,16 +1271,15 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-css-classes)
       "Accessor"
       (documentation 'widget-css-classes 'function)
- "@version{2025-08-14}
+ "@version{2026-08-30}
   @syntax{(gtk:widget-css-classes object) => classes}
   @syntax{(setf (gtk:widget-css-classes object) classes)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[classes]{a list of strings for the CSS classes applied to the
     widget}
   @begin{short}
-    The accessor for the @slot[gtk:widget]{css-classes} slot of the
-    @class{gtk:widget} class gets or sets the list of style classes applied to
-    the widget.
+    The accessor for the @slot[gtk:widget]{css-classes} slot gets or sets the
+    list of style classes applied to the widget.
   @end{short}
   @see-class{gtk:widget}")
 
@@ -1301,15 +1296,14 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-css-name)
       "Accessor"
       (documentation 'widget-css-name 'function)
- "@version{2025-08-14}
+ "@version{2026-08-30}
   @syntax{(gtk:widget-css-name object) => name}
   @syntax{(setf (gtk:widget-css-name object) name)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[name]{a string for the name of the widget in the CSS tree}
   @begin{short}
-    The accessor for the @slot[gtk:widget]{css-name} slot of the
-    @class{gtk:widget} class gets or sets the CSS name that is used for the
-    widget.
+    The accessor for the @slot[gtk:widget]{css-name} slot gets or sets the
+    CSS name that is used for the widget.
   @end{short}
   This property is meant to be set by widget implementations, typically in their
   instance init function.
@@ -1326,14 +1320,14 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-cursor)
       "Accessor"
       (documentation 'widget-cursor 'function)
- "@version{2025-08-14}
+ "@version{2026-08-30}
   @syntax{(gtk:widget-cursor object) => cursor}
   @syntax{(setf (gtk:widget-cursor object) cursor)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[cursor]{a @class{gdk:cursor} object}
   @begin{short}
-    The accessor for the @slot[gtk:widget]{cursor} slot of the
-    @class{gtk:widget} class gets or sets the cursor set on the widget.
+    The accessor for the @slot[gtk:widget]{cursor} slot gets or sets the cursor
+    set on the widget.
   @end{short}
   If the @slot[gtk:widget]{cursor} property is @code{nil}, the widget will use
   the cursor inherited from the parent widget.
@@ -1353,15 +1347,14 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-focus-on-click)
       "Accessor"
       (documentation 'widget-focus-on-click 'function)
- "@version{2025-08-14}
+ "@version{2026-08-30}
   @syntax{(gtk:widget-focus-on-click object) => setting}
   @syntax{(setf (gtk:widget-focus-on-click object) setting)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[setting]{a boolean whether the widget should grab focus}
   @begin{short}
-    The accessor for the @slot[gtk:widget]{focus-on-click} slot of the
-    @class{gtk:widget} class gets or sets whether the widget should grab focus
-    when it is clicked with the mouse.
+    The accessor for the @slot[gtk:widget]{focus-on-click} slot gets or sets
+    whether the widget should grab focus when it is clicked with the mouse.
   @end{short}
 
   Making mouse clicks not grab focus is useful in places like toolbars where you
@@ -1379,16 +1372,15 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-focusable)
       "Accessor"
       (documentation 'widget-focusable 'function)
- "@version{2025-08-14}
+ "@version{2026-08-30}
   @syntax{(gtk:widget-focusable object) => setting}
   @syntax{(setf (gtk:widget-focusable object) setting)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[setting]{a boolean whether @arg{object} itself will accept the
     input focus}
   @begin{short}
-    The accessor for the @slot[gtk:widget]{focusable} slot of the
-    @class{gtk:widget} class gets or sets whether the widget can own the input
-    focus.
+    The accessor for the @slot[gtk:widget]{focusable} slot gets or sets whether
+    the widget can own the input focus.
   @end{short}
 
   Widget implementations should set the @slot[gtk:widget]{focusable} property to
@@ -1417,15 +1409,14 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-halign)
       "Accessor"
       (documentation 'widget-halign 'function)
- "@version{2025-08-14}
+ "@version{2026-08-30}
   @syntax{(gtk:widget-halign object) => align}
   @syntax{(setf (gtk:widget-halign object) align)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[align]{a @sym{gtk:align} value}
   @begin{short}
-    The accessor for the @slot[gtk:widget]{halign} slot of the
-    @class{gtk:widget} class gets or sets the horizontal alignment of the
-    widget.
+    The accessor for the @slot[gtk:widget]{halign} slot gets or sets the
+    horizontal alignment of the widget.
   @end{short}
   @see-class{gtk:widget}
   @see-symbol{gtk:align}
@@ -1443,14 +1434,14 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-has-default)
       "Accessor"
       (documentation 'widget-has-default 'function)
- "@version{2025-08-14}
+ "@version{2026-08-30}
   @syntax{(gtk:widget-has-default object) => setting}
   @argument[object]{a @class{gtk:widget} object}
   @argument[setting]{a boolean whether the widget is the default widget}
   @begin{short}
-    The accessor for the @slot[gtk:widget]{has-default} slot of the
-    @class{gtk:widget} class returns @em{true} if the widget is the current
-    default widget within its toplevel, @em{false} otherwise.
+    The accessor for the @slot[gtk:widget]{has-default} slot returns @em{true}
+    if the widget is the current default widget within its toplevel, @em{false}
+    otherwise.
   @end{short}
   @see-class{gtk:widget}")
 
@@ -1466,14 +1457,13 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-has-focus)
       "Accessor"
       (documentation 'widget-has-focus 'function)
- "@version{2025-08-14}
+ "@version{2026-08-30}
   @syntax{(gtk:widget-has-focus object) => setting}
   @argument[object]{a @class{gtk:widget} object}
   @argument[setting]{a boolean whether the widget has the input focus}
   @begin{short}
-    The accessor for the @slot[gtk:widget]{has-focus} slot of the
-    @class{gtk:widget} class returns @em{true} if the widget has the global
-    input focus.
+    The accessor for the @slot[gtk:widget]{has-focus} slot returns @em{true}
+    if the widget has the global input focus.
   @end{short}
 
   See the @fun{gtk:widget-is-focus} function for the difference between having
@@ -1497,16 +1487,15 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-has-tooltip)
       "Accessor"
       (documentation 'widget-has-tooltip 'function)
- "@version{2025-08-14}
+ "@version{2026-08-30}
   @syntax{(gtk:widget-has-tooltip object) => setting}
   @syntax{(setf (gtk:widget-has-tooltip object) setting)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[setting]{a boolean whether the emission of the
     @sig[gtk:widget]{query-tooltip} signal is enabled or disabled}
   @begin{short}
-    The accessor for the @slot[gtk:widget]{has-tooltip} slot of the
-    @class{gtk:widget} class enables or disables the emission of the
-    @sig[gtk:widget]{query-tooltip} signal on the widget.
+    The accessor for the @slot[gtk:widget]{has-tooltip} slot enables or disables
+    the emission of the @sig[gtk:widget]{query-tooltip} signal on the widget.
   @end{short}
   A @em{true} value indicates that the widget can have a tooltip, in this case
   the widget will be queried using the @sig[gtk:widget]{query-tooltip} signal to
@@ -1527,15 +1516,15 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-height-request)
       "Accessor"
       (documentation 'widget-height-request 'function)
- "@version{2025-08-14}
+ "@version{2026-08-30}
   @syntax{(gtk:widget-height-request object) => height}
   @syntax{(setf (gtk:widget-height-request object) height)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[height]{an integer for the height request}
   @begin{short}
-    The accessor for the @slot[gtk:widget]{height-request} slot of the
-    @class{gtk:widget} class gets or sets the override for height request of
-    the widget, or -1 if natural request should be used.
+    The accessor for the @slot[gtk:widget]{height-request} slot gets or sets
+    the override for height request of the widget, or -1 if natural request
+    should be used.
   @end{short}
   See the @fun{gtk:widget-size-request} function for details.
   @see-class{gtk:widget}
@@ -1554,15 +1543,14 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-hexpand)
       "Accessor"
       (documentation 'widget-hexpand 'function)
- "@version{2025-08-14}
+ "@version{2026-08-30}
   @syntax{(gtk:widget-hexpand object) => setting}
   @syntax{(setf (gtk:widget-hexpand object) setting)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[setting]{a boolean whether to expand horizontally}
   @begin{short}
-    The accessor for the @slot[gtk:widget]{hexpand} slot of the
-    @class{gtk:widget} class get or sets whether the widget would like any
-    available extra horizontal space.
+    The accessor for the @slot[gtk:widget]{hexpand} slot gets or sets whether
+    the widget would like any available extra horizontal space.
   @end{short}
   This function only looks at the own @slot[gtk:widget]{hexpand} flag of the
   widget, rather than computing whether the entire widget tree rooted at this
@@ -1600,16 +1588,15 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-hexpand-set)
       "Accessor"
       (documentation 'widget-hexpand-set 'function)
- "@version{2025-08-14}
+ "@version{2026-08-30}
   @syntax{(gtk:widget-hexpand-set object) => setting}
   @syntax{(setf (gtk:widget-hexpand-set object) setting)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[setting]{a boolean whether to use the @slot[gtk:widget]{hexpand}
     property}
   @begin{short}
-    The accessor for the @slot[gtk:widget]{hexpand-set} slot of the
-    @class{gtk:widget} class gets or sets whether to use the
-    @slot[gtk:widget]{hexpand} property.
+    The accessor for the @slot[gtk:widget]{hexpand-set} slot gets or sets
+    whether to use the @slot[gtk:widget]{hexpand} property.
   @end{short}
 
   The @slot[gtk:widget]{hexpand-set} property will be set automatically when
@@ -1640,16 +1627,15 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-layout-manager)
       "Accessor"
       (documentation 'widget-layout-manager 'function)
- "@version{2025-08-22}
+ "@version{2026-08-30}
   @syntax{(gtk:widget-layout-manager object) => manager}
   @syntax{(setf (gtk:widget-layout-manager object) manager)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[manager]{a @class{gtk:layout-manager} object}
   @begin{short}
-    The accessor for the @slot[gtk:widget]{layout-manager} slot of the
-    @class{gtk:widget} class gets or sets the layout manager delegate instance
-    that provides an implementation for measuring and allocating the children
-    of the widget.
+    The accessor for the @slot[gtk:widget]{layout-manager} slot gets or sets
+    the layout manager delegate instance that provides an implementation for
+    measuring and allocating the children of the widget.
   @end{short}
   @begin[Examples]{dictionary}
     Get the layout manager for a button and a grid:
@@ -1678,15 +1664,14 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-limit-events)
       "Accessor"
       (documentation 'widget-limit-events 'function)
- "@version{2025-09-26}
+ "@version{2026-08-30}
   @syntax{(gtk:widget-limit-events object) => setting}
   @syntax{(setf (gtk:widget-limit-events object) setting)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[manager]{a boolean whether to limit events}
   @begin{short}
-    The accessor for the @slot[gtk:widget]{limit-events} slot of the
-    @class{gtk:widget} class gets or sets whether the widget acts like a modal
-    dialog, with respect to event delivery.
+    The accessor for the @slot[gtk:widget]{limit-events} slot gets or sets
+    whether the widget acts like a modal dialog, with respect to event delivery.
   @end{short}
   Makes this widget act like a modal dialog, with respect to event delivery.
   Global event controllers will not handle events with targets inside the
@@ -1711,14 +1696,14 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-margin-bottom)
       "Accessor"
       (documentation 'widget-margin-bottom 'function)
- "@version{2025-09-26}
+ "@version{2026-08-30}
   @syntax{(gtk:widget-margin-bottom object) => margin}
   @syntax{(setf (gtk:widget-margin-bottom object) margin)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[margin]{an integer for the margin on the bottom side of the widget}
   @begin{short}
-    The accessor for the @slot[gtk:widget]{margin-bottom} slot of the
-    @class{gtk:widget} class gets or sets the bottom marging of the widget.
+    The accessor for the @slot[gtk:widget]{margin-bottom} slot gets or sets the
+    bottom marging of the widget.
   @end{short}
   This property adds margin outside of the normal size request of the widget.
   The margin will be added in addition to the size from the
@@ -1741,16 +1726,15 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-margin-end)
       "Accessor"
       (documentation 'widget-margin-end 'function)
- "@version{2025-09-26}
+ "@version{2026-08-30}
   @syntax{(gtk:widget-margin-end object) => margin}
   @syntax{(setf (gtk:widget-margin-end object) margin)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[margin]{an integer for the margin on the end side of the widget,
     horizontally}
   @begin{short}
-    The accessor for the @slot[gtk:widget]{margin-end} slot of the
-    @class{gtk:widget} class gets or sets the value of the end margin of the
-    widget.
+    The accessor for the @slot[gtk:widget]{margin-end} slot gets or sets the
+    value of the end margin of the widget.
   @end{short}
   This property supports left-to-right text directions. This property adds
   margin outside of the normal size request of the widget. The margin will be
@@ -1774,15 +1758,15 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-margin-start)
       "Accessor"
       (documentation 'widget-margin-start 'function)
- "@version{2025-09-26}
+ "@version{2026-08-30}
   @syntax{(gtk:widget-margin-start object) => margin}
   @syntax{(setf (gtk:widget-margin-start object) margin)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[margin]{an integer for the margin on the start side of the widget,
     horizontally}
   @begin{short}
-    The accessor for the @slot[gtk:widget]{margin-start} slot of the
-    @class{gtk:widget} class gets or sets the start margin of the widget.
+    The accessor for the @slot[gtk:widget]{margin-start} slot gets or sets the
+    start margin of the widget.
   @end{short}
   This property supports left-to-right and right-to-left text directions. This
   property adds margin outside of the normal size request of the widget. The
@@ -1805,14 +1789,14 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-margin-top)
       "Accessor"
       (documentation 'widget-margin-top 'function)
- "@version{2025-09-26}
+ "@version{2026-08-30}
   @syntax{(gtk:widget-margin-top object) => margin}
   @syntax{(setf (gtk:widget-margin-top object) margin)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[margin]{an integer for the margin on the top side of the widget}
   @begin{short}
-    The accessor for the @slot[gtk:widget]{margin-top} slot of the
-    @class{gtk:widget} class gets or sets the top margin of widget.
+    The accessor for the @slot[gtk:widget]{margin-top} slot gets or sets the
+    top margin of widget.
   @end{short}
   This property adds margin outside of the normal size request of the widget.
   The margin will be added in addition to the size from the
@@ -1832,14 +1816,14 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-name)
       "Accessor"
       (documentation 'widget-name 'function)
- "@version{2025-08-24}
+ "@version{2026-08-30}
   @syntax{(gtk:widget-name object) => name}
   @syntax{(setf (gtk:widget-name object) name)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[name]{a string for the name of the widget}
   @begin{short}
-    The accessor for the @slot[gtk:widget]{name} slot of the @class{gtk:widget}
-    class gets or sets the name of the widget.
+    The accessor for the @slot[gtk:widget]{name} slot gets or sets the name
+    of the widget.
   @end{short}
 
   Widgets can be named, which allows you to refer to them from a CSS file. You
@@ -1863,16 +1847,16 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-opacity)
       "Accessor"
       (documentation 'widget-opacity 'function)
- "@version{2025-09-26}
+ "@version{2026-08-30}
   @syntax{(gtk:widget-opacity object) => opacity}
   @syntax{(setf (gtk:widget-opacity object) opacity)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[opacity]{a number coerced to a double float for the opacity of
     the widget}
   @begin{short}
-    The accessor for the @slot[gtk:widget]{opacity} slot of the
-    @class{gtk:widget} class gets or sets the requested opacity for the widget,
-    with opacity 0.0 being fully transparent and 1.0 fully opaque.
+    The accessor for the @slot[gtk:widget]{opacity} slot gets or sets the
+    requested opacity for the widget, with opacity 0.0 being fully transparent
+    and 1.0 fully opaque.
   @end{short}
   Opacity works on both toplevel widgets and child widgets, although there are
   some limitations. For toplevel widgets, applying opacity depends on the
@@ -1909,14 +1893,14 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-overflow)
       "Accessor"
       (documentation 'widget-overflow 'function)
- "@version{2025-09-26}
+ "@version{2026-08-30}
   @syntax{(gtk:widget-overflow object) => overflow}
   @syntax{(setf (gtk:widget-overflow object) overflow)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[overflow]{a value of the @sym{gtk:overflow} enumeration}
   @begin{short}
-    The accessor for the @slot[gtk:widget]{overflow} slot of the
-    @class{gtk:widget} class gets or sets the overflow value of the widget.
+    The accessor for the @slot[gtk:widget]{overflow} slot gets or sets the
+    overflow value of the widget.
   @end{short}
   See the definition of the @sym{gtk:overflow} enumeration for details.
 
@@ -1936,13 +1920,13 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-parent)
       "Accessor"
       (documentation 'widget-parent 'function)
- "@version{2025-09-26}
+ "@version{2026-08-30}
   @syntax{(gtk:widget-parent object) => parent}
   @argument[object]{a @class{gtk:widget} object}
   @argument[parent]{a parent @class{gtk:widget} object}
   @begin{short}
-    The accessor for the @slot[gtk:widget]{parent} slot of the
-    @class{gtk:widget} class returns the parent widget of the widget.
+    The accessor for the @slot[gtk:widget]{parent} slot returns the parent
+    widget of the widget.
   @end{short}
   @begin[Notes]{dictionary}
     The @slot[gtk:widget]{parent} property is not writable. Use the
@@ -1965,17 +1949,16 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-receives-default)
       "Accessor"
       (documentation 'widget-receives-default 'function)
- "@version{2025-09-26}
+ "@version{2026-08-30}
   @syntax{(gtk:widget-receives-default object) => setting}
   @syntax{(setf (gtk:widget-receives-default object) setting)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[setting]{a boolean whether the widget will receive the default
     action}
   @begin{short}
-    The accessor for the @slot[gtk:widget]{receives-default} slot of the
-    @class{gtk:widget} class gets or sets whether the widget is alyways treated
-    as default widget within its toplevel when it has the focus, even if another
-    widget is the default.
+    The accessor for the @slot[gtk:widget]{receives-default} slot gets or sets
+    whether the widget is alyways treated as default widget within its toplevel
+    when it has the focus, even if another widget is the default.
   @end{short}
   @see-class{gtk:widget}")
 
@@ -1991,13 +1974,13 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-root)
       "Accessor"
       (documentation 'widget-root 'function)
- "@version{2025-09-26}
+ "@version{2026-08-30}
   @syntax{(gtk:widget-root object) => root}
   @argument[object]{a @class{gtk:widget} object}
   @argument[root]{a @class{gtk:root} root widget}
   @begin{short}
-    The accessor for the @slot[gtk:widget]{root} slot of the @class{gtk:widget}
-    class returns the @class{gtk:root} widget of the widget.
+    The accessor for the @slot[gtk:widget]{root} slot returns the
+    @class{gtk:root} widget of the widget.
   @end{short}
   This function will return @code{nil} if the widget is not contained inside a
   widget tree with a root widget. The @class{gtk:root} widget will return
@@ -2021,14 +2004,14 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-scale-factor)
       "Accessor"
       (documentation 'widget-scale-factor 'function)
- "@version{2025-09-26}
+ "@version{2026-08-30}
   @syntax{(gtk:widget-scale-factor object) => scale}
   @argument[object]{a @class{gtk:widget} object}
   @argument[scale]{an integer for the scale factor}
   @begin{short}
-    The accessor for the @slot[gtk:widget]{scale-factor} of the
-    @class{gtk:widget} class returns the internal scale factor that maps from
-    window coordinates to the actual device pixels.
+    The accessor for the @slot[gtk:widget]{scale-factor} slot returns the
+    internal scale factor that maps from window coordinates to the actual
+    device pixels.
   @end{short}
   On traditional systems this is 1, on high density outputs, it can be a higher
   value (typically 2).
@@ -2046,14 +2029,14 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-sensitive)
       "Accessor"
       (documentation 'widget-sensitive 'function)
- "@version{2025-09-26}
+ "@version{2026-08-30}
   @syntax{(gtk:widget-sensitive object) => setting}
   @syntax{(setf (gtk:widget-sensitive object) setting)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[setting]{a boolean whether the widget responds to input}
   @begin{short}
-    The accessor for the @slot[gtk:widget]{sensitive} slot of the
-    @class{gtk:widget} class gets or sets the sensitivity of the widget.
+    The accessor for the @slot[gtk:widget]{sensitive} slot gets or sets the
+    sensitivity of the widget.
   @end{short}
   A widget is sensitive if the user can interact with it. Insensitive widgets
   are \"grayed out\" and the user cannot interact with them. Insensitive widgets
@@ -2085,15 +2068,15 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-tooltip-markup)
       "Accessor"
       (documentation 'widget-tooltip-markup 'function)
- "@version{2025-09-26}
+ "@version{2026-08-30}
   @syntax{(gtk:widget-tooltip-markup object) => markup}
   @syntax{(setf (gtk:widget-tooltip-markup object) markup)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[markup]{a string for the text of the tooltip}
   @begin{short}
-    The accessor for the @slot[gtk:widget]{tooltip-markup} slot of the
-    @class{gtk:widget} class gets or sets the contents of the tooltip, which is
-    marked up with the Pango text markup language.
+    The accessor for the @slot[gtk:widget]{tooltip-markup} slot gets or sets
+    the contents of the tooltip, which is marked up with the Pango text markup
+    language.
   @end{short}
   This function will take care of setting the @slot[gtk:widget]{has-tooltip}
   property to @em{true} and of the default handler for the
@@ -2123,14 +2106,14 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-tooltip-text)
       "Accessor"
       (documentation 'widget-tooltip-text 'function)
- "@version{2025-09-26}
+ "@version{2026-08-30}
   @syntax{(gtk:widget-tooltip-text object) => text}
   @syntax{(setf (gtk:widget-tooltip-text object) text)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[text]{a string for the text of the tooltip}
   @begin{short}
-    The accessor for the @slot[gtk:widget]{tooltip-text} slot of the
-    @class{gtk:widget} class gets or sets the contents of the tooltip.
+    The accessor for the @slot[gtk:widget]{tooltip-text} slot gets or sets the
+    contents of the tooltip.
   @end{short}
   This function will take care of setting the @slot[gtk:widget]{has-tooltip}
   property to @em{true} and of the default handler for the
@@ -2154,14 +2137,14 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-valign)
       "Accessor"
       (documentation 'widget-valign 'function)
- "@version{2025-09-26}
+ "@version{2026-08-30}
   @syntax{(gtk:widget-valign object) => align}
   @syntax{(setf (gtk:widget-valign object) align)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[align]{a value of the @sym{gtk:align} enumeration}
   @begin{short}
-    The accessor for the @slot[gtk:widget]{valign} slot of the
-    @class{gtk:widget} class gets or sets the vertical alignment of the widget.
+    The accessor for the @slot[gtk:widget]{valign} slot gets or sets the
+    vertical alignment of the widget.
   @end{short}
   @see-class{gtk:widget}
   @see-symbol{gtk:align}
@@ -2179,15 +2162,14 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-vexpand)
       "Accessor"
       (documentation 'widget-vexpand 'function)
- "@version{2025-09-26}
+ "@version{2026-08-30}
   @syntax{(gtk:widget-vexpand object) => setting}
   @syntax{(setf (gtk:widget-vexpand object) setting)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[setting]{a boolean whether to expand vertically}
   @begin{short}
-    The accessor for the @slot[gtk:widget]{vexpand} slot of the
-    @class{gtk:widget} class gets or sets whether the widget would like any
-    available extra vertical space.
+    The accessor for the @slot[gtk:widget]{vexpand} slot gets or sets whether
+    the widget would like any available extra vertical space.
   @end{short}
 
   See the @fun{gtk:widget-hexpand} function for more details.
@@ -2207,16 +2189,15 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-vexpand-set)
       "Accessor"
       (documentation 'widget-vexpand-set 'function)
- "@version{2025-09-26}
+ "@version{2026-08-30}
   @syntax{(gtk:widget-vexpand-set object) => setting}
   @syntax{(setf (gtk:widget-vexpand-set object) setting)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[setting]{a boolean whether to use the @slot[gtk:widget]{vexpand}
     property}
   @begin{short}
-    The accessor for the @slot[gtk:widget]{vexpand-set} slot of the
-    @class{gtk:widget} class gets or sets whether to use the
-    @slot[gtk:widget]{vexpand} property.
+    The accessor for the @slot[gtk:widget]{vexpand-set} slot gets or sets
+    whether to use the @slot[gtk:widget]{vexpand} property.
   @end{short}
 
   See the @fun{gtk:widget-hexpand-set} function for more details.
@@ -2236,14 +2217,14 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-visible)
       "Accessor"
       (documentation 'widget-visible 'function)
- "@version{2025-09-26}
+ "@version{2026-08-30}
   @syntax{(gtk:widget-visible object) => setting}
   @syntax{(setf (gtk:widget-visible object) setting)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[setting]{a boolean whether @arg{widget} is visible}
   @begin{short}
-    The accessor for the @slot[gtk:widget]{visible} slot of the
-    @class{gtk:widget} class gets or sets whether the widget is visible.
+    The accessor for the @slot[gtk:widget]{visible} slot gets or sets whether
+    the widget is visible.
   @end{short}
   Note that this does not take into account whether the parent of the widget is
   also visible or the widget is obscured in any way.
@@ -2267,15 +2248,14 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-width-request)
       "Accessor"
       (documentation 'widget-width-request 'function)
- "@version{2025-09-26}
+ "@version{2026-08-30}
   @syntax{(gtk:widget-width-request object) => width}
   @syntax{(setf (gtk:widget-width-request object) width)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[width]{an integer for the width request}
   @begin{short}
-    The accessor for the @slot[gtk:widget]{width-request} slot of the
-    @class{gtk:widget} class gets or sets the width request of the widget, or
-    -1 if natural request should be used.
+    The accessor for the @slot[gtk:widget]{width-request} slot gets or sets
+    the width request of the widget, or -1 if natural request should be used.
   @end{short}
   See the @fun{gtk:widget-size-request} function for details.
   @see-class{gtk:widget}
