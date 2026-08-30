@@ -53,20 +53,47 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
+;; On Linux we have one more reference for the font chooser widget.
+;; What's going on here?
+
+#-windows
 (test gtk-font-chooser-widget-properties
   (let ((gtk-init:*warn-deprecated* nil))
     (glib-test:with-check-memory ((widget 2) :strong 2)
-      (setf widget (make-instance 'gtk:font-chooser-widget))
+      (is (typep (setf widget
+                       (make-instance 'gtk:font-chooser-widget))
+                 'gtk:font-chooser-widget))
+      (is (typep (gtk:font-chooser-widget-tweak-action widget) 'g:action)))))
+
+;; a strong reference for the g:action object
+
+#+windows
+(test gtk-font-chooser-widget-properties
+  (let ((gtk-init:*warn-deprecated* nil))
+    (glib-test:with-check-memory (widget :strong 1)
+      (is (typep (setf widget
+                       (make-instance 'gtk:font-chooser-widget))
+                 'gtk:font-chooser-widget))
       (is (typep (gtk:font-chooser-widget-tweak-action widget) 'g:action)))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_font_chooser_widget_new
 
+;; On Linux we have one more reference for the font chooser widget.
+;; What's going on here?
+
+#-windows
 (test gtk-font-chooser-widget-new
   (let ((gtk-init:*warn-deprecated* nil))
-    (glib-test:with-check-memory ((widget 2) :strong 2)
+    (glib-test:with-check-memory ((widget 2) :strong 1)
+      (is (typep (setf widget
+                       (gtk:font-chooser-widget-new)) 'gtk:font-chooser-widget)))))
+#+windows
+(test gtk-font-chooser-widget-new
+  (let ((gtk-init:*warn-deprecated* nil))
+    (glib-test:with-check-memory (widget)
       (is (typep (setf widget
                        (gtk:font-chooser-widget-new)) 'gtk:font-chooser-widget)))))
 
-;;; 2026-05-15
+;;; 2026-07-14

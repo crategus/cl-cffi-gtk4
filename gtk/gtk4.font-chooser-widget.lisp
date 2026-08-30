@@ -83,7 +83,7 @@
 
 #+liber-documentation
 (setf (documentation 'font-chooser-widget 'type)
- "@version{2026-02-05}
+ "@version{2026-07-14}
   @begin{short}
     The @class{gtk:font-chooser-widget} widget lists the available fonts,
     styles and sizes, allowing the user to select a font.
@@ -93,7 +93,6 @@
 
   To set or to get the font which is initially selected, use the
   @fun{gtk:font-chooser-font} or @fun{gtk:font-chooser-font-desc} functions.
-
   To change the text which is shown in the preview area, use the
   @fun{gtk:font-chooser-preview-text} function.
   @begin[CSS nodes]{dictionary}
@@ -125,15 +124,14 @@
 (setf (liber:alias-for-function 'font-chooser-widget-tweak-action)
       "Accessor"
       (documentation 'font-chooser-widget-tweak-action 'function)
- "@version{2026-02-05}
+ "@version{2026-07-14}
   @syntax{(gtk:font-chooser-widget-tweak-action object) => action}
-  @syntax{(setf (gtk:font-chooser-widget-tweak-action object) action)}
   @argument[object]{a @class{gtk:font-chooser-widget} widget}
   @argument[action]{a @class{g:action} toggle action}
   @begin{short}
-    The accessor for the @slot[gtk:font-chooser-widget]{tweak-action} slot of
-    the @class{gtk:font-chooser-widget} class gets or sets the toggle action
-    that can be used to switch to the tweak page of the font chooser widget.
+    The accessor for the @slot[gtk:font-chooser-widget]{tweak-action} slot
+    returns the toggle action that can be used to switch to the tweak page of
+    the font chooser widget.
   @end{short}
   This lets the user tweak the OpenType features and variation axes of the
   selected font. The action will be enabled or disabled depending on whether the

@@ -6,7 +6,7 @@
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2012 - 2025 Dieter Kaiser
+;;; Copyright (C) 2012 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -226,16 +226,15 @@ lambda (fontchooser fontname)    :run-first
 (setf (liber:alias-for-function 'font-chooser-font)
       "Accessor"
       (documentation 'font-chooser-font 'function)
- "@version{2025-09-28}
+ "@version{2026-08-28}
   @syntax{(gtk:font-chooser-font object) => fontname}
   @syntax{(setf (gtk:font-chooser-font object) fontname)}
   @argument[object]{a @class{gtk:font-chooser} object}
   @argument[fontname]{a string for the font name like \"Helvetica 12\" or
     \"Times Bold 18\"}
   @begin{short}
-    The accessor for the @slot[gtk:font-chooser]{font} slot of the
-    @class{gtk:font-chooser} class gets or sets the font description as a
-    string:
+    The accessor for the @slot[gtk:font-chooser]{font} slot gets or sets the
+    font description as a string.
   @end{short}
 
   Note that this can be a different string than what you set with the
@@ -266,15 +265,14 @@ lambda (fontchooser fontname)    :run-first
 (setf (liber:alias-for-function 'font-chooser-font-desc)
       "Accessor"
       (documentation 'font-chooser-font-desc 'function)
- "@version{2025-09-28}
+ "@version{2026-08-28}
   @syntax{(gtk:font-chooser-font-desc object) => font-desc}
   @syntax{(setf (gtk:font-chooser-font-desc object) font-desc)}
   @argument[object]{a @class{gtk:font-chooser} object}
   @argument[font-desc]{a @class{pango:font-description} instance}
   @begin{short}
-    The accessor for the @slot[gtk:font-chooser]{font-desc} slot of the
-    @class{gtk:font-chooser} class gets or sets the Pango font description for
-    the selected font.
+    The accessor for the @slot[gtk:font-chooser]{font-desc} slot gets or sets
+    the Pango font description for the selected font.
   @end{short}
 
   Use the @fun{pango:font-description-equal} function if you want to compare
@@ -301,14 +299,14 @@ lambda (fontchooser fontname)    :run-first
 (setf (liber:alias-for-function 'font-chooser-font-features)
       "Accessor"
       (documentation 'font-chooser-font-features 'function)
- "@version{2025-09-28}
+ "@version{2026-08-28}
   @syntax{(gtk:font-chooser-font-features object) => features}
   @argument[object]{a @class{gtk:font-chooser} object}
   @argument[features]{a string for the currently selected font features}
   @begin{short}
-    The accessor for the @slot[gtk:font-chooser]{font-features} slot of the
-    @class{gtk:font-chooser} class returns the currently selected font features,
-    in a format that is compatible with CSS and with Pango attributes.
+    The accessor for the @slot[gtk:font-chooser]{font-features} slot returns
+    the currently selected font features, in a format that is compatible with
+    CSS and with Pango attributes.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:font-chooser} implementation is deprecated since 4.10. Use
@@ -330,15 +328,14 @@ lambda (fontchooser fontname)    :run-first
 (setf (liber:alias-for-function 'font-chooser-language)
       "Accessor"
       (documentation 'font-chooser-language 'function)
- "@version{2025-09-28}
+ "@version{2026-08-28}
   @syntax{(gtk:font-chooser-language object) => language}
   @syntax{(setf (gtk:font-chooser-language object) language)}
   @argument[object]{a @class{gtk:font-chooser} object}
   @argument[language]{a RFC-3066 format string representing the language}
   @begin{short}
-    The accessor for the @slot[gtk:font-chooser]{language} slot of the
-    @class{gtk:font-chooser} class gets or sets the language that is used for
-    font features.
+    The accessor for the @slot[gtk:font-chooser]{language} slot gets or sets
+    the language that is used for font features.
   @end{short}
   See the @fun{pango:language-to-string} function.
   @begin[Examples]{dictionary}
@@ -367,16 +364,15 @@ lambda (fontchooser fontname)    :run-first
 (setf (liber:alias-for-function 'font-chooser-level)
       "Accessor"
       (documentation 'font-chooser-level 'function)
- "@version{2025-09-28}
+ "@version{2026-08-28}
   @syntax{(gtk:font-chooser-level object) => level}
   @syntax{(setf (gtk:font-chooser-level object) level)}
   @argument[object]{a @class{gtk:font-chooser} object}
   @argument[level]{a @sym{gtk:font-chooser-level} value for the desired level
     of granularity of type}
   @begin{short}
-    The accessor for the @slot[gtk:font-chooser]{level} slot of the
-    @class{gtk:font-chooser} class gets or sets the level of granularity for
-    selecting fonts.
+    The accessor for the @slot[gtk:font-chooser]{level} slot gets or sets the
+    level of granularity for selecting fonts.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:font-chooser} implementation is deprecated since 4.10. Use
@@ -398,15 +394,14 @@ lambda (fontchooser fontname)    :run-first
 (setf (liber:alias-for-function 'font-chooser-preview-text)
       "Accessor"
       (documentation 'font-chooser-preview-text 'function)
- "@version{2025-09-28}
+ "@version{2026-08-28}
   @syntax{(gtk:font-chooser-preview-text object) => text}
   @syntax{(setf (gtk:font-chooser-preview-text object) text)}
   @argument[object]{a @class{gtk:font-chooser} object}
   @argument[text]{a string for the text to display in the preview area}
   @begin{short}
-    The accessor for the @slot[gtk:font-chooser]{preview-text} slot of the
-    @class{gtk:font-chooser} class gets or sets the text displayed in the
-    preview area.
+    The accessor for the @slot[gtk:font-chooser]{preview-text} slot gets or
+    sets the text displayed in the preview area.
   @end{short}
   The text is used to show how the selected font looks. See the
   @fun{pango:language-sample-string} function.
@@ -432,16 +427,15 @@ lambda (fontchooser fontname)    :run-first
 (setf (liber:alias-for-function 'font-chooser-show-preview-entry)
       "Accessor"
       (documentation 'font-chooser-show-preview-entry 'function)
- "@version{2025-09-28}
+ "@version{2026-08-28}
   @syntax{(gtk:font-chooser-show-preview-entry object) => show-entry}
   @syntax{(setf (gtk:font-chooser-show-preview-entry object) show-entry)}
   @argument[object]{a @class{gtk:font-chooser} object}
   @argument[show-entry]{a boolean whether to show the editable preview entry or
     not}
   @begin{short}
-    The accessor for the @slot[gtk:font-chooser]{show-preview-entry} slot of the
-    @class{gtk:font-chooser} class gets or setswhether to show an entry to
-    change the preview text.
+    The accessor for the @slot[gtk:font-chooser]{show-preview-entry} slot gets
+    or setswhether to show an entry to change the preview text.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:font-chooser} implementation is deprecated since 4.10. Use
@@ -651,13 +645,13 @@ lambda (fontchooser fontname)    :run-first
 (cffi:defcfun ("gtk_font_chooser_get_font_map" font-chooser-font-map)
     (g:object pango:font-map)
  #+liber-documentation
- "@version{#2025-09-28}
+ "@version{#2026-08-28}
   @syntax{(gtk:font-chooser-font-map fontchooser) => fontmap}
   @syntax{(setf (gtk:font-chooser-font-map fontchooser) fontmap)}
   @argument[fontchooser]{a @class{gtk:font-chooser} widget}
   @argument[fontmap]{a @class{pango:font-map} object, or @code{nil}}
   @begin{short}
-    Gets or sets the custom font map of the font chooser widget
+    Gets or sets the custom font map of the font chooser widget.
   @end{short}
   Returns @code{nil} if it does not have one. A custom font map can be used to
   present application specific fonts instead of or in addition to the normal
