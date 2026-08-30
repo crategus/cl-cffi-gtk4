@@ -61,17 +61,20 @@
 ;;;     change-current-page
 
 (test gtk-shortcuts-section-change-current-page-signal
-  (let ((query (g:signal-query (g:signal-lookup "change-current-page"
-                                                "GtkShortcutsSection"))))
-    (is (string= "change-current-page" (g:signal-query-signal-name query)))
-    (is (string= "GtkShortcutsSection"
-                 (g:type-name (g:signal-query-owner-type query))))
+  (let* ((name "change-current-page")
+         (gtype (g:gtype "GtkShortcutsSection"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
     (is (equal '(:ACTION :RUN-LAST)
                (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "gboolean" (g:type-name (g:signal-query-return-type query))))
+    ;; Check return type
+    (is (eq (g:gtype "gboolean") (g:signal-query-return-type query)))
+    ;; Check parameter types
     (is (equal '("gint")
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -90,4 +93,4 @@
     (is-false (gtk:shortcuts-section-title section))
     (is-false (gtk:shortcuts-section-view-name section)))))
 
-;;; 2025-05-15
+;;; 2026-07-24

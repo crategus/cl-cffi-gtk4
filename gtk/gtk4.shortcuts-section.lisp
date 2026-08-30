@@ -6,7 +6,7 @@
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2025 Dieter Kaiser
+;;; Copyright (C) 2019 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -156,23 +156,22 @@ lambda (section offset data)    :action
 (setf (liber:alias-for-function 'shortcuts-section-max-height)
       "Accessor"
       (documentation 'shortcuts-section-max-height 'function)
- "@version{2025-08-11}
+ "@version{2026-08-17}
   @syntax{(gtk:shortcuts-section-max-height object) => height}
   @syntax{(setf (gtk:shortcuts-section-max-height object) height)}
   @argument[object]{a @class{gtk:shortcuts-section} widget}
   @argument[height]{an unsigned integer for the maximum number of lines to
     allow per column}
   @begin{short}
-    The accessor for the @slot[gtk:shortcuts-section]{max-height} slot of the
-    @class{gtk:shortcuts-section} class gets or sets the maximum number of lines
-    to allow per column.
+    The accessor for the @slot[gtk:shortcuts-section]{max-height} slot gets or
+    sets the maximum number of lines to allow per column.
   @end{short}
   This property can be used to influence how the groups in this section are
   distributed across pages and columns. The default value of 15 should work in
   for most cases.
   @begin[Warning]{dictionary}
-    The @fun{gtk:shortcuts-section-max-height} function is deprecated since
-    4.18. This widget will be removed in GTK 5.
+    This function is deprecated since 4.18. This widget will be removed in
+    GTK 5.
   @end{dictionary}
   @see-class{gtk:shortcuts-section}")
 
@@ -192,22 +191,21 @@ lambda (section offset data)    :action
 (setf (liber:alias-for-function 'shortcuts-section-section-name)
       "Accessor"
       (documentation 'shortcuts-section-section-name 'function)
- "@version{2025-08-11}
+ "@version{2026-08-17}
   @syntax{(gtk:shortcuts-section-section-name object) => name}
   @syntax{(setf (gtk:shortcuts-section-section-name object) name)}
   @argument[object]{a @class{gtk:shortcuts-section} widget}
   @argument[name]{a string for a unique name to identify this section}
   @begin{short}
-    The accessor for the @slot[gtk:shortcuts-section]{section-name} slot of the
-    @class{gtk:shortcuts-section} class gets or sets the unique name to identify
-    this section among the sections added to the @class{gtk:shortcuts-window}
-    widget.
+    The accessor for the @slot[gtk:shortcuts-section]{section-name} slot gets or
+    sets the unique name to identify this section among the sections added to
+    the @class{gtk:shortcuts-window} widget.
   @end{short}
   Setting the @slot[gtk:shortcuts-section]{section-name} property to this string
   will make this section shown in the @class{gtk:shortcuts-window} widget.
   @begin[Warning]{dictionary}
-    The @fun{gtk:shortcuts-section-section-name} function is deprecated since
-    4.18. This widget will be removed in GTK 5.
+    This function is deprecated since 4.18. This widget will be removed in
+    GTK 5.
   @end{dictionary}
   @see-class{gtk:shortcuts-section}
   @see-class{gtk:shortcuts-window}")
@@ -226,22 +224,21 @@ lambda (section offset data)    :action
 (setf (liber:alias-for-function 'shortcuts-section-title)
       "Accessor"
       (documentation 'shortcuts-section-title 'function)
- "@version{2025-08-11}
+ "@version{2026-08-17}
   @syntax{(gtk:shortcuts-section-title object) => title}
   @syntax{(setf (gtk:shortcuts-section-title object) title)}
   @argument[object]{a @class{gtk:shortcuts-section} widget}
   @argument[title]{a string to show in the section selector}
   @begin{short}
-    The accessor for the @slot[gtk:shortcuts-section]{title} slot of the
-    @class{gtk:shortcuts-section} class gets or sets the string to show in the
-    section selector of the @class{gtk:shortcuts-window} widget for this
-    section.
+    The accessor for the @slot[gtk:shortcuts-section]{title} slot gets or sets
+    the string to show in the section selector of the
+    @class{gtk:shortcuts-window} widget for this section.
   @end{short}
   If there is only one section, you do not need to set a title, since the
   section selector will not be shown in this case.
   @begin[Warning]{dictionary}
-    The @fun{gtk:shortcuts-section-title} function is deprecated since 4.18.
-    This widget will be removed in GTK 5.
+    This function is deprecated since 4.18. This widget will be removed in
+    GTK 5.
   @end{dictionary}
   @see-class{gtk:shortcuts-section}
   @see-class{gtk:shortcuts-window}")
@@ -261,22 +258,21 @@ lambda (section offset data)    :action
 (setf (liber:alias-for-function 'shortcuts-section-view-name)
       "Accessor"
       (documentation 'shortcuts-section-view-name 'function)
- "@version{2025-08-11}
+ "@version{2026-08-17}
   @syntax{(gtk:shortcuts-section-view-name object) => name}
   @syntax{(setf (gtk:shortcuts-section-view-name object) name)}
   @argument[object]{a @class{gtk:shortcuts-section} widget}
   @argument[name]{a string for a view name to filter the groups in this
     section by}
   @begin{short}
-    The accessor for the @slot[gtk:shortcuts-section]{view-name} slot of the
-    @class{gtk:shortcuts-section} class gets or sets the view name to filter the
-    groups in this section by.
+    The accessor for the @slot[gtk:shortcuts-section]{view-name} slot gets or
+    sets the view name to filter the groups in this section by.
   @end{short}
   See the @slot[gtk:shortcuts-group]{view} property. Applications are expected
   to use the @slot[gtk:shortcuts-section]{view-name} property for this purpose.
   @begin[Warning]{dictionary}
-    The @fun{gtk:shortcuts-section-view-name} function is deprecated since
-    4.18. This widget will be removed in GTK 5.
+    This function is deprecated since 4.18. This widget will be removed in
+    GTK 5.
   @end{dictionary}
   @see-class{gtk:shortcuts-section}
   @see-function{gtk:shortcuts-group-view}")
@@ -302,8 +298,8 @@ lambda (section offset data)    :action
 
   Since 4.14
   @begin[Warning]{dictionary}
-    The @fun{gtk:shortcuts-section-add-group} function is deprecated since
-    4.18. This widget will be removed in GTK 5.
+    This function is deprecated since 4.18. This widget will be removed in
+    GTK 5.
   @end{dictionary}
   @see-class{gtk:shortcuts-section}
   @see-class{gtk:shortcuts-group}"
