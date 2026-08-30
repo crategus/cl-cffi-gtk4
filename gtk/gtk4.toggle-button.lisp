@@ -355,14 +355,14 @@ lambda (toggle)    :run-first
 
 (defun toggle-button-toggled (button)
  #+liber-documentation
- "@version{2025-07-13}
+ "@version{2026-08-28}
   @argument[button]{a @class{gtk:toggle-button} widget}
   @begin{short}
     Emits the @sig[gtk:toggle-button]{toggled} signal on the toggle button.
   @end{short}
   @begin[Warning]{dictionary}
-    The @fun{gtk:toggle-button-toggled} function is deprecated since 4.10.
-    There is no good reason for an application ever to call this function.
+    This function is deprecated since 4.10. There is no good reason for an
+    application ever to call this function.
   @end{dictionary}
   @see-class{gtk:toggle-button}"
   #+(and gtk-4-10 gtk-warn-deprecated)
