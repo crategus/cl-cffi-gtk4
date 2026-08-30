@@ -6,7 +6,7 @@
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2025 Dieter Kaiser
+;;; Copyright (C) 2011 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -289,14 +289,13 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'entry-completion-cell-area)
       "Accessor"
       (documentation 'entry-completion-cell-area 'function)
- "@version{2025-09-24}
+ "@version{2026-08-27}
   @syntax{(gtk:entry-completion-cell-area object) => area}
   @argument[object]{a @class{gtk:entry-completion} object}
   @argument[area]{a @class{gtk:cell-area} object}
   @begin{short}
-    The accessor for the @slot[gtk:entry-completion]{cell-area} slot of the
-    @class{gtk:entry-completion} class returns the cell area used to layout cell
-    renderers in the tree view column.
+    The accessor for the @slot[gtk:entry-completion]{cell-area} slot returns
+    the cell area used to layout cell renderers in the tree view column.
   @end{short}
   If no area is specified when creating the entry completion with the
   @fun{gtk:entry-completion-new-with-area} function a horizontally oriented
@@ -327,16 +326,15 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'entry-completion-inline-completion)
       "Accessor"
       (documentation 'entry-completion-inline-completion 'function)
- "@version{2025-09-24}
+ "@version{2026-08-28}
   @syntax{(gtk:entry-completion-inline-completion object) => setting}
   @syntax{(setf (gtk:entry-completion-inline-completion object) setting)}
   @argument[object]{a @class{gtk:entry-completion} object}
   @argument[setting]{@em{true} to do inline completion}
   @begin{short}
-    The accessor for the @slot[gtk:entry-completion]{inline-completion} slot of
-    the @class{gtk:entry-completion} class gets or sets whether the common
-    prefix of the possible completions should be automatically inserted in the
-    text entry.
+    The accessor for the @slot[gtk:entry-completion]{inline-completion} slot
+    gets or sets whether the common prefix of the possible completions should
+    be automatically inserted in the text entry.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:entry-completion} implementation is deprecated since 4.10.
@@ -359,16 +357,15 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'entry-completion-inline-selection)
       "Accessor"
       (documentation 'entry-completion-inline-selection 'function)
- "@version{2025-09-24}
+ "@version{2026-08-28}
   @syntax{(gtk:entry-completion-inline-selection object) => setting}
   @syntax{(setf (gtk:entry-completion-inline-selection object) setting)}
   @argument[object]{a @class{gtk:entry-completion} object}
   @argument[setting]{@em{true} to do inline selection}
   @begin{short}
-    The accessor for the @slot[gtk:entry-completion]{inline-selection} slot of
-    the @class{gtk:entry-completion} class gets or sets whether the possible
-    completions on the popup will appear in the text entry as you navigate
-    through them.
+    The accessor for the @slot[gtk:entry-completion]{inline-selection} slot
+    gets or sets whether the possible completions on the popup will appear in
+    the text entry as you navigate through them.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:entry-completion} implementation is deprecated since 4.10.
@@ -391,16 +388,15 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'entry-completion-minimum-key-length)
       "Accessor"
       (documentation 'entry-completion-minimum-key-length 'function)
- "@version{2025-09-24}
+ "@version{2026-08-28}
   @syntax{(gtk:entry-completion-minimum-key-length object) => length}
   @syntax{(setf (gtk:entry-completion-minimum-key-length object) length)}
   @argument[object]{a @class{gtk:entry-completion} object}
   @argument[length]{an integer for the minimum length of the key in order to
     start completing}
   @begin{short}
-    The accessor for the @slot[gtk:entry-completion]{minimum-key-length} slot of
-    the @class{gtk:entry-completion} class gets or sets the minimum key length
-    as set for the entry completion.
+    The accessor for the @slot[gtk:entry-completion]{minimum-key-length} slot
+    gets or sets the minimum key length as set for the entry completion.
   @end{short}
 
   This is useful for long lists, where completing using a small key takes a
@@ -423,15 +419,14 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'entry-completion-model)
       "Accessor"
       (documentation 'entry-completion-model 'function)
- "@version{2025-09-24}
+ "@version{2026-08-28}
   @syntax{(gtk:entry-completion-model object) => model}
   @syntax{(setf (gtk:entry-completion-model object) model)}
   @argument[object]{a @class{gtk:entry-completion} object}
   @argument[model]{a @class{gtk:tree-model} object}
   @begin{short}
-    The accessor for the @slot[gtk:entry-completion]{model} slot of the
-    @class{gtk:entry-completion} class gets or sets the model for a entry
-    completion.
+    The accessor for the @slot[gtk:entry-completion]{model} slot gets or sets
+    the model for a entry completion.
   @end{short}
   Returns @code{nil} if none is currently being used. If the entry completion
   already has a model set, it will remove it before setting the new model. If
@@ -458,15 +453,14 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'entry-completion-popup-completion)
       "Accessor"
       (documentation 'entry-completion-popup-completion 'function)
- "@version{2025-09-24}
+ "@version{2026-08-28}
   @syntax{(gtk:entry-completion-popup object) => setting}
   @syntax{(setf (gtk:entry-completion-popup object) setting)}
   @argument[object]{a @class{gtk:entry-completion} object}
   @argument[setting]{@em{true} to do popup completion}
   @begin{short}
-    The accessor for the @slot[gtk:entry-completion]{popup-completion} slot of
-    the @class{gtk:entry-completion} class gets or sets whether the completions
-    should be presented in a popup window.
+    The accessor for the @slot[gtk:entry-completion]{popup-completion} slot
+    gets or sets whether the completions should be presented in a popup window.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:entry-completion} implementation is deprecated since 4.10.
@@ -489,16 +483,16 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'entry-completion-popup-set-width)
       "Accessor"
       (documentation 'entry-completion-popup-set-width 'function)
- "@version{2025-09-24}
+ "@version{2026-08-28}
   @syntax{(gtk:entry-completion-popup-set-width object) => setting}
   @syntax{(setf (gtk:entry-completion-popup-set-width object) setting)}
   @argument[object]{a @class{gtk:entry-completion} object}
   @argument[setting]{@em{true} to make the width of the popup the same as the
     text entry}
   @begin{short}
-    The accessor for the @slot[gtk:entry-completion]{popup-set-width} slot of
-    the @class{gtk:entry-completion} class gets or sets whether the completion
-    popup window will be resized to the width of the text entry.
+    The accessor for the @slot[gtk:entry-completion]{popup-set-width} slot
+    gets or sets whether the completion popup window will be resized to the
+    width of the text entry.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:entry-completion} implementation is deprecated since 4.10.
@@ -522,7 +516,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'entry-completion-popup-single-match)
       "Accessor"
       (documentation 'entry-completion-popup-single-match 'function)
- "@version{2025-09-24}
+ "@version{2026-08-28}
   @syntax{(gtk:entry-completion-popup-single-match object) => setting}
   @syntax{(setf (gtk:entry-completion-popup-single-match object) setting)}
   @argument[object]{a @class{gtk:entry-completion} object}
@@ -530,8 +524,8 @@ lambda (widget)    :run-last
     match}
   @begin{short}
     The accessor for the @slot[gtk:entry-completion]{popup-single-match} slot
-    of the @class{gtk:entry-completion} class gets or sets whether the
-    completions popup window will shown for a single possible completion.
+    gets or sets whether the completions popup window will shown for a single
+    possible completion.
   @end{short}
   You may want to set this to @em{false} if you are using inline completion.
   @begin[Warning]{dictionary}
@@ -555,16 +549,15 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'entry-completion-text-column)
       "Accessor"
       (documentation 'entry-completion-text-column 'function)
- "@version{2025-09-24}
+ "@version{2026-08-28}
   @syntax{(gtk:entry-completion-text-column) => column}
   @syntax{(setf (gtk:entry-completion-text-column object) column)}
   @argument[object]{a @class{gtk:entry-completion} object}
   @argument[column]{an integer for the column in the model of the completion
     to get strings from}
   @begin{short}
-    The accessor for the @slot[gtk:entry-completion]{text-column} slot of the
-    @class{gtk:entry-completion} class gets or sets the column in the model of
-    the completion to get strings from.
+    The accessor for the @slot[gtk:entry-completion]{text-column} slot gets or
+    sets the column in the model of the completion to get strings from.
   @end{short}
   This function will set up completion to have a list displaying all, and just,
   strings in the completion list, and to get those strings from column in the
