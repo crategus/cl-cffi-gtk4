@@ -2,7 +2,7 @@
 ;;; gtk4.event-controller-scroll.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -238,15 +238,14 @@ lambda (controller)    :run-first
 (setf (liber:alias-for-function 'event-controller-scroll-flags)
       "Accessor"
       (documentation 'event-controller-scroll-flags 'function)
- "@version{2025-09-28}
+ "@version{2026-08-30}
   @syntax{(gtk:event-controller-scroll-flags object) => flags}
   @syntax{(setf (gtk:event-controller-scroll-flags object) flags)}
   @argument[object]{a @class{gtk:event-controller-scroll} object}
   @argument[flags]{a @sym{gtk:event-controller-scroll-flags} value}
   @begin{short}
-    The accessor for the @slot[gtk:event-controller-scroll]{flags} slot of the
-    @class{gtk:event-controller-scroll} class gets or sets the flags
-    conditioning the scroll controller behavior.
+    The accessor for the @slot[gtk:event-controller-scroll]{flags} slot gets
+    or sets the flags conditioning the scroll controller behavior.
   @end{short}
   @see-class{gtk:event-controller-scroll}
   @see-symbol{gtk:event-controller-scroll-flags}")

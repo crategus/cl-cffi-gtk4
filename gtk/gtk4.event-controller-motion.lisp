@@ -2,7 +2,7 @@
 ;;; gtk4.event-controller-motion.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -152,14 +152,14 @@ lambda (controller x y)    :run-first
 (setf (liber:alias-for-function 'event-controller-motion-contains-pointer)
       "Accessor"
       (documentation 'event-controller-motion-contains-pointer 'function)
- "@version{2025-09-25}
+ "@version{2026-08-30}
   @syntax{(gtk:event-controller-motion-contains-pointer object) => contains}
   @argument[object]{a @class{gtk:event-controller-motion} object}
   @argument[contains]{a boolean whether the pointer is within @arg{object}}
   @begin{short}
     The accessor for the @slot[gtk:event-controller-motion]{contains-pointer}
-    slot of the @class{gtk:event-controller-motion} class returns @em{true} if
-    the pointer is within the controllers widget or one of its children.
+    slot returns @em{true} if the pointer is within the controllers widget or
+    one of its children.
   @end{short}
   @see-class{gtk:event-controller-motion}")
 
@@ -179,14 +179,14 @@ lambda (controller x y)    :run-first
 (setf (liber:alias-for-function 'event-controller-motion-is-pointer)
       "Accessor"
       (documentation 'event-controller-motion-is-pointer 'function)
- "@version{2025-09-25}
+ "@version{2026-08-30}
   @syntax{(gtk:event-controller-motion-is-pointer object) => is-pointer}
   @argument[object]{a @class{gtk:event-controller-motion} object}
   @argument[is-pointer]{a boolean whether the pointer is within @arg{object}}
   @begin{short}
-    The accessor for the @slot[gtk:event-controller-motion]{is-pointer} slot of
-    the @class{gtk:event-controller-motion} class returns @em{true} if the
-    pointer is within the controllers widget but not one of its children.
+    The accessor for the @slot[gtk:event-controller-motion]{is-pointer} slot
+    returns @em{true} if the pointer is within the controllers widget but not
+    one of its children.
   @end{short}
   @see-class{gtk:event-controller-motion}")
 

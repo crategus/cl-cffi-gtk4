@@ -2,7 +2,7 @@
 ;;; gtk4.event-controller-key.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -178,11 +178,8 @@ lambda (controller state)    :run-last
   @argument[controller]{a @class{gtk:event-controller-key} object}
   @argument[context]{a @class{gtk:im-context} object}
   @begin{short}
-    The @fun{gtk:event-controller-key-im-context} function gets the input method
-    context of the key controller.
+    Gets or sets the input method context of the key controller.
   @end{short}
-  The @setf{gtk:event-controller-key-im-context} function sets the input method
-  context.
   @see-class{gtk:event-controller-key}
   @see-class{gtk:im-context}"
   (controller (g:object event-controller-key)))

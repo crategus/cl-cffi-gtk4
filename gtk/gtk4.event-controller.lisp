@@ -2,7 +2,7 @@
 ;;; gtk4.event-controller.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -228,15 +228,14 @@
 (setf (liber:alias-for-function 'event-controller-name)
       "Accessor"
       (documentation 'event-controller-name 'function)
- "@version{2025-09-29}
+ "@version{2026-08-30}
   @syntax{(gtk:event-controller-name object) => name}
   @syntax{(setf (gtk:event-controller-name object) name)}
   @argument[object]{a @class{gtk:event-controller} object}
   @argument[name]{a string for the name for the controller}
   @begin{short}
-    The accessor for the @slot[gtk:event-controller]{name} slot of the
-    @class{gtk:event-controller} class gets or sets the name of the event
-    controller.
+    The accessor for the @slot[gtk:event-controller]{name} slot gets or sets
+    the name of the event controller.
   @end{short}
   The name can be used for debugging purposes.
   @see-class{gtk:event-controller}")
@@ -255,15 +254,14 @@
 (setf (liber:alias-for-function 'event-controller-propagation-limit)
       "Accessor"
       (documentation 'event-controller-propagation-limit 'function)
- "@version{2025-09-29}
+ "@version{2026-08-30}
   @syntax{(gtk:event-controller-propagation-limit object) => limit}
   @syntax{(setf (gtk:event-controller-propagation-limit object) limit)}
   @argument[object]{a @class{gtk:event-controller} object}
   @argument[limit]{a value of the @sym{gtk:propagation-limit} enumeration}
   @begin{short}
-    The accessor for the @slot[gtk:event-controller]{propagation-limit} slot of
-    the @class{gtk:event-controller} class gets or sets the propagation limit of
-    the event controller.
+    The accessor for the @slot[gtk:event-controller]{propagation-limit} slot
+    gets or sets the propagation limit of the event controller.
   @end{short}
 
   If the limit is set to @code{:same-native}, the controller will not handle
@@ -285,15 +283,14 @@
 (setf (liber:alias-for-function 'event-controller-propagation-phase)
       "Accessor"
       (documentation 'event-controller-propagation-phase 'function)
- "@version{2025-09-29}
+ "@version{2026-08-30}
   @syntax{(gtk:event-controller-propagation-phase object) => phase}
   @syntax{(setf (gtk:event-controller-propagation-phase object) phase)}
   @argument[object]{a @class{gtk:event-controller} object}
   @argument[phase]{a value of the @sym{gtk:propagation-phase} enumeration}
   @begin{short}
-    The accessor for the @slot[gtk:event-controller]{propagation-phase} slot of
-    the @class{gtk:event-controller} class gets or sets the propagation phase at
-    which controller handles events.
+    The accessor for the @slot[gtk:event-controller]{propagation-phase} slot
+    gets or sets the propagation phase at which controller handles events.
   @end{short}
 
   If @arg{phase} is @code{:none}, no automatic event handling will be performed,
@@ -313,14 +310,13 @@
 (setf (liber:alias-for-function 'event-controller-widget)
       "Accessor"
       (documentation 'event-controller-widget 'function)
- "@version{2025-09-29}
+ "@version{2026-08-30}
   @syntax{(gtk:event-controller-widget object) => widget}
   @argument[object]{a @class{gtk:event-controller} object}
   @argument[widget]{a @class{gtk:widget} object}
   @begin{short}
-    The accessor for the @slot[gtk:event-controller]{widget} slot of the
-    @class{gtk:event-controller} class returns the widget the event controller
-    relates to.
+    The accessor for the @slot[gtk:event-controller]{widget} slot returns the
+    widget the event controller relates to.
   @end{short}
   @see-class{gtk:event-controller}
   @see-class{gtk:widget}")
