@@ -2,7 +2,7 @@
 ;;; gtk4.drag-icon.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -119,14 +119,14 @@
 (setf (liber:alias-for-function 'drag-icon-child)
       "Accessor"
       (documentation 'drag-icon-child 'function)
- "@version{2026-01-13}
+ "@version{2026-08-19}
   @syntax{(gtk:drag-icon-child object) => child}
   @syntax{(setf (gtk:drag-icon-child object) child)}
   @argument[object]{a @class{gtk:drag-icon} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{short}
-    The accessor for the @slot[gtk:drag-icon]{child} slot of the
-    @class{gtk:drag-icon} class gets or sets the widget to display as drag icon.
+    The accessor for the @slot[gtk:drag-icon]{child} slot gets or sets the
+    widget to display as drag icon.
   @end{short}
   @see-class{gtk:drag-icon}
   @see-class{gtk:widget}")

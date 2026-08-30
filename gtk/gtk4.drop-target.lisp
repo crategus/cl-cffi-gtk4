@@ -2,7 +2,7 @@
 ;;; gtk4.drop-target.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -259,15 +259,14 @@ lambda (target x y)    :run-last
 (setf (liber:alias-for-function 'drop-target-actions)
       "Accessor"
       (documentation 'drop-target-actions 'function)
- "@version{2026-01-13}
+ "@version{2026-08-30}
   @syntax{(gtk:drop-target-actions object) => actions}
   @syntax{(setf (gtk:drop-target-actions object) actions)}
   @argument[object]{a @class{gtk:drop-target} object}
   @argument[actions]{a @sym{gdk:drag-action} value}
   @begin{short}
-    The accessor for the @slot[gtk:drop-target]{actions} slot of the
-    @class{gtk:drop-target} class gets or sets the actions that this drop target
-    supports.
+    The accessor for the @slot[gtk:drop-target]{actions} slot gets or sets
+    the actions that this drop target supports.
   @end{short}
   @see-class{gtk:drop-target}
   @see-symbol{gdk:drag-action}")
@@ -283,13 +282,13 @@ lambda (target x y)    :run-last
 (setf (liber:alias-for-function 'drop-target-current-drop)
       "Accessor"
       (documentation 'drop-target-current-drop 'function)
- "@version{2026-01-13}
+ "@version{2026-08-30}
   @syntax{(gtk:drop-target-current-drop object) => drop}
   @argument[object]{a @class{gtk:drop-target} object}
   @argument[drop]{a @class{gdk:drop} object for the current drop}
   @begin{short}
-    The accessor for the @slot[gtk:drop-target]{current-drop} slot of the
-    @class{gtk:drop-target} class returns the currently handled drop operation.
+    The accessor for the @slot[gtk:drop-target]{current-drop} slot returns
+    the currently handled drop operation.
   @end{short}
   If no drop operation is going on, @code{nil} is returned.
 
@@ -308,13 +307,13 @@ lambda (target x y)    :run-last
 (setf (liber:alias-for-function 'drop-target-drop)
       "Accessor"
       (documentation 'drop-target-drop 'function)
- "@version{2026-01-13}
+ "@version{2026-08-30}
   @syntax{(gtk:drop-target-drop object) => drop}
   @argument[object]{a @class{gtk:drop-target} object}
   @argument[drop]{a @class{gdk:drop} object for the current drop}
   @begin{short}
-    The accessor for the @slot[gtk:drop-target]{drop} slot of the
-    @class{gtk:drop-target} class returns the currently handled drop operation.
+    The accessor for the @slot[gtk:drop-target]{drop} slot returns the
+    currently handled drop operation.
   @end{short}
 
   Deprecated 4.4
@@ -332,15 +331,14 @@ lambda (target x y)    :run-last
 (setf (liber:alias-for-function 'drop-target-formats)
       "Accessor"
       (documentation 'drop-target-formats 'function)
- "@version{2026-01-13}
+ "@version{2026-08-30}
   @syntax{(gtk:drop-target-formats object) => formats}
   @argument[object]{a @class{gtk:drop-target} object}
   @argument[formats]{a @class{gdk:content-formats} instance for the supported
     data formats}
   @begin{short}
-    The accessor for the @slot[gtk:drop-target]{formats} slot of the
-    @class{gtk:drop-target} class returns the data formats that this drop target
-    accepts.
+    The accessor for the @slot[gtk:drop-target]{formats} slot returns the data
+    formats that this drop target accepts.
   @end{short}
   If the result is @code{nil}, all formats are expected to be supported.
   @see-class{gtk:drop-target}
@@ -359,7 +357,7 @@ lambda (target x y)    :run-last
   of gigabytes of text from a text editor across a widget with a preloading
   drop target, this data will be downloaded, even if the data is ultimately
   dropped elsewhere. For a lot of data formats, the amount of data is very
-  small, like the @class{gdk:rgba} color, so enabling this property does not
+  small, like the @class{gdk:rgba} instance, so enabling this property does not
   hurt at all. And for local-only Drag-and-Drop operations, no data transfer is
   done, so enabling it there is free. @br{}
   Default value: @em{false}")
@@ -368,16 +366,15 @@ lambda (target x y)    :run-last
 (setf (liber:alias-for-function 'drop-target-preload)
       "Accessor"
       (documentation 'drop-target-preload 'function)
- "@version{2026-01-13}
+ "@version{2026-08-30}
   @syntax{(gtk:drop-target-preload object) => preload}
   @syntax{(setf (gtk:drop-target-preload object) preload)}
   @argument[object]{a @class{gtk:drop-target} object}
   @argument[preload]{a boolean whether the drop data should be preloaded}
   @begin{short}
-    The accessor for the @slot[gtk:drop-target]{preload} slot of the
-    @class{gtk:drop-target} class gets or sets whether the drop data should be
-    preloaded when the pointer is only hovering over the widget but has not been
-    released.
+    The accessor for the @slot[gtk:drop-target]{preload} slot gets or sets
+    whether the drop data should be preloaded when the pointer is only hovering
+    over the widget but has not been released.
   @end{short}
   @see-class{gtk:drop-target}")
 
@@ -396,15 +393,14 @@ lambda (target x y)    :run-last
 (setf (liber:alias-for-function 'drop-target-value)
       "Accessor"
       (documentation 'drop-target-value 'function)
- "@version{2026-01-13}
+ "@version{2026-08-30}
   @syntax{(gtk:drop-target-value object) => value}
   @argument[object]{a @class{gtk:drop-target} object}
   @argument[value]{a @sym{g:value} instance for the current drop data}
   @begin{short}
-    The accessor for the @slot[gtk:drop-target]{value} slot of the
-    @class{gtk:drop-target} class returns the value for this drop operation or
-    @code{nil} if the data has not been loaded yet or no drop operation is going
-    on.
+    The accessor for the @slot[gtk:drop-target]{value} slot returns the value
+    for this drop operation or @code{nil} if the data has not been loaded yet
+    or no drop operation is going on.
   @end{short}
   @see-class{gtk:drop-target}
   @see-symbol{g:value}")

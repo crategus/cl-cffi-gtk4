@@ -2,7 +2,7 @@
 ;;; gtk4.drop-controller-motion.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -160,16 +160,15 @@ lambda (controller x y)    :run-first
 (setf (liber:alias-for-function 'drop-controller-motion-contains-pointer)
       "Accessor"
       (documentation 'drop-controller-motion-contains-pointer 'function)
- "@version{2026-01-17}
+ "@version{2026-08-30}
   @syntax{(gtk:drop-controller-motion-contains-pointer object) => contains}
   @argument[object]{a @class{gtk:drop-controller-motion} object}
   @argument[contains]{@em{true} if a dragging pointer is within @arg{object}
     or one of its children}
   @begin{short}
     The accessor for the @slot[gtk:drop-controller-motion]{contains-pointer}
-    slot of the @class{gtk:drop-controller-motion} class returns whether the
-    pointer of a Drag-and-Drop operation is in the controller’s widget or a
-    descendant.
+    slot returns whether the pointer of a Drag-and-Drop operation is in the
+    controller’s widget or a descendant.
   @end{short}
   @see-class{gtk:drop-controller-motion}")
 
@@ -190,15 +189,15 @@ lambda (controller x y)    :run-first
 (setf (liber:alias-for-function 'drop-controller-motion-drop)
       "Accessor"
       (documentation 'drop-controller-motion-drop 'function)
- "@version{2026-01-17}
+ "@version{2026-08-30}
   @syntax{(gtk:drop-controller-motion-drop object) => drop}
   @argument[object]{a @class{gtk:drop-controller-motion} object}
   @argument[drop]{a @class{gdk:drop} object currently happening within
     @arg{object} or @code{nil} if none}
   @begin{short}
-    The accessor for the @slot[gtk:drop-controller-motion]{drop} slot of the
-    @class{gtk:drop-controller-motion} class returns the ongoing drop operation
-    over the widget of the controller or its descendant.
+    The accessor for the @slot[gtk:drop-controller-motion]{drop} slot returns
+    the ongoing drop operation over the widget of the controller or its
+    descendant.
   @end{short}
   @see-class{gtk:drop-controller-motion}
   @see-class{gdk:drop}")
@@ -220,15 +219,15 @@ lambda (controller x y)    :run-first
 (setf (liber:alias-for-function 'drop-controller-motion-is-pointer)
       "Accessor"
       (documentation 'drop-controller-motion-is-pointer 'function)
- "@version{2026-01-17}
+ "@version{2026-08-30}
   @syntax{(gtk:drop-controller-motion-is-pointer object) => is-pointer}
   @argument[object]{a @class{gtk:drop-controller-motion} object}
   @argument[is-pointer]{@em{true} if a dragging pointer is within @arg{object}
     but not one of its children}
   @begin{short}
-    The accessor for the @slot[gtk:drop-controller-motion]{is-pointer} slot of
-    the @class{gtk:drop-controller-motion} class returns whether the pointer is
-    in the controllers widget itself, as opposed to in a descendent widget.
+    The accessor for the @slot[gtk:drop-controller-motion]{is-pointer} slot
+    returns whether the pointer is in the controllers widget itself, as opposed
+    to in a descendent widget.
   @end{short}
   @see-class{gtk:drop-controller-motion}")
 

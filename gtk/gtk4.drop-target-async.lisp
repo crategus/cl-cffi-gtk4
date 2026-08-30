@@ -2,11 +2,11 @@
 ;;; gtk4.drop-target-async.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 -2025 Dieter Kaiser
+;;; Copyright (C) 2022 -2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -246,15 +246,14 @@ lambda (target drop x y)    :run-last
 (setf (liber:alias-for-function 'drop-target-async-actions)
       "Accessor"
       (documentation 'drop-target-async-actions 'function)
- "@version{2026-01-17}
+ "@version{2026-08-30}
   @syntax{(gtk:drop-target-async-actions object) => actions}
   @syntax{(setf (gtk:drop-target-async-actions object) actions)}
   @argument[object]{a @class{gtk:drop-target-async} object}
   @argument[actions]{a @sym{gdk:drag-action} value}
   @begin{short}
-    The accessor for the @slot[gtk:drop-target-async]{actions} slot of the
-    @class{gtk:drop-target-async} class gets or sets the actions that this drop
-    target supports.
+    The accessor for the @slot[gtk:drop-target-async]{actions} slot gets or
+    sets the actions that this drop target supports.
   @end{short}
   @see-class{gtk:drop-target-async}
   @see-symbol{gdk:drag-action}")
@@ -271,16 +270,15 @@ lambda (target drop x y)    :run-last
 (setf (liber:alias-for-function 'drop-target-async-formats)
       "Accessor"
       (documentation 'drop-target-async-formats 'function)
- "@version{2026-01-17}
+ "@version{2026-08-30}
   @syntax{(gtk:drop-target-async-formats object) => formats}
   @syntax{(setf (gtk:drop-target-async-formats object) formats)}
   @argument[object]{a @class{gtk:drop-target-async} object}
   @argument[formats]{a @class{gdk:content-formats} instance for the supported
     data formats}
   @begin{short}
-    The accessor for the @slot[gtk:drop-target-async]{formats} slot of the
-    @class{gtk:drop-target-async} class gets or sets the data formats that this
-    drop target accepts.
+    The accessor for the @slot[gtk:drop-target-async]{formats} slot gets or
+    sets the data formats that this drop target accepts.
   @end{short}
   If the result is @code{nil}, all formats are expected to be supported.
   @see-class{gtk:drop-target-async}

@@ -2,7 +2,7 @@
 ;;; gtk4.drag-source.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -211,15 +211,14 @@ lambda (source x y)    :run-last
 (setf (liber:alias-for-function 'drag-source-actions)
       "Accessor"
       (documentation 'drag-source-actions 'function)
- "@version{2026-01-12}
+ "@version{2026-08-30}
   @syntax{(gtk:drag-source-actions object) => actions}
   @syntax{(setf (gtk:drag-source-actions object) actions)}
   @argument[object]{a @class{gtk:drag-source} object}
   @argument[actions]{a @sym{gdk:drag-action} value for the actions to offer}
   @begin{short}
-    The accessor for the @slot[gtk:drag-source]{actions} slot of the
-    @class{gtk:drag-source} class gets or sets the actions that are supported
-    by drag operations from the drag source.
+    The accessor for the @slot[gtk:drag-source]{actions} slot gets or sets the
+    actions that are supported by drag operations from the drag source.
   @end{short}
 
   During a DND operation, the actions are offered to potential drop targets.
@@ -245,17 +244,16 @@ lambda (source x y)    :run-last
 (setf (liber:alias-for-function 'drag-source-content)
       "Accessor"
       (documentation 'drag-source-content 'function)
- "@version{2026-01-12}
+ "@version{2026-08-30}
   @syntax{(gtk:drag-source-content object) => content}
   @syntax{(setf (gtk:drag-source-content object) content)}
   @argument[object]{a @class{gtk:drag-source} object}
   @argument[content]{a @class{gdk:content-provider} object for the drag source,
     or @code{nil}}
   @begin{short}
-    The accessor for the @slot[gtk:drag-source]{content} slot of the
-    @class{gtk:drag-source} class gets or sets the data that is offered by drag
-    operations from this drag source, in the form of a
-    @class{gdk:content-provider} object.
+    The accessor for the @slot[gtk:drag-source]{content} slot gets or sets the
+    data that is offered by drag operations from this drag source, in the form
+    of a @class{gdk:content-provider} object.
   @end{short}
   When the data is requested in the cause of a DND operation, it will be
   obtained from the content provider.
