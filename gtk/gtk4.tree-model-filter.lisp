@@ -195,14 +195,13 @@
 (setf (liber:alias-for-function 'tree-model-filter-child-model)
       "Accessor"
       (documentation 'tree-model-filter-child-model 'function)
- "@version{2026-05-08}
+ "@version{2026-08-28}
   @syntax{(gtk:tree-model-filter-child-model object) => child}
   @argument[object]{a @class{gtk:tree-model-filter} object}
   @argument[child]{a @class{gtk:tree-model} object}
   @begin{short}
-    The accessor for the @slot[gtk:tree-model-filter]{child-model} slot of the
-    @class{gtk:tree-model-filter} class returns the model for the filter model
-    to filter.
+    The accessor for the @slot[gtk:tree-model-filter]{child-model} slot returns
+    the model for the filter model to filter.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:tree-model-filter} implementation is deprecated since 4.10.
@@ -224,14 +223,13 @@
 (setf (liber:alias-for-function 'tree-model-filter-virtual-root)
       "Accessor"
       (documentation 'tree-model-filter-virtual-root 'function)
- "@version{2026-05-08}
+ "@version{2026-08-28}
   @syntax{(gtk:tree-model-filter-virtual-root object) => root}
   @argument[object]{a @class{gtk:tree-model-filter} object}
   @argument[root]{a @class{gtk:tree-path} instance}
   @begin{short}
-    The accessor for the @slot[gtk:tree-model-filter]{virtual-root} slot of the
-    @class{gtk:tree-model-filter} class returns the virtual root, relative to
-    the child model, for this filter model.
+    The accessor for the @slot[gtk:tree-model-filter]{virtual-root} slot returns
+    the virtual root, relative to the child model, for this filter model.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:tree-model-filter} implementation is deprecated since 4.10.
