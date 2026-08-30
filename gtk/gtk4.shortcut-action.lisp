@@ -2,7 +2,7 @@
 ;;; gtk4.shortcut-action.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -482,14 +482,13 @@
 (setf (liber:alias-for-function 'signal-action-signal-name)
       "Accessor"
       (documentation 'signal-action-signal-name 'function)
- "@version{2025-09-28}
+ "@version{2026-08-30}
   @syntax{(gtk:signal-action-signal-name object) => name}
   @argument[object]{a @class{gtk:signal-action} object}
   @argument[name]{a string for the name of the signal to emit}
   @begin{short}
-    The accessor for the @slot[gtk:signal-action]{signal-name} slot of the
-    @class{gtk:signal-action} class returns the name of the signal that will be
-    emitted.
+    The accessor for the @slot[gtk:signal-action]{signal-name} slot returns the
+    name of the signal that will be emitted.
   @end{short}
   @see-class{gtk:signal-action}")
 
@@ -551,14 +550,13 @@
 (setf (liber:alias-for-function 'named-action-action-name)
       "Accessor"
       (documentation 'named-action-action-name 'function)
- "@version{2025-09-28}
+ "@version{2026-08-30}
   @syntax{(gtk:named-action-action-name object) => name}
   @argument[object]{a @class{gtk:named-action} object}
   @argument[name]{a string for the name of the actopm that will be activated}
   @begin{short}
-    The accessor for the @slot[gtk:named-action]{action-name} slot of the
-    @class{gtk:named-action} class returns the name of the action that will be
-    activated.
+    The accessor for the @slot[gtk:named-action]{action-name} slot returns the
+    name of the action that will be activated.
   @end{short}
   @see-class{gtk:named-action}")
 

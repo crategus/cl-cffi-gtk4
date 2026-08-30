@@ -2,7 +2,7 @@
 ;;; gtk4.shortcut-trigger.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -335,14 +335,13 @@
 (setf (liber:alias-for-function 'keyval-trigger-keyval)
       "Accessor"
       (documentation 'keyval-trigger-keyval 'function)
- "@version{2025-09-28}
+ "@version{2026-08-30}
   @syntax{(gtk:keyval-trigger-keyval object) => keyval}
   @argument[object]{a @class{gtk:keyval-trigger} object}
   @argument[keyval]{an unsigned integer for the keyval}
   @begin{short}
-    The accessor for the @slot[gtk:keyval-trigger]{keyval} slot of the
-    @class{gtk:keyval-trigger} class returns the keyval that must be pressed to
-    succed triggering @arg{object}.
+    The accessor for the @slot[gtk:keyval-trigger]{keyval} slot returns the
+    keyval that must be pressed to succed triggering @arg{object}.
   @end{short}
   @see-class{gtk:keyval-trigger}")
 
@@ -359,14 +358,13 @@
 (setf (liber:alias-for-function 'keyval-trigger-modifiers)
       "Accessor"
       (documentation 'keyval-trigger-modifiers 'function)
- "@version{2025-09-28}
+ "@version{2026-08-30}
   @syntax{(gtk:keyval-trigger-modifiers object) => modifiers}
   @argument[object]{a @class{gtk:keyval-trigger} object}
   @argument[modifiers]{a @sym{gdk:modifier-type} value}
   @begin{short}
-    The accessor for the @slot[gtk:keyval-trigger]{modifiers} slot of the
-    @class{gtk:keyval-trigger} class returns the modifiers that must be present
-    to succed triggering @arg{object}.
+    The accessor for the @slot[gtk:keyval-trigger]{modifiers} slot returns the
+    modifiers that must be present to succed triggering @arg{object}.
   @end{short}
   @see-class{gtk:keyval-trigger}
   @see-symbol{gdk:modifier-type}")
@@ -432,14 +430,13 @@
 (setf (liber:alias-for-function 'mnemonic-trigger-keyval)
       "Accessor"
       (documentation 'mnemonic-trigger-keyval 'function)
- "@version{2025-09-28}
+ "@version{2026-08-30}
   @syntax{(gtk:mnemonic-trigger-keyval object) => keyval}
   @argument[object]{a @class{gtk:mnemonic-trigger} object}
   @argument[keyval]{an unsigned integer for the keyval}
   @begin{short}
-    The accessor for the @slot[gtk:mnemonic-trigger]{keyval} slot of the
-    @class{gtk:mnemonic-trigger} class returns the keyval that must be pressed
-    to succed triggering @arg{object}.
+    The accessor for the @slot[gtk:mnemonic-trigger]{keyval} slot returns the
+    keyval that must be pressed to succed triggering @arg{object}.
   @end{short}
   @see-class{gtk:mnemonic-trigger}")
 
@@ -509,14 +506,13 @@
 (setf (liber:alias-for-function 'alternative-trigger-first)
       "Accessor"
       (documentation 'alternative-trigger-first 'function)
- "@version{2025-09-28}
+ "@version{2026-08-30}
   @syntax{(gtk:alternative-trigger-first object) => shortcut)}
   @argument[object]{a @class{gtk:mnemonic-trigger} object}
   @argument[shortcut]{a first @class{gtk:shortcut-trigger} object}
   @begin{short}
-    The accessor for the @slot[gtk:alternative-trigger]{first} slot of the
-    @class{gtk:alternative-trigger} class returns the first of the two
-    alternative triggers that may trigger @arg{shortcut}.
+    The accessor for the @slot[gtk:alternative-trigger]{first} slot returns the
+    first of the two alternative triggers that may trigger @arg{shortcut}.
   @end{short}
   The @fun{gtk:alternative-trigger-second} function will return the other one.
   @see-class{gtk:alternative-trigger}
@@ -535,14 +531,13 @@
 (setf (liber:alias-for-function 'alternative-trigger-second)
       "Accessor"
       (documentation 'alternative-trigger-second 'function)
- "@version{2025-09-28}
+ "@version{2026-08-30}
   @syntax{(gtk:alternative-trigger-second object) => shortcut)}
   @argument[object]{a @class{gtk:mnemonic-trigger} object}
   @argument[shortcut]{a second @class{gtk:shortcut-trigger} object}
   @begin{short}
-    The accessor for the @slot[gtk:alternative-trigger]{second} slot of the
-    @class{gtk:alternative-trigger} class returns the second of the two
-    alternative triggers that may trigger @arg{shortcut}.
+    The accessor for the @slot[gtk:alternative-trigger]{second} slot returns
+    the second of the two alternative triggers that may trigger @arg{shortcut}.
   @end{short}
   The @fun{gtk:alternative-trigger-first} function will return the other one.
   @see-class{gtk:alternative-trigger}

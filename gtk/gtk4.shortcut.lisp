@@ -2,7 +2,7 @@
 ;;; gtk4.shortcut.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -127,15 +127,14 @@
 (setf (liber:alias-for-function 'shortcut-action)
       "Accessor"
       (documentation 'shortcut-action 'function)
- "@version{2025-09-27}
+ "@version{2026-08-30}
   @syntax{(gtk:shortcut-action object) => action)}
   @syntax{(setf (gtk:shortcut-action object) action)}
   @argument[object]{a @class{gtk:shortcut} object}
   @argument[action]{a @class{gtk:shortcut-action} object}
   @begin{short}
-    The accessor for the @slot[gtk:shortcut]{action} slot of the
-    @class{gtk:shortcut} class gets or sets the action that is activated by the
-    shortcut.
+    The accessor for the @slot[gtk:shortcut]{action} slot gets or sets the
+    action that is activated by the shortcut.
   @end{short}
   If @arg{action} is @code{nil}, the nothing action will be used.
   @see-class{gtk:shortcut}
@@ -153,16 +152,15 @@
 (setf (liber:alias-for-function 'shortcut-arguments)
       "Accessor"
       (documentation 'shortcut-arguments 'function)
- "@version{2025-09-27}
+ "@version{2026-08-30}
   @syntax{(gtk:shortcut-arguments object) => args)}
   @syntax{(setf (gtk:shortcut-arguments object) args)}
   @argument[object]{a @class{gtk:shortcut} object}
   @argument[args]{a @sym{g:variant} parameter to pass when activating the
     shortcut}
   @begin{short}
-    The accessor for the @slot[gtk:shortcut]{arguments} slot of the
-    @class{gtk:shortcut} class gets or sets the arguments that are passed when
-    activating the shortcut.
+    The accessor for the @slot[gtk:shortcut]{arguments} slot gets or sets the
+    arguments that are passed when activating the shortcut.
   @end{short}
   @see-class{gtk:shortcut}
   @see-symbol{g:variant}")
@@ -179,15 +177,14 @@
 (setf (liber:alias-for-function 'shortcut-trigger)
       "Accessor"
       (documentation 'shortcut-trigger 'function)
- "@version{2025-09-27}
+ "@version{2026-08-30}
   @syntax{(gtk:shortcut-trigger object) => trigger)}
   @syntax{(setf (gtk:shortcut-trigger object) trigger)}
   @argument[object]{a @class{gtk:shortcut} object}
   @argument[trigger]{a @class{gtk:shortcut-trigger} object}
   @begin{short}
-    The accessor for the @slot[gtk:shortcut]{trigger} slot of the
-    @class{gtk:shortcut} class gets or sets the trigger used to trigger the
-    shortcut.
+    The accessor for the @slot[gtk:shortcut]{trigger} slot gets or sets the
+    trigger used to trigger the shortcut.
   @end{short}
   If @arg{trigger} is @code{nil}, the never trigger will be used.
   @see-class{gtk:shortcut}
