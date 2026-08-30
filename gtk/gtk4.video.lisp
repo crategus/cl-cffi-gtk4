@@ -2,7 +2,7 @@
 ;;; gtk4.video.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -159,15 +159,14 @@
 (setf (liber:alias-for-function 'video-autoplay)
       "Accessor"
       (documentation 'video-autoplay 'function)
- "@version{2025-09-28}
+ "@version{2026-08-30}
   @syntax{(gtk:video-autoplay object) => autoplay}
   @syntax{(setf (gtk:video-autoplay object) autoplay)}
   @argument[object]{a @class{gtk:video} widget}
   @argument[autoplay]{a boolean whether media streams should autoplay}
   @begin{short}
-    The accessor for the @slot[gtk:video]{autoplay} slot of the
-    @class{gtk:video} class gets or sets whether the video should automatically
-    begin playing.
+    The accessor for the @slot[gtk:video]{autoplay} slot gets or sets whether
+    the video should automatically begin playing.
   @end{short}
   @see-class{gtk:video}
   @see-function{gtk:video-loop}")
@@ -183,15 +182,14 @@
 (setf (liber:alias-for-function 'video-file)
       "Accessor"
       (documentation 'video-file 'function)
- "@version{2025-09-28}
+ "@version{2026-08-30}
   @syntax{(gtk:video-file object) => file}
   @syntax{(setf (gtk:video-file object) file)}
   @argument[object]{a @class{gtk:video} widget}
   @argument[file]{a @class{g:file} object to play}
   @begin{short}
-    The accessor for the @slot[gtk:video]{file} slot of the @class{gtk:video}
-    class gets or sets the file played back by the video if the video is playing
-    a file.
+    The accessor for the @slot[gtk:video]{file} slot gets or sets the file
+    played back by the video if the video is playing a file.
   @end{short}
   Returns @code{nil} if not playing back a file.
   @see-class{gtk:video}
@@ -210,14 +208,14 @@
 (setf (liber:alias-for-function 'video-graphics-offload)
       "Accessor"
       (documentation 'video-graphics-offload 'function)
- "@version{2025-09-28}
+ "@version{2026-08-30}
   @syntax{(gtk:video-graphics-offload object) => setting}
   @syntax{(setf (gtk:video-graphics-offload object) setting)}
   @argument[object]{a @class{gtk:video} widget}
   @argument[setting]{a @sym{gtk:graphics-offload-enabled} value}
   @begin{short}
-    The accessor for the @slot[gtk:video]{graphics-offload} slot of the
-    @class{gtk:video} class gets or sets whether graphics offload is enabled.
+    The accessor for the @slot[gtk:video]{graphics-offload} slot gets or sets
+    whether graphics offload is enabled.
   @end{short}
   See the @sym{gtk:graphics-offload-enabled} documentation for more information
   on graphics offload.
@@ -238,15 +236,14 @@
 (setf (liber:alias-for-function 'video-loop)
       "Accessor"
       (documentation 'video-loop 'function)
- "@version{2025-09-28}
+ "@version{2026-08-30}
   @syntax{(gtk:video-loop object) => loop}
   @syntax{(setf (gtk:video-loop object) loop)}
   @argument[object]{a @class{gtk:video} widget}
   @argument[loop]{a boolean whether media streams should loop}
   @begin{short}
-    The accessor for the @slot[gtk:video]{loop} slot of the @class{gtk:video}
-    class gets or sets whether new files loaded by @arg{object} should be set
-    to loop.
+    The accessor for the @slot[gtk:video]{loop} slot gets or sets whether new
+    files loaded by @arg{object} should be set to loop.
   @end{short}
   @see-class{gtk:video}")
 
@@ -262,16 +259,15 @@
 (setf (liber:alias-for-function 'video-media-stream)
       "Accessor"
       (documentation 'video-media-stream 'function)
- "@version{2025-09-28}
+ "@version{2026-08-30}
   @syntax{(gtk:video-media-stream object) => stream}
   @syntax{(setf (gtk:video-media-stream object) stream)}
   @argument[object]{a @class{gtk:video} widget}
   @argument[stream]{a @class{gtk:media-stream} object to play or @code{nil}
     to unset}
   @begin{short}
-    The accessor for the @slot[gtk:video]{media-stream} slot of the
-    @class{gtk:video} class gets or sets the media stream managed by
-    @arg{object}.
+    The accessor for the @slot[gtk:video]{media-stream} slot gets or sets the
+    media stream managed by @arg{object}.
   @end{short}
   Returns @code{nil} if none. The @arg{object} argument will take full control
   of managing the media stream. If you want to manage a media stream yourself,

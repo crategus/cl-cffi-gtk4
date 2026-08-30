@@ -2,7 +2,7 @@
 ;;; gtk4.graphics-offload.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -182,16 +182,15 @@
 (setf (liber:alias-for-function 'graphics-offload-black-background)
       "Accessor"
       (documentation 'graphics-offload-black-background 'function)
- "@version{2025-09-27}
+ "@version{2026-08-30}
   @syntax{(gtk:graphics-offload-black-background object) => setting}
   @syntax{(setf (gtk:graphics-offload-black-background object) setting)}
   @argument[object]{a @class{gtk:graphics-offload} widget}
   @argument[setting]{a boolean whether to draw a black background behind
     the content}
   @begin{short}
-    The accessor for the @slot[gtk:graphics-offload]{black-background} slot of
-    the @class{gtk:graphics-offload} class gets or sets whether the widget draws
-    a black background.
+    The accessor for the @slot[gtk:graphics-offload]{black-background} slot
+    gets or sets whether the widget draws a black background.
   @end{short}
 
   A main use case for this is letterboxing where black bars are visible next to
@@ -216,14 +215,14 @@
 (setf (liber:alias-for-function 'graphics-offload-child)
       "Accessor"
       (documentation 'graphics-offload-child 'function)
- "@version{2025-09-27}
+ "@version{2026-08-30}
   @syntax{(gtk:graphics-offload-child object) => child}
   @syntax{(setf (gtk:graphics-offload-child object) child)}
   @argument[object]{a @class{gtk:graphics-offload} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{short}
-    The accessor for the @slot[gtk:graphics-offload]{child} slot of the
-    @class{gtk:graphics-offload} class gets or sets the child widget.
+    The accessor for the @slot[gtk:graphics-offload]{child} slot gets or sets
+    the child widget.
   @end{short}
 
   Since 4.14
@@ -243,16 +242,15 @@
 (setf (liber:alias-for-function 'graphics-offload-enabled)
       "Accessor"
       (documentation 'graphics-offload-enabled 'function)
- "@version{2025-09-27}
+ "@version{2026-08-30}
   @syntax{(gtk:graphics-offload-enabled object) => setting}
   @syntax{(setf (gtk:graphics-offload-enabled object) setting)}
   @argument[object]{a @class{gtk:graphics-offload} widget}
   @argument[setting]{a @sym{gtk:graphics-offload-enabled} value}
   @begin{short}
-    The accessor for the @slot[gtk:graphics-offload]{enabled} slot of the
-    @class{gtk:graphics-offload} class gets or sets whether the
-    @class{gtk:graphics-offload} widget will attempt to offload the content of
-    its child widget.
+    The accessor for the @slot[gtk:graphics-offload]{enabled} slot gets or sets
+    whether the @class{gtk:graphics-offload} widget will attempt to offload the
+    content of its child widget.
   @end{short}
 
   Since 4.14

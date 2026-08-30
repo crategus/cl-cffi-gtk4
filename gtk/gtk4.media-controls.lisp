@@ -2,7 +2,7 @@
 ;;; gtk4.media-controls.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -109,15 +109,14 @@
 (setf (liber:alias-for-function 'media-controls-media-stream)
       "Accessor"
       (documentation 'media-controls-media-stream 'function)
- "@version{2025-08-17}
+ "@version{2026-08-20}
   @syntax{(gtk:media-controls-media-stream object) => stream}
   @syntax{(setf (gtk:media-controls-media-stream object) stream)}
   @argument[object]{a @class{gtk:media-controls} widget}
   @argument[stream]{a @class{gtk:media-stream} object, or @code{nil}}
   @begin{short}
-    The accessor for the @slot[gtk:media-controls]{media-stream} slot of the
-    @class{gtk:media-controls} class gets or sets the media stream managed by
-    the media controls
+    The accessor for the @slot[gtk:media-controls]{media-stream} slot gets or
+    sets the media stream managed by the media controls.
   @end{short}
   Returns @code{nil} if none.
   @see-class{gtk:media-controls}
