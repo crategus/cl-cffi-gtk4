@@ -50,6 +50,10 @@
   (widgets) and the rendering. Like GDK, GSK is part of GTK and licensed under
   the GNU Lesser General Public License (LGPL). This is the API documentation
   of a Lisp binding to GSK.
+  @begin[Enumerations]{section}
+    @about-symbol{gsk:isolation}
+    @about-symbol{gsk:porter-duff}
+  @end{section}
   @begin[GskRenderer]{section}
     @about-class{renderer}
     @about-generic{renderer-realized}
