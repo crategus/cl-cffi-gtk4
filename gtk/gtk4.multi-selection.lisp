@@ -2,7 +2,7 @@
 ;;; gtk4.multi-selection.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -114,14 +114,13 @@
 (setf (liber:alias-for-function 'multi-selection-item-type)
       "Accessor"
       (documentation 'multi-selection-item-type 'function)
- "@version{2025-08-17}
+ "@version{2026-08-30}
   @syntax{(gtk:multi-selection-item-type object) => gtype}
   @argument[object]{a @class{gtk:multi-selection} object}
   @argument[gtype]{a @class{g:type-t} type ID}
   @begin{short}
-    The accessor for the @slot[gtk:multi-selection]{item-type} slot of the
-    @class{gtk:multi-selection} class returns the type of items contained in
-    the list model.
+    The accessor for the @slot[gtk:multi-selection]{item-type} slot returns
+    the type of items contained in the list model.
   @end{short}
   Items must be subclasses of the @class{g:object} class.
 
@@ -145,15 +144,14 @@
 (setf (liber:alias-for-function 'multi-selection-model)
       "Accessor"
       (documentation 'multi-selection-model 'function)
- "@version{2025-09-28}
+ "@version{2026-08-30}
   @syntax{(gtk:multi-selection-model object) => model}
   @syntax{(setf (gtk:multi-selection-model object) model)}
   @argument[object]{a @class{gtk:multi-selection} object}
   @argument[model]{a @class{g:list-model} object to wrap}
   @begin{short}
-    The accessor for the @slot[gtk:multi-selection]{model} slot of the
-    @class{gtk:multi-selection} class gets or sets the underlying model of
-    @arg{object}.
+    The accessor for the @slot[gtk:multi-selection]{model} slot gets or sets
+    the underlying model of @arg{object}.
   @end{short}
   If @arg{model} is @code{nil}, @arg{object} will be empty.
   @see-class{gtk:multi-selection}
@@ -171,15 +169,14 @@
 (setf (liber:alias-for-function 'multi-selection-n-items)
       "Accessor"
       (documentation 'multi-selection-n-items 'function)
- "@version{2025-08-17}
+ "@version{2026-08-30}
   @syntax{(gtk:multi-selection-n-items object) => n-items}
   @argument[object]{a @class{gtk:multi-selection} object}
   @argument[n-items]{an unsigned integer for the number of items contained in
     the model}
   @begin{short}
-    The accessor for the @slot[gtk:multi-selection]{n-items} slot of the
-    @class{gtk:multi-selection} class returns the number of items contained in
-    the model.
+    The accessor for the @slot[gtk:multi-selection]{n-items} slot returns the
+    number of items contained in the model.
   @end{short}
   @see-class{g:multi-selection}
   @see-function{g:list-model-n-items}")

@@ -2,7 +2,7 @@
 ;;; gtk4.no-selection.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -115,14 +115,13 @@
 (setf (liber:alias-for-function 'no-selection-item-type)
       "Accessor"
       (documentation 'no-selection-item-type 'function)
- "@version{2025-08-17}
+ "@version{2026-08-20}
   @syntax{(gtk:no-selection-item-type object) => gtype}
   @argument[object]{a @class{gtk:no-selection} object}
   @argument[gtype]{a @class{g:type-t} type ID}
   @begin{short}
-    The accessor for the @slot[gtk:no-selection]{item-type} slot of the
-    @class{gtk:no-selection} class returns the type of items contained in the
-    list model.
+    The accessor for the @slot[gtk:no-selection]{item-type} slot returns the
+    type of items contained in the list model.
   @end{short}
   Items must be subclasses of the @class{g:object} class.
 
@@ -146,15 +145,14 @@
 (setf (liber:alias-for-function 'no-selection-model)
       "Accessor"
       (documentation 'no-selection-model 'function)
- "@version{2025-08-17}
+ "@version{2026-08-20}
   @syntax{(gtk:no-selection-model object) => model}
   @syntax{(setf (gtk:no-selection-model object) model)}
   @argument[object]{a @class{gtk:no-selection} object}
   @argument[model]{a @class{g:list-model} object to wrap}
   @begin{short}
-    The accessor for the @slot[gtk:no-selection]{model} slot of the
-    @class{gtk:no-selection} class gets or sets the model that @arg{object} is
-    wrapping.
+    The accessor for the @slot[gtk:no-selection]{model} slot gets or sets the
+    model that @arg{object} is wrapping.
   @end{short}
   If @arg{model} is @code{nil}, this model will be empty.
   @see-class{gtk:no-selection}
@@ -172,15 +170,14 @@
 (setf (liber:alias-for-function 'no-selection-n-items)
       "Accessor"
       (documentation 'no-selection-n-items 'function)
- "@version{2025-08-17}
+ "@version{2026-08-20}
   @syntax{(gtk:no-selection-n-items object) => n-items}
   @argument[object]{a @class{gtk:no-selection} object}
   @argument[n-items]{an unsigned integer for the number of items contained in
     the model}
   @begin{short}
-    The accessor for the @slot[gtk:no-selection]{n-items} slot of the
-    @class{gtk:no-selection} class returns the number of items contained in the
-    model.
+    The accessor for the @slot[gtk:no-selection]{n-items} slot returns the
+    number of items contained in the model.
   @end{short}
 
   Since 4.8

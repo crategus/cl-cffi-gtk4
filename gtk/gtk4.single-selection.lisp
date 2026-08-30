@@ -2,7 +2,7 @@
 ;;; gtk4.single-selection.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -168,15 +168,14 @@
 (setf (liber:alias-for-function 'single-selection-autoselect)
       "Accessor"
       (documentation 'single-selection-autoselect 'function)
- "@version{2025-08-14}
+ "@version{2026-08-17}
   @syntax{(gtk:single-selection-autoselect object) => autoselect}
   @syntax{(setf (gtk:single-selection-autoselect object) autoselect)}
   @argument[object]{a @class{gtk:single-selection} object}
   @argument[autoselect]{@em{true} if autoselect is enabled}
   @begin{short}
-    The accessor for the @slot[gtk:single-selection]{autoselect} slot of the
-    @class{gtk:single-selection} class gets or sets whether the selection will
-    always select an item.
+    The accessor for the @slot[gtk:single-selection]{autoselect} slot gets or
+    sets whether the selection will always select an item.
   @end{short}
 
   If @arg{autoselect} is @em{true}, @arg{object} will enforce that an item is
@@ -197,15 +196,14 @@
 (setf (liber:alias-for-function 'single-selection-can-unselect)
       "Accessor"
       (documentation 'single-selection-can-unselect 'function)
- "@version{2025-08-14}
+ "@version{2026-08-17}
   @syntax{(gtk:single-selection-can-unselect object) => setting}
   @syntax{(setf (gtk:single-selection-can-unselect object) setting)}
   @argument[object]{a @class{gtk:single-selection} object}
   @argument[setting]{@em{true} to allow unselecting}
   @begin{short}
-    The accessor for the @slot[gtk:single-selection]{can-unselect} slot of the
-    @class{gtk:single-selection} class gets or sets whether unselecting the
-    selected item is allowed.
+    The accessor for the @slot[gtk:single-selection]{can-unselect} slot gets or
+    sets whether unselecting the selected item is allowed.
   @end{short}
   If @em{true}, unselecting the current item is supported. Note that setting
   @slot[gtk:single-selection]{autoselect} will cause the unselecting to not
@@ -225,14 +223,13 @@
 (setf (liber:alias-for-function 'single-selection-item-type)
       "Accessor"
       (documentation 'single-selection-item-type 'function)
- "@version{2025-08-14}
+ "@version{2026-08-17}
   @syntax{(gtk:single-selection-item-type object) => gtype}
   @argument[object]{a @class{gtk:single-selection} object}
   @argument[gtype]{a @class{g:type-t} type ID}
   @begin{short}
-    The accessor for the @slot[gtk:single-selection]{item-type} slot of the
-    @class{gtk:single-selection} class gets the type of items contained in the
-    list model.
+    The accessor for the @slot[gtk:single-selection]{item-type} slot gets the
+    type of items contained in the list model.
   @end{short}
   Items must be subclasses of the @class{g:object} class.
 
@@ -256,15 +253,14 @@
 (setf (liber:alias-for-function 'single-selection-model)
       "Accessor"
       (documentation 'single-selection-model 'function)
- "@version{2025-08-14}
+ "@version{2026-08-17}
   @syntax{(gtk:single-selection-model object) => model}
   @syntax{(setf (gtk:single-selection-model object) model)}
   @argument[object]{a @class{gtk:single-selection} object}
   @argument[model]{a @class{g:list-model} object to wrap}
   @begin{short}
-    The accessor for the @slot[gtk:single-selection]{model} slot of the
-    @class{gtk:single-selection} class gets or sets the model that @arg{object}
-    is wrapping.
+    The accessor for the @slot[gtk:single-selection]{model} slot gets or sets
+    the model that @arg{object} is wrapping.
   @end{short}
   If @arg{model} is @code{nil}, @arg{object} will be empty.
   @see-class{gtk:single-selection}
@@ -282,14 +278,14 @@
 (setf (liber:alias-for-function 'single-selection-n-items)
       "Accessor"
       (documentation 'single-selection-n-items 'function)
- "@version{2025-04-18}
+ "@version{2026-08-17}
   @syntax{(gtk:single-selection-n-items object) => n-items}
   @argument[object]{a @class{gtk:single-selection} object}
   @argument[n-items]{an unsigned integer for the number of items contained in
     the model}
   @begin{short}
-    The accessor for the @slot[gtk:single-selection]{n-items} slot of the
-    @class{gtk:single-selection} class gets the number of items.
+    The accessor for the @slot[gtk:single-selection]{n-items} slot gets the
+    number of items.
   @end{short}
   @see-class{gtk:single-selection}
   @see-function{g:list-model-n-items}")
@@ -306,16 +302,15 @@
 (setf (liber:alias-for-function 'single-selection-selected)
       "Accessor"
       (documentation 'single-selection-selected 'function)
- "@version{2025-08-14}
+ "@version{2026-08-17}
   @syntax{(gtk:single-selection-selected object) => pos}
   @syntax{(setf (gtk:single-selection-selected object) pos)}
   @argument[object]{a @class{gtk:single-selection} object}
   @argument[pos]{an unsigned integer for the item to select or the
     @var{gtk:+invalid-list-position+} value}
   @begin{short}
-    The accessor for the @slot[gtk:single-selection]{selected} slot of the
-    @class{gtk:single-selection} class gets or sets the position of the selected
-    item.
+    The accessor for the @slot[gtk:single-selection]{selected} slot gets or
+    sets the position of the selected item.
   @end{short}
   If no item is selected, the @var{gtk:+invalid-list-position+} value is
   returned. The @setf{gtk:single-selection-selected} function selects the item
@@ -341,13 +336,13 @@
 (setf (liber:alias-for-function 'single-selection-selected-item)
       "Accessor"
       (documentation 'single-selection-selected-item 'function)
- "@version{2025-08-14}
+ "@version{2026-08-17}
   @syntax{(gtk:single-selection-selected object) => item}
   @argument[object]{a @class{gtk:single-selection} object}
   @argument[item]{a @class{g:object} instance for the selected item}
   @begin{short}
-    The accessor for the @slot[gtk:single-selection]{selected-item} slot of the
-    @class{gtk:single-selection} class gets the selected item.
+    The accessor for the @slot[gtk:single-selection]{selected-item} slot gets
+    the selected item.
   @end{short}
   If no item is selected, @code{nil} ist returned.
   @see-class{gtk:single-selection}")
