@@ -6,7 +6,7 @@
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2025 Dieter Kaiser
+;;; Copyright (C) 2011 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -312,14 +312,14 @@ lambda (widget)    :action
 (setf (liber:alias-for-function 'file-chooser-widget-search-mode)
       "Accessor"
       (documentation 'file-chooser-widget-search-mode 'function)
- "@version{2025-09-29}
+ "@version{2026-08-28}
   @syntax{(gtk:file-chooser-widget-search-mode object) => mode}
   @syntax{(setf (gtk:file-chooser-widget-search-mode object) mode)}
   @argument[object]{a @class{gtk:file-chooser-widget} widget}
   @argument[mode]{a boolean whether in search mode}
   @begin{short}
-    The accessor for the @slot[gtk:file-chooser-widget]{search-mode} slot of the
-    @class{gtk:file-chooser-widget} class gets or sets the search mode.
+    The accessor for the @slot[gtk:file-chooser-widget]{search-mode} slot gets
+    or sets the search mode.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:file-chooser-widget} implementation is deprecated since 4.10.
@@ -339,13 +339,13 @@ lambda (widget)    :action
 (setf (liber:alias-for-function 'file-chooser-widget-show-time)
       "Accessor"
       (documentation 'file-chooser-widget-show-time 'function)
- "@version{2025-09-29}
+ "@version{2026-08-28}
   @syntax{(gtk:file-chooser-widget-show-time object) => setting}
   @argument[object]{a @class{gtk:file-chooser-widget} widget}
   @argument[setting]{a boolean whether in search mode}
   @begin{short}
-    The accessor for the @slot[gtk:file-chooser-widget]{show-time} slot of the
-    @class{gtk:file-chooser-widget} class returns whether to show the time.
+    The accessor for the @slot[gtk:file-chooser-widget]{show-time} slot returns
+    whether to show the time.
   @end{short}
 
   Since 4.10
@@ -367,13 +367,13 @@ lambda (widget)    :action
 (setf (liber:alias-for-function 'file-chooser-widget-subtitle)
       "Accessor"
       (documentation 'file-chooser-widget-subtitle 'function)
- "@version{2025-09-29}
+ "@version{2026-08-28}
   @syntax{(gtk:file-chooser-widget-subtitle object) => subtitle}
   @argument[object]{a @class{gtk:file-chooser-widget} widget}
   @argument[subtitle]{a string for the subtitle}
   @begin{short}
-    The accessor for the @slot[gtk:file-chooser-widget]{subtitle} slot of the
-    @class{gtk:file-chooser-widget} class returns the subtitle.
+    The accessor for the @slot[gtk:file-chooser-widget]{subtitle} slot returns
+    the subtitle.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:file-chooser-widget} implementation is deprecated since 4.10.

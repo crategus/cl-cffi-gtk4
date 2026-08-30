@@ -6,7 +6,7 @@
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2025 Dieter Kaiser
+;;; Copyright (C) 2022 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -210,15 +210,14 @@
 (setf (liber:alias-for-function 'file-chooser-native-accept-label)
       "Accessor"
       (documentation 'file-chooser-native-accept-label 'function)
- "@version{2025-09-28}
+ "@version{2026-08-28}
   @syntax{(gtk:file-chooser-native-accept-label object) => label}
   @syntax{(setf (gtk:file-chooser-native-accept-label object) label)}
   @argument[object]{a @class{gtk:file-chooser-native} object}
   @argument[label]{a string for the custom label or @code{nil} for the default}
   @begin{short}
-    The accessor for the @slot[gtk:file-chooser-native]{accept-label} slot of
-    the @class{gtk:file-chooser-native} interface gets or sets the custom label
-    text for the accept button.
+    The accessor for the @slot[gtk:file-chooser-native]{accept-label} slot gets
+    or sets the custom label text for the accept button.
   @end{short}
 
   If characters in label are preceded by an underscore, they are underlined. If
@@ -246,15 +245,14 @@
 (setf (liber:alias-for-function 'file-chooser-native-cancel-label)
       "Accessor"
       (documentation 'file-chooser-native-cancel-label 'function)
- "@version{2025-09-28}
+ "@version{2026-08-28}
   @syntax{(gtk:file-chooser-native-cancel-label object) => label}
   @syntax{(setf (gtk:file-chooser-native-cancel-label object) label)}
   @argument[object]{a @class{gtk:file-chooser-native} object}
   @argument[label]{a string for the custom label or @code{nil} for the default}
   @begin{short}
-    The accessor for the @slot[gtk:file-chooser-native]{cancel-label} slot of
-    the @class{gtk:file-chooser-native} interface gets or sets the custom label
-    text for the cancel button.
+    The accessor for the @slot[gtk:file-chooser-native]{cancel-label} slot
+    gets or sets the custom label text for the cancel button.
   @end{short}
 
   If characters in label are preceded by an underscore, they are underlined. If

@@ -259,15 +259,14 @@
 (setf (liber:alias-for-function 'file-chooser-action)
       "Accessor"
       (documentation 'file-chooser-action 'function)
- "@version{2025-09-21}
+ "@version{2026-08-21}
   @syntax{(gtk:file-chooser-action object) => action}
   @syntax{(setf (gtk:file-chooser-action object) action)}
   @argument[object]{a @class{gtk:file-chooser} widget}
   @argument[action]{a @sym{gtk:file-chooser-action} value}
   @begin{short}
-    The accessor for the @slot[gtk:file-chooser]{action} slot of the
-    @class{gtk:file-chooser} interface gets or sets the type of operation that
-    the file chooser is performing.
+    The accessor for the @slot[gtk:file-chooser]{action} slot gets or sets the
+    type of operation that the file chooser is performing.
   @end{short}
   The user interface is adapted to suit the selected action. For example, an
   option to create a new folder might be shown if the action is
@@ -296,16 +295,15 @@
 (setf (liber:alias-for-function 'file-chooser-create-folders)
       "Accessor"
       (documentation 'file-chooser-create-folders 'function)
- "@version{2025-09-21}
+ "@version{2026-08-21}
   @syntax{(gtk:file-chooser-create-folders object) => setting}
   @syntax{(setf (gtk:file-chooser-create-folders object) setting)}
   @argument[object]{a @class{gtk:file-chooser} widget}
   @argument[setting]{@em{true} if the @kbd{New Folder} button should be
     displayed}
   @begin{short}
-    The accessor for the @slot[gtk:file-chooser]{create-folders} slot of the
-    @class{gtk:file-chooser} interface gets or sets whether the file chooser
-    will offer to create new folders.
+    The accessor for the @slot[gtk:file-chooser]{create-folders} slot gets or
+    sets whether the file chooser will offer to create new folders.
   @end{short}
   This is only relevant if the action of the file chooser is not set to be in
   @val[gtk:file-chooser-action]{:open} mode.
@@ -329,15 +327,14 @@
 (setf (liber:alias-for-function 'file-chooser-filter)
       "Accessor"
       (documentation 'file-chooser-filter 'function)
- "@version{2025-09-21}
+ "@version{2026-08-21}
   @syntax{(gtk:file-chooser-filter object) => filter}
   @syntax{(setf (gtk:file-chooser-filter object) filter)}
   @argument[object]{a @class{gtk:file-chooser} widget}
   @argument[filter]{a @class{gtk:file-filter} object}
   @begin{short}
-    The accessor for the @slot[gtk:file-chooser]{filter} slot of the
-    @class{gtk:file-chooser} interface gets or sets the filter for selecting
-    which files are displayed.
+    The accessor for the @slot[gtk:file-chooser]{filter} slot gets or sets the
+    filter for selecting which files are displayed.
   @end{short}
   Only the files that pass the filter will be displayed.
 
@@ -365,15 +362,14 @@
 (setf (liber:alias-for-function 'file-chooser-filters)
       "Accessor"
       (documentation 'file-chooser-filters 'function)
- "@version{2025-09-21}
+ "@version{2026-08-21}
   @syntax{(gtk:file-chooser-filters object) => filters}
   @argument[object]{a @class{gtk:file-chooser} widget}
   @argument[filters]{a @class{g:list-model} object containing the current set
     of user-selectable filters}
   @begin{short}
-    The accessor for the @slot[gtk:file-chooser]{filters} slot of the
-    @class{gtk:file-chooser} interface returns the current set of user
-    selectable filters, as a list model.
+    The accessor for the @slot[gtk:file-chooser]{filters} slot returns the
+    current set of user selectable filters, as a list model.
   @end{short}
   See the @fun{gtk:file-chooser-add-filter}, and
   @fun{gtk:file-chooser-remove-filter} functions.
@@ -401,15 +397,14 @@
 (setf (liber:alias-for-function 'file-chooser-select-multiple)
       "Accessor"
       (documentation 'file-chooser-select-multiple 'function)
- "@version{2025-09-21}
+ "@version{2026-08-21}
   @syntax{(gtk:file-chooser-select-multiple object) => setting}
   @syntax{(setf (gtk:file-chooser-select-multiple object) setting)}
   @argument[object]{a @class{gtk:file-chooser} widget}
   @argument[setting]{@em{true} if multiple files can be selected}
   @begin{short}
-    The accessor for the @slot[gtk:file-chooser]{select-multiple} slot of the
-    @class{gtk:file-chooser} interface gets or sets whether multiple files can
-    be selected in the file selector.
+    The accessor for the @slot[gtk:file-chooser]{select-multiple} slot gets or
+    sets whether multiple files can be selected in the file selector.
   @end{short}
   This is only relevant if the action of the file chooser is set to be in
   @val[gtk:file-chooser-action]{:open} or
@@ -435,15 +430,14 @@
 (setf (liber:alias-for-function 'file-chooser-shortcut-folders)
       "Accessor"
       (documentation 'file-chooser-shortcut-folders 'function)
- "@version{2025-09-21}
+ "@version{2026-08-21}
   @syntax{(gtk:file-chooser-shortcut-folders object) => folders}
   @argument[object]{a @class{gtk:file-chooser} widget}
   @argument[folders]{a @class{g:list-model} object of @class{g:file} objects}
   @begin{short}
-    The accessor for the @slot[gtk:file-chooser]{shortcut-folders} slot of the
-    @class{gtk:file-chooser} interface returns the list of shortcut folders in
-    the file chooser, as set by the @fun{gtk:file-chooser-add-shortcut-folder}
-    function.
+    The accessor for the @slot[gtk:file-chooser]{shortcut-folders} slot returns
+    the list of shortcut folders in the file chooser, as set by the
+    @fun{gtk:file-chooser-add-shortcut-folder} function.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:file-chooser} implementation is deprecated since 4.10. Use
