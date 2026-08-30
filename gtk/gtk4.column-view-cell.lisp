@@ -2,7 +2,7 @@
 ;;; gtk4.column-view-cell.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -129,15 +129,14 @@
 (setf (liber:alias-for-function 'column-view-cell-child)
       "Accessor"
       (documentation 'column-view-cell-child 'function)
- "@version{2025-09-28}
+ "@version{2026-08-30}
   @syntax{(gtk:column-view-cell-child object) => child}
   @syntax{(setf (gtk:column-view-cell-child object) child)}
   @argument[object]{a @class{gtk:column-view-cell} object}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{short}
-    The accessor for the @slot[gtk:column-view-cell]{child} slot of the
-    @class{gtk:column-view-cell} class gets or sets the child widget to be used
-    for this list item.
+    The accessor for the @slot[gtk:column-view-cell]{child} slot gets or sets
+    the child widget to be used for this list item.
   @end{short}
   Returns @code{nil} if none was set.
 
@@ -159,15 +158,14 @@
 (setf (liber:alias-for-function 'column-view-cell-focusable)
       "Accessor"
       (documentation 'column-view-cell-focusable 'function)
- "@version{2025-09-28}
+ "@version{2026-08-30}
   @syntax{(gtk:column-view-cell-focusable object) => focusable}
   @syntax{(setf (gtk:column-view-cell-focusable object) focusable)}
   @argument[object]{a @class{gtk:column-view-cell} object}
   @argument[focusable]{a boolean whether the item should be focusable}
   @begin{short}
-    The accessor for the @slot[gtk:column-view-cell]{focusable} slot of the
-    @class{gtk:column-view-cell} class gets or sets whether the item can be
-    focused with the keyboard.
+    The accessor for the @slot[gtk:column-view-cell]{focusable} slot gets or
+    sets whether the item can be focused with the keyboard.
   @end{short}
   If an item is focusable, it can be focused using the keyboard. This works
   similar to the @fun{gtk:widget-focusable} function.
@@ -191,14 +189,13 @@
 (setf (liber:alias-for-function 'column-view-cell-item)
       "Accessor"
       (documentation 'column-view-cell-item 'function)
- "@version{2025-09-28}
+ "@version{2026-08-30}
   @syntax{(gtk:column-view-cell-item object) => item}
   @argument[object]{a @class{gtk:column-view-cell} object}
   @argument[item]{a @class{g:object} instance for the item displayed}
   @begin{short}
-    The accessor for the @slot[gtk:column-view-cell]{item} slot of the
-    @class{gtk:column-view-cell} class returns the model item that associated
-    with @arg{object}.
+    The accessor for the @slot[gtk:column-view-cell]{item} slot returns the
+    model item that associated with @arg{object}.
   @end{short}
   If @arg{object} is unbound, this function returns @code{nil}.
 
@@ -217,14 +214,13 @@
 (setf (liber:alias-for-function 'column-view-cell-position)
       "Accessor"
       (documentation 'column-view-cell-position 'function)
- "@version{2025-09-28}
+ "@version{2026-08-30}
   @syntax{(gtk:column-view-cell-position object) => position}
   @argument[object]{a @class{gtk:column-view-cell} object}
   @argument[position]{an unsigned integer for the position of the item}
   @begin{short}
-    The accessor for the @slot[gtk:column-view-cell]{position} slot of the
-    @class{gtk:column-view-cell} class returns the position in the model that
-    @arg{object} currently displays.
+    The accessor for the @slot[gtk:column-view-cell]{position} slot returns
+    the position in the model that @arg{object} currently displays.
   @end{short}
   If @arg{object} is unbound, the @var{gtk:+invalid-list-position+} value is
   returned.
@@ -244,14 +240,13 @@
 (setf (liber:alias-for-function 'column-view-cell-selected)
       "Accessor"
       (documentation 'column-view-cell-selected 'function)
- "@version{2025-09-28}
+ "@version{2026-08-30}
   @syntax{(gtk:column-view-cell-selected object) => selected}
   @argument[object]{a @class{gtk:column-view-cell} object}
   @argument[selected]{a boolean whether the item is currently selected}
   @begin{short}
-    The accessor for the @slot[gtk:column-view-cell]{selected} slot of the
-    @class{gtk:column-view-cell} class returns whether the item is displayed as
-    selected.
+    The accessor for the @slot[gtk:column-view-cell]{selected} slot returns
+    whether the item is displayed as selected.
   @end{short}
   The selected state is maintained by the list widget and its model and cannot
   be set otherwise.

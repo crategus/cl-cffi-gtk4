@@ -2,7 +2,7 @@
 ;;; gtk4.column-view-row.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -141,15 +141,15 @@
 (setf (liber:alias-for-function 'column-view-row-accessible-description)
       "Accessor"
       (documentation 'column-view-row-accessible-description 'function)
- "@version{2025-08-14}
+ "@version{2026-08-17}
   @syntax{(gtk:column-view-row-accessible-description object) => description}
   @syntax{(setf (gtk:column-view-row-accessible-description object) description)}
   @argument[object]{a @class{gtk:column-view-row} object}
   @argument[description]{a string for the accessible description}
   @begin{short}
     The accessor for the @slot[gtk:column-view-row]{accessible-description} slot
-    of the @class{gtk:column-view-row} class gets or sets the accessible
-    description for the row, which may be used, for example by screen readers.
+    gets or sets the accessible description for the row, which may be used, for
+    example by screen readers.
   @end{short}
 
   Since 4.12
@@ -169,15 +169,15 @@
 (setf (liber:alias-for-function 'column-view-row-accessible-label)
       "Accessor"
       (documentation 'column-view-row-accessible-label 'function)
- "@version{2025-08-14}
+ "@version{2026-08-17}
   @syntax{(gtk:column-view-row-accessible-label object) => label}
   @syntax{(setf (gtk:column-view-row-accessible-label object) label)}
   @argument[object]{a @class{gtk:column-view-row} object}
   @argument[label]{a string for the accesible label}
   @begin{short}
-    The accessor for the @slot[gtk:column-view-row]{accessible-label} slot of
-    the @class{gtk:column-view-row} class gets or sets the accessible label for
-    the row, which may be used, for example by screen readers.
+    The accessor for the @slot[gtk:column-view-row]{accessible-label} slot gets
+    or sets the accessible label for the row, which may be used, for example by
+    screen readers.
   @end{short}
 
   Since 4.12
@@ -196,15 +196,14 @@
 (setf (liber:alias-for-function 'column-view-row-activatable)
       "Accessor"
       (documentation 'column-view-row-activatable 'function)
- "@version{2025-08-14}
+ "@version{2026-08-17}
   @syntax{(gtk:column-view-row-activatable object) => activatable}
   @syntax{(setf (gtk:column-view-row-activatable object) activatable)}
   @argument[object]{a @class{gtk:column-view-row} object}
   @argument[activatable]{a boolean whether the row can be activated}
   @begin{short}
-    The accessor for the @slot[gtk:column-view-row]{activatable} slot of
-    the @class{gtk:column-view-row} class gets or sets whether the row has been
-    set to be activatable.
+    The accessor for the @slot[gtk:column-view-row]{activatable} slot gets or
+    sets whether the row has been set to be activatable.
   @end{short}
 
   If a row is activatable, double-clicking on the row, using the @kbd{Return}
@@ -230,15 +229,14 @@
 (setf (liber:alias-for-function 'column-view-row-focusable)
       "Accessor"
       (documentation 'column-view-row-focusable 'function)
- "@version{2025-08-14}
+ "@version{2026-08-17}
   @syntax{(gtk:column-view-row-focusable object) => focusable}
   @syntax{(setf (gtk:column-view-row-focusable object) focusable)}
   @argument[object]{a @class{gtk:column-view-row} object}
   @argument[focusable]{a boolean whether the row can be focused}
   @begin{short}
-    The accessor for the @slot[gtk:column-view-row]{focusable} slot of
-    the @class{gtk:column-view-row} class gets or sets whether the row can be
-    focused with the keyboard.
+    The accessor for the @slot[gtk:column-view-row]{focusable} slot gets or sets
+    whether the row can be focused with the keyboard.
   @end{short}
   If a row is focusable, it can be focused using the keyboard. This works
   similar to the @fun{gtk:widget-focusable} function.
@@ -263,14 +261,13 @@
 (setf (liber:alias-for-function 'column-view-row-item)
       "Accessor"
       (documentation 'column-view-row-item 'function)
- "@version{2025-08-14}
+ "@version{2026-08-17}
   @syntax{(gtk:column-view-row-item object) => item}
   @argument[object]{a @class{gtk:column-view-row} object}
   @argument[item]{a @class{g:object} instance for the item of the row}
   @begin{short}
-    The accessor for the @slot[gtk:column-view-row]{item} slot of
-    the @class{gtk:column-view-row} class gets the model item that associated
-    with @arg{object}.
+    The accessor for the @slot[gtk:column-view-row]{item} slot gets the model
+    item that associated with @arg{object}.
   @end{short}
   If @arg{object} is unbound, this function returns @code{nil}.
 
@@ -290,14 +287,13 @@
 (setf (liber:alias-for-function 'column-view-row-position)
       "Accessor"
       (documentation 'column-view-row-position 'function)
- "@version{2025-08-14}
+ "@version{2026-08-17}
   @syntax{(gtk:column-view-row-position object) => position}
   @argument[object]{a @class{gtk:column-view-row} object}
   @argument[position]{an unsigned integer for the position of the row}
   @begin{short}
-    The accessor for the @slot[gtk:column-view-row]{position} slot of
-    the @class{gtk:column-view-row} class gets the position in the model that
-    @arg{object} currently displays.
+    The accessor for the @slot[gtk:column-view-row]{position} slot gets the
+    position in the model that @arg{object} currently displays.
   @end{short}
   If @arg{object} is unbound, the @var{gtk:+invalid-list-position+} value is
   returned.
@@ -318,15 +314,14 @@
 (setf (liber:alias-for-function 'column-view-row-selectable)
       "Accessor"
       (documentation 'column-view-row-selectable 'function)
- "@version{2025-08-14}
+ "@version{2026-08-17}
   @syntax{(gtk:column-view-row-selectable object) => selectable}
   @syntax{(setf (gtk:column-view-row-selectable object) selectable)}
   @argument[object]{a @class{gtk:column-view-row} object}
   @argument[selectable]{a boolean whether the row can be selected}
   @begin{short}
-    The accessor for the @slot[gtk:column-view-row]{selectable} slot of
-    the @class{gtk:column-view-row} class gets or sets whether the row can be
-    selected by the user.
+    The accessor for the @slot[gtk:column-view-row]{selectable} slot gets or
+    sets whether the row can be selected by the user.
   @end{short}
 
   If a row is selectable, clicking on the row or using the keyboard will try to
@@ -353,14 +348,13 @@
 (setf (liber:alias-for-function 'column-view-row-selected)
       "Accessor"
       (documentation 'column-view-row-selected 'function)
- "@version{2025-08-14}
+ "@version{2026-08-17}
   @syntax{(gtk:column-view-row-selected object) => selected}
   @argument[object]{a @class{gtk:column-view-row} object}
   @argument[selected]{a boolean whether the item in the row is selected}
   @begin{short}
-    The accessor for the @slot[gtk:column-view-row]{selected} slot of
-    the @class{gtk:column-view-row} class gets if the item is selected that
-    this row corresponds to.
+    The accessor for the @slot[gtk:column-view-row]{selected} slot gets if the
+    item is selected that this row corresponds to.
   @end{short}
   The selected state is maintained by the list widget and its model and cannot
   be set otherwise.
