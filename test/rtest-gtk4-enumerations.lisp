@@ -1448,73 +1448,6 @@
 
 ;;;     GtkAccessibleRelation
 
-#-gtk-4-18
-(test gtk-accessible-relation
-  ;; Check type
-  (is (g:type-is-enum "GtkAccessibleRelation"))
-  ;; Check type initializer
-  (is (eq (g:gtype "GtkAccessibleRelation")
-          (g:gtype (cffi:foreign-funcall "gtk_accessible_relation_get_type"
-                                         :size))))
-  ;; Check registered name
-  (is (eq 'gtk:accessible-relation
-          (glib:symbol-for-gtype "GtkAccessibleRelation")))
-  ;; Check names
-  (is (equal '("GTK_ACCESSIBLE_RELATION_ACTIVE_DESCENDANT"
-               "GTK_ACCESSIBLE_RELATION_COL_COUNT"
-               "GTK_ACCESSIBLE_RELATION_COL_INDEX"
-               "GTK_ACCESSIBLE_RELATION_COL_INDEX_TEXT"
-               "GTK_ACCESSIBLE_RELATION_COL_SPAN"
-               "GTK_ACCESSIBLE_RELATION_CONTROLS"
-               "GTK_ACCESSIBLE_RELATION_DESCRIBED_BY"
-               "GTK_ACCESSIBLE_RELATION_DETAILS"
-               "GTK_ACCESSIBLE_RELATION_ERROR_MESSAGE"
-               "GTK_ACCESSIBLE_RELATION_FLOW_TO"
-               "GTK_ACCESSIBLE_RELATION_LABELLED_BY"
-               "GTK_ACCESSIBLE_RELATION_OWNS"
-               "GTK_ACCESSIBLE_RELATION_POS_IN_SET"
-               "GTK_ACCESSIBLE_RELATION_ROW_COUNT"
-               "GTK_ACCESSIBLE_RELATION_ROW_INDEX"
-               "GTK_ACCESSIBLE_RELATION_ROW_INDEX_TEXT"
-               "GTK_ACCESSIBLE_RELATION_ROW_SPAN"
-               "GTK_ACCESSIBLE_RELATION_SET_SIZE")
-             (glib-test:list-enum-item-names "GtkAccessibleRelation")))
-  ;; Check values
-  (is (equal '(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17)
-             (glib-test:list-enum-item-values "GtkAccessibleRelation")))
-  ;; Check nick names
-  (is (equal '("active-descendant" "col-count" "col-index" "col-index-text"
-               "col-span" "controls" "described-by" "details" "error-message"
-               "flow-to" "labelled-by" "owns" "pos-in-set" "row-count"
-               "row-index" "row-index-text" "row-span" "set-size")
-             (glib-test:list-enum-item-nicks "GtkAccessibleRelation")))
-  ;; Check enum definition
-  (is (equal '(GOBJECT:DEFINE-GENUM "GtkAccessibleRelation"
-                                    GTK:ACCESSIBLE-RELATION
-                                    (:EXPORT T
-                                     :TYPE-INITIALIZER
-                                     "gtk_accessible_relation_get_type")
-                                    (:ACTIVE-DESCENDANT 0)
-                                    (:COL-COUNT 1)
-                                    (:COL-INDEX 2)
-                                    (:COL-INDEX-TEXT 3)
-                                    (:COL-SPAN 4)
-                                    (:CONTROLS 5)
-                                    (:DESCRIBED-BY 6)
-                                    (:DETAILS 7)
-                                    (:ERROR-MESSAGE 8)
-                                    (:FLOW-TO 9)
-                                    (:LABELLED-BY 10)
-                                    (:OWNS 11)
-                                    (:POS-IN-SET 12)
-                                    (:ROW-COUNT 13)
-                                    (:ROW-INDEX 14)
-                                    (:ROW-INDEX-TEXT 15)
-                                    (:ROW-SPAN 16)
-                                    (:SET-SIZE 17))
-             (gobject:get-gtype-definition "GtkAccessibleRelation"))))
-
-#+gtk-4-18
 (test gtk-accessible-relation
   ;; Check type
   (is (g:type-is-enum "GtkAccessibleRelation"))
@@ -1735,6 +1668,40 @@
                                     (:OTHER 3))
              (gobject:get-gtype-definition "GtkAccessibleSort"))))
 
+;;;     GtkAccessiblePlatformState
+
+(test gtk-accessible-platform-state
+  ;; Check type
+  (is (g:type-is-enum "GtkAccessiblePlatformState"))
+  ;; Check type initializer
+  (is (eq (g:gtype "GtkAccessiblePlatformState")
+          (g:gtype (cffi:foreign-funcall "gtk_accessible_platform_state_get_type"
+                                         :size))))
+  ;; Check registered name
+  (is (eq 'gtk:accessible-platform-state
+          (glib:symbol-for-gtype "GtkAccessiblePlatformState")))
+  ;; Check names
+  (is (equal '("GTK_ACCESSIBLE_PLATFORM_STATE_FOCUSABLE"
+               "GTK_ACCESSIBLE_PLATFORM_STATE_FOCUSED"
+               "GTK_ACCESSIBLE_PLATFORM_STATE_ACTIVE")
+             (glib-test:list-enum-item-names "GtkAccessiblePlatformState")))
+  ;; Check values
+  (is (equal '(0 1 2)
+             (glib-test:list-enum-item-values "GtkAccessiblePlatformState")))
+  ;; Check nick names
+  (is (equal '("focusable" "focused" "active")
+             (glib-test:list-enum-item-nicks "GtkAccessiblePlatformState")))
+  ;; Check enum definition
+  (is (equal '(GOBJECT:DEFINE-GENUM "GtkAccessiblePlatformState"
+                                    GTK:ACCESSIBLE-PLATFORM-STATE
+                       (:EXPORT T
+                        :TYPE-INITIALIZER
+                        "gtk_accessible_platform_state_get_type")
+                       (:FOCUSABLE 0)
+                       (:FOCUSED 1)
+                       (:ACTIVE 2))
+             (gobject:get-gtype-definition "GtkAccessiblePlatformState"))))
+
 ;;;     GtkAccessibleAnnouncementPriority
 
 (test gtk-accessible-announcement-priority
@@ -1769,4 +1736,4 @@
                        (:HIGH 2))
              (gobject:get-gtype-definition "GtkAccessibleAnnouncementPriority"))))
 
-;;; 2026-05-15
+;;; 2026-08-25

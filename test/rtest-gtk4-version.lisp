@@ -20,7 +20,7 @@
 
 #+crategus
 (test gtk-micro-version
-  (is (= 2 (gtk:micro-version))))
+  (is (= 4 (gtk:micro-version))))
 
 ;;;     gtk_get_binary_age                                  not implemented
 ;;;     gtk_get_interface_age                               not implemented
@@ -29,7 +29,7 @@
 
 #+crategus
 (test gtk-version-string
-  (is (string= "4.22.2" (gtk:version-string))))
+  (is (string= "4.22.4" (gtk:version-string))))
 
 ;;;     gtk_check_version
 
@@ -38,4 +38,4 @@
                (gtk:check-version 5 0 0)))
   (is-false (gtk:check-version 4 0 0)))
 
-;;; 2026-05-15
+;;; 2026-07-11

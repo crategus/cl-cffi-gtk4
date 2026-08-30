@@ -34,7 +34,7 @@
 ;;; Types and Values
 ;;;
 ;;;     GtkSystemSetting                                    not exported
-;;;     GtkFontRendering
+;;;     GtkFontRendering                                    Since 4.16
 ;;;
 ;;;     GtkSettings
 ;;;     GtkSettingsValue                                    not implemented
@@ -501,7 +501,7 @@
 (setf (liber:alias-for-function 'settings-gtk-alternative-button-order)
       "Accessor"
       (documentation 'settings-gtk-alternative-button-order 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk:alternative-button-order object) => setting}
   @syntax{(setf (gtk:settings-gtk-alternative-button-order object) setting)}
   @argument[object]{a @class{gtk:settings} object}
@@ -509,8 +509,8 @@
    alternative button order}
   @begin{short}
     The accessor for the @slot[gtk:settings]{gtk-alternative-button-order} slot
-    of the @class{gtk:settings} class gets or sets whether buttons in dialogs
-    should use the alternative button order.
+    of gets or sets whether buttons in dialogs should use the alternative button
+    order.
   @end{short}
   @see-class{gtk:settings}")
 
@@ -530,15 +530,15 @@
 (setf (liber:alias-for-function 'settings-gtk-alternative-sort-arrows)
       "Accessor"
       (documentation 'settings-gtk-alternative-sort-arrows 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-alternative-sort-arrows object) => setting}
   @syntax{(setf (gtk:settings-gtk-alternative-sort-arrows object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{a boolean which controls the direction of sort indicators}
   @begin{short}
     The accessor for the @slot[gtk:settings]{gtk-alternative-sort-arrows} slot
-    of the @class{gtk:settings} class gets or sets the direction of the sort
-    indicators in sorted list and tree views.
+    of gets or sets the direction of the sort indicators in sorted list and
+    tree views.
   @end{short}
   By default an arrow pointing down means the column is sorted in ascending
   order. When set to @em{true}, this order will be inverted.
@@ -561,7 +561,7 @@
 (setf (liber:alias-for-function 'settings-gtk-application-prefer-dark-theme)
       "Accessor"
       (documentation 'settings-gtk-application-prefer-dark-theme 'function)
- "@version{2025-11-08}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-application-prefer-dark-theme object) => setting}
   @syntax{(setf (gtk:settings-gtk-application-prefer-dark-theme object) setting)}
   @argument[object]{a @class{gtk:settings} object}
@@ -569,8 +569,7 @@
     theme}
   @begin{short}
     The accessor for the @slot[gtk:settings]{gtk-application-prefer-dark-theme}
-    slot of the @class{gtk:settings} class gets or sets whether the application
-    prefers to use a dark theme.
+    slot gets or sets whether the application prefers to use a dark theme.
   @end{short}
   If a GTK theme includes a dark variant, it will be used instead of the
   configured theme.
@@ -595,15 +594,14 @@
 (setf (liber:alias-for-function 'settings-gtk-cursor-aspect-ratio)
       "Accessor"
       (documentation 'settings-gtk-cursor-aspect-ratio 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-cursor-aspect-ratio object) => setting}
   @syntax{(setf (gtk:settings-gtk-cursor-aspect-ratio object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{a single float for the aspect ratio of the text caret}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-cursor-aspect-ratio} slot of
-    the @class{gtk:settings} class gets or sets the aspect ratio of the text
-    caret.
+    The accessor for the @slot[gtk:settings]{gtk-cursor-aspect-ratio} slot
+    gets or sets the aspect ratio of the text caret.
   @end{short}
   @see-class{gtk:settings}")
 
@@ -622,16 +620,16 @@
 (setf (liber:alias-for-function 'settings-gtk-cursor-blink)
       "Accessor"
       (documentation 'settings-gtk-cursor-blink 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-cursor-blink object) => setting}
   @syntax{(setf (gtk:settings-gtk-cursor-blink object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{a boolean whether the cursor should blink}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-cursor-blink} slot of the
-    @class{gtk:settings} class gets or sets whether the cursor should blink.
-    Also see the @slot[gtk:settings]{gtk-cursor-blink-timeout} setting, which
-    allows more flexible control over cursor blinking.
+    The accessor for the @slot[gtk:settings]{gtk-cursor-blink} slot gets or
+    sets whether the cursor should blink. Also see the
+    @slot[gtk:settings]{gtk-cursor-blink-timeout} setting, which allows more
+    flexible control over cursor blinking.
   @end{short}
   @see-class{gtk:settings}
   @see-function{gtk:settings-gtk-cursor-blink-timeout}")
@@ -651,16 +649,15 @@
 (setf (liber:alias-for-function 'settings-gtk-cursor-blink-time)
       "Accessor"
       (documentation 'settings-gtk-cursor-blink-time 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-cursor-blink-time object) => setting}
   @syntax{(setf (gtk:settings-gtk-cursor-blink-time object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{an integer for the length of the cursor blink cycle,
     in milliseconds}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-cursor-blink-time} slot of the
-    @class{gtk:settings} class gets or sets the length of the cursor blink
-    cycle, in milliseconds.
+    The accessor for the @slot[gtk:settings]{gtk-cursor-blink-time} slot gets
+    or sets the length of the cursor blink cycle, in milliseconds.
   @end{short}
   @see-class{gtk:settings}")
 
@@ -681,16 +678,15 @@
 (setf (liber:alias-for-function 'settings-gtk-cursor-blink-timeout)
       "Accessor"
       (documentation 'settings-gtk-cursor-blink-timeout 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-cursor-blink-timeout object) => setting}
   @syntax{(setf (gtk:settings-gtk-cursor-blink-timeout object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{an integer for the time after which the cursor stops
     blinking, in seconds}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-cursor-blink-timeout} slot of
-    the @class{gtk:settings} class gets or sets the time after which the cursor
-    stops blinking, in seconds.
+    The accessor for the @slot[gtk:settings]{gtk-cursor-blink-timeout} slot
+    gets or sets the time after which the cursor stops blinking, in seconds.
   @end{short}
   The timer is reset after each user interaction. Setting this to zero has the
   same effect as setting the @slot[gtk:settings]{gtk-cursor-blink} property to
@@ -711,15 +707,15 @@
 (setf (liber:alias-for-function 'settings-gtk-cursor-theme-name)
       "Accessor"
       (documentation 'settings-gtk-cursor-theme-name 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-cursor-theme-name object) => setting}
   @syntax{(setf (gtk:settings-gtk-cursor-theme-name object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{a string for the cursor theme name}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-cursor-theme-name} slot of the
-    @class{gtk:settings} class gets or sets the name of the cursor theme to use,
-    or @code{nil} to use the default theme.
+    The accessor for the @slot[gtk:settings]{gtk-cursor-theme-name} slot gets
+    or sets the name of the cursor theme to use, or @code{nil} to use the
+    default theme.
   @end{short}
   @see-class{gtk:settings}")
 
@@ -738,15 +734,14 @@
 (setf (liber:alias-for-function 'settings-gtk-cursor-theme-size)
       "Accessor"
       (documentation 'settings-gtk-cursor-theme-size 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-cursor-theme-size object) => setting}
   @syntax{(setf (gtk:settings-gtk-cursor-theme-size object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{an integer for the size to use for cursors}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-cursor-theme-size} slot of the
-    @class{gtk:settings} class gets or sets the size to use for cursors, or 0 to
-    use the default size.
+    The accessor for the @slot[gtk:settings]{gtk-cursor-theme-size} slot gets
+    or sets the size to use for cursors, or 0 to use the default size.
   @end{short}
   @see-class{gtk:settings}")
 
@@ -776,16 +771,15 @@
 (setf (liber:alias-for-function 'settings-gtk-decoration-layout)
       "Accessor"
       (documentation 'settings-gtk-decoration-layout 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-decoration-layout object) => setting}
   @syntax{(setf (gtk:settings-gtk-decoration-layout object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{a string for the settings for buttons}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-decoration-layout} slot of the
-    @class{gtk:settings} class get or sets which buttons should be put in the
-    titlebar of client-side decorated windows, and whether they should be placed
-    at the left of right.
+    The accessor for the @slot[gtk:settings]{gtk-decoration-layout} slot gets
+    or sets which buttons should be put in the titlebar of client-side decorated
+    windows, and whether they should be placed at the left of right.
   @end{short}
 
   The format of the string is button names, separated by commas. A colon
@@ -824,16 +818,16 @@
 (setf (liber:alias-for-function 'settings-gtk-dialogs-use-header)
       "Accessor"
       (documentation 'settings-gtk-dialogs-use-header 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-dialogs-use-header object) => setting}
   @syntax{(setf (gtk:settings-gtk-dialogs-use-header object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{a boolean whether dialogs use a header bar}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-dialogs-use-header} slot of the
-    @class{gtk:settings} class gets or sets whether built-in GTK dialogs such as
-    the file chooser, the color chooser or the font chooser will use a header
-    bar at the top to show action widgets, or an action area at the bottom.
+    The accessor for the @slot[gtk:settings]{gtk-dialogs-use-header} slot gets
+    or sets whether built-in GTK dialogs such as the file chooser, the color
+    chooser or the font chooser will use a header bar at the top to show action
+    widgets, or an action area at the bottom.
   @end{short}
   This setting does not affect custom dialogs using the @class{gtk:dialog}
   widget directly, or message dialogs.
@@ -855,15 +849,14 @@
 (setf (liber:alias-for-function 'settings-gtk-dnd-drag-threshold)
       "Accessor"
       (documentation 'settings-gtk-dnd-drag-threshold 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-dnd-drag-threshold object) => setting}
   @syntax{(setf (gtk:settings-gtk-dnd-drag-threshold object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{an integer for the number of pixels the cursor can move}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-dnd-drag-threshold} slot of the
-    @class{gtk:settings} class gets or sets the number of pixels the cursor can
-    move before dragging.
+    The accessor for the @slot[gtk:settings]{gtk-dnd-drag-threshold} slot gets
+    or sets the number of pixels the cursor can move before dragging.
   @end{short}
   @see-class{gtk:settings}")
 
@@ -883,15 +876,15 @@
 (setf (liber:alias-for-function 'settings-gtk-double-click-distance)
       "Accessor"
       (documentation 'settings-gtk-double-click-distance 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-double-click-distance object) => setting}
   @syntax{(setf (gtk:settings-gtk-double-click-distance object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{an integer for the maximum distance in pixels}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-double-click-distance} slot of
-    the @class{gtk:settings} class gets or sets the maximum distance in pixels
-    allowed between two clicks for them to be considered a double click.
+    The accessor for the @slot[gtk:settings]{gtk-double-click-distance} slot
+    gets or sets the maximum distance in pixels allowed between two clicks for
+    them to be considered a double click.
   @end{short}
   @see-class{gtk:settings}")
 
@@ -911,16 +904,16 @@
 (setf (liber:alias-for-function 'settings-gtk-double-click-time)
       "Accessor"
       (documentation 'settings-gtk-double-click-time 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-double-click-time object) => setting}
   @syntax{(setf (gtk:settings-gtk-double-click-time object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{an integer for the maximum time allowed between two
     clicks}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-double-click-time} slot of the
-    @class{gtk:settings} class gets or sets the maximum time allowed between two
-    clicks for them to be considered a double click, in milliseconds.
+    The accessor for the @slot[gtk:settings]{gtk-double-click-time} slot gets
+    or sets the maximum time allowed between two clicks for them to be
+    considered a double click, in milliseconds.
   @end{short}
   @see-class{gtk:settings}")
 
@@ -939,16 +932,16 @@
 (setf (liber:alias-for-function 'settings-gtk-enable-accels)
       "Accessor"
       (documentation 'settings-gtk-enable-accels 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-enable-accels object) => setting}
   @syntax{(setf (gtk:settings-gtk-enable-accels object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{a boolean whether menu items should have visible
     accelerators}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-enable-accels} slot of the
-    @class{gtk:settings} class gets or sets whether menu items should have
-    visible accelerators which can be activated.
+    The accessor for the @slot[gtk:settings]{gtk-enable-accels} slot gets or
+    sets whether menu items should have visible accelerators which can be
+    activated.
   @end{short}
   @see-class{gtk:settings}")
 
@@ -966,15 +959,14 @@
 (setf (liber:alias-for-function 'settings-gtk-enable-animations)
       "Accessor"
       (documentation 'settings-gtk-enable-animations 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-enable-animations object) => setting}
   @syntax{(setf (gtk:settings-gtk-enable-animations object) setting)}
   @argument[object]{the @class{gtk:settings} object}
   @argument[setting]{a boolean whether to enable animations}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-enable-animations} slot of the
-    @class{gtk:settings} class gets or sets whether to enable toolkit-wide
-    animations.
+    The accessor for the @slot[gtk:settings]{gtk-enable-animations} slot gets
+    or sets whether to enable toolkit-wide animations.
   @end{short}
   The default value is @em{true}.
   @see-class{gtk:settings}")
@@ -996,15 +988,14 @@
 (setf (liber:alias-for-function 'settings-gtk-enable-event-sounds)
       "Accessor"
       (documentation 'settings-gtk-enable-event-sounds 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-enable-event-sounds object) => setting}
   @syntax{(setf (gtk:settings-gtk-enable-event-sounds object) setting)}
   @argument[object]{the @class{gtk:settings} object}
   @argument[setting]{a boolean whether to play any event sounds at all}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-enable-event-sounds} slot of
-    the @class{gtk:settings} class gets or sets whether to play any event sounds
-    at all.
+    The accessor for the @slot[gtk:settings]{gtk-enable-event-sounds} slot gets
+    or sets whether to play any event sounds at all.
   @end{short}
   See the Sound Theme specification for more information on event sounds and
   sound themes. GTK itself does not support event sounds, you have to use a
@@ -1029,15 +1020,14 @@
 (setf (liber:alias-for-function 'settings-gtk-enable-input-feedback-sounds)
       "Accessor"
       (documentation 'settings-gtk-enable-input-feedback-sounds 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-enable-input-feedback-sounds object) => setting}
   @syntax{(setf (gtk:settings-gtk-enable-input-feedback-sounds object) setting)}
   @argument[object]{the @class{gtk:settings} object}
   @argument[setting]{a boolean whether to play any event sounds at all}
   @begin{short}
     The accessor for the @slot[gtk:settings]{gtk-enable-input-feedback-sounds}
-    slot of the @class{gtk:settings} class gets or sets whether to play event
-    sounds as feedback to user input.
+    slot gets or sets whether to play event sounds as feedback to user input.
   @end{short}
   See the Sound Theme specification for more information on event sounds and
   sound themes. GTK itself does not support event sounds, you have to use a
@@ -1059,16 +1049,16 @@
 (setf (liber:alias-for-function 'settings-gtk-enable-primary-paste)
       "Accessor"
       (documentation 'settings-gtk-enable-primary-paste 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-enable-primary-paste object) => setting}
   @syntax{(setf (gtk:settings-gtk-enable-primary-paste object) setting)}
   @argument[object]{the @class{gtk:settings} object}
   @argument[setting]{a boolean whether a middle click should paste the
     \"PRIMARY\" clipboard}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-enable-primary-paste} slot of
-    the @class{gtk:settings} class gets or sets whether a middle click on a
-    mouse should paste the \"PRIMARY\" clipboard content at the cursor location.
+    The accessor for the @slot[gtk:settings]{gtk-enable-primary-paste} slot
+    gets or sets whether a middle click on a mouse should paste the \"PRIMARY\"
+    clipboard content at the cursor location.
   @end{short}
   @see-class{gtk:settings}")
 
@@ -1088,15 +1078,15 @@
 (setf (liber:alias-for-function 'settings-gtk-entry-password-hint-timeout)
       "Accessor"
       (documentation 'settings-gtk-entry-password-hint-timeout 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-entry-password-hint-timeout object) => setting}
   @syntax{(setf (gtk:settings-gtk-entry-password-hint-timeout object) setting)}
   @argument[object]{the @class{gtk:settings} object}
   @argument[setting]{an unsigned integer for how long to show the last input}
   @begin{short}
     The accessor for the @slot[gtk:settings]{gtk-entry-password-hint-timeout}
-    slot of the @class{gtk:settings} class gets or sets how long to show the
-    last input character in hidden entries.
+    slot gets or sets how long to show the last input character in hidden
+    entries.
   @end{short}
   This value is in milliseconds. The value 0 disables showing the last char.
   The value 600 is a good value for enabling it.
@@ -1116,15 +1106,14 @@
 (setf (liber:alias-for-function 'settings-gtk-entry-select-on-focus)
       "Accessor"
       (documentation 'settings-gtk-entry-select-on-focus 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-entry-select-on-focus object) => setting}
   @syntax{(setf (gtk:settings-gtk-entry-select-on-focus object) setting)}
   @argument[object]{the @class{gtk:settings} object}
   @argument[setting]{a boolean whether to select the contents of an entry}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-entry-select-on-focus} slot of
-    the @class{gtk:settings} class gets or sets whether to select the contents
-    of an entry when it is focused.
+    The accessor for the @slot[gtk:settings]{gtk-entry-select-on-focus} slot
+    gets or sets whether to select the contents of an entry when it is focused.
   @end{short}
   @see-class{gtk:settings}")
 
@@ -1144,15 +1133,15 @@
 (setf (liber:alias-for-function 'settings-gtk-error-bell)
       "Accessor"
       (documentation 'settings-gtk-error-bell 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-error-bell object) => setting}
   @syntax{(setf (gtk:settings-gtk-error-bell object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{a boolean whether errors well cause a beep}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-error-bell} slot of the
-    @class{gtk:settings} class get or sets whether keyboard navigation and other
-    input-related errors will cause a beep.
+    The accessor for the @slot[gtk:settings]{gtk-error-bell} slot gets or sets
+    whether keyboard navigation and other input-related errors will cause a
+    beep.
   @end{short}
   Since the error bell is implemented using the @fun{gdk:surface-beep} function,
   the windowing system may offer ways to configure the error bell in many ways,
@@ -1171,14 +1160,14 @@
 (setf (liber:alias-for-function 'settings-gtk-font-name)
       "Accessor"
       (documentation 'settings-gtk-font-name 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-font-name object) => setting}
   @syntax{(setf (gtk:settings-gtk-font-name object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{a string for the name of the default font to use}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-font-name} slot of the
-    @class{gtk:settings} class gets or sets the name of the default font to use.
+    The accessor for the @slot[gtk:settings]{gtk-font-name} slot gets or sets
+    the name of the default font to use.
   @end{short}
   @see-class{gtk:settings}")
 
@@ -1202,14 +1191,14 @@
 (setf (liber:alias-for-function 'settings-gtk-font-rendering)
       "Accessor"
       (documentation 'settings-gtk-font-rendering 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-font-rendering object) => setting}
   @syntax{(setf (gtk:settings-gtk-font-rendering object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{a @sym{gtk:font-rendering} value}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-font-rendering} slot of the
-    @class{gtk:settings} class gets or sets how GTK font rendering is set up.
+    The accessor for the @slot[gtk:settings]{gtk-font-rendering} slot gets or
+    sets how GTK font rendering is set up.
   @end{short}
 
   When set to @code{:manual}, GTK respects the low-level font-related settings
@@ -1239,15 +1228,14 @@
 (setf (liber:alias-for-function 'settings-gtk-fontconfig-timestamp)
       "Accessor"
       (documentation 'settings-gtk-fontconfig-timestamp 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-fontconfig-timestamp object) => setting}
   @syntax{(setf (gtk:settings-gtk-fontconfig-timestamp object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{an unsigned integer for the timestamp}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-fontconfig-timestamp} slot of
-    the @class{gtk:settings} class gets or sets the timestamp of the current
-    fontconfig configuration.
+    The accessor for the @slot[gtk:settings]{gtk-fontconfig-timestamp} slot
+    gets or sets the timestamp of the current fontconfig configuration.
   @end{short}
   @see-class{gtk:settings}")
 
@@ -1266,16 +1254,15 @@
 (setf (liber:alias-for-function 'settings-gtk-hint-font-metrics)
       "Accessor"
       (documentation 'settings-gtk-hint-font-metrics 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-hint-font-metrics object) => setting}
   @syntax{(setf (gtk:settings-gtk-hint-font-metrics object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{a boolean whether hinting should be applied to font
     metrics}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-hint-font-metrics} slot of the
-    @class{gtk:settings} class gets or sets whether hinting should be applied to
-    font metrics.
+    The accessor for the @slot[gtk:settings]{gtk-hint-font-metrics} slot gets
+    or sets whether hinting should be applied to font metrics.
   @end{short}
   Note that this also turns off subpixel positioning of glyphs, since it
   conflicts with metrics hinting.
@@ -1296,14 +1283,14 @@
 (setf (liber:alias-for-function 'settings-gtk-icon-theme-name)
       "Accessor"
       (documentation 'settings-gtk-icon-theme-name 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-icon-theme-name object) => setting}
   @syntax{(setf (gtk:settings-gtk-icon-theme-name object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{a string for the icon theme name}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-icon-theme-name} slot of the
-    @class{gtk:settings} class gets or sets the name of the icon theme to use.
+    The accessor for the @slot[gtk:settings]{gtk-icon-theme-name} slot gets or
+    sets the name of the icon theme to use.
   @end{short}
   @see-class{gtk:settings}")
 
@@ -1324,15 +1311,14 @@
 (setf (liber:alias-for-function 'settings-gtk-im-module)
       "Accessor"
       (documentation 'settings-gtk-im-module 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-im-module object) => setting}
   @syntax{(setf (gtk:settings-gtk-im-module object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{a string for the IM module}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-im-module} slot of the
-    @class{gtk:settings} class gets or sets which IM (input method) module
-    should be used by default.
+    The accessor for the @slot[gtk:settings]{gtk-im-module} slot gets or sets
+    which IM (input method) module should be used by default.
   @end{short}
   This is the input method that will be used if the user has not explicitly
   chosen another input method from the IM context menu. This also can be a
@@ -1357,13 +1343,14 @@
 (setf (liber:alias-for-function 'settings-gtk-interface-color-scheme)
       "Accessor"
       (documentation 'settings-gtk-interface-color-scheme 'function)
- "@version{2025-11-08}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-interface-color-scheme object) => mode}
   @syntax{(setf (gtk:settings-gtk-interface-color-scheme object) mode)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[mode]{a @sym{gtk:interface-color-scheme} value}
   @begin{short}
-    The color scheme used for rendering the user interface.
+    The accessor for the @slot[gtk:settings]{gtk-interface-color-scheme} slot
+    gets or sets the color scheme used for rendering the user interface.
   @end{short}
   This setting communicates the system-wide preference. The color scheme that is
   actually used when applying CSS styles can be set with the
@@ -1387,13 +1374,14 @@
 (setf (liber:alias-for-function 'settings-gtk-interface-contrast)
       "Accessor"
       (documentation 'settings-gtk-interface-contrast 'function)
- "@version{2025-11-08}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-interface-contrast object) => mode}
   @syntax{(setf (gtk:settings-gtk-interface-contrast object) mode)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[mode]{a @sym{gtk:interface-contrast} value}
   @begin{short}
-    The level of contrast to use for the user interface.
+    The accessor for the @slot[gtk:settings]{gtk-interface-contrast} slot gets
+    or sets the level of contrast to use for the user interface.
   @end{short}
   This setting communicates the system-wide preference. The contrast level that
   is actually used when applying CSS styles can be set with the
@@ -1420,13 +1408,14 @@
 (setf (liber:alias-for-function 'settings-gtk-interface-reduced-motion)
       "Accessor"
       (documentation 'settings-gtk-interface-reduced-motion 'function)
- "@version{2026-05-15}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-interface-reduced-motion object) => setting}
   @syntax{(setf (gtk:settings-gtk-interface-reduced-motion object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{a @sym{gtk:interface-reduced-motion} value}
   @begin{short}
-    Gets or sets whether animations should be reduced to essential motions.
+    The accessor for the @slot[gtk:settings]{gtk-interface-reduced-motion} slot
+    gets or sets whether animations should be reduced to essential motions.
   @end{short}
   This setting communicates the system-wide preference. The motion level that
   is actually used when applying CSS styles can be set with the
@@ -1452,16 +1441,16 @@
 (setf (liber:alias-for-function 'settings-gtk-keynav-use-caret)
       "Accessor"
       (documentation 'settings-gtk-keynav-use-caret 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-keynav-use-caret object) => setting}
   @syntax{(setf (gtk:settings-gtk-keynav-use-caret object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{a boolean whether GTK should make sure that text can be
     navigated with a caret}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-keynav-use-caret} slot of the
-    @class{gtk:settings} class gets or sets whether GTK should make sure that
-    text can be navigated with a caret, even if it is not editable.
+    The accessor for the @slot[gtk:settings]{gtk-keynav-use-caret} slot gets
+    or sets whether GTK should make sure that text can be navigated with a
+    caret, even if it is not editable.
   @end{short}
   This is useful when using a screen reader.
   @see-class{gtk:settings}")
@@ -1480,16 +1469,16 @@
 (setf (liber:alias-for-function 'settings-gtk-label-select-on-focus)
       "Accessor"
       (documentation 'settings-gtk-label-select-on-focus 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-label-select-on-focus object) => setting}
   @syntax{(setf (gtk:settings-gtk-label-select-on-focus object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{a boolean whether to select the contents of a selectable
     label}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-label-select-on-focus} slot of
-    the @class{gtk:settings} class gets or sets whether to select the contents
-    of a selectable label when it is focused.
+    The accessor for the @slot[gtk:settings]{gtk-label-select-on-focus} slot
+    gets or sets whether to select the contents of a selectable label when it
+    is focused.
   @end{short}
   @see-class{gtk:settings}")
 
@@ -1508,16 +1497,15 @@
 (setf (liber:alias-for-function 'settings-gtk-long-press-time)
       "Accessor"
       (documentation 'settings-gtk-long-press-time 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-long-press-time object) => setting}
   @syntax{(setf (gtk:settings-gtk-long-press-time object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{an unsigned integer for the time for a button or touch
     press to be considered a \"long press\"}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-long-press-time} slot of the
-    @class{gtk:settings} class gets or sets the time for a button or touch press
-    to be considered a \"long press\".
+    The accessor for the @slot[gtk:settings]{gtk-long-press-time} slot gets or
+    sets the time for a button or touch press to be considered a \"long press\".
   @end{short}
   @see-class{gtk:settings}")
 
@@ -1536,16 +1524,15 @@
 (setf (liber:alias-for-function 'settings-gtk-overlay-scrolling)
       "Accessor"
       (documentation 'settings-gtk-overlay-scrolling 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-overlay-scrolling object) => setting}
   @syntax{(setf (gtk:settings-gtk-overlay-scrolling object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{a boolean whether scrolled windows may use overlayed
     scrolled indicators}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-overlay-scrolling} slot of the
-    @class{gtk:settings} class gets or sets whether scrolled windows may use
-    overlayed scrolling indicators.
+    The accessor for the @slot[gtk:settings]{gtk-overlay-scrolling} slot gets
+    or sets whether scrolled windows may use overlayed scrolling indicators.
   @end{short}
   If this is set to @em{false}, scrolled windows will have permanent scrollbars.
   @see-class{gtk:settings}")
@@ -1565,7 +1552,7 @@
 (setf (liber:alias-for-function 'settings-gtk-primary-button-warps-slider)
       "Accessor"
       (documentation 'settings-gtk-primary-button-warps-slider 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-primary-button-warps-slider object) => setting}
   @syntax{(setf (gtk:settings-gtk-primary-button-warps-slider object) setting)}
   @argument[object]{a @class{gtk:settings} object}
@@ -1573,9 +1560,9 @@
     position}
   @begin{short}
     The accessor for the @slot[gtk:settings]{gtk-primary-buton-warps-slider}
-    slot of the @class{gtk:settings} class gets or sets whether a click in a
-    @class{gtk:range} widget trough should scroll to the click position or
-    scroll by a single page in the respective direction.
+    slot gets or sets whether a click in a @class{gtk:range} widget trough
+    should scroll to the click position or scroll by a single page in the
+    respective direction.
   @end{short}
   @see-class{gtk:settings}
   @see-class{gtk:range}")
@@ -1596,15 +1583,14 @@
 (setf (liber:alias-for-function 'settings-gtk-print-backends)
       "Accessor"
       (documentation 'settings-gtk-print-backends 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-print-backends object) => setting}
   @syntax{(setf (gtk:settings-gtk-print-backends object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{a string for a list of print backends}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-print-backends} slot of the
-    @class{gtk:settings} class gets or sets a comma-separated list of print
-    backends to use in the print dialog.
+    The accessor for the @slot[gtk:settings]{gtk-print-backends} slot gets or
+    sets a comma-separated list of print backends to use in the print dialog.
   @end{short}
   Available print backends depend on the GTK installation, and may include
   @code{\"file\"}, @code{\"cups\"}, @code{\"lpr\"} or @code{\"papi\"}.
@@ -1631,16 +1617,15 @@
 (setf (liber:alias-for-function 'settings-gtk-print-preview-command)
       "Accessor"
       (documentation 'settings-gtk-print-preview-command 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-print-preview-command object) => setting}
   @syntax{(setf (gtk:settings-gtk-print-preview-command object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{a string for a command to run for displaying the print
     preview}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-print-preview-command} slot of
-    the @class{gtk:settings} class gets or sets a command to run for displaying
-    the print preview.
+    The accessor for the @slot[gtk:settings]{gtk-print-preview-command} slot
+    gets or sets a command to run for displaying the print preview.
   @end{short}
   The command should contain a @code{f} placeholder, which will get replaced by
   the path to the PDF file. The command may also contain a @code{s} placeholder,
@@ -1666,16 +1651,16 @@
 (setf (liber:alias-for-function 'settings-gtk-recent-files-enabled)
       "Accessor"
       (documentation 'settings-gtk-recent-files-enabled 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-recent-files-enabled object) => setting}
   @syntax{(setf (gtk:settings-gtk-recent-files-enabled object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{a boolean whether GTK should keep track of items inside
     the recently used resources list}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-recent-files-enabled} slot of
-    the @class{gtk:settings} class gets or sets whether GTK should keep track of
-    items inside the recently used resources list.
+    The accessor for the @slot[gtk:settings]{gtk-recent-files-enabled} slot
+    gets or sets whether GTK should keep track of items inside the recently
+    used resources list.
   @end{short}
   If set to @em{false}, the list will always be empty.
   @see-class{gtk:settings}
@@ -1697,15 +1682,15 @@
 (setf (liber:alias-for-function 'settings-gtk-recent-files-max-age)
       "Accessor"
       (documentation 'settings-gtk-recent-files-max-age 'function)
- "@version{2026-04-19}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-recent-files-max-age object) => setting}
   @syntax{(setf (gtk:settings-gtk-recent-files-max-age object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{an integer for the maximum age, in days}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-recent-files-max-age} slot of
-    the @class{gtk:settings} class gets or sets the maximum age, in days, of the
-    items inside the recently used resources list.
+    The accessor for the @slot[gtk:settings]{gtk-recent-files-max-age} slot
+    gets or sets the maximum age, in days, of the items inside the recently
+    used resources list.
   @end{short}
   Items older than this setting will be excised from the list. If set to 0, the
   list will always be empty, if set to -1, no item will be removed.
@@ -1727,16 +1712,16 @@
 (setf (liber:alias-for-function 'settings-gtk-shell-shows-app-menu)
       "Accessor"
       (documentation 'settings-gtk-shell-shows-app-menu 'function)
- "@version{2025-11-08}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-shell-shows-app-menu object) => setting}
   @syntax{(setf (gtk:settings-gtk-shell-shows-app-menu object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{a boolean whether the environment is displaying the
     application menu}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-shell-shows-app-menu} slot of
-    the @class{gtk:settings} class gets or sets whether the desktop environment
-    is displaying the application menu.
+    The accessor for the @slot[gtk:settings]{gtk-shell-shows-app-menu} slot
+    gets or sets whether the desktop environment is displaying the application
+    menu.
   @end{short}
   Set to @em{true} if the desktop environment is displaying the application
   menu, @em{false} if the application should display it itself.
@@ -1761,16 +1746,15 @@
 (setf (liber:alias-for-function 'settings-gtk-shell-shows-desktop)
       "Accessor"
       (documentation 'settings-gtk-shell-shows-desktop 'function)
- "@version{2025-11-08}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-shell-shows-desktop object) => setting}
   @syntax{(setf (gtk:settings-gtk-shell-shows-desktop object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{a boolean whether the environment is displaying the
     desktop folder}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-shell-shows-desktop} slot of
-    the @class{gtk:settings} class gets or sets whether the desktop environment
-    is displaying the desktop folder.
+    The accessor for the @slot[gtk:settings]{gtk-shell-shows-desktop} slot gets
+    or sets whether the desktop environment is displaying the desktop folder.
   @end{short}
   Set to @em{true} if the desktop environment is displaying the desktop folder,
   @em{false} if not.
@@ -1795,16 +1779,15 @@
 (setf (liber:alias-for-function 'settings-gtk-shell-shows-menubar)
       "Accessor"
       (documentation 'settings-gtk-shell-shows-menubar 'function)
- "@version{2025-11-08}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-shell-shows-menubar object) => setting}
   @syntax{(setf (gtk:settings-gtk-shell-shows-menubar object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{a boolean whether the environment is displaying the
     menubar}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-shell-shows-menubar} slot of
-    the @class{gtk:settings} class gets or sets whether the desktop environment
-    is displaying the menubar.
+    The accessor for the @slot[gtk:settings]{gtk-shell-shows-menubar} slot gets
+    or sets whether the desktop environment is displaying the menubar.
   @end{short}
   Set to @em{true} if the desktop environment is displaying the menubar,
   @em{false} if the application should display it itself.
@@ -1829,16 +1812,16 @@
 (setf (liber:alias-for-function 'settings-gtk-show-status-shapes)
       "Accessor"
       (documentation 'settings-gtk-show-status-shapes 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-shell-shows-menubar object) => setting}
   @syntax{(setf (gtk:settings-gtk-shell-shows-menubar object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{a boolean whether widgets include shapes to indicate their
     on/off state}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-shell-shows-menubar} slot of
-    the @class{gtk:settings} class gets or sets whether widgets like switches
-    include shapes to indicate their on/off state.
+    The accessor for the @slot[gtk:settings]{gtk-shell-shows-menubar} slot gets
+    or sets whether widgets like switches include shapes to indicate their
+    on/off state.
   @end{short}
 
   Since 4.14
@@ -1860,15 +1843,14 @@
 (setf (liber:alias-for-function 'settings-gtk-sound-theme-name)
       "Accessor"
       (documentation 'settings-gtk-sound-theme-name 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-sound-theme-name object) => setting}
   @syntax{(setf (gtk:settings-gtk-sound-theme-name object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{a string for the sound theme name}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-sound-theme-name} slot of the
-    @class{gtk:settings} class gets or sets the XDG sound theme to use for event
-    sounds.
+    The accessor for the @slot[gtk:settings]{gtk-sound-theme-name} slot gets or
+    sets the XDG sound theme to use for event sounds.
   @end{short}
   See the Sound Theme specification for more information on event sounds and
   sound themes. GTK itself does not support event sounds, you have to use a
@@ -1889,16 +1871,16 @@
 (setf (liber:alias-for-function 'settings-gtk-split-cursor)
       "Accessor"
       (documentation 'settings-gtk-split-cursor 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-split-cursor object) => setting}
   @syntax{(setf (gtk:settings-gtk-split-cursor object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{a boolean whether two cursors should be displayed for
     mixed left-to-right and right-to-left text}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-split-cursor} slot of the
-    @class{gtk:settings} class gets or sets whether two cursors should be
-    displayed for mixed left-to-right and right-to-left text.
+    The accessor for the @slot[gtk:settings]{gtk-split-cursor} slot gets or
+    sets whether two cursors should be displayed for mixed left-to-right and
+    right-to-left text.
   @end{short}
   @see-class{gtk:settings}")
 
@@ -1913,14 +1895,14 @@
 (setf (liber:alias-for-function 'settings-gtk-theme-name)
       "Accessor"
       (documentation 'settings-gtk-theme-name 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-theme-name object) => setting}
   @syntax{(setf (gtk:settings-gtk-theme-name object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{a string for the theme name}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-theme-name} slot of the
-    @class{gtk:settings} class gets or sets the name of the theme to load.
+    The accessor for the @slot[gtk:settings]{gtk-theme-name} slot gets or sets
+    the name of the theme to load.
   @end{short}
   @see-class{gtk:settings}")
 
@@ -1941,15 +1923,15 @@
 (setf (liber:alias-for-function 'settings-gtk-titlebar-double-click)
       "Accessor"
       (documentation 'settings-gtk-titlebar-double-click 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-titlebar-double-click object) => setting}
   @syntax{(setf (gtk:settings-gtk-titlebar-double-click object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{a string for an action}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-titlebar-double-click} slot of
-    the @class{gtk:settings} class gets or sets the action to take when a double
-    click occures on the titlebar of client-side decorated windows.
+    The accessor for the @slot[gtk:settings]{gtk-titlebar-double-click} slot
+    gets or sets the action to take when a double click occures on the titlebar
+    of client-side decorated windows.
   @end{short}
   Recognized actions are @code{\"minimize\"}, @code{\"toggle-maximize\"},
   @code{\"menu\"}, @code{\"lower\"} or @code{\"none\"}.
@@ -1972,15 +1954,15 @@
 (setf (liber:alias-for-function 'settings-gtk-titlebar-middle-click)
       "Accessor"
       (documentation 'settings-gtk-titlebar-middle-click 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-titlebar-middle-click object) => setting}
   @syntax{(setf (gtk:settings-gtk-titlebar-middle-click object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{a string for an action}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-titlebar-middle-click} slot of
-    the @class{gtk:settings} class gets or sets the action to take when a
-    middle-click occurs on the titlebar of client-side decorated windows.
+    The accessor for the @slot[gtk:settings]{gtk-titlebar-middle-click} slot
+    gets or sets the action to take when a middle-click occurs on the titlebar
+     of client-side decorated windows.
   @end{short}
   Recognized actions are @code{\"minimize\"}, @code{\"toggle-maximize\"},
   @code{\"menu\"}, @code{\"lower\"} or @code{\"none\"}.
@@ -2003,15 +1985,15 @@
 (setf (liber:alias-for-function 'settings-gtk-titlebar-right-click)
       "Accessor"
       (documentation 'settings-gtk-titlebar-right-click 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-titlebar-right-click object) => setting}
   @syntax{(setf (gtk:settings-gtk-titlebar-right-click object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{a string for an action}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-titlebar-right-click} slot of
-    the @class{gtk:settings} class gets or sets the action to take when a
-    right-click occurs on the titlebar of client-side decorated windows.
+    The accessor for the @slot[gtk:settings]{gtk-titlebar-right-click} slot
+    gets or sets the action to take when a right-click occurs on the titlebar
+    of client-side decorated windows.
   @end{short}
   Recognized actions are @code{\"minimize\"}, @code{\"toggle-maximize\"},
   @code{\"menu\"}, @code{\"lower\"} or @code{\"none\"}.
@@ -2031,15 +2013,14 @@
 (setf (liber:alias-for-function 'settings-gtk-xft-antialias)
       "Accessor"
       (documentation 'settings-gtk-xft-antialias 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-xft-antialias object) => setting}
   @syntax{(setf (gtk:settings-gtk-xft-antialias object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{a boolean whether to antialias Xft fonts}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-xft-antialias} slot of the
-    @class{gtk:settings} class gets or sets whether to antialias Xft fonts:
-    0 = no, 1 = yes, -1 = default.
+    The accessor for the @slot[gtk:settings]{gtk-xft-antialias} slot gets or
+    sets whether to antialias Xft fonts: 0 = no, 1 = yes, -1 = default.
   @end{short}
   @see-class{gtk:settings}")
 
@@ -2056,15 +2037,14 @@
 (setf (liber:alias-for-function 'settings-gtk-xft-dpi)
       "Accessor"
       (documentation 'settings-gtk-xft-dpi 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-xft-dpi object) => setting}
   @syntax{(setf (gtk:settings-gtk-xft-dpi object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{an integer for the resolution for Xft}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-xft-dpi} slot of the
-    @class{gtk:settings} class gets or sets the resolution for Xft, in
-    1024 * dots/inch. -1 to use default value.
+    The accessor for the @slot[gtk:settings]{gtk-xft-dpi} slot gets or sets
+    the resolution for Xft, in 1024 * dots/inch. -1 to use default value.
   @end{short}
   @see-class{gtk:settings}")
 
@@ -2082,15 +2062,14 @@
 (setf (liber:alias-for-function 'settings-gtk-xft-hinting)
       "Accessor"
       (documentation 'settings-gtk-xft-hinting 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-xft-hinting object) => setting}
   @syntax{(setf (gtk:settings-gtk-xft-hinting object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{an integer whether to hint Xft fonts}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-xft-hinting} slot of the
-    @class{gtk:settings} class gets or sets whether to hint Xft fonts: 0 = no,
-    1 = yes, -1 = default.
+    The accessor for the @slot[gtk:settings]{gtk-xft-hinting} slot gets or
+    sets whether to hint Xft fonts: 0 = no, 1 = yes, -1 = default.
   @end{short}
   @see-class{gtk:settings}")
 
@@ -2109,15 +2088,15 @@
 (setf (liber:alias-for-function 'settings-gtk-xft-hintstyle)
       "Accessor"
       (documentation 'settings-gtk-xft-hintstyle 'function)
- "@version{2025-09-23}
+ "@version{2026-08-30}
   @syntax{(gtk:settings-gtk-xft-hintstyle object) => setting}
   @syntax{(setf (gtk:settings-gtk-xft-hintstyle object) setting)}
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{a string for the deegree of hinting}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-xft-hintstyle} slot of the
-    @class{gtk:settings} class gets or sets the degree of hinting to use:
-    @code{hintnone}, @code{hintslight}, @code{hintmedium}, or @code{hintfull}.
+    The accessor for the @slot[gtk:settings]{gtk-xft-hintstyle} slot gets or
+    sets the degree of hinting to use: @code{hintnone}, @code{hintslight},
+    @code{hintmedium}, or @code{hintfull}.
   @end{short}
   @see-class{gtk:settings}")
 
@@ -2140,9 +2119,9 @@
   @argument[object]{a @class{gtk:settings} object}
   @argument[setting]{a string for the type of subpixel antialiasing}
   @begin{short}
-    The accessor for the @slot[gtk:settings]{gtk-xft-rgba} slot of the
-    @class{gtk:settings} class gets or sets the type of subpixel antialiasing:
-    @code{none}, @code{rgb}, @code{bgr}, @code{vrgb}, @code{vbgr}.
+    The accessor for the @slot[gtk:settings]{gtk-xft-rgba} slot gets or sets
+    the type of subpixel antialiasing: @code{none}, @code{rgb}, @code{bgr},
+    @code{vrgb}, @code{vbgr}.
   @end{short}
   @see-class{gtk:settings}")
 
@@ -2150,9 +2129,12 @@
 ;;; gtk_settings_get_default
 ;;; ----------------------------------------------------------------------------
 
+;; The default GtkSettings object for the default display is a global skeleton
+;; object.
+
 (cffi:defcfun ("gtk_settings_get_default" %settings-default) (g:object settings))
 
-(let ((settings nil))
+(let (settings)
   (defun settings-default  ()
    #+liber-documentation
    "@version{2026-01-17}

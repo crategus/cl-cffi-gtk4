@@ -69,6 +69,7 @@
 ;;;     GtkConstraintAttribute
 ;;;     GtkConstraintVflParserError
 ;;;     GtkSymbolicColor
+;;;
 ;;;     GtkAccessibleRole
 ;;;     GtkAccessibleState
 ;;;     GtkAccessibleProperty
@@ -77,7 +78,8 @@
 ;;;     GtkAccessibleInvalidState
 ;;;     GtkAccessibleAutocomplete
 ;;;     GtkAccessibleSort
-;;;     GtkAccessibleAnnouncementPriority
+;;;     GtkAccessiblePlatformState                          Since 4.10
+;;;     GtkAccessibleAnnouncementPriority                   Since 4.14
 ;;; ----------------------------------------------------------------------------
 
 (in-package :gtk)
@@ -1737,276 +1739,266 @@
 (gobject:define-genum "GtkAccessibleRole" accessible-role
   (:export t
    :type-initializer "gtk_accessible_role_get_type")
-  :alert
-  :alert-dialog
-  :banner
-  :button
-  :caption
-  :cell
-  :checkbox
-  :column-header
-  :combo-box
-  :command
-  :composite
-  :dialog
-  :document
-  :feed
-  :form
-  :generic
-  :grid
-  :grid-cell
-  :group
-  :heading
-  :img
-  :input
-  :label
-  :landmark
-  :legend
-  :link
-  :list
-  :list-box
-  :list-item
-  :log
-  :main
-  :marquee
-  :math
-  :meter
-  :menu
-  :menu-bar
-  :menu-item
-  :menu-item-checkbox
-  :menu-item-radio
-  :navigation
-  :none
-  :note
-  :option
-  :presentation
-  :progress-bar
-  :radio
-  :radio-group
-  :range
-  :region
-  :row
-  :row-group
-  :row-header
-  :scrollbar
-  :search
-  :search-box
-  :section
-  :section-head
-  :select
-  :separator
-  :slider
-  :spin-button
-  :status
-  :structure
-  :switch
-  :tab
-  :table
-  :tab-list
-  :tab-panel
-  :text-box
-  :time
-  :timer
-  :toolbar
-  :tooltip
-  :tree
-  :tree-grid
-  :tree-item
-  :widget
-  :window
+  (:alert 0)
+  (:alert-dialog 1)
+  (:banner 2)
+  (:button 3)
+  (:caption 4)
+  (:cell 5)
+  (:checkbox 6)
+  (:column-header 7)
+  (:combo-box 8)
+  (:command 9)
+  (:composite 10)
+  (:dialog 11)
+  (:document 12)
+  (:feed 13)
+  (:form 14)
+  (:generic 15)
+  (:grid 16)
+  (:grid-cell 17)
+  (:group 18)
+  (:heading 19)
+  (:img 20)
+  (:input 21)
+  (:label 22)
+  (:landmark 23)
+  (:legend 24)
+  (:link 25)
+  (:list 26)
+  (:list-box 27)
+  (:list-item 28)
+  (:log 29)
+  (:main 30)
+  (:marquee 31)
+  (:math 32)
+  (:meter 33)
+  (:menu 34)
+  (:menu-bar 35)
+  (:menu-item 36)
+  (:menu-item-checkbox 37)
+  (:menu-item-radio 38)
+  (:navigation 39)
+  (:none 40)
+  (:note 41)
+  (:option 42)
+  (:presentation 43)
+  (:progress-bar 44)
+  (:radio 45)
+  (:radio-group 46)
+  (:range 47)
+  (:region 48)
+  (:row 49)
+  (:row-group 50)
+  (:row-header 51)
+  (:scrollbar 52)
+  (:search 53)
+  (:search-box 54)
+  (:section 55)
+  (:section-head 56)
+  (:select 57)
+  (:separator 58)
+  (:slider 59)
+  (:spin-button 60)
+  (:status 61)
+  (:structure 62)
+  (:switch 63)
+  (:tab 64)
+  (:table 65)
+  (:tab-list 66)
+  (:tab-panel 67)
+  (:text-box 68)
+  (:time 69)
+  (:timer 70)
+  (:toolbar 71)
+  (:tooltip 72)
+  (:tree 73)
+  (:tree-grid 74)
+  (:tree-item 75)
+  (:widget 76)
+  (:window 77)
   #+gtk-4-10
-  :toggle-button
+  (:toggle-button 78)
   #+gtk-4-12
-  :application
+  (:application 79)
   #+gtk-4-14
-  :paragraph
+  (:paragraph 80)
   #+gtk-4-14
-  :block-quote
+  (:block-quote 81)
   #+gtk-4-14
-  :article
+  (:article 82)
   #+gtk-4-14
-  :comment
+  (:comment 83)
   #+gtk-4-14
-  :terminal)
+  (:terminal 84))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'accessible-role)
       "GEnum"
       (liber:symbol-documentation 'accessible-role)
- "@version{2025-07-12}
+ "@version{2026-08-25}
   @begin{declaration}
 (gobject:define-genum \"GtkAccessibleRole\" accessible-role
   (:export t
    :type-initializer \"gtk_accessible_role_get_type\")
-  :alert
-  :alert-dialog
-  :banner
-  :button
-  :caption
-  :cell
-  :checkbox
-  :column-header
-  :combo-box
-  :command
-  :composite
-  :dialog
-  :document
-  :feed
-  :form
-  :generic
-  :grid
-  :grid-cell
-  :group
-  :heading
-  :img
-  :input
-  :label
-  :landmark
-  :legend
-  :link
-  :list
-  :list-box
-  :list-item
-  :log
-  :main
-  :marquee
-  :math
-  :meter
-  :menu
-  :menu-bar
-  :menu-item
-  :menu-item-checkbox
-  :menu-item-radio
-  :navigation
-  :none
-  :note
-  :option
-  :presentation
-  :progress-bar
-  :radio
-  :radio-group
-  :range
-  :region
-  :row
-  :row-group
-  :row-header
-  :scrollbar
-  :search
-  :search-box
-  :section
-  :section-head
-  :select
-  :separator
-  :slider
-  :spin-button
-  :status
-  :structure
-  :switch
-  :tab
-  :table
-  :tab-list
-  :tab-panel
-  :text-box
-  :time
-  :timer
-  :toolbar
-  :tooltip
-  :tree
-  :tree-grid
-  :tree-item
-  :widget
-  :window
-  #+gtk-4-10
-  :toggle-button
-  #+gtk-4-12
-  :application
-  #+gtk-4-14
-  :paragraph
-  #+gtk-4-14
-  :block-quote
-  #+gtk-4-14
-  :article
-  #+gtk-4-14
-  :comment
-  #+gtk-4-14
-  :terminal)
+  (:alert 0)
+  (:alert-dialog 1)
+  (:banner 2)
+  (:button 3)
+  (:caption 4)
+  (:cell 5)
+  (:checkbox 6)
+  (:column-header 7)
+  (:combo-box 8)
+  (:command 9)
+  (:composite 10)
+  (:dialog 11)
+  (:document 12)
+  (:feed 13)
+  (:form 14)
+  (:generic 15)
+  (:grid 16)
+  (:grid-cell 17)
+  (:group 18)
+  (:heading 19)
+  (:img 20)
+  (:input 21)
+  (:label 22)
+  (:landmark 23)
+  (:legend 24)
+  (:link 25)
+  (:list 26)
+  (:list-box 27)
+  (:list-item 28)
+  (:log 29)
+  (:main 30)
+  (:marquee 31)
+  (:math 32)
+  (:meter 33)
+  (:menu 34)
+  (:menu-bar 35)
+  (:menu-item 36)
+  (:menu-item-checkbox 37)
+  (:menu-item-radio 38)
+  (:navigation 39)
+  (:none 40)
+  (:note 41)
+  (:option 42)
+  (:presentation 43)
+  (:progress-bar 44)
+  (:radio 45)
+  (:radio-group 46)
+  (:range 47)
+  (:region 48)
+  (:row 49)
+  (:row-group 50)
+  (:row-header 51)
+  (:scrollbar 52)
+  (:search 53)
+  (:search-box 54)
+  (:section 55)
+  (:section-head 56)
+  (:select 57)
+  (:separator 58)
+  (:slider 59)
+  (:spin-button 60)
+  (:status 61)
+  (:structure 62)
+  (:switch 63)
+  (:tab 64)
+  (:table 65)
+  (:tab-list 66)
+  (:tab-panel 67)
+  (:text-box 68)
+  (:time 69)
+  (:timer 70)
+  (:toolbar 71)
+  (:tooltip 72)
+  (:tree 73)
+  (:tree-grid 74)
+  (:tree-item 75)
+  (:widget 76)
+  (:window 77)
+  (:toggle-button 78)
+  (:application 79)
+  (:paragraph 80)
+  (:block-quote 81)
+  (:article 82)
+  (:comment 83)
+  (:terminal 84))
   @end{declaration}
   @begin{values}
     @begin[code]{simple-table}
       @entry[:alert]{An element with important, and usually time-sensitive,
         information.}
-      @entry[:alert-dialog]{ A type of dialog that contains an alert message.}
-      @entry[:banner]{Unused}
+      @entry[:alert-dialog]{A type of dialog that contains an alert message.}
+      @entry[:banner]{Unused.}
       @entry[:button]{An input element that allows for user-triggered actions
         when clicked or pressed.}
-      @entry[:caption]{Unused}
-      @entry[:cell]{Unused}
+      @entry[:caption, :cell]{Unused.}
       @entry[:checkbox]{A checkable input element that has three possible
-        values: \"true\", \"false\", or \"mixed\".}
+        values: @val[gtk:accessible-tristate]{:false},
+        @val[gtk:accessible-tristate]{:true} , or
+        @val[gtk:accessible-tristate]{:mixed}.}
       @entry[:column-header]{A header in a columned list.}
       @entry[:combo-box]{An input that controls another element, such as a list
-        or a grid, that can dynamically pop up to help the user set the value of
-        the input.}
-      @entry[:command]{Abstract role.}
-      @entry[:composite]{Abstract role.}
+        or a grid, that can dynamically pop up to help the user set the value
+        of the input.}
+      @entry[:command, :composite]{Abstract role.}
       @entry[:dialog]{A dialog is a window that is designed to interrupt the
         current processing of an application in order to prompt the user to
         enter information or require a response.}
-      @entry[:document]{Unused}
-      @entry[:feed]{Unused}
-      @entry[:form]{Unused}
-      @entry[:generic]{Unused}
+      @entry[:document]{Content that assistive technology users may want to
+        browse in a reading mode.}
+      @entry[:feed, :form]{Unused.}
+      @emtry[:generic]{A nameless container that has no semantic meaning of its
+        own. This is the role that GTK uses by default for widgets.}
       @entry[:grid]{A grid of items.}
       @entry[:grid-cell]{An item in a grid or tree grid.}
       @entry[:group]{An element that groups multiple widgets. GTK uses this role
-        for various containers, like the @class{gtk:box}, @class{gtk:viewport},
-        and @class{gtk:header-bar} widgets.}
-      @entry[:heading]{Unused}
+        for various containers, like the @class{gtk:header-bar} or
+        @class{gtk:notebook} widgets.}
+      @entry[:heading]{Unused.}
       @entry[:img]{An image.}
       @entry[:input]{Abstract role.}
       @entry[:label]{A visible name or caption for a user interface component.}
       @entry[:landmark]{Abstract role.}
-      @entry[:legend]{Unused}
+      @entry[:legend]{Unused.}
       @entry[:link]{A clickable link.}
       @entry[:list]{A list of items.}
-      @entry[:list-box]{Unused}
+      @entry[:list-box]{Unused.}
       @entry[:list-item]{An item in a list.}
-      @entry[:log]{Unused}
-      @entry[:main]{Unused}
-      @entry[:marquee]{Unused}
-      @entry[:math]{Unused}
+      @entry[:log, :main, :marquee, :math]{Unused.}
       @entry[:meter]{An element that represents a value within a known range.}
       @entry[:menu]{A menu.}
       @entry[:menu-bar]{A menubar.}
       @entry[:menu-item]{An item in a menu.}
       @entry[:menu-item-checkbox]{A check item in a menu.}
       @entry[:menu-item-radio]{A radio item in a menu.}
-      @entry[:navigation]{Unused}
+      @entry[:navigation]{Unused.}
       @entry[:none]{An element that is not represented to accessibility
-        technologies.}
-      @entry[:note]{Unused}
-      @entry[:option]{Unused}
+        technologies. This role is synonymous to
+        @val[gtk:accessible-role]{:presentation}.}
+      @entry[:note, :option]{Unused.}
       @entry[:presentation]{An element that is not represented to accessibility
-        technologies.}
+        technologies. This role is synonymous to
+        @val[gtk:accessible-role]{:none}.}
       @entry[:progress-bar]{An element that displays the progress status for
         tasks that take a long time.}
       @entry[:radio]{A checkable input in a group of radio roles, only one of
         which can be checked at a time.}
-      @entry[:radio-group]{Unused}
+      @entry[:radio-group]{Unused.}
       @entry[:range]{Abstract role.}
-      @entry[:region]{Unused}
+      @entry[:region]{Unused.}
       @entry[:row]{A row in a columned list.}
-      @entry[:row-group]{Unused}
-      @entry[:row-header]{Unused}
+      @entry[:row-group, :row-header]{Unused.}
       @entry[:scrollbar]{A graphical object that controls the scrolling of
         content within a viewing area, regardless of whether the content is
         fully displayed within the viewing area.}
-      @entry[:search]{Unused}
+      @entry[:search]{Unused.}
       @entry[:search-box]{A type of textbox intended for specifying search
         criteria.}
-      @entry[:section]{Abstract role.}
-      @entry[:section-head]{Abstract role.}
+      @entry[:section. :section-head]{Abstract role.}
       @entry[:select]{Abstract role.}
       @entry[:separator]{A divider that separates and distinguishes sections of
         content or groups of menuitems.}
@@ -2014,26 +2006,22 @@
         given range.}
       @entry[:spin-button]{A form of range that expects the user to select from
         among discrete choices.}
-      @entry[:status]{Unused}
+      @entry[:status]{Unused.}
       @entry[:structure]{Abstract role.}
       @entry[:switch]{A type of checkbox that represents on/off values, as
         opposed to checked/unchecked values.}
       @entry[:tab]{An item in a list of tab used for switching pages.}
-      @entry[:table]{Unused}
+      @entry[:table]{Unused.}
       @entry[:tab-list]{A list of tabs for switching pages.}
       @entry[:tab-panel]{A page in a notebook or stack.}
       @entry[:text-box]{A type of input that allows free-form text as its
         value.}
-      @entry[:time]{Unused}
-      @entry[:timer]{Unused}
-      @entry[:toolbar]{Unused}
-      @entry[:tooltip]{Unused}
-      @entry[:tree]{Unused}
+      @entry[:time, :timer, :toolbar, :tooltip, :tree]{Unused.}
       @entry[:tree-grid]{A treeview-like, columned list.}
-      @entry[:tree-item]{Unused}
-      @entry[:widget]{An interactive component of a graphical user interface.
-        This is the role that GTK uses by default for widgets.}
-      @entry[:window]{An application window.}
+      @entry[:tree-item]{Unused.}
+      @entry[:widget]{Abstract role for interactive components of a graphical
+        user interface.}
+      @entry[:window]{Abstract role for windows.}
       @entry[:toggle-button]{A type of push button which stays pressed until
         depressed by a second activation. Since: 4.10}
       @entry[:application]{A toplevel element of a graphical user interface.
@@ -2062,43 +2050,42 @@
 (gobject:define-genum "GtkAccessibleState" accessible-state
   (:export t
    :type-initializer "gtk_accessible_state_get_type")
-   :busy
-   :checked
-   :disabled
-   :expanded
-   :hidden
-   :invalid
-   :pressed
-   :selected
+   (:busy 0)
+   (:checked 1)
+   (:disabled 2)
+   (:expanded 3)
+   (:hidden 4)
+   (:invalid 5)
+   (:pressed 6)
+   (:selected 7)
    #+gtk-4-12
-   :visited)
+   (:visited 8))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'accessible-state)
       "GEnum"
       (liber:symbol-documentation 'accessible-state)
- "@version{2025-07-12}
+ "@version{2026-08-25}
   @begin{declaration}
-(gobject:define-genum \"GtkAccessibleState\" gtk:accessible-state
+(gobject:define-genum \"GtkAccessibleState\" accessible-state
   (:export t
    :type-initializer \"gtk_accessible_state_get_type\")
-   :busy
-   :checked
-   :disabled
-   :expanded
-   :hidden
-   :invalid
-   :pressed
-   :selected
-   #+gtk-4-12
-   :visited)
+   (:busy 0)
+   (:checked 1)
+   (:disabled 2)
+   (:expanded 3)
+   (:hidden 4)
+   (:invalid 5)
+   (:pressed 6)
+   (:selected 7)
+   (:visited 8))
   @end{declaration}
   @begin{values}
     @begin[code]{simple-table}
       @entry[:busy]{A \"busy\" state. This state has boolean values.}
       @entry[:checked]{A \"checked\" state. Indicates the current state of a
         @class{gtk:check-button} widget.
-        Value type: @sym{gtk:accessible-tristate} enumeration}
+        Value type: @sym{gtk:accessible-tristate}}
       @entry[:disabled]{A \"disabled\" state. Corresponds to the
         @slot[gtk:widget]{sensitive} property on the @class{gtk:widget} object.
         It indicates a UI element that is perceivable, but not editable or
@@ -2112,10 +2099,10 @@
         exposed to an assistive technology. See also the
         @val[gtk:accessible-state]{:disabled} value. Value type: boolean}
       @entry[:invalid]{An \"invalid\" state. Set when a widget is showing an
-        error. Value type: @sym{gtk:accessible-invalid-state} enumeration}
+        error. Value type: @sym{gtk:accessible-invalid-state}}
       @entry[:pressed]{A \"pressed\" state. Indicates the current state of a
-        @class{gtk:toggle-button} widget.
-        Value type: @sym{gtk:accessible-tristate} enumeration}
+        @class{gtk:toggle-button} widget. Value type:
+        @sym{gtk:accessible-tristate}}
       @entry[:selected]{A \"selected\" state. Set when a widget is selected.
         Value type: boolean or undefined}
       @entry[:visited]{Indicates that a widget with the
@@ -2137,72 +2124,85 @@
 (gobject:define-genum "GtkAccessibleProperty" accessible-property
   (:export t
    :type-initializer "gtk_accessible_property_get_type")
-  :autocomplete
-  :description
-  :has-popup
-  :key-shortcuts
-  :label
-  :level
-  :modal
-  :multi-line
-  :multi-selectable
-  :orientation
-  :placeholder
-  :read-only
-  :required
-  :role-description
-  :sort
-  :value-max
-  :value-min
-  :value-now
-  :value-text
+  (:autocomplete 0)
+  (:description 1)
+  (:has-popup 2)
+  (:key-shortcuts 3)
+  (:label 4)
+  (:level 5)
+  (:modal 6)
+  (:multi-line 7)
+  (:multi-selectable 8)
+  (:orientation 9)
+  (:placeholder 10)
+  (:read-only 11)
+  (:required 12)
+  (:role-description 13)
+  (:sort 14)
+  (:value-max 15)
+  (:value-min 16)
+  (:value-now 17)
+  (:value-text 18)
   #+gtk-4-16
-  :help-text)
+  (:help-text 19))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'accessible-property)
       "GEnum"
       (liber:symbol-documentation 'accessible-property)
- "@version{2025-07-12}
+ "@version{2026-08-25}
   @begin{declaration}
 (gobject:define-genum \"GtkAccessibleProperty\" accessible-property
   (:export t
    :type-initializer \"gtk_accessible_property_get_type\")
-  :autocomplete
-  :description
-  :has-popup
-  :key-shortcuts
-  :label
-  :level
-  :modal
-  :multi-line
-  :multi-selectable
-  :orientation
-  :placeholder
-  :read-only
-  :required
-  :role-description
-  :sort
-  :value-max
-  :value-min
-  :value-now
-  :value-text
-  :help-text)
+  (:autocomplete 0)
+  (:description 1)
+  (:has-popup 2)
+  (:key-shortcuts 3)
+  (:label 4)
+  (:level 5)
+  (:modal 6)
+  (:multi-line 7)
+  (:multi-selectable 8)
+  (:orientation 9)
+  (:placeholder 10)
+  (:read-only 11)
+  (:required 12)
+  (:role-description 13)
+  (:sort 14)
+  (:value-max 15)
+  (:value-min 16)
+  (:value-now 17)
+  (:value-text 18)
+  (:help-text 19))
   @end{declaration}
   @begin{values}
     @begin[code]{simple-table}
-      @entry[:auto-complete]{Indicates whether inputting text could trigger
+      @entry[:autocomplete]{Indicates whether inputting text could trigger
         display of one or more predictions of the user's intended value for a
         combobox, searchbox, or textbox and specifies how predictions would be
         presented if they were made.
-        Value type: @sym{gtk:accessible-autocomplete} enumeration}
+        Value type: @sym{gtk:accessible-autocomplete}}
       @entry[:description]{Defines a string value that describes or annotates
         the current element. Value type: string}
       @entry[:has-popup]{Indicates the availability and type of interactive
         popup element, such as menu or dialog, that can be triggered by an
-        element.}
+        element. Contrary to \"aria-haspopup\", it does not indicate the type
+        of the element, as such it cannot be used to indicate the availability
+        of more complex elements such as dialog. Value type: boolean}
       @entry[:key-shortcuts]{Indicates keyboard shortcuts that an author has
-        implemented to activate or give focus to an element. Value type: string}
+        implemented to activate or give focus to an element. The format of the
+        value is a space-separated list of shortcuts, with each shortcut
+        consisting of one or more modifiers (@kbd{Control}, @kbd{Alt} or
+        @kbd{Shift}), followed by a non-modifier key, all separated by
+        @kbd{+.}
+        The @url[https://www.w3.org/TR/wai-aria/#aria-keyshortcuts]{WAI-ARIA}
+        reference specifies how to build keyboard shortcuts strings, with
+        specific values for each key which are the same regardless of the
+        language, so these strings cannot be built from localized key names.
+        You can convert an accelerator into the matching key shortcuts label
+        with the @fun{gtk:accelerator-accessible-label} function. Examples:
+        @kbd{F2}, @kbd{Alt+F}, @bdk{Control+Shift+N}. Value type: string}
       @entry[:label]{Defines a string value that labels the current element.
         Value type: string}
       @entry[:level]{Defines the hierarchical level of an element within a
@@ -2215,7 +2215,7 @@
         one item from the current selectable descendants. Value type: boolean}
       @entry[:orientation]{Indicates whether the orientation of the element is
         horizontal, vertical, or unknown/ambiguous. Value type:
-        @class{gtk:orientation} enumeration}
+        @class{gtk:orientation}}
       @entry[:placeholder]{Defines a short hint (a word or short phrase)
         intended to aid the user with data entry when the control has no value.
         A hint could be a sample value or a brief description of the expected
@@ -2229,7 +2229,7 @@
       @entry[:sort]{Indicates if items in a table or grid are sorted in
         ascending or descending order. Possible property values are in the
         @sym{gtk:accessible-sort} enumeration. Value type:
-        @sym{gtk:accessible-sort} enumeration}
+        @sym{gtk:accessible-sort}}
       @entry[:value-max]{Defines the maximum allowed value for a range widget.
         Value type: double}
       @entry[:value-min]{Defines the minimum allowed value for a range widget.
@@ -2237,7 +2237,8 @@
       @entry[:value-now]{Defines the current value for a range widget.
         Value type: double}
       @entry[:value-text]{Defines the human readable text alternative of
-        aria-valuenow for a range widget. Value type: string}
+        @val[gtk:accessible-property]{:value-now} for a range widget. Value
+        type: string}
       @entry[:help-text]{Defines a string value that provides a description
         of non-standard keyboard interactions of the current element. Value
         type: string. Since 4.16}
@@ -2248,8 +2249,7 @@
   @end{short}
   @see-class{gtk:accessible}
   @see-symbol{gtk:accessible-autocomplete}
-  @see-symbol{gtk:accessible-sort}
-  @see-function{gtk:accessible-property-init-value}")
+  @see-symbol{gtk:accessible-sort}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkAccessibleRelation
@@ -2258,70 +2258,70 @@
 (gobject:define-genum "GtkAccessibleRelation" accessible-relation
   (:export t
    :type-initializer "gtk_accessible_relation_get_type")
-  :active-descendant
-  :col-count
-  :col-index
-  :col-index-text
-  :col-span
-  :controls
-  :described-by
-  :details
-  :error-message
-  :flow-to
-  :labelled-by
-  :owns
-  :pos-in-set
-  :row-count
-  :row-index
-  :row-index-text
-  :row-span
-  :set-size
+  (:active-descendant 0)
+  (:col-count 1)
+  (:col-index 2)
+  (:col-index-text 3)
+  (:col-span 4)
+  (:controls 5)
+  (:described-by 6)
+  (:details 7)
+  (:error-message 8)
+  (:flow-to 9)
+  (:labelled-by 10)
+  (:owns 11)
+  (:pos-in-set 12)
+  (:row-count 13)
+  (:row-index 14)
+  (:row-index-text 15)
+  (:row-span 16)
+  (:set-size 17)
   #+gtk-4-18
-  :label-for
+  (:label-for 18)
   #+gtk-4-18
-  :description-for
+  (:description-for 19)
   #+gtk-4-18
-  :controlled-by
+  (:controlled-by 20)
   #+gtk-4-18
-  :details-for
+  (:details-for 21)
   #+gtk-4-18
-  :error-message-for
+  (:error-message-for 22)
   #+gtk-4-18
-  :flow-error)
+  (:flow-from 12))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'accessible-relation)
       "GEnum"
       (liber:symbol-documentation 'accessible-relation)
- "@version{2025-07-12}
+ "@version{2026-08-25}
   @begin{declaration}
 (gobject:define-genum \"GtkAccessibleRelation\" accessible-relation
   (:export t
    :type-initializer \"gtk_accessible_relation_get_type\")
-  :active-descendant
-  :col-count
-  :col-index
-  :col-index-text
-  :col-span
-  :controls
-  :described-by
-  :details
-  :error-message
-  :flow-to
-  :labelled-by
-  :owns
-  :pos-in-set
-  :row-count
-  :row-index
-  :row-index-text
-  :row-span
-  :set-size
-  :label-for
-  :description-for
-  :controlled-by
-  :details-for
-  :error-message-for
-  :flow-error)
+  (:active-descendant 0)
+  (:col-count 1)
+  (:col-index 2)
+  (:col-index-text 3)
+  (:col-span 4)
+  (:controls 5)
+  (:described-by 6)
+  (:details 7)
+  (:error-message 8)
+  (:flow-to 9)
+  (:labelled-by 10)
+  (:owns 11)
+  (:pos-in-set 12)
+  (:row-count 13)
+  (:row-index 14)
+  (:row-index-text 15)
+  (:row-span 16)
+  (:set-size 17)
+  (:label-for 18)
+  (:description-for 19)
+  (:controlled-by 20)
+  (:details-for 21)
+  (:error-message-for 22)
+  (:flow-from 12))
   @end{declaration}
   @begin{values}
     @begin[code]{simple-table}
@@ -2343,8 +2343,8 @@
         the object. Value type: reference}
       @entry[:details]{Identifies the element (or elements) that provide
         additional information related to the object. Value type: reference}
-      @entry[:error-message]{Identifies the element that provides an error
-        message for an object. Value type: reference}
+      @entry[:error-message]{Identifies the element (or elements) that provides
+        an error message for an object. Value type: reference}
       @entry[:flow-to]{Identifies the next element (or elements) in an alternate
         reading order of content which, at the user's discretion, allows
         assistive technology to override the general default of reading in
@@ -2363,7 +2363,7 @@
         respect to the total number of rows within a table, grid, or treegrid.
         Value type: integer}
       @entry[:row-index-text]{Defines a human readable text alternative of
-        aria-rowindex. Value type: string}
+        the @val[gtk:accessible-relation]{:row-index} value. Value type: string}
       @entry[:row-span]{Defines the number of rows spanned by a cell or
         gridcell within a table, grid, or treegrid. Value type: integer}
       @entry[:set-size]{Defines the number of items in the current set of
@@ -2407,28 +2407,28 @@
 (gobject:define-genum "GtkAccessibleTristate" accessible-tristate
   (:export t
    :type-initializer "gtk_accessible_tristate_get_type")
-  :false
-  :true
-  :mixed)
+  (:false 0)
+  (:true 1)
+  (:mixed 2))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'accessible-tristate)
       "GEnum"
       (liber:symbol-documentation 'accessible-tristate)
- "@version{2025-07-12}
+ "@version{2026-08-25}
   @begin{declaration}
 (gobject:define-genum \"GtkAccessibleTristate\" accessible-tristate
   (:export t
    :type-initializer \"gtk_accessible_tristate_get_type\")
-  :false
-  :true
-  :mixed)
+  (:false 0)
+  (:true 1)
+  (:mixed 2))
   @end{declaration}
   @begin{values}
     @begin[code]{simple-table}
-      @entry[:false]{The state is \"false\".}
-      @entry[:true]{The state is \"true\".}
-      @entry[:mixed]{The state is \"mixed\".}
+      @entry[:false]{The state is @code{false}.}
+      @entry[:true]{The state is @code{true}.}
+      @entry[:mixed]{The state is @code{mixed}.}
     @end{simple-table}
   @end{values}
   @begin{short}
@@ -2448,24 +2448,24 @@
 (gobject:define-genum "GtkAccessibleInvalidState" accessible-invalid-state
   (:export t
    :type-initializer "gtk_accessible_invalid_state_get_type")
-  :false
-  :true
-  :grammar
-  :spelling)
+  (:false 0)
+  (:true 1)
+  (:grammar 2)
+  (:spelling 3))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'accessible-invalid-state)
       "GEnum"
       (liber:symbol-documentation 'accessible-invalid-state)
- "@version{2025-07-25}
+ "@version{2026-08-25}
   @begin{declaration}
 (gobject:define-genum \"GtkAccessibleInvalidState\" accessible-invalid-state
   (:export t
    :type-initializer \"gtk_accessible_invalid_state_get_type\")
-  :false
-  :true
-  :grammar
-  :spelling)
+  (:false 0)
+  (:true 1)
+  (:grammar 2)
+  (:spelling 3))
   @end{declaration}
   @begin{values}
     @begin[code]{simple-table}
@@ -2492,24 +2492,24 @@
 (gobject:define-genum "GtkAccessibleAutocomplete" accessible-autocomplete
   (:export t
    :type-initializer "gtk_accessible_autocomplete_get_type")
-  :none
-  :inline
-  :list
-  :both)
+  (:none 0)
+  (:inline 1)
+  (:list 2)
+  (:both 3))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'accessible-autocomplete)
       "GEnum"
       (liber:symbol-documentation 'accessible-autocomplete)
- "@version{2025-07-25}
+ "@version{2026-08-25}
   @begin{declaration}
 (gobject:define-genum \"GtkAccessibleAutocomplete\" accessible-autocomplete
   (:export t
    :type-initializer \"gtk_accessible_autocomplete_get_type\")
-  :none
-  :inline
-  :list
-  :both)
+  (:none 0)
+  (:inline 1)
+  (:list 2)
+  (:both 3))
   @end{declaration}
   @begin{values}
     @begin[code]{simple-table}
@@ -2528,7 +2528,7 @@
     @end{simple-table}
   @end{values}
   @begin{short}
-    The possible values for the @sym[gtk:accessible-property]{:autocomplete}
+    The possible values for the @val[gtk:accessible-property]{:autocomplete}
     accessible property.
   @end{short}
   @see-class{gtk:accessible}
@@ -2541,24 +2541,24 @@
 (gobject:define-genum "GtkAccessibleSort" accessible-sort
   (:export t
    :type-initializer "gtk_accessible_sort_get_type")
-  :none
-  :ascending
-  :descending
-  :other)
+  (:none 0)
+  (:ascending 1)
+  (:descending 2)
+  (:other 3))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'accessible-sort)
       "GEnum"
       (liber:symbol-documentation 'accessible-sort)
- "@version{2025-07-25}
+ "@version{2026-08-25}
   @begin{declaration}
 (gobject:define-genum \"GtkAccessibleSort\" accessible-sort
   (:export t
    :type-initializer \"gtk_accessible_sort_get_type\")
-  :none
-  :ascending
-  :descending
-  :other)
+  (:none 0)
+  (:ascending 1)
+  (:descending 2)
+  (:other 3))
   @end{declaration}
   @begin{values}
     @begin[code]{simple-table}
@@ -2577,6 +2577,47 @@
   @see-symbol{gtk:accessible-property}")
 
 ;;; ----------------------------------------------------------------------------
+;;; GtkAccessiblePlatformState                              Since 4.10
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-10
+(gobject:define-genum "GtkAccessiblePlatformState" accessible-platform-state
+  (:export t
+   :type-initializer "gtk_accessible_platform_state_get_type")
+  (:focusable 0)
+  (:focused 1)
+  (:active 2))
+
+#+(and gtk-4-10 liber-documentation)
+(setf (liber:alias-for-symbol 'accessible-platform-state)
+      "GEnum"
+      (liber:symbol-documentation 'accessible-platform-state)
+ "@version{2026-08-25}
+  @begin{declaration}
+(gobject:define-genum \"GtkAccessiblePlatformState\" accessible-platform-state
+  (:export t
+   :type-initializer \"gtk_accessible_platform_state_get_type\")
+  (:focusable 0)
+  (:focused 1)
+  (:active 2))
+  @end{declaration}
+  @begin{values}
+    @begin[code]{simple-table}
+      @entry[:focusable]{Whether the accessible can be focused.}
+      @entry[:focused]{Whether the accessible has focus.}
+      @entry[:active]{Whether the accessible is active.}
+    @end{simple-table}
+  @end{values}
+  @begin{short}
+    The various platform states which can be queried using the
+    @fun{gtk:accessible-platform-state} function.
+  @end{short}
+
+  Since 4.10
+  @see-class{gtk:accessible}
+  @see-function{gtk:accessible-platform-state}")
+
+;;; ----------------------------------------------------------------------------
 ;;; GtkAccessibleAnnouncementPriority                       Since 4.14
 ;;; ----------------------------------------------------------------------------
 
@@ -2585,23 +2626,23 @@
                       accessible-announcement-priority
   (:export t
    :type-initializer "gtk_accessible_announcement_priority_get_type")
-  :low
-  :medium
-  :high)
+  (:low 0)
+  (:medium 1)
+  (:high 2))
 
 #+(and gtk-4-14 liber-documentation)
 (setf (liber:alias-for-symbol 'accessible-announcement-priority)
       "GEnum"
       (liber:symbol-documentation 'accessible-announcement-priority)
- "@version{2025-07-12}
+ "@version{2026-08-25}
   @begin{declaration}
 (gobject:define-genum \"GtkAccessibleAnnouncementPriority\"
                       accessible-announcement-priority
   (:export t
    :type-initializer \"gtk_accessible_announcement_priority_get_type\")
-  :low
-  :medium
-  :high)
+  (:low 0)
+  (:medium 1)
+  (:high 2))
   @end{declaration}
   @begin{values}
     @begin[code]{simple-table}
