@@ -1918,12 +1918,12 @@ color {
 
 (defun border-node-new (outline widths colors)
  #+liber-documentation
- "@version{2025-08-02}
+ "@version{2026-08-01}
   @argument[outline]{a @sym{gsk:rounded-rect} instance describing the outline
     of the border}
   @argument[widths]{a list with 4 single floats for the stroke width of the
     border on the top, right, bottom, and left side respectively}
-  @argument[colors]{a list with 4 @class{gdk:rgba} instances for the color
+  @argument[colors]{a list with 4 @class{gdk:rgba} instances for the colors
     used on the top, right, bottom, and left side}
   @return{The @class{gsk:border-node} instance.}
   @begin{short}
