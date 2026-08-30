@@ -2,7 +2,7 @@
 ;;; gtk4.list-view.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -232,14 +232,14 @@
 (setf (liber:alias-for-function 'list-base-orientation)
       "Accessor"
       (documentation 'list-base-orientation 'function)
- "@version{2025-09-29}
+ "@version{2026-08-30}
   @syntax{(gtk:list-base-orientation object) => orientation}
   @syntax{(setf (gtk:list-base-orientation object) orientation)}
   @argument[object]{a @class{gtk:list-base} widget}
   @argument[orientation]{a @sym{gtk:orientation} value}
   @begin{short}
-    The accessor for the @slot[gtk:list-base]{orientation} slot of the
-    @class{gtk:list-base} class gets or sets the orientation of the list widget.
+    The accessor for the @slot[gtk:list-base]{orientation} slot gets or sets
+    the orientation of the list widget.
   @end{short}
   @see-class{gtk:list-base}
   @see-symbol{gtk:orientation}")
@@ -434,15 +434,14 @@ lambda (listview position)    :run-last
 (setf (liber:alias-for-function 'list-view-enable-rubberband)
       "Accessor"
       (documentation 'list-view-enable-rubberband 'function)
- "@version{2025-09-29}
+ "@version{2026-08-30}
   @syntax{(gtk:list-view-enable-rubberband object) => setting}
   @syntax{(setf (gtk:list-view-enable-rubberband object) setting)}
   @argument[object]{a @class{gtk:list-view} object}
   @argument[setting]{@em{true} if rubberband selection is enabled}
   @begin{short}
-    The accessor for the @slot[gtk:list-view]{enable-rubberband} slot of the
-    @class{gtk:list-view} class gets or sets whether rows can be selected by
-    dragging with the mouse.
+    The accessor for the @slot[gtk:list-view]{enable-rubberband} slot gets or
+    sets whether rows can be selected by dragging with the mouse.
   @end{short}
   @see-class{gtk:list-view}")
 
@@ -458,16 +457,15 @@ lambda (listview position)    :run-last
 (setf (liber:alias-for-function 'list-view-factory)
       "Accessor"
       (documentation 'list-view-factory 'function)
- "@version{2025-09-29}
+ "@version{2026-08-30}
   @syntax{(gtk:list-view-factory object) => factory}
   @syntax{(setf (gtk:list-view-factory object) factory)}
   @argument[object]{a @class{gtk:list-view} object}
   @argument[factory]{a @class{gtk:list-item-factory} object to use, or
     @code{nil} for none}
   @begin{short}
-    The accessor for the @slot[gtk:list-view]{factory} slot of the
-    @class{gtk:list-view} class gets or sets the factory that is currently used
-    to populate list items.
+    The accessor for the @slot[gtk:list-view]{factory} slot gets or sets the
+    factory that is currently used to populate list items.
   @end{short}
   @see-class{gtk:list-view}
   @see-class{gtk:list-item-factory}")
@@ -484,15 +482,15 @@ lambda (listview position)    :run-last
 (setf (liber:alias-for-function 'list-view-header-factory)
       "Accessor"
       (documentation 'list-view-header-factory 'function)
- "@version{2025-09-29}
+ "@version{2026-08-30}
   @syntax{(gtk:list-view-header-factory object) => factory}
   @syntax{(setf (gtk:list-view-header-factory object) factory)}
   @argument[object]{a @class{gtk:list-view} object}
   @argument[factory]{a @class{gtk:list-item-factory} object to use}
   @begin{short}
-    The accessor for the @slot[gtk:list-view]{header-factory} slot of the
-    @class{gtk:list-view} class gets or sets the factory to use for populating
-    the @class{gtk:list-header} objects used in section headers.
+    The accessor for the @slot[gtk:list-view]{header-factory} slot gets or sets
+    the factory to use for populating the @class{gtk:list-header} objects used
+    in section headers.
   @end{short}
   If this factory is set to @code{nil}, the list will not show section headers.
 
@@ -513,15 +511,14 @@ lambda (listview position)    :run-last
 (setf (liber:alias-for-function 'list-view-model)
       "Accessor"
       (documentation 'list-view-model 'function)
- "@version{2025-09-29}
+ "@version{2026-08-30}
   @syntax{(gtk:list-view-model object) => model}
   @syntax{(setf (gtk:list-view-model object) model)}
   @argument[object]{a @class{gtk:list-view} object}
   @argument[model]{a @class{gtk:selection-model} object to use}
   @begin{short}
-    The accessor for the @slot[gtk:list-view]{model} slot of the
-    @class{gtk:list-view} class gets or sets the model that is currently used to
-    read the items displayed.
+    The accessor for the @slot[gtk:list-view]{model} slot gets or sets the
+    model that is currently used to read the items displayed.
   @end{short}
   This must be a @class{gtk:selection-model} object.
   @see-class{gtk:list-view}
@@ -540,15 +537,14 @@ lambda (listview position)    :run-last
 (setf (liber:alias-for-function 'list-view-show-separators)
       "Accessor"
       (documentation 'list-view-show-separators 'function)
- "@version{2025-09-29}
+ "@version{2026-08-30}
   @syntax{(gtk:list-view-show-separators object) => setting}
   @syntax{(setf (gtk:list-view-show-separators object) setting)}
   @argument[object]{a @class{gtk:list-view} object}
   @argument[setting]{@em{true} if the list box shows separators}
   @begin{short}
-    The accessor for the @slot[gtk:list-view]{show-separators} slot of the
-    @class{gtk:list-view} class gets or sets whether the list box should show
-    separators between rows.
+    The accessor for the @slot[gtk:list-view]{show-separators} slot gets or
+    sets whether the list box should show separators between rows.
   @end{short}
   @see-class{gtk:list-view}")
 
@@ -566,15 +562,15 @@ lambda (listview position)    :run-last
 (setf (liber:alias-for-function 'list-view-single-click-activate)
       "Accessor"
       (documentation 'list-view-single-click-activate 'function)
- "@version{2025-09-29}
+ "@version{2026-08-30}
   @syntax{(gtk:list-view-single-click-activate object) => setting}
   @syntax{(setf (gtk:list-view-single-click-activate object) setting)}
   @argument[object]{a @class{gtk:list-view} object}
   @argument[setting]{@em{true} if rows are activated on single click}
   @begin{short}
-    The accessor for the @slot[gtk:list-view]{single-click-activate} slot of the
-    @class{gtk:list-view} class gets or sets whether rows will be activated on
-    single click and selected on hover.
+    The accessor for the @slot[gtk:list-view]{single-click-activate} slot
+    gets or sets whether rows will be activated on single click and selected on
+    hover.
   @end{short}
   @see-class{gtk:list-view}")
 
@@ -591,15 +587,14 @@ lambda (listview position)    :run-last
 (setf (liber:alias-for-function 'list-view-tab-behavior)
       "Accessor"
       (documentation 'list-view-tab-behavior 'function)
- "@version{2025-09-29}
+ "@version{2026-08-30}
   @syntax{(gtk:list-view-tab-behavior object) => setting}
   @syntax{(setf (gtk:list-view-tab-behavior object) setting)}
   @argument[object]{a @class{gtk:list-view} object}
   @argument[setting]{a @sym{gtk:list-tab-behavior} value}
   @begin{short}
-    The accessor for the @slot[gtk:list-view]{tab-behavior} slot of the
-    @class{gtk:list-view} class gets or sets the behavior set for the @kbd{Tab}
-    and @kbd{Shift+Tab} keys.
+    The accessor for the @slot[gtk:list-view]{tab-behavior} slot gets or sets
+    the behavior set for the @kbd{Tab} and @kbd{Shift+Tab} keys.
   @end{short}
 
   Since 4.12

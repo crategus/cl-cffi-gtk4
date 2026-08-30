@@ -2,7 +2,7 @@
 ;;; gtk4.builder-list-item-factory.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -133,14 +133,14 @@
 (setf (liber:alias-for-function 'builder-list-item-factory-bytes)
       "Accessor"
       (documentation 'builder-list-item-factory-bytes 'function)
- "@version{2025-08-15}
+ "@version{2026-08-30}
   @syntax{(gtk:builder-list-item-factory-bytes object) => bytes}
   @argument[object]{a @class{gtk:builder-list-item-factory} object}
   @argument[bytes]{a @class{g:bytes} instance for the @class{gtk:builder} data}
   @begin{short}
-    The accessor for the @slot[gtk:builder-list-item-factory]{bytes} slot of the
-    @class{gtk:builder-list-item-factory} class gets the data used as the
-    @class{gtk:builder} UI template for constructing list items.
+    The accessor for the @slot[gtk:builder-list-item-factory]{bytes} slot gets
+    the data used as the @class{gtk:builder} UI template for constructing list
+    items.
   @end{short}
   @see-class{gtk:builder-list-item-factory}
   @see-class{gtk:builder}
@@ -160,15 +160,14 @@
 (setf (liber:alias-for-function 'builder-list-item-factory-resource)
       "Accessor"
       (documentation 'builder-list-item-factory-resource 'function)
- "@version{2025-08-15}
+ "@version{2026-08-30}
   @syntax{(gtk:builder-list-item-factory-resource object) => resource}
   @argument[object]{a @class{gtk:builder-list-item-factory} object}
   @argument[resource]{a string for the path to the resource or @code{nil}
     if none}
   @begin{short}
-    The accessor for the @slot[gtk:builder-list-item-factory]{resource} slot of
-    the @class{gtk:builder-list-item-factory} class gets the resource path
-    containing the UI definition.
+    The accessor for the @slot[gtk:builder-list-item-factory]{resource} slot
+    gets the resource path containing the UI definition.
   @end{short}
   @see-class{gtk:builder-list-item-factory}
   @see-class{g:resource}")
@@ -186,15 +185,14 @@
 (setf (liber:alias-for-function 'builder-list-item-factory-scope)
       "Accessor"
       (documentation 'builder-list-item-factory-scope 'function)
- "@version{2025-08-15}
+ "@version{2026-08-30}
   @syntax{(gtk:builder-list-item-factory-scope object) => scope}
   @argument[object]{a @class{gtk:builder-list-item-factory} object}
   @argument[resource]{a @class{gtk:builder-scope} object used when
     constructing list items}
   @begin{short}
-    The accessor for the @slot[gtk:builder-list-item-factory]{scope} slot of the
-    @class{gtk:builder-list-item-factory} class gets or sets the scope used when
-    constructing list items.
+    The accessor for the @slot[gtk:builder-list-item-factory]{scope} slot gets
+    or sets the scope used when constructing list items.
   @end{short}
   @see-class{gtk:builder-list-item-factory}
   @see-class{g:resource}")

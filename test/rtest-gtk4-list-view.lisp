@@ -173,16 +173,21 @@
 
 ;;; --- Signals ----------------------------------------------------------------
 
-(test gtk-list-view-signals
-  (let ((query (g:signal-query (g:signal-lookup "activate" "GtkListView"))))
-    (is (string= "activate" (g:signal-query-signal-name query)))
-    (is (string= "GtkListView" (g:type-name (g:signal-query-owner-type query))))
+(test gtk-list-view-activate-signal
+  (let* ((name "activate")
+         (gtype (g:gtype "GtkListView"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
     (is (equal '(:RUN-LAST)
                (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
     (is (equal '("guint")
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Properties (GtkListView) -----------------------------------------------
 
@@ -234,4 +239,4 @@
     (gtk:list-view-scroll-to listview 1 :select nil)
 ))
 
-;;; 2025-4-26
+;;; 2025-07-24

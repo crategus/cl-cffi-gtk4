@@ -2,7 +2,7 @@
 ;;; gtk4.list-item.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -159,15 +159,14 @@
 (setf (liber:alias-for-function 'list-item-accessible-description)
       "Accessor"
       (documentation 'list-item-accessible-description 'function)
- "@version{2025-09-29}
+ "@version{2026-08-30}
   @syntax{(gtk:list-item-accessible-description object) => description}
   @syntax{(setf (gtk:list-item-accessible-description object) description)}
   @argument[object]{a @class{gtk:list-item} object}
   @argument[description]{a string for the description}
   @begin{short}
-    The accessor for the @slot[gtk:list-item]{accessible-description} slot of
-    the @class{gtk:list-item} class gets or sets the accessible description for
-    the list item.
+    The accessor for the @slot[gtk:list-item]{accessible-description} slot
+    gets or sets the accessible description for the list item.
   @end{short}
   The accessible description may be used by screen readers, for example.
 
@@ -187,15 +186,14 @@
 (setf (liber:alias-for-function 'list-item-accessible-label)
       "Accessor"
       (documentation 'list-item-accessible-label 'function)
- "@version{2025-09-29}
+ "@version{2026-08-30}
   @syntax{(gtk:list-item-accessible-label object) => label}
   @syntax{(setf (gtk:list-item-accessible-label object) label)}
   @argument[object]{a @class{gtk:list-item} object}
   @argument[label]{a string for the label}
   @begin{short}
-    The accessor for the @slot[gtk:list-item]{accessible-label} slot of the
-    @class{gtk:list-item} class gets or sets the accessible label for the list
-    item.
+    The accessor for the @slot[gtk:list-item]{accessible-label} slot gets or
+    sets the accessible label for the list item.
   @end{short}
   The accessible label may be used by screen readers, for example.
 
@@ -214,15 +212,14 @@
 (setf (liber:alias-for-function 'list-item-activatable)
       "Accessor"
       (documentation 'list-item-activatable 'function)
- "@version{2025-09-29}
+ "@version{2026-08-30}
   @syntax{(gtk:list-item-activatable object) => activatable}
   @syntax{(setf (gtk:list-item-activatable object) activatable)}
   @argument[object]{a @class{gtk:list-item} object}
   @argument[activatable]{a boolean whether the list item should be activatable}
   @begin{short}
-    The accessor for the @slot[gtk:list-item]{activatable} slot of the
-    @class{gtk:list-item} class gets or sets whether the list item has been set
-    to be activatable.
+    The accessor for the @slot[gtk:list-item]{activatable} slot gets or sets
+    whether the list item has been set to be activatable.
   @end{short}
 
   If a list item is activatable, double-clicking on the list item, using the
@@ -247,14 +244,14 @@
 (setf (liber:alias-for-function 'list-item-child)
       "Accessor"
       (documentation 'list-item-child 'function)
- "@version{2025-09-29}
+ "@version{2026-08-30}
   @syntax{(gtk:list-item-child object) => child}
   @syntax{(setf (gtk:list-item-child object) child)}
   @argument[object]{a @class{gtk:list-item} object}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{short}
-    The accessor for the @slot[gtk:list-item]{child} slot of the
-    @class{gtk:list-item} class gets or sets the child widget.
+    The accessor for the @slot[gtk:list-item]{child} slot gets or sets the
+    child widget.
   @end{short}
   Returns @code{nil} if none was set. This function is typically called by
   applications when setting up a list item so that the widget can be reused when
@@ -274,15 +271,14 @@
 (setf (liber:alias-for-function 'list-item-focusable)
       "Accessor"
       (documentation 'list-item-focusable 'function)
- "@version{2025-09-29}
+ "@version{2026-08-30}
   @syntax{(gtk:list-item-focusable object) => focusable}
   @syntax{(setf (gtk:list-item-focusable object) focusable)}
   @argument[object]{a @class{gtk:list-item} object}
   @argument[focusable]{a boolean whether the list item can be focused}
   @begin{short}
-    The accessor for the @slot[gtk:list-item]{focusable} slot of the
-    @class{gtk:list-item} class gets or sets whether the list item has been set
-    to be focusable.
+    The accessor for the @slot[gtk:list-item]{focusable} slot gets or sets
+    whether the list item has been set to be focusable.
   @end{short}
   If a list item is focusable, it can be focused using the keyboard. This works
   similar to the @fun{gtk:widget-focusable} function.
@@ -306,15 +302,14 @@
 (setf (liber:alias-for-function 'list-item-item)
       "Accessor"
       (documentation 'list-item-item 'function)
- "@version{2025-09-29}
+ "@version{2026-08-30}
   @syntax{(gtk:list-item-item object) => item}
   @argument[object]{a @class{gtk:list-item} object}
   @argument[item]{a @class{g:object} instance for the list item displayed}
   @begin{short}
-    The accessor for the @slot[gtk:list-item]{item} slot of the
-    @class{gtk:list-item} class returns the list item that is currently
-    displayed in the model that @arg{object} is currently bound to or @code{nil}
-    if @arg{object} is unbound.
+    The accessor for the @slot[gtk:list-item]{item} slot returns the list item
+    that is currently displayed in the model that @arg{object} is currently
+    bound to or @code{nil} if @arg{object} is unbound.
   @end{short}
   @see-class{gtk:list-item}
   @see-class{g:object}")
@@ -331,14 +326,13 @@
 (setf (liber:alias-for-function 'list-item-position)
       "Accessor"
       (documentation 'list-item-position 'function)
- "@version{2025-09-29}
+ "@version{2026-08-30}
   @syntax{(gtk:list-item-position object) => position}
   @argument[object]{a @class{gtk:list-item} object}
   @argument[position]{an unsigned integer for the position of the item.}
   @begin{short}
-    The accessor for the @slot[gtk:list-item]{position} slot of the
-    @class{gtk:list-item} class returns the position in the model that
-    @arg{object} currently displays.
+    The accessor for the @slot[gtk:list-item]{position} slot returns the
+    position in the model that @arg{object} currently displays.
   @end{short}
   If @arg{object} is unbound, the @var{gtk:+invalid-list-position+} value is
   returned.
@@ -357,15 +351,14 @@
 (setf (liber:alias-for-function 'list-item-selectable)
       "Accessor"
       (documentation 'list-item-selectable 'function)
- "@version{2025-09-29}
+ "@version{2026-08-30}
   @syntax{(gtk:list-item-selectable object) => selectable}
   @syntax{(setf (gtk:list-item-selectable object) selectable)}
   @argument[object]{a @class{gtk:list-item} object}
   @argument[selectable]{a boolean whether the item should be selectable}
   @begin{short}
-    The accessor for the @slot[gtk:list-item]{selectable} slot of the
-    @class{gtk:list-item} class gets or sets whether the list item has been set
-    to be selectable.
+    The accessor for the @slot[gtk:list-item]{selectable} slot gets or sets
+    whether the list item has been set to be selectable.
   @end{short}
   If an item is selectable, clicking on the item or using the keyboard will try
   to select or unselect the item. If this succeeds is up to the model to
@@ -395,9 +388,8 @@
   @argument[object]{a @class{gtk:list-item} object}
   @argument[selected]{a boolean whether the item is selected}
   @begin{short}
-    The accessor for the @slot[gtk:list-item]{selected} slot of the
-    @class{gtk:list-item} class returns whether the list item is displayed as
-    selected.
+    The accessor for the @slot[gtk:list-item]{selected} slot returns whether
+    the list item is displayed as selected.
   @end{short}
   The selected state is maintained by the container and its list model and
   cannot be set otherwise.
