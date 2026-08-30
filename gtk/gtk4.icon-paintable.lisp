@@ -2,7 +2,7 @@
 ;;; gtk4.icon-paintable.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -119,12 +119,12 @@
 (defun symbolic-paintable-snapshot-symbolic
        (paintable snapshot width height colors)
  #+liber-documentation
- "@version{#2026-01-31}
+ "@version{#2026-08-01}
   @argument[paintable]{a @class{gtk:symbolic-paintable} object}
   @argument[snapshot]{a @class{gdk:snapshot} object to snapshot to}
   @argument[width]{an integer for the width to snapshot in}
   @argument[height]{an integer for the height to snapshot in}
-  @argument[colors]{a list of @class{gdk:rgba} colors}
+  @argument[colors]{a list of @class{gdk:rgba} instances}
   @begin{short}
     Snapshots the paintable with the given colors.
   @end{short}
@@ -219,14 +219,14 @@
 (setf (liber:alias-for-function 'icon-paintable-file)
       "Accessor"
       (documentation 'icon-paintable-file 'function)
- "@version{2025-11-08}
+ "@version{2026-08-30}
   @syntax{(gtk:icon-paintable-file object) => file}
   @argument[object]{a @class{gtk:icon-paintable} object}
   @argument[file]{a @class{g:file} object for the icon, or @code{nil}}
   @begin{short}
-    The accessor for the @slot[gtk:icon-paintable]{file} slot of the
-    @class{gtk:icon-paintable} class returns the @class{g:file} object that was
-    used to load the icon, or @code{nil} if the icon was not loaded from a file.
+    The accessor for the @slot[gtk:icon-paintable]{file} slot returns the
+    @class{g:file} object that was used to load the icon, or @code{nil} if the
+    icon was not loaded from a file.
   @end{short}
   @see-class{gtk:icon-paintable}
   @see-class{g:file}")
@@ -244,15 +244,14 @@
 (setf (liber:alias-for-function 'icon-paintable-icon-name)
       "Accessor"
       (documentation 'icon-paintable-icon-name 'function)
- "@version{2025-11-08}
+ "@version{2026-08-30}
   @syntax{(gtk:icon-paintable-icon-name object) => name}
   @argument[object]{a @class{gtk:icon-paintable} object}
   @argument[name]{a string for the themed icon name for the icon, or @code{nil}
     if its not a themed icon}
   @begin{short}
-    The accessor for the @slot[gtk:icon-paintable]{icon-name} slot of the
-    @class{gtk:icon-paintable} class returns the icon name being used for this
-    icon.
+    The accessor for the @slot[gtk:icon-paintable]{icon-name} slot returns the
+    icon name being used for this icon.
   @end{short}
 
   When an icon looked up in the icon theme was not available, the icon theme
@@ -283,13 +282,13 @@
 (setf (liber:alias-for-function 'icon-paintable-is-symbolic)
       "Accessor"
       (documentation 'icon-paintable-is-symbolic 'function)
- "@version{2025-11-08}
+ "@version{2026-08-30}
   @syntax{(gtk:icon-paintable-is-symbolic object) => symbolic}
   @argument[object]{a @class{gtk:icon-paintable} object}
   @argument[symbolic]{@em{true} if the icon is symbolic, @em{false} otherwise}
   @begin{short}
-    The accessor for the @slot[gtk:icon-paintable]{is-symbolic} slot of the
-    @class{gtk:icon-paintable} class checks if the icon is symbolic or not.
+    The accessor for the @slot[gtk:icon-paintable]{is-symbolic} slot checks if
+    the icon is symbolic or not.
   @end{short}
   This currently uses only the file name and not the file contents for
   determining this. This behaviour may change in the future.
@@ -311,14 +310,13 @@
 (setf (liber:alias-for-function 'icon-paintable-scale)
       "Accessor"
       (documentation 'icon-paintable-scale 'function)
- "@version{2025-11-08}
+ "@version{2026-08-30}
   @syntax{(gtk:icon-paintable-scale object) => scale}
   @syntax{(setf (gtk:icon-paintable-scale object) scale)}
   @argument[object]{a @class{gtk:icon-paintable} object}
   @argument[scale]{no description available}
   @begin{short}
-    The accessor for the @slot[gtk:icon-paintable]{scale} slot of the
-    @class{gtk:icon-paintable} class.
+    The accessor for the @slot[gtk:icon-paintable]{scale} slot.
   @end{short}
   @see-class{gtk:icon-paintable}")
 
@@ -334,14 +332,13 @@
 (setf (liber:alias-for-function 'icon-paintable-size)
       "Accessor"
       (documentation 'icon-paintable-size 'function)
- "@version{2025-11-08}
+ "@version{2026-08-30}
   @syntax{(gtk:icon-paintable-size object) => size}
   @syntax{(setf (gtk:icon-paintable-size object) size)}
   @argument[object]{a @class{gtk:icon-paintable} object}
   @argument[size]{no description available}
   @begin{short}
-    The accessor for the @slot[gtk:icon-paintable]{size} slot of the
-    @class{gtk:icon-paintable} class.
+    The accessor for the @slot[gtk:icon-paintable]{size} slot.
   @end{short}
   @see-class{gtk:icon-paintable}")
 

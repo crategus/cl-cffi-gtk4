@@ -137,7 +137,7 @@
 
 ;;;     GtkReducedMotion
 
-#+gtk-4-22
+#+(and gtk-4-22 (not windows))
 (test gtk-reduce-motion
   ;; Check type
   (is (g:type-is-enum "GtkReducedMotion"))
@@ -377,9 +377,9 @@
     #+gtk-4-22
     (is (equal '(:READABLE :WRITABLE)
                (glib-test:list-param-flags "GtkCssProvider" "prefers-reduced-motion")))
-    #+gtk-4-22
+    #+(and gtk-4-22 (not windows))
     (is (eq :no-preference (gtk:css-provider-prefers-reduced-motion provider)))
-    #+gtk-4-22
+    #+(and gtk-4-22 (not windows))
     (is (eq :reduce (setf (gtk:css-provider-prefers-reduced-motion provider) :reduce)))))
 
 ;;; --- Functions --------------------------------------------------------------

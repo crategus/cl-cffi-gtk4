@@ -2,7 +2,7 @@
 ;;; gtk4.icon-theme.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -218,15 +218,14 @@ lambda (theme)    :run-last
 (setf (liber:alias-for-function 'icon-theme-display)
       "Accessor"
       (documentation 'icon-theme-display 'function)
- "@version{2025-09-22}
+ "@version{2026-08-30}
   @syntax{(gtk:icon-theme-display object) => display}
   @syntax{(setf (gtk:icon-theme-display object) display)}
   @argument[object]{a @class{gtk:icon-theme} object}
   @argument[display]{a @class{gdk:display} object}
   @begin{short}
-    The accessor for the @slot[gtk:icon-theme]{display} slot of the
-    @class{gtk:icon-theme} class gets or sets the display that the icon theme
-    object is attached to.
+    The accessor for the @slot[gtk:icon-theme]{display} slot gets or sets
+    the display that the icon theme object is attached to.
   @end{short}
   @see-class{gtk:icon-theme}
   @see-class{gdk:display}")
@@ -242,14 +241,13 @@ lambda (theme)    :run-last
 (setf (liber:alias-for-function 'icon-theme-icon-names)
       "Accessor"
       (documentation 'icon-theme-icon-names 'function)
- "@version{2025-09-22}
+ "@version{2026-08-30}
   @syntax{(gtk:icon-theme-icon-names object) => names}
   @argument[object]{a @class{gtk:icon-theme} object}
   @argument[names]{a list of strings for the icon names}
   @begin{short}
-    The accessor for the @slot[gtk:icon-theme]{icon-names} slot of the
-    @class{gtk:icon-theme} class lists the names of icons in the current icon
-    theme.
+    The accessor for the @slot[gtk:icon-theme]{icon-names} slot lists the names
+    of icons in the current icon theme.
   @end{short}
   @see-class{gtk:icon-theme}")
 
@@ -270,15 +268,15 @@ lambda (theme)    :run-last
 (setf (liber:alias-for-function 'icon-theme-resource-path)
       "Accessor"
       (documentation 'icon-theme-resource-path 'function)
- "@version{2025-09-22}
+ "@version{2026-08-30}
   @syntax{(gtk:icon-theme-resource-path object) => path}
   @syntax{(setf (gtk:icon-theme-resource-path object) path}
   @argument[object]{a @class{gtk:icon-theme} object}
   @argument[path]{a list of strings for the resource paths}
   @begin{short}
-    The accessor for the @slot[gtk:icon-theme]{resource-path} slot of the
-    @class{gtk:icon-theme} class gets or sets the resource paths that will be
-    looked at when looking for icons, similar to search paths.
+    The accessor for the @slot[gtk:icon-theme]{resource-path} slot gets or sets
+    the resource paths that will be looked at when looking for icons, similar
+    to search paths.
   @end{short}
 
   The resources are considered as part of the hicolor icon theme and must be
@@ -306,15 +304,14 @@ lambda (theme)    :run-last
 (setf (liber:alias-for-function 'icon-theme-search-path)
       "Accessor"
       (documentation 'icon-theme-search-path 'function)
- "@version{2025-09-22}
+ "@version{2026-08-30}
   @syntax{(gtk:icon-theme-search-path object) => path}
   @syntax{(setf (gtk:icon-theme-search-path object) path}
   @argument[object]{a @class{gtk:icon-theme} object}
   @argument[path]{a list of strings for the search paths}
   @begin{short}
-    The accessor for the @slot[gtk:icon-theme]{search-path} slot of the
-    @class{gtk:icon-theme} class gets or sets the search path for the icon
-    theme object.
+    The accessor for the @slot[gtk:icon-theme]{search-path} slot gets or sets
+    the search path for the icon theme object.
   @end{short}
   When looking for an icon theme, GTK will search for a subdirectory of one or
   more of the directories in path with the same name as the icon theme
@@ -345,15 +342,15 @@ lambda (theme)    :run-last
 (setf (liber:alias-for-function 'icon-theme-theme-name)
       "Accessor"
       (documentation 'icon-theme-theme-name 'function)
- "@version{2025-09-22}
+ "@version{2026-08-30}
   @syntax{(gtk:icon-theme-theme-name object) => name}
   @syntax{(setf (gtk:icon-theme-theme-name object) name}
   @argument[object]{a @class{gtk:icon-theme} object}
   @argument[name]{a string for the current icon theme name}
   @begin{short}
-    The accessor for the @slot[gtk:icon-theme]{theme-name} slot of the
-    @class{gtk:icon-theme} class gets or sets the name of the icon theme that
-    the @class{gtk:icon-theme} object uses overriding system configuration.
+    The accessor for the @slot[gtk:icon-theme]{theme-name} slot gets or sets
+    the name of the icon theme that the @class{gtk:icon-theme} object uses
+    overriding system configuration.
   @end{short}
 
   This function cannot be called on the icon theme objects returned from the

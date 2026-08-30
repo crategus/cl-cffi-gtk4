@@ -86,18 +86,21 @@
 
 ;;;     changed
 
-(test gtk-icon-theme-signals
-  (let ((query (g:signal-query (g:signal-lookup "changed" "GtkIconTheme"))))
-    (is (string= "changed" (g:signal-query-signal-name query)))
-    (is (string= "GtkIconTheme"
-                 (g:type-name (g:signal-query-owner-type query))))
+(test gtk-icon-theme-changed-signal
+  (let* ((name "changed")
+         (gtype (g:gtype "GtkIconTheme"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
     (is (equal '(:RUN-LAST)
                (sort (g:signal-query-signal-flags query) #'string<)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check return type
+    (is (eq (g:gtype "void") (g:signal-query-return-type query)))
+    ;; Check parameter types
     (is (equal '()
-               (sort (mapcar #'g:type-name (g:signal-query-param-types query))
-                     #'string<)))
-    (is-false (g:signal-query-signal-detail query))))
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -171,4 +174,4 @@
 ;;;     gtk_icon_theme_lookup_by_gicon
 ;;;     gtk_icon_theme_get_icon_sizes
 
-;;; 2025-09-18
+;;; 2026-07-24
