@@ -102,6 +102,7 @@
     :serial t
     :components
     ((:file "gsk4.package")
+     (:file "gsk4.enums")
      (:file "gsk4.rounded-rect")
      (:file "gsk4.transform")
      (:file "gsk4.path"                           :if-feature :gtk-4-14)
@@ -130,6 +131,7 @@
      (:file "gtk4.accessible")
      (:file "gtk4.accessible-range"               :if-feature :gtk-4-10)
      (:file "gtk4.accessible-text"                :if-feature :gtk-4-14)
+     (:file "gtk4.accessible-hypertext"           :if-feature :gtk-4-22)
      (:file "gtk4.actionable")
      (:file "gtk4.cell-editable")
      (:file "gtk4.native")
@@ -401,6 +403,7 @@
 
      ;; Accessibility
      (:file "gtk4.at-context")
+     (:file "gtk4.accessible-hyperlink"           :if-feature :gtk-4-22)
 
      ;; Input Methods
      (:file "gtk4.im-context")
@@ -566,6 +569,7 @@
      (:file "rtest-gdk4-cairo-interaction")
 
      ;; GSK
+     (:file "rtest-gsk4-enums")
      (:file "rtest-gsk4-rounded-rect")
      (:file "rtest-gsk4-transform")
      (:file "rtest-gsk4-path"                     :if-feature :gtk-4-14)
@@ -589,6 +593,7 @@
      (:file "rtest-gtk4-accessible")
      (:file "rtest-gtk4-accessible-range"         :if-feature :gtk-4-10)
      (:file "rtest-gtk4-accessible-text"          :if-feature :gtk-4-14)
+     (:file "rtest-gtk4-accessible-hypertext"     :if-feature :gtk-4-22)
      (:file "rtest-gtk4-actionable")
      (:file "rtest-gtk4-cell-editable")
      (:file "rtest-gtk4-native")
@@ -858,6 +863,7 @@
 
      ;; Accessibility
      (:file "rtest-gtk4-at-context")
+     (:file "rtest-gtk4-accessible-hyperlink"     :if-feature :gtk-4-22)
 
      ;; Input Methods
      (:file "rtest-gtk4-im-context")

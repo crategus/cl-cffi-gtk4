@@ -170,6 +170,7 @@
       @about-function{window-is-active}
       @about-function{window-is-maximized}
       @about-function{window-is-fullscreen}
+      @about-function{window-is-suspended}
       @about-function{window-toplevels}
       @about-function{window-list-toplevels}
       @about-function{window-focus}
@@ -188,7 +189,6 @@
       @about-function{window-has-group}
       @about-function{window-set-auto-startup-notification}
       @about-function{window-set-interactive-debugging}
-      @about-function{window-is-suspended}
     @end{subsection}
     @begin[GtkAboutDialog]{subsection}
       @about-symbol{license}
@@ -1578,84 +1578,6 @@
       @about-function{text-view-rtl-context}
     @end{subsection}
   @end{section}
-  @begin[Media Support]{section}
-    @begin[GtkGraphicsOffload]{subsection}
-      @about-symbol{graphics-offload-enabled}
-      @about-class{graphics-offload}
-      @about-generic{graphics-offload-black-background}
-      @about-generic{graphics-offload-child}
-      @about-generic{graphics-offload-enabled}
-      @about-function{graphics-offload-new}
-    @end{subsection}
-    @begin[GtkVideo]{subsection}
-      @about-class{video}
-      @about-generic{video-autoplay}
-      @about-generic{video-file}
-      @about-generic{video-graphics-offload}
-      @about-generic{video-loop}
-      @about-generic{video-media-stream}
-      @about-function{video-new}
-      @about-function{video-new-for-media-stream}
-      @about-function{video-new-for-file}
-      @about-function{video-new-for-filename}
-      @about-function{video-new-for-resource}
-      @about-function{video-set-filename}
-      @about-function{video-set-resource}
-    @end{subsection}
-    @begin[GtkMediaControls]{subsection}
-      @about-class{media-controls}
-      @about-generic{media-controls-media-stream}
-      @about-function{media-controls-new}
-    @end{subsection}
-    @begin[GtkMediaStream]{subsection}
-      @about-class{media-stream}
-      @about-generic{media-stream-duration}
-      @about-generic{media-stream-ended}
-      @about-generic{media-stream-error}
-      @about-generic{media-stream-has-audio}
-      @about-generic{media-stream-has-video}
-      @about-generic{media-stream-loop}
-      @about-generic{media-stream-muted}
-      @about-generic{media-stream-playing}
-      @about-generic{media-stream-prepared}
-      @about-generic{media-stream-seekable}
-      @about-generic{media-stream-seeking}
-      @about-generic{media-stream-timestamp}
-      @about-generic{media-stream-volume}
-      @about-function{media-stream-is-prepared}
-      @about-function{media-stream-play}
-      @about-function{media-stream-pause}
-      @about-function{media-stream-is-seekable}
-      @about-function{media-stream-is-seeking}
-      @about-function{media-stream-seek}
-      @about-function{media-stream-realize}
-      @about-function{media-stream-unrealize}
-      @about-function{media-stream-prepared}
-      @about-function{media-stream-unprepared}
-      @about-function{media-stream-update}
-      @about-function{media-stream-ended}
-      @about-function{media-stream-seek-success}
-      @about-function{media-stream-seek-failed}
-      @about-function{media-stream-gerror}
-      @about-function{media-stream-error}
-      @about-function{media-stream-error-valist}
-    @end{subsection}
-    @begin[GtkMediaFile]{subsection}
-      @about-class{media-file}
-      @about-generic{media-file-file}
-      @about-generic{media-file-input-stream}
-      @about-function{media-file-new}
-      @about-function{media-file-new-for-filename}
-      @about-function{media-file-new-for-resource}
-      @about-function{media-file-new-for-file}
-      @about-function{media-file-new-for-input-stream}
-      @about-function{media-file-clear}
-      @about-function{media-file-set-filename}
-      @about-function{media-file-set-resource}
-      @about-function{media-file-file}
-      @about-function{media-file-input-stream}
-    @end{subsection}
-  @end{section}
   @begin[GListModel support]{section}
     @begin[GtkBitset]{subsection}
       @about-class{bitset}
@@ -2418,6 +2340,191 @@ GtkCellRenderer         GtkWidget
       @about-function{tree-expander-new}
     @end{subsection}
   @end{section}
+  @begin[Accessibility & Input Methods]{section}
+    @begin[Enumerations for Accessibility]{subsection}
+      @about-symbol{accessible-role}
+      @about-symbol{accessible-state}
+      @about-symbol{accessible-property}
+      @about-symbol{accessible-relation}
+      @about-symbol{accessible-tristate}
+      @about-symbol{accessible-invalid-state}
+      @about-symbol{accessible-autocomplete}
+      @about-symbol{accessible-sort}
+      @about-symbol{accessible-platform-state}
+      @about-symbol{accessible-announcement-priority}
+    @end{subsection}
+    @begin[GtkAccessibleList]{subsection}
+      @about-class{accessible-list}
+      @about-function{accessible-list-new-from-list}
+      @about-function{accessible-list-objects}
+    @end{subsection}
+    @begin[GtkAccessible]{subsection}
+      @about-class{accessible}
+      @about-generic{accessible-accessible-role}
+      @about-function{accessible-update-property}
+      @about-function{accessible-update-relation}
+      @about-function{accessible-update-state}
+      @about-function{accessible-reset-property}
+      @about-function{accessible-reset-relation}
+      @about-function{accessible-reset-state}
+      @about-function{accessible-update-next-accessible-sibling}
+      @about-function{accessible-update-platform-state}
+      @about-function{accessible-accessible-parent}
+      @about-function{accessible-at-context}
+      @about-function{accessible-bounds}
+      @about-function{accessible-first-accessible-child}
+      @about-function{accessible-next-accessible-sibling}
+      @about-function{accessible-platform-state}
+      @about-function{accessible-accessible-id}
+      @about-function{accessible-announce}
+    @end{subsection}
+    @begin[GtkAccessibleRange]{subsection}
+      @about-class{accessible-range}
+      @about-function{accessible-range-set-current-value}
+    @end{subsection}
+    @begin[GtkAccessibleText]{subsection}
+      @about-symbol{accessible-text-range}
+      @about-symbol{accessible-text-content-change}
+      @about-symbol{accessible-text-granularity}
+      @about-class{accessible-text}
+      @about-function{accessible-text-caret-position}
+      @about-function{accessible-text-contents}
+      @about-function{accessible-text-contents-at}
+      @about-function{accessible-text-default-attributes}
+      @about-function{accessible-text-attributes}
+      @about-function{accessible-text-extents}
+      @about-function{accessible-text-offset}
+      @about-function{accessible-text-selection}
+      @about-function{accessible-text-update-caret-position}
+      @about-function{accessible-text-update-contents}
+      @about-function{accessible-text-update-selection-bound}
+    @end{subsection}
+    @begin[GtkAccessibleHypertext]{subsection}
+      @about-class{accessible-hypertext}
+      @about-function{accessible-hypertext-link}
+      @about-function{accessible-hypertext-link-at}
+      @about-function{accessible-hypertext-n-links}
+    @end{subsection}
+    @begin[GtkAccessibleHyperlink]{subsection}
+      @about-class{accessible-hyperlink}
+      @about-function{accessible-hyperlink-new}
+      @about-function{accessible-hyperlink-set-platform-state}
+    @end{subsection}
+    @begin[GtkATContext]{subsection}
+      @about-class{at-context}
+      @about-generic{at-context-accessible}
+      @about-generic{at-context-accessible-role}
+      @about-generic{at-context-display}
+      @about-generic{at-context-realized}
+      @about-function{at-context-create}
+    @end{subsection}
+    @begin[GtkIMContext]{subsection}
+      @about-class{im-context}
+      @about-generic{im-context-input-hints}
+      @about-generic{im-context-input-purpose}
+      @about-function{im-context-preedit-string}
+      @about-function{im-context-filter-keypress}
+      @about-function{im-context-filter-key}
+      @about-function{im-context-focus-in}
+      @about-function{im-context-focus-out}
+      @about-function{im-context-reset}
+      @about-function{im-context-set-client-widget}
+      @about-function{im-context-set-cursor-location}
+      @about-function{im-context-set-use-preedit}
+      @about-function{im-context-surrounding}
+      @about-function{im-context-delete-surrounding}
+    @end{subsection}
+    @begin[GtkIMContextSimple]{subsection}
+      @about-class{im-context-simple}
+      @about-symbol{GTK_MAX_COMPOSE_LEN}
+      @about-function{im-context-simple-new}
+      @about-function{im-context-simple-add-table}
+      @about-function{im-context-simple-add-compose-file}
+    @end{subsection}
+    @begin[GtkIMMulticontext]{subsection}
+      @about-class{im-multicontext}
+      @about-function{im-multicontext-new}
+      @about-function{im-multicontext-context-id}
+    @end{subsection}
+  @end{section}
+  @begin[Media Support]{section}
+    @begin[GtkGraphicsOffload]{subsection}
+      @about-symbol{graphics-offload-enabled}
+      @about-class{graphics-offload}
+      @about-generic{graphics-offload-black-background}
+      @about-generic{graphics-offload-child}
+      @about-generic{graphics-offload-enabled}
+      @about-function{graphics-offload-new}
+    @end{subsection}
+    @begin[GtkVideo]{subsection}
+      @about-class{video}
+      @about-generic{video-autoplay}
+      @about-generic{video-file}
+      @about-generic{video-graphics-offload}
+      @about-generic{video-loop}
+      @about-generic{video-media-stream}
+      @about-function{video-new}
+      @about-function{video-new-for-media-stream}
+      @about-function{video-new-for-file}
+      @about-function{video-new-for-filename}
+      @about-function{video-new-for-resource}
+      @about-function{video-set-filename}
+      @about-function{video-set-resource}
+    @end{subsection}
+    @begin[GtkMediaControls]{subsection}
+      @about-class{media-controls}
+      @about-generic{media-controls-media-stream}
+      @about-function{media-controls-new}
+    @end{subsection}
+    @begin[GtkMediaStream]{subsection}
+      @about-class{media-stream}
+      @about-generic{media-stream-duration}
+      @about-generic{media-stream-ended}
+      @about-generic{media-stream-error}
+      @about-generic{media-stream-has-audio}
+      @about-generic{media-stream-has-video}
+      @about-generic{media-stream-loop}
+      @about-generic{media-stream-muted}
+      @about-generic{media-stream-playing}
+      @about-generic{media-stream-prepared}
+      @about-generic{media-stream-seekable}
+      @about-generic{media-stream-seeking}
+      @about-generic{media-stream-timestamp}
+      @about-generic{media-stream-volume}
+      @about-function{media-stream-is-prepared}
+      @about-function{media-stream-play}
+      @about-function{media-stream-pause}
+      @about-function{media-stream-is-seekable}
+      @about-function{media-stream-is-seeking}
+      @about-function{media-stream-seek}
+      @about-function{media-stream-realize}
+      @about-function{media-stream-unrealize}
+      @about-function{media-stream-prepared}
+      @about-function{media-stream-unprepared}
+      @about-function{media-stream-update}
+      @about-function{media-stream-ended}
+      @about-function{media-stream-seek-success}
+      @about-function{media-stream-seek-failed}
+      @about-function{media-stream-gerror}
+      @about-function{media-stream-error}
+      @about-function{media-stream-error-valist}
+    @end{subsection}
+    @begin[GtkMediaFile]{subsection}
+      @about-class{media-file}
+      @about-generic{media-file-file}
+      @about-generic{media-file-input-stream}
+      @about-function{media-file-new}
+      @about-function{media-file-new-for-filename}
+      @about-function{media-file-new-for-resource}
+      @about-function{media-file-new-for-file}
+      @about-function{media-file-new-for-input-stream}
+      @about-function{media-file-clear}
+      @about-function{media-file-set-filename}
+      @about-function{media-file-set-resource}
+      @about-function{media-file-file}
+      @about-function{media-file-input-stream}
+    @end{subsection}
+  @end{section}
   @begin[Popovers]{section}
     @begin[GtkPopover]{subsection}
       @about-class{popover}
@@ -2634,6 +2741,7 @@ GtkCellRenderer         GtkWidget
       @about-function{accelerator-name-with-keycode}
       @about-function{accelerator-label-with-keycode}
       @about-function{accelerator-default-mod-mask}
+      @about-function{accelerator-accessible-label}
     @end{subsection}
     @begin[GtkShortcutManager]{subsection}
       @about-class{shortcut-manager}
@@ -3159,103 +3267,6 @@ GtkCellRenderer         GtkWidget
       @about-function{print-dialog-setup-finish}
     @end{subsection}
   @end{section}
-  @begin[Accessibility]{section}
-    @begin[GtkAccessibleRange]{subsection}
-      @about-class{accessible-range}
-      @about-function{accessible-range-set-current-value}
-    @end{subsection}
-    @begin[GtkAccessibleText]{subsection}
-      @about-symbol{accessible-text-range}
-      @about-symbol{accessible-text-content-change}
-      @about-symbol{accessible-text-granularity}
-      @about-class{accessible-text}
-      @about-function{accessible-text-attributes}
-      @about-function{accessible-text-caret-position}
-      @about-function{accessible-text-contents}
-      @about-function{accessible-text-contents-at}
-      @about-function{accessible-text-default-attributes}
-      @about-function{accessible-text-extents}
-      @about-function{accessible-text-offset}
-      @about-function{accessible-text-selection}
-      @about-function{accessible-text-update-caret-position}
-      @about-function{accessible-text-update-contents}
-      @about-function{accessible-text-update-selection-bound}
-    @end{subsection}
-    @begin[GtkAccessibleList]{subsection}
-      @about-class{accessible-list}
-      @about-function{accessible-list-new-from-list}
-      @about-function{accessible-list-objects}
-    @end{subsection}
-    @begin[GtkAccessible]{subsection}
-      @about-symbol{accessible-role}
-      @about-symbol{accessible-state}
-      @about-symbol{accessible-property}
-      @about-symbol{accessible-relation}
-      @about-symbol{accessible-tristate}
-      @about-symbol{accessible-invalid-state}
-      @about-symbol{accessible-autocomplete}
-      @about-symbol{accessible-sort}
-      @about-symbol{accessible-platform-state}
-      @about-symbol{accessible-announcement-priority}
-      @about-class{accessible}
-      @about-generic{accessible-accessible-role}
-      @about-function{accessible-property-init-value}
-      @about-function{accessible-relation-init-value}
-      @about-function{accessible-state-init-value}
-      @about-function{accessible-accessible-parent}
-      @about-function{accessible-at-context}
-      @about-function{accessible-bounds}
-      @about-function{accessible-first-accessible-child}
-      @about-function{accessible-next-accessible-sibling}
-      @about-function{accessible-platform-state}
-      @about-function{accessible-reset-property}
-      @about-function{accessible-reset-relation}
-      @about-function{accessible-reset-state}
-      @about-function{accessible-update-next-accessible-sibling}
-      @about-function{accessible-update-property}
-      @about-function{accessible-update-relation}
-      @about-function{accessible-update-state}
-      @about-function{accessible-announce}
-    @end{subsection}
-    @begin[GtkATContext]{subsection}
-      @about-class{at-context}
-      @about-generic{at-context-accessible}
-      @about-generic{at-context-accessible-role}
-      @about-generic{at-context-display}
-      @about-generic{at-context-realized}
-      @about-function{at-context-create}
-    @end{subsection}
-  @end{section}
-  @begin[Input Methods]{section}
-    @begin[GtkIMContext]{subsection}
-      @about-class{im-context}
-      @about-generic{im-context-input-hints}
-      @about-generic{im-context-input-purpose}
-      @about-function{im-context-preedit-string}
-      @about-function{im-context-filter-keypress}
-      @about-function{im-context-filter-key}
-      @about-function{im-context-focus-in}
-      @about-function{im-context-focus-out}
-      @about-function{im-context-reset}
-      @about-function{im-context-set-client-widget}
-      @about-function{im-context-set-cursor-location}
-      @about-function{im-context-set-use-preedit}
-      @about-function{im-context-surrounding}
-      @about-function{im-context-delete-surrounding}
-    @end{subsection}
-    @begin[GtkIMContextSimple]{subsection}
-      @about-class{im-context-simple}
-      @about-symbol{GTK_MAX_COMPOSE_LEN}
-      @about-function{im-context-simple-new}
-      @about-function{im-context-simple-add-table}
-      @about-function{im-context-simple-add-compose-file}
-    @end{subsection}
-    @begin[GtkIMMulticontext]{subsection}
-      @about-class{im-multicontext}
-      @about-function{im-multicontext-new}
-      @about-function{im-multicontext-context-id}
-    @end{subsection}
-  @end{section}
   @begin[Recently Used Documents]{section}
     @begin[GtkRecentInfo]{subsection}
       @about-class{recent-info}
@@ -3541,6 +3552,10 @@ GtkCellRenderer         GtkWidget
       @about-function{snapshot-push-mask}
       @about-function{snapshot-push-fill}
       @about-function{snapshot-push-stroke}
+      @about-function{snapshot-push-component-transfer}
+      @about-function{snapshot-push-composite}
+      @about-function{snapshot-push-copy}
+      @about-function{snapshot-push-isolation}
       @about-function{snapshot-pop}
       @about-function{snapshot-gl-shader-pop-texture}
       @about-function{snapshot-save}
@@ -3570,6 +3585,7 @@ GtkCellRenderer         GtkWidget
       @about-function{snapshot-append-scaled-texture}
       @about-function{snapshot-append-fill}
       @about-function{snapshot-append-stroke}
+      @about-function{snapshot-append-paste}
     @end{subsection}
     @begin[GtkTooltip]{subsection}
       @about-class{tooltip}
