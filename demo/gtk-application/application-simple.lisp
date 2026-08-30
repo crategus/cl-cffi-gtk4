@@ -2,7 +2,7 @@
 ;;;;
 ;;;; This example is included in the API documentation for GtkApplication.
 ;;;;
-;;;; Last version: 2025-05-12
+;;;; Last version: 2026-07-10
 
 (in-package :gtk4-application)
 
@@ -14,12 +14,14 @@
     ;; Connect signal "activate" to the application
     (g:signal-connect app "activate"
         (lambda (application)
-          ;; Create an application window
-          (let ((window (make-instance 'gtk:application-window
-                                       :application application
-                                       :title "Simple Application"
-                                       :default-width 480
-                                       :default-height 300)))
+          (let ((window (gtk:application-active-window application)))
+            (unless window
+              ;; Create an application window
+              (setf window (make-instance 'gtk:application-window
+                                          :application application
+                                          :title "Simple Application"
+                                          :default-width 480
+                                          :default-height 300)))
             ;; Present the application window
             (gtk:window-present window))))
   ;; Run the application
