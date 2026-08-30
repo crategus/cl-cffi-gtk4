@@ -2,7 +2,7 @@
 ;;; gtk4.file-filter.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -45,8 +45,9 @@
 ;;;     gtk_file_filter_new
 ;;;     gtk_file_filter_new_from_gvariant
 ;;;     gtk_file_filter_add_mime_type
+;;;     gtk_file_filter_add_mime_types                      Since 4.22
 ;;;     gtk_file_filter_add_pattern
-;;;     gtk_file_filter_add_pixbuf_formats
+;;;     gtk_file_filter_add_pixbuf_formats                  Deprecated 4.20
 ;;;     gtk_file_filter_add_suffix                          Since 4.4
 ;;;     gtk_file_filter_get_attributes
 ;;;     gtk_file_filter_to_gvariant
@@ -180,16 +181,15 @@
 (setf (liber:alias-for-function 'file-filter-name)
       "Accessor"
       (documentation 'file-filter-name 'function)
- "@version{2025-09-28}
+ "@version{2026-08-30}
   @syntax{(gtk:file-filter-name object) => name}
   @syntax{(setf (gtk:file-filter-name object) name)}
   @argument[object]{a @class{gtk:file-filter} object}
   @argument[name]{a string for the human-readable name for the filter, or
     @code{nil} to remove any existing name}
   @begin{short}
-    The accessor for the @slot[gtk:file-filter]{name} slot of the
-    @class{gtk:file-filter} class gets or sets the human-readable name for the
-    file filter.
+    The accessor for the @slot[gtk:file-filter]{name} slot gets or sets the
+    human-readable name for the file filter.
   @end{short}
   This is the name that will be displayed in the file chooser if there is a
   selectable list of filters.
@@ -289,6 +289,10 @@
 (export 'file-filter-add-mime-type)
 
 ;;; ----------------------------------------------------------------------------
+;;; gtk_file_filter_add_mime_types                          Since 4.22
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
 ;;; gtk_file_filter_add_pattern
 ;;; ----------------------------------------------------------------------------
 
@@ -313,9 +317,12 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_file_filter_add_pixbuf_formats"
-               file-filter-add-pixbuf-formats) :void
+               %file-filter-add-pixbuf-formats) :void
+  (filter (g:object file-filter)))
+
+(defun file-filter-add-pixbuf-formats (filter)
  #+liber-documentation
- "@version{2025-03-13}
+ "@version{2026-08-30}
   @argument[filter]{a @class{gtk:file-filter} object}
   @begin{short}
     Adds a rule allowing image files in the formats supported by the
@@ -323,10 +330,16 @@
   @end{short}
   This is equivalent to calling the @fun{gtk:file-filter-add-mime-type}
   function for all the supported MIME types.
+  @begin[Warning]{dictionary}
+    This function is deprecated since 4.20.
+  @end{dictionary}
   @see-class{gtk:file-filter}
   @see-class{gdk-pixbuf:pixbuf}
   @see-function{gtk:file-filter-add-mime-type}"
-  (filter (g:object file-filter)))
+  #+(and gtk-4-20 gtk-warn-deprecated)
+  (when gtk-init:*warn-deprecated*
+    (warn "GTK:FILE-FILTER-ADD-PIXBUF-FORMATS is deprecated since 4.20."))
+  (%file-filter-add-pixbuf-formats filter))
 
 (export 'file-filter-add-pixbuf-formats)
 

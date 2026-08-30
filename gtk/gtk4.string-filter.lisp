@@ -2,7 +2,7 @@
 ;;; gtk4.string-filter.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -156,15 +156,14 @@
 (setf (liber:alias-for-function 'string-filter-expression)
       "Accessor"
       (documentation 'string-filter-expression 'function)
- "@version{2025-09-25}
+ "@version{2026-08-30}
   @syntax{(gtk:string-filter-expression object) => expression}
   @syntax{(setf (gtk:string-filter-expression object) expression)}
   @argument[object]{a @class{gtk:string-filter} object}
   @argument[expression]{a @class{gtk:expression} instance}
   @begin{short}
-    The accessor for the @slot[gtk:string-filter]{expression} slot of the
-    @class{gtk:string-filter} class gets or sets the expression that the string
-    filter uses to obtain strings from items.
+    The accessor for the @slot[gtk:string-filter]{expression} slot gets or sets
+    the expression that the string filter uses to obtain strings from items.
   @end{short}
   The expression must have a @code{\"gchararray\"} value type.
   @see-class{gtk:string-filter}
@@ -182,15 +181,14 @@
 (setf (liber:alias-for-function 'string-filter-ignore-case)
       "Accessor"
       (documentation 'string-filter-ignore-case 'function)
- "@version{2025-09-25}
+ "@version{2026-08-30}
   @syntax{(gtk:string-filter-ignore-case object) => ignore}
   @syntax{(setf (gtk:stringt-filter-ignore-case object) ignore)}
   @argument[object]{a @class{gtk:string-filter} object}
   @argument[ignore]{@em{true} to ignore case}
   @begin{short}
-    The accessor for the @slot[gtk:string-filter]{ignore-case} slot of the
-    @class{gtk:string-filter} class gets or sets whether the filter ignores case
-    differences.
+    The accessor for the @slot[gtk:string-filter]{ignore-case} slot gets or
+    sets whether the filter ignores case differences.
   @end{short}
   @see-class{gtk:string-filter}")
 
@@ -207,15 +205,14 @@
 (setf (liber:alias-for-function 'string-filter-match-mode)
       "Accessor"
       (documentation 'string-filter-match-mode 'function)
- "@version{2025-09-25}
+ "@version{2026-08-30}
   @syntax{(gtk:string-filter-match-mode object) => mode}
   @syntax{(setf (gtk:stringt-filter-match-mode object) mode)}
   @argument[object]{a @class{gtk:string-filter} object}
   @argument[mode]{a @sym{gtk:string-filter-match-mode} value}
   @begin{short}
-    The accessor for the @slot[gtk:string-filter]{match-mode} slot of the
-    @class{gtk:string-filter} class gets or sets the match mode that the filter
-    is using.
+    The accessor for the @slot[gtk:string-filter]{match-mode} slot gets or sets
+    the match mode that the filter is using.
   @end{short}
   @see-class{gtk:string-filter}
   @see-symbol{gtk:string-filter-match-mode}")
@@ -232,15 +229,14 @@
 (setf (liber:alias-for-function 'string-filter-search)
       "Accessor"
       (documentation 'string-filter-search 'function)
- "@version{2025-09-25}
+ "@version{2026-08-30}
   @syntax{(gtk:string-filter-search object) => search}
   @syntax{(setf (gtk:stringt-filter-search object) search)}
   @argument[object]{a @class{gtk:string-filter} object}
   @argument[search]{a string to search for or @code{nil} to clear the search}
   @begin{short}
-    The accessor for the @slot[gtk:string-filter]{search} slot of the
-    @class{gtk:string-filter} class gets or sets the search string to search
-    for.
+    The accessor for the @slot[gtk:string-filter]{search} slot gets or sets
+    the search string to search for.
   @end{short}
   @see-class{gtk:string-filter}")
 

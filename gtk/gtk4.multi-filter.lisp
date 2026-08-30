@@ -2,7 +2,7 @@
 ;;; gtk4.multi-filter.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -112,14 +112,13 @@
 (setf (liber:alias-for-function 'multi-filter-item-type)
       "Accessor"
       (documentation 'multi-filter-item-type 'function)
- "@version{2025-08-12}
+ "@version{2026-08-17}
   @syntax{(gtk:multi-filter-item-type object) => gtype}
   @argument[object]{a @class{gtk:multi-filter} object}
   @argument[gtype]{a @class{g:type-t} type ID}
   @begin{short}
-    The accessor for the @slot[gtk:multi-filter]{item-type} slot of the
-    @class{gtk:multi-filter} class gets the type of items contained in the list
-    model.
+    The accessor for the @slot[gtk:multi-filter]{item-type} slot gets the type
+    of items contained in the list model.
   @end{short}
   Items must be subclasses of the @class{g:object} class.
 
@@ -144,15 +143,14 @@
 (setf (liber:alias-for-function 'multi-filter-n-items)
       "Accessor"
       (documentation 'multi-filter-n-items 'function)
- "@version{2025-08-12}
+ "@version{2026-08-17}
   @syntax{(gtk:multi-filter-n-items object) => n-items}
   @argument[object]{a @class{gtk:multi-filter} object}
   @argument[n-items]{an unsigned integer for the number of items contained in
     the model}
   @begin{short}
-    The accessor for the @slot[gtk:multi-filter]{n-items} slot of the
-    @class{gtk:multi-filter} class gets the number of items contained in the
-    model.
+    The accessor for the @slot[gtk:multi-filter]{n-items} slot gets the number
+    of items contained in the model.
   @end{short}
 
   Since 4.8
