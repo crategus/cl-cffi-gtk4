@@ -6,7 +6,7 @@
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2025 Dieter Kaiser
+;;; Copyright (C) 2011 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -150,13 +150,14 @@
 (setf (liber:alias-for-function 'border-left)
       "Accessor"
       (documentation 'border-left 'function)
- "@version{2025-08-21}
+ "@version{2026-08-17}
   @syntax{(gtk:border-left instance) => left}
   @syntax{(setf (gtk:border-left instance) left)}
   @argument[instance]{a @class{gtk:border} instance}
   @argument[left]{an integer for the width of the left border}
   @begin{short}
-    The accessor for the @code{left} slot of the @class{gtk:border} structure.
+    The accessor for the @code{left} slot gets or sets the width of the left
+    border.
   @end{short}
   @see-class{gtk:border}")
 
@@ -168,13 +169,14 @@
 (setf (liber:alias-for-function 'border-right)
       "Accessor"
       (documentation 'border-right 'function)
- "@version{2025-08-21}
+ "@version{2026-08-17}
   @syntax{(gtk:border-right instance) => right}
   @syntax{(setf (gtk:border-right instance) right)}
   @argument[instance]{a @class{gtk:border} instance}
   @argument[right]{an integer for the width of the right border}
   @begin{short}
-    The accessor for the @code{right} slot of the @class{gtk:border} structure.
+    The accessor for the @code{right} slot gets or sets the width of the right
+    border.
   @end{short}
   @see-class{gtk:border}")
 
@@ -186,13 +188,14 @@
 (setf (liber:alias-for-function 'border-top)
       "Accessor"
       (documentation 'border-top 'function)
- "@version{2025-08-21}
+ "@version{2026-08-17}
   @syntax{(gtk:border-top instance) => top}
   @syntax{(setf (gtk:border-top instance) top)}
   @argument[instance]{a @class{gtk:border} instance}
   @argument[top]{an integer for the width of the top border}
   @begin{short}
-    The accessor for the @code{top} slot of the @class{gtk:border} structure.
+    The accessor for the @code{top} slot gets or sets the width of the top
+    border.
   @end{short}
   @see-class{gtk:border}")
 
@@ -204,13 +207,14 @@
 (setf (liber:alias-for-function 'border-bottom)
       "Accessor"
       (documentation 'border-bottom 'function)
- "@version{2025-08-21}
+ "@version{2026-08-17}
   @syntax{(gtk:border-top instance) => bottom}
   @syntax{(setf (gtk:border-top instance) bottom)}
   @argument[instance]{a @class{gtk:border} instance}
   @argument[bottom]{an integer for the width of the bottom border}
   @begin{short}
-    The accessor for the @code{bottom} slot of the @class{gtk:border} structure.
+    The accessor for the @code{bottom} slot gets or sets the width of the
+    bottom border.
   @end{short}
   @see-class{gtk:border}")
 
@@ -387,15 +391,14 @@
 (setf (liber:alias-for-function 'style-context-display)
       "Accessor"
       (documentation 'style-context-display 'function)
- "@version{2026-01-18}
+ "@version{2026-08-17}
   @syntax{(gtk:style-context-display object) => display}
   @syntax{(setf (gtk:style-context-display object) display)}
   @argument[object]{a @class{gtk:style-context} object}
   @argument[display]{a @class{gdk:display} object}
   @begin{short}
-    The accessor for the @slot[gtk:style-context]{display} slot of the
-    @class{gtk:style-context} class gets or sets the display to which the style
-    context is attached.
+    The accessor for the @slot[gtk:style-context]{display} slot gets or sets
+    the display to which the style context is attached.
   @end{short}
 
   The display is used to add style information from 'global' style providers,
@@ -793,10 +796,10 @@
 
 (defun style-context-lookup-color (context name)
  #+liber-documentation
- "@version{2026-01-18}
+ "@version{2026-08-01}
   @argument[context]{a @class{gtk:style-context} object}
   @argument[name]{a string for a color name to lookup}
-  @return{The looked up @class{gdk:rgba} color, or @code{nil}.}
+  @return{The looked up @class{gdk:rgba} instance, or @code{nil}.}
   @begin{short}
     Looks up and resolves a color name in the style context color map.
   @end{short}
@@ -1149,7 +1152,7 @@ GtkEntry.entry { ... @}
 
 (defun render-background (context cr x y width height)
  #+liber-documentation
- "@version{#2025-07-26}
+ "@version{#2026-08-28}
   @argument[context]{a @class{gtk:style-context} object}
   @argument[cr]{a @sym{cairo:context-t} context}
   @argument[x]{a number coerced to a double float for the x origin of the
@@ -1161,12 +1164,11 @@ GtkEntry.entry { ... @}
   @begin{short}
     Renders the background of an element.
   @end{short}
-
   Typical background rendering, showing the effect of @code{background-image},
   @code{border-width} and @code{border-radius}: @br{}
   @image[render-background]{}
   @begin[Warning]{dictionary}
-    The function is deprecated since 4.10. Please do not use it in newly
+    This function is deprecated since 4.10. Please do not use it in newly
     written code.
   @end{dictionary}
   @see-class{gtk:style-context}
