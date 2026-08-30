@@ -6,7 +6,7 @@
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2025 Dieter Kaiser
+;;; Copyright (C) 2011 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -176,13 +176,13 @@
 (setf (liber:alias-for-function 'cell-view-cell-area)
       "Accessor"
       (documentation 'cell-view-cell-area 'function)
- "@version{2025-09-26}
+ "@version{2026-08-30}
   @syntax{(gtk:cell-view-cell-area object) => area}
   @argument[object]{a @class{gtk:cell-view} object}
   @argument[area]{a @class{gtk:cell-area} object}
   @begin{short}
-    The accessor for the @slot[gtk:cell-view]{cell-area} slot of the
-    @class{gtk:cell-view} class returns the cell area rendering cells.
+    The accessor for the @slot[gtk:cell-view]{cell-area} slot returns the cell
+    area rendering cells.
   @end{short}
   If no cell area is specified when creating the cell view with the
   @fun{gtk:cell-view-new-with-context} function a horizontally oriented
@@ -215,14 +215,13 @@
 (setf (liber:alias-for-function 'cell-view-cell-area-context)
       "Accessor"
       (documentation 'cell-view-cell-area-context 'function)
- "@version{2025-09-26}
+ "@version{2026-08-30}
   @syntax{(gtk:cell-view-cell-area-context object) => context}
   @argument[object]{a @class{gtk:cell-view} object}
   @argument[cellarea]{a @class{gtk:cell-area-context} object}
   @begin{short}
-    The accessor for the @slot[gtk:cell-view]{cell-area-context} slot of the
-    @class{gtk:cell-view} class returns the cell area used to compute the
-    geometry of the cell view.
+    The accessor for the @slot[gtk:cell-view]{cell-area-context} slot returns
+    the cell area used to compute the geometry of the cell view.
   @end{short}
   A group of cell views can be assigned the same context in order to ensure the
   sizes and cell alignments match across all the views with the same context.
@@ -253,15 +252,15 @@
 (setf (liber:alias-for-function 'cell-view-draw-sensitive)
       "Accessor"
       (documentation 'cell-view-draw-sensitive 'function)
- "@version{2025-09-26}
+ "@version{2026-08-30}
   @syntax{(gtk:cell-view-draw-sensitive object) => setting}
   @syntax{(setf (gtk:cell-view-draw-sensitive object) setting)}
   @argument[object]{a @class{gtk:cell-view} object}
   @argument[setting]{a boolean whether to draw all cells in a sensitive state}
   @begin{short}
-    The accessor for the @slot[gtk:tree-view]{draw-sensitive} slot of the
-    @class{gtk:cell-view} class gets or sets whether the cell view is configured
-    to draw all of its cells in a sensitive state.
+    The accessor for the @slot[gtk:tree-view]{draw-sensitive} slot gets or sets
+    whether the cell view is configured to draw all of its cells in a sensitive
+    state.
   @end{short}
   This is used by @class{gtk:combo-box} menus to ensure that rows with
   insensitive cells that contain children appear sensitive in the parent menu
@@ -287,16 +286,16 @@
 (setf (liber:alias-for-function 'cell-view-fit-model)
       "Accessor"
       (documentation 'cell-view-fit-model 'function)
- "@version{2025-09-26}
+ "@version{2026-08-30}
   @syntax{(gtk:cell-view-fit-model object) => setting}
   @syntax{(setf (gtk:cell-view-fit-model object) setting)}
   @argument[object]{a @class{gtk:cell-view} object}
   @argument[setting]{whether the cell view should request space for the whole
     model}
   @begin{short}
-    The accessor for the @slot[gtk:cell-view]{fit-model}  slot of the
-    @class{gtk:cell-view} class gets or sets whether the cell view is configured
-    to request space to fit the entire @class{gtk:tree-model} object.
+    The accessor for the @slot[gtk:cell-view]{fit-model} slot gets or sets
+    whether the cell view is configured to request space to fit the entire
+    @class{gtk:tree-model} object.
   @end{short}
   This is used by @class{gtk:combo-box} widgets to ensure that the cell view
   displayed on the combo box's button always gets enough space and does not
@@ -319,14 +318,14 @@
 (setf (liber:alias-for-function 'cell-view-model)
       "Accessor"
       (documentation 'cell-view-model 'function)
- "@version{2025-09-26}
+ "@version{2026-08-30}
   @syntax{(gtk:cell-view-model object) => model}
   @syntax{(setf (gtk:cell-view-model object) model)}
   @argument[object]{a @class{gtk:cell-view} object}
   @argument[model]{a @class{gtk:tree-model} object}
   @begin{short}
-    The accessor for the @slot[gtk:cell-view]{model} slot of the
-    @class{gtk:cell-view} class gets or sets the model for the cell view.
+    The accessor for the @slot[gtk:cell-view]{model} slot gets or sets the
+    model for the cell view.
   @end{short}
   If no model is used @code{nil} is returned. If the cell view already has a
   model set, it will remove it before setting the new model. If @arg{model} is
@@ -489,16 +488,15 @@
   @argument[cellview]{a @class{gtk:cell-view} widget}
   @argument[path]{a @class{gtk:tree-path} instance or @code{nil} to unset}
   @begin{short}
-    The @fun{gtk:cell-view-displayed-row} function returns a
-    @class{gtk:tree-path} instance referring to the currently displayed row.
+    Gets or sets the @class{gtk:tree-path} instance referring to the currently
+    displayed row.
   @end{short}
   If no row is currently displayed, @code{nil} is returned.
 
-  The @setf{gtk:cell-view-displayed-row} function sets the row of the model that
-  is currently displayed by the cell view. If the path is unset, then the
-  contents of the cell view \"stick\" at their last value. This is not normally
-  a desired result, but may be a needed intermediate state if say, the model
-  for the cell view becomes temporarily empty.
+  If the path is unset, then the contents of the cell view \"stick\" at their
+  last value. This is not normally a desired result, but may be a needed
+  intermediate state if say, the model for the cell view becomes temporarily
+  empty.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-view} implementation is deprecated since 4.10.
     Please do not use it in newly written code.
