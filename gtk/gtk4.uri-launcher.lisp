@@ -2,7 +2,7 @@
 ;;; gtk4.uri-launcher.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -122,14 +122,14 @@
 (setf (liber:alias-for-function 'uri-launcher-uri)
       "Accessor"
       (documentation 'uri-launcher-uri 'function)
- "@version{2026-01-03}
+ "@version{2026-08-20}
   @syntax{(gtk:uri-launcher-uri object) => uri}
   @syntax{(setf (gtk:uri-launcher-uri object) uri)}
   @argument[object]{a @class{gtk:uri-launcher} object}
   @argument[uri]{a string for the URI}
   @begin{short}
-    The accessor for the @slot[gtk:uri-launcher]{uri} slot of the
-    @class{gtk:uri-launcher} class gets or sets the URI that will be opened.
+    The accessor for the @slot[gtk:uri-launcher]{uri} slot gets or sets the URI
+    that will be opened.
   @end{short}
 
   Since 4.10

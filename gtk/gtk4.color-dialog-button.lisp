@@ -2,7 +2,7 @@
 ;;; gtk4.color-dialog-button.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -46,6 +46,10 @@
 ;;;
 ;;;     dialog
 ;;;     rgba
+;;;
+;;; Signals
+;;;
+;;;     activate                                            Since 4.14
 ;;;
 ;;; Hierachy
 ;;;
@@ -139,16 +143,15 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'color-dialog-button-dialog)
       "Accessor"
       (documentation 'color-dialog-button-dialog 'function)
- "@version{2025-08-06}
+ "@version{2026-08-30}
   @syntax{(gtk:color-dialog-button-dialog object) => dialog}
   @syntax{(setf (gtk:color-dialog-button-dialog object) dialog)}
   @argument[object]{a @class{gtk:color-dialog-button} object}
   @argument[dialog]{a @class{gtk:color-dialog} object}
   @begin{short}
-    The accessor for the @slot[color-dialog-button]{dialog} slot of the
-    @class{gtk:color-dialog-button} class gets or sets a
-    @class{gtk:color-dialog} object to use for creating the color chooser dialog
-    that is presented when the user clicks the button.
+    The accessor for the @slot[color-dialog-button]{dialog} slot gets or sets
+    a @class{gtk:color-dialog} object to use for creating the color chooser
+    dialog that is presented when the user clicks the button.
   @end{short}
 
   Since 4.10
@@ -170,14 +173,14 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'color-dialog-button-rgba)
       "Accessor"
       (documentation 'color-dialog-button-rgba 'function)
- "@version{2025-08-06}
+ "@version{2026-08-30}
   @syntax{(gtk:color-dialog-button-rgba object) => rgba}
   @syntax{(setf (gtk:color-dialog-button-rgba object) rgba)}
   @argument[object]{a @class{gtk:color-dialog-button} object}
   @argument[rgba]{a @class{gdk:rgba} instance}
   @begin{short}
-    The accessor for the @slot[color-dialog-button]{rgba} slot of the
-    @class{gtk:color-dialog-button} class gets or sets the color of the button.
+    The accessor for the @slot[color-dialog-button]{rgba} slot gets or sets
+    the color of the button.
   @end{short}
 
   This function is what should be used to obtain the color that was chosen by

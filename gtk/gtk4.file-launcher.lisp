@@ -2,7 +2,7 @@
 ;;; gtk4.file-launcher.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -127,15 +127,14 @@
 (setf (liber:alias-for-function 'file-launcher-always-ask)
       "Accessor"
       (documentation 'file-launcher-always-ask 'function)
- "@version{2025-09-21}
+ "@version{2026-08-20}
   @syntax{(gtk:file-launcher-always-ask object) => setting}
   @syntax{(setf (gtk:file-launcher-always-ask object) setting)}
   @argument[object]{a @class{gtk:file-launcher} object}
   @argument[setting]{a boolean whether to always ask the user}
   @begin{short}
-    The accessor for the @slot[gtk:file-launcher]{always-ask} slot of the
-    @class{gtk:file-launcher} class gets or sets whether to ask the user to
-    choose an application for opening the file.
+    The accessor for the @slot[gtk:file-launcher]{always-ask} slot gets or
+    sets whether to ask the user to choose an application for opening the file.
   @end{short}
   If @em{false}, the file might be opened with a default application or the
   previous choice.
@@ -154,14 +153,14 @@
 (setf (liber:alias-for-function 'file-launcher-file)
       "Accessor"
       (documentation 'file-launcher-file 'function)
- "@version{2025-09-21}
+ "@version{2026-08-20}
   @syntax{(gtk:file-launcher-file object) => file}
   @syntax{(setf (gtk:file-launcher-file object) file)}
   @argument[object]{a @class{gtk:file-launcher} object}
   @argument[file]{a @class{g:file} object}
   @begin{short}
-    The accessor for the @slot[gtk:file-launcher]{file} slot of the
-    @class{gtk:file-launcher} class gets or sets the file that will be opened.
+    The accessor for the @slot[gtk:file-launcher]{file} slot gets or sets the
+    file that will be opened.
   @end{short}
 
   Since 4.10
@@ -180,15 +179,14 @@
 (setf (liber:alias-for-function 'file-launcher-writable)
       "Accessor"
       (documentation 'file-launcher-writable 'function)
- "@version{2025-09-21}
+ "@version{2026-08-20}
   @syntax{(gtk:file-launcher-writable object) => writable}
   @syntax{(setf (gtk:file-launcher-writable object) writable)}
   @argument[object]{a @class{gtk:file-launcher} object}
   @argument[writable]{a boolean whether to make the file writable}
   @begin{short}
-    The accessor for the @slot[gtk:file-launcher]{writable} slot of the
-    @class{gtk:file-launcher} class gets or sets whether to make the file
-    writable for the handler.
+    The accessor for the @slot[gtk:file-launcher]{writable} slot gets or sets
+    whether to make the file writable for the handler.
   @end{short}
 
   Since 4.14

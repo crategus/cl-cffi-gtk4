@@ -2,7 +2,7 @@
 ;;; gtk4.font-dialog.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -139,15 +139,14 @@
 (setf (liber:alias-for-function 'font-dialog-filter)
       "Accessor"
       (documentation 'font-dialog-filter 'function)
- "@version{2026-01-03}
+ "@version{2026-08-30}
   @syntax{(gtk:font-dialog-filter object) => filter}
   @syntax{(setf (gtk:font-dialog-filter object) filter)}
   @argument[object]{a @class{gtk:font-dialog} object}
   @argument[filter]{a @class{gtk:filter} object}
   @begin{short}
-    The accessor for the @slot[gtk:font-dialog]{filter} slot of the
-    @class{gtk:font-dialog} class gets or sets the filter that decides which
-    fonts to display in the font chooser dialog.
+    The accessor for the @slot[gtk:font-dialog]{filter} slot gets or sets the
+    filter that decides which fonts to display in the font chooser dialog.
   @end{short}
 
   The @class{gtk:filter} object must be able to handle both
@@ -173,15 +172,14 @@
 (setf (liber:alias-for-function 'font-dialog-font-map)
       "Accessor"
       (documentation 'font-dialog-font-map 'function)
- "@version{2026-01-03}
+ "@version{2026-08-30}
   @syntax{(gtk:font-dialog-font-map object) => fontmap}
   @syntax{(setf (gtk:font-dialog-font-map object) fontmap)}
   @argument[object]{a @class{gtk:font-dialog} object}
   @argument[fontmap]{a @class{pango:font-map} object}
   @begin{short}
-    The accessor for the @slot[gtk:font-dialog]{font-map} slot of the
-    @class{gtk:font-dialog} class gets or sets the fontmap from which fonts are
-    selected.
+    The accessor for the @slot[gtk:font-dialog]{font-map} slot gets or sets
+    the fontmap from which fonts are selected.
   @end{short}
   Returns @code{nil} for the default fontmap.
 
@@ -201,15 +199,14 @@
 (setf (liber:alias-for-function 'font-dialog-language)
       "Accessor"
       (documentation 'font-dialog-language 'function)
- "@version{2026-01-03}
+ "@version{2026-08-30}
   @syntax{(gtk:font-dialog-language object) => language}
   @syntax{(setf (gtk:font-dialog-language object) language)}
   @argument[object]{a @class{gtk:font-dialog} object}
   @argument[fontmap]{a @class{pango:language} object}
   @begin{short}
-    The accessor for the @slot[gtk:font-dialog]{language} slot of the
-    @class{gtk:font-dialog} class gets or sets the language for which font
-    features are applied.
+    The accessor for the @slot[gtk:font-dialog]{language} slot gets or sets
+    the language for which font features are applied.
   @end{short}
 
   Since 4.10
@@ -228,15 +225,15 @@
 (setf (liber:alias-for-function 'font-dialog-modal)
       "Accessor"
       (documentation 'font-dialog-modal 'function)
- "@version{2026-01-03}
+ "@version{2026-08-30}
   @syntax{(gtk:font-dialog-modal object) => modal}
   @syntax{(setf (gtk:font-dialog-modal object) modal)}
   @argument[object]{a @class{gtk:font-dialog} object}
   @argument[modal]{a boolean whether the font chooser dialog is modal}
   @begin{short}
-    The accessor for the @slot[gtk:font-dialog]{modal} slot of the
-    @class{gtk:font-dialog} class gets or sets whether the font chooser dialog
-    blocks interaction with the parent window while it is presented.
+    The accessor for the @slot[gtk:font-dialog]{modal} slot gets or sets
+    whether the font chooser dialog blocks interaction with the parent window
+    while it is presented.
   @end{short}
 
   Since 4.10
@@ -255,15 +252,14 @@
 (setf (liber:alias-for-function 'font-dialog-title)
       "Accessor"
       (documentation 'font-dialog-title 'function)
- "@version{2026-01-03}
+ "@version{2026-08-30}
   @syntax{(gtk:font-dialog-title object) => title}
   @syntax{(setf (gtk:font-dialog-title object) title)}
   @argument[object]{a @class{gtk:font-dialog} object}
   @argument[title]{a string for the title}
   @begin{short}
-    The accessor for the @slot[gtk:font-dialog]{title} slot of the
-    @class{gtk:font-dialog} class gets or sets the title that will be shown on
-    the font chooser dialog.
+    The accessor for the @slot[gtk:font-dialog]{title} slot gets or sets the
+    title that will be shown on the font chooser dialog.
   @end{short}
 
   Since 4.10

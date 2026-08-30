@@ -2,7 +2,7 @@
 ;;; gtk4.color-dialog.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -118,15 +118,15 @@
 (setf (liber:alias-for-function 'color-dialog-modal)
       "Accessor"
       (documentation 'color-dialog-modal 'function)
- "@version{2025-08-06}
+ "@version{2026-08-30}
   @syntax{(gtk:color-dialog-modal object) => modal)}
   @syntax{(setf (gtk:color-dialog-modal object) modal)}
   @argument[object]{a @class{gtk:color-dialog} object}
   @argument[modal]{a boolean whether the color chooser dialog is modal}
   @begin{short}
-    The accessor for the @slot[gtk:color-dialog]{modal} slot of the
-    @class{gtk:color-dialog} class gets or sets whether the color chooser dialog
-    blocks interaction with the parent window while it is presented.
+    The accessor for the @slot[gtk:color-dialog]{modal} slot gets or sets
+    whether the color chooser dialog blocks interaction with the parent window
+    while it is presented.
   @end{short}
 
   Since 4.10
@@ -145,15 +145,14 @@
 (setf (liber:alias-for-function 'color-dialog-title)
       "Accessor"
       (documentation 'color-dialog-title 'function)
- "@version{2025-08-06}
+ "@version{2026-08-30}
   @syntax{(gtk:color-dialog-title object) => title)}
   @syntax{(setf (gtk:color-dialog-title object) title)}
   @argument[object]{a @class{gtk:color-dialog} object}
   @argument[title]{a string for the title}
   @begin{short}
-    The accessor for the @slot[gtk:color-dialog]{title} slot of the
-    @class{gtk:color-dialog} class gets or sets the title that will be shown on
-    the color chooser dialog.
+    The accessor for the @slot[gtk:color-dialog]{title} slot gets or sets the
+    title that will be shown on the color chooser dialog.
   @end{short}
 
   Since 4.10
@@ -172,14 +171,14 @@
 (setf (liber:alias-for-function 'color-dialog-with-alpha)
       "Accessor"
       (documentation 'color-dialog-with-alpha 'function)
- "@version{2025-08-06}
+ "@version{2026-08-30}
   @syntax{(gtk:color-dialog-with-alpha object) => setting)}
   @syntax{(setf (gtk:color-dialog-with-alpha object) setting)}
   @argument[object]{a @class{gtk:color-dialog} object}
   @argument[setting]{a boolean whether colors may have alpha}
   @begin{short}
-    The accessor for the @slot[gtk:color-dialog]{with-alpha} slot of the
-    @class{gtk:color-dialog} class get or sets whether colors may have alpha.
+    The accessor for the @slot[gtk:color-dialog]{with-alpha} slot gets or sets
+    whether colors may have alpha.
   @end{short}
 
   Since 4.10
