@@ -243,6 +243,8 @@
                         (declare (ignore app))
                         (when *verbose-gtk-application*
                           (format t "~&  Signal SHUTDOWN emitted~%"))
+                        ;; FIXME: This migth cause a problem in the testsuite.
+                        ;; Check this.
                         ;; Destroy all toplevel windows
                         (dolist (window (gtk:window-list-toplevels))
                           (gtk:window-destroy window))

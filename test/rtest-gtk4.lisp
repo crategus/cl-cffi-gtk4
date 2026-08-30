@@ -16,7 +16,7 @@
 ;; Check which version of the library we are running. The testsuite requires
 ;; the latest version.
 (glib-init:require-library-version "GTK"
-                                   4 20
+                                   4 22
                                    (gtk:major-version)
                                    (gtk:minor-version))
 
@@ -24,6 +24,62 @@
 (def-suite gsk-suite :in gtk-test)
 (def-suite gdk-suite :in gtk-test)
 (def-suite gtk-suite :in gtk-test)
+
+(defvar gdk-suite
+        '(;; General
+          gdk-enumerations
+          gdk-rectangle
+          gdk-rgba
+          gdk-keyval
+          gdk-dmabuf-formats
+          gdk-color-state
+          gdk-cicp-params
+          ;; Display, Seat, Device, Monitor
+          gdk-display-manager
+          gdk-display
+          gdk-device-tool
+          gdk-device
+          gdk-pad-device
+          gdk-monitor
+          gdk-seat
+          ;; Paintables, Textures
+          gdk-paintable
+          gdk-texture
+          gdk-texture-downloader
+          gdk-dmabuf-texture
+          ;;Surfaces, Toplevels, Popups
+          gdk-surface
+          gdk-toplevel-size
+          gdk-toplevel-layout
+          gdk-toplevel
+          gdk-popup-layout
+          gdk-popup
+          ;; Draw Contexts
+          gdk-draw-context
+          gdk-gl-context
+          gdk-cairo-context
+          ;; Clipbord, Drag and Drop
+          gdk-content-formats
+          gdk-content-provider
+          gdk-content-serializer
+          gdk-content-deserializer
+          gdk-clipboard
+          gdk-drag
+          gdk-drop
+          gdk-drag-surface
+          ;; Application launching
+          gdk-app-launch-context
+          ;; Miscellaneous
+          gdk-event
+          gdk-cursor
+          gdk-frame-clock
+          gdk-frame-timings
+
+          ;; Pixbuf, Pango, Cairo and Backends interaction
+          gdk-pixbuf-interaction
+          gdk-pango-interaction
+          gdk-cairo-interaction
+))
 
 (def-suite gtk-list-model-support :in gtk-suite)
 (def-suite gtk-list-widgets :in gtk-suite)
@@ -57,6 +113,48 @@
 (def-suite gtk-core :in gtk-suite)
 (def-suite gtk-theming :in gtk-suite)
 (def-suite gtk-deprecated :in gtk-suite)
+
+(defvar gtk-suite
+        '(;; Application support
+;         gtk-application
+;         gtk-application-window
+          ;; Interface builder
+;         gtk-buildable
+;         gtk-builder
+          ;; Windows
+;         gtk-root
+;         gtk-native
+;         gtk-window
+;         gtk-about-dialog
+;         gtk-alert-dialog
+;         gtk-window-group
+;         gtk-native-dialog
+          ;; Layout Widgets
+          gtk-box gtk-center-box gtk-grid gtk-revealer gtk-list-box gtk-flow-box
+          gtk-stack gtk-stack-switcher gtk-stack-sidebar gtk-action-bar
+          gtk-header-bar gtk-overlay gtk-paned gtk-notebook gtk-expander
+          gtk-aspect-frame gtk-fixed
+          ;; Layout Managers
+          gtk-layout-manager gtk-layout-child gtk-bin-layout gtk-box-layout
+          gtk-center-layout gtk-fixed-layout gtk-grid-layout gtk-overlay-layout
+          gtk-custom-layout
+          gtk-constraint gtk-constraint-guide gtk-constraint-layout
+          ;; Display Widgets
+          gtk-label gtk-inscription gtk-image gtk-picture gtk-spinner
+          gtk-progress-bar gtk-level-bar  gtk-calendar
+          ;; Buttons and Toggles
+          gtk-button gtk-toggle-button gtk-check-button gtk-menu-button
+          gtk-link-button gtk-scale-button gtk-switch
+          ;; Numeric and Text Data Entry
+          gtk-editable
+          gtk-entry-buffer
+          gtk-text
+          gtk-entry
+          gtk-password-entry
+          gtk-scale
+          ;; Accessibility & Input Methods
+          gtk-accessible
+          ))
 
 ;; push the hostname on *features*
 (pushnew (intern (string-upcase (machine-instance)) :keyword) *features*)
@@ -210,4 +308,10 @@ sem venenatis, vitae ultricies arcu laoreet."))
           (format t "~&No printer for testsuite available~%")))
     default-printer))
 
-;;; 2026-05-20
+;;; Initialise some skeleton objects
+
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  ;; Initialise default display manager
+  (gdk:display-manager-get))
+
+;;; 2026-08-08

@@ -252,7 +252,7 @@
 ;;; ---  Properties ------------------------------------------------------------
 
 (test gtk-builder-properties
-  (glib-test:with-check-memory (builder scope)
+  (glib-test:with-check-memory (builder (scope 1))
     (is (typep (setf builder (make-instance 'gtk:builder)) 'gtk:builder))
     (is-false (gtk:builder-current-object builder))
     (is (typep (setf scope

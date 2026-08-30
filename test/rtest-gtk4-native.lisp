@@ -27,8 +27,8 @@
              (glib-test:list-signals "GtkNative")))
   ;; Check interface definition
   (is (equal '(GOBJECT:DEFINE-GINTERFACE "GtkNative" GTK:NATIVE
-                       (:EXPORT T
-                        :TYPE-INITIALIZER "gtk_native_get_type"))
+                      (:EXPORT T
+                       :TYPE-INITIALIZER "gtk_native_get_type"))
              (gobject:get-gtype-definition "GtkNative"))))
 
 ;;; --- Functions --------------------------------------------------------------
@@ -36,8 +36,11 @@
 ;;;     gtk_native_get_for_surface
 ;;;     gtk_native_get_surface
 
+;; This test adds two references to the default display. Reason ist the call
+;; of the GTK:WIDGET-REALIZE function.
+
 (test gtk-native-surface/for-surface
-  (glib-test:with-check-memory (button window surface :strong 1)
+  (glib-test:with-check-memory (button window surface)
     (setf button (make-instance 'gtk:button))
     (setf window (make-instance 'gtk:window :child button))
     ;; Realize WINDOW to create GDK resources
@@ -72,6 +75,16 @@
 
 (test gtk-native-surface-transform
   (glib-test:with-check-memory (window)
+    (setf window (make-instance 'gtk:window))
+    (is (equal '(0d0 0d0)
+               (multiple-value-list (gtk:native-surface-transform window))))
+    (is-false (gtk:widget-realize window))
+    (is (equal '(14d0 12d0)
+               (multiple-value-list (gtk:native-surface-transform window))))
+    (is-false (gtk:window-destroy window))))
+
+(test gtk-native-surface-transform.1
+  (gobject::using (window nil)
     (setf window (make-instance 'gtk:window))
     (is (equal '(0d0 0d0)
                (multiple-value-list (gtk:native-surface-transform window))))

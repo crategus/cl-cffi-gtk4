@@ -106,6 +106,10 @@
 
 ;;;     gtk_buildable_get_buildable_id
 
+;; TODO: Check the memory management. The tests in rtest-gtk-builder gets extra
+;; references for the gtk:builder-cl-scope object after perorming this test.
+
+#+nil
 (test gtk-buildable-buildable-id
   (glib-test:with-check-memory (builder
                                 (window1 2) (stack 4) (image 4)

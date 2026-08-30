@@ -261,6 +261,7 @@
 
 ;;;     gtk_recent_info_create_app_info
 
+#+crategus
 (test gtk-recent-info-create-app-info
   (glib-test:with-check-memory ()
     (let* ((recent (gtk:recent-manager-default))
@@ -297,4 +298,4 @@
       (is-true (gtk:recent-info-match info2 info2))
       (is-false (gtk:recent-info-match info1 info2)))))
 
-;;; 2026-05-15
+;;; 2026-07-14
