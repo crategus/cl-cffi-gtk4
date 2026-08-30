@@ -2,7 +2,7 @@
 ;;; gtk4.popover.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -261,14 +261,14 @@ lambda (popover)    :run-last
 (setf (liber:alias-for-function 'popover-autohide)
       "Accessor"
       (documentation 'popover-autohide 'function)
- "@version{2025-08-12}
+ "@version{2026-08-17}
   @syntax{(gtk:popover-autohide object) => setting}
   @syntax{(setf (gtk:popover-autohide object) setting)}
   @argument[object]{a @class{gtk:popover} widget}
   @argument[setting]{a boolean whether to dismiss the popover on outside clicks}
   @begin{short}
-    The accessor for the @slot[gtk:popover]{autohide} slot of the
-    @class{gtk:popover} class gets or sets whether the popover is modal.
+    The accessor for the @slot[gtk:popover]{autohide} slot gets or sets whether
+    the popover is modal.
   @end{short}
 
   A modal popover will grab the keyboard focus on it when being displayed.
@@ -292,16 +292,15 @@ lambda (popover)    :run-last
 (setf (liber:alias-for-function 'popover-cascade-popdown)
       "Accessor"
       (documentation 'popover-cascade-popdown 'function)
- "@version{2025-08-12}
+ "@version{2026-08-17}
   @syntax{(gtk:popover-cascade-popdown object) => setting}
   @syntax{(setf (gtk:popover-cascade-popdown object) setting)}
   @argument[object]{a @class{gtk:popover} widget}
   @argument[setting]{a boolean whether the popover should follow a child
     closing}
   @begin{short}
-    The accessor for the @slot[gtk:popover]{cascade-popdown} slot of the
-    @class{gtk:popover} class gets or sets whether the popover will close after
-    a modal child is closed.
+    The accessor for the @slot[gtk:popover]{cascade-popdown} slot gets or sets
+    whether the popover will close after a modal child is closed.
   @end{short}
   If @em{true}, the popover will be closed when a child modal popover is closed.
   If @em{false}, the popover will stay visible.
@@ -318,14 +317,14 @@ lambda (popover)    :run-last
 (setf (liber:alias-for-function 'popover-child)
       "Accessor"
       (documentation 'popover-child 'function)
- "@version{2025-08-12}
+ "@version{2026-08-17}
   @syntax{(gtk:popover-child object) => child}
   @syntax{(setf (gtk:popover-child object) child)}
   @argument[object]{a @class{gtk:popover} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{short}
-    The accessor for the @slot[gtk:popover]{child} slot of the
-    @class{gtk:popover} class gets or sets the child widget of the popover.
+    The accessor for the @slot[gtk:popover]{child} slot gets or sets the child
+    widget of the popover.
   @end{short}
   @see-class{gtk:popover}
   @see-class{gtk:widget}")
@@ -342,15 +341,15 @@ lambda (popover)    :run-last
 (setf (liber:alias-for-function 'popover-default-widget)
       "Accessor"
       (documentation 'popover-default-widget 'function)
- "@version{2025-08-12}
+ "@version{2026-08-17}
   @syntax{(gtk:popover-default-widget object) => widget}
   @syntax{(setf (gtk:popover-default-widget object) widget)}
   @argument[object]{a @class{gtk:popover} widget}
   @argument[widget]{a @class{gtk:widget} default widget, or @code{nil} to
     unset the default widget}
   @begin{short}
-    The accessor for the @slot[gtk:popover]{default-widget} slot of the
-    @class{gtk:popover} class gets or sets the default widget of the popover.
+    The accessor for the @slot[gtk:popover]{default-widget} slot gets or sets
+    the default widget of the popover.
   @end{short}
 
   The default widget is the widget that is activated when the user presses the
@@ -370,15 +369,15 @@ lambda (popover)    :run-last
 (setf (liber:alias-for-function 'popover-has-arrow)
       "Accessor"
       (documentation 'popover-has-arrow 'function)
- "@version{2025-08-12}
+ "@version{2026-08-17}
   @syntax{(gtk:popover-has-arrow object) => setting}
   @syntax{(setf (gtk:popover-has-arrow object) setting)}
   @argument[object]{a @class{gtk:popover} widget}
   @argument[setting]{a boolean whether the popover has an arrow}
   @begin{short}
-    The accessor for the @slot[gtk:popover]{has-arrow} slot of the
-    @class{gtk:popover} class gets or sets whether the popover is showing an
-    arrow pointing at the widget that it is relative to.
+    The accessor for the @slot[gtk:popover]{has-arrow} slot gets or sets
+    whether the popover is showing an arrow pointing at the widget that it is
+    relative to.
   @end{short}
   @see-class{gtk:popover}")
 
@@ -395,16 +394,15 @@ lambda (popover)    :run-last
 (setf (liber:alias-for-function 'popover-mnemonics-visible)
       "Accessor"
       (documentation 'popover-mnemonics-visible 'function)
- "@version{2025-08-12}
+ "@version{2026-08-17}
   @syntax{(gtk:popover-mnemonics-visible object) => setting}
   @syntax{(setf (gtk:popover-mnemonics-visible object) setting)}
   @argument[object]{a @class{gtk:popover} widget}
   @argument[setting]{a boolean whether mnemonics are currently visible in the
     popover}
   @begin{short}
-    The accessor for the @slot[gtk:popover]{mnemonics-visible} slot of the
-    @class{gtk:popover} class gets or sets whether mnemonics are currently
-    visible in this popover.
+    The accessor for the @slot[gtk:popover]{mnemonics-visible} slot gets or
+    sets whether mnemonics are currently visible in this popover.
   @end{short}
   @see-class{gtk:popover}")
 
@@ -420,15 +418,14 @@ lambda (popover)    :run-last
 (setf (liber:alias-for-function 'popover-pointing-to)
       "Accessor"
       (documentation 'popover-pointing-to 'function)
- "@version{2025-08-12}
+ "@version{2026-08-17}
   @syntax{(gtk:popover-pointing-to object) => rect}
   @syntax{(setf (gtk:popover-pointing-to object) rect)}
   @argument[object]{a @class{gtk:popover} widget}
   @argument[rect]{a @class{gdk:rectangle} instance to point to}
   @begin{short}
-    The accessor for the @slot[gtk:popover]{pointing-to} slot of the
-    @class{gtk:popover} class gets or sets the rectangle that the popover points
-    to.
+    The accessor for the @slot[gtk:popover]{pointing-to} slot gets or sets the
+    rectangle that the popover points to.
   @end{short}
   This is in the coordinate space of the popover parent.
   @see-class{gtk:popover}
@@ -447,16 +444,15 @@ lambda (popover)    :run-last
 (setf (liber:alias-for-function 'popover-position)
       "Accessor"
       (documentation 'popover-position 'function)
- "@version{2025-08-12}
+ "@version{2026-08-17}
   @syntax{(gtk:popover-pointing-to object) => position}
   @syntax{(setf (gtk:popover-pointing-to object) position)}
   @argument[object]{a @class{gtk:popover} widget}
   @argument[position]{a @sym{gtk:position-type} value for the preferred popover
     position}
   @begin{short}
-    The accessor for the @slot[gtk:popover]{position} slot of the
-    @class{gtk:popover} class gets or sets the preferred position of the popover
-    to appear.
+    The accessor for the @slot[gtk:popover]{position} slot gets or sets the
+    preferred position of the popover to appear.
   @end{short}
   If the popover is currently visible, it will be immediately updated.
 

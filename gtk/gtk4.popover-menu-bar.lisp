@@ -2,7 +2,7 @@
 ;;; gtk4.popover-menu-bar.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -135,15 +135,14 @@ menubar
 (setf (liber:alias-for-function 'popover-menu-bar-menu-model)
       "Accessor"
       (documentation 'popover-menu-bar-menu-model 'function)
- "@version{2025-09-21}
+ "@version{2026-08-20}
   @syntax{(gtk:popover-menu-bar-menu-model object) => model}
   @syntax{(setf (gtk:popover-menu-bar-menu-model object) model)}
   @argument[object]{a @class{gtk:popover-menu} widget}
   @argument[model]{a @class{g:menu-model} object}
   @begin{short}
-    The accessor for the @slot[gtk:popover-menu-bar]{menu-model} slot of the
-    @class{gtk:popover-menu} class gets or sets the model from which the
-    contents of the menu bar are taken.
+    The accessor for the @slot[gtk:popover-menu-bar]{menu-model} slot gets or
+    sets the model from which the contents of the menu bar are taken.
   @end{short}
   @see-class{gtk:popover-menu-bar}
   @see-class{g:menu-model}")
