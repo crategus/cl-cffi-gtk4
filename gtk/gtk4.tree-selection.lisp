@@ -6,7 +6,7 @@
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2025 Dieter Kaiser
+;;; Copyright (C) 2011 - 2026 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -161,15 +161,14 @@ lambda (selection)    :run-first
 (setf (liber:alias-for-function 'tree-selection-mode)
       "Accessor"
       (documentation 'tree-selection-mode 'function)
- "@version{2025-09-21}
+ "@version{2026-08-20}
   @syntax{(gtk:tree-selection-mode object) => mode}
   @syntax{(setf (gtk:tree-selection-mode object) mode)}
   @argument[object]{a @class{gtk:tree-selection} object}
   @argument[mode]{a @sym{gtk:selection-mode} value}
   @begin{short}
-    The accessor for the @slot[gtk:tree-selection]{mode} slot of the
-    @class{gtk:tree-selection} class gets or sets the selection mode of the
-    selection.
+    The accessor for the @slot[gtk:tree-selection]{mode} slot gets or sets the
+    selection mode of the selection.
   @end{short}
   If the previous type was @val[gtk:selection-mode]{:multiple}, then the anchor
   is kept selected, if it was previously selected.
