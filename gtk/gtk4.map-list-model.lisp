@@ -2,7 +2,7 @@
 ;;; gtk4.map-list-model.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -137,14 +137,13 @@
 (setf (liber:alias-for-function 'map-list-model-has-map)
       "Accessor"
       (documentation 'map-list-model-has-map 'function)
- "@version{2025-09-25}
+ "@version{2026-08-30}
   @syntax{(gtk:map-list-model-has-map object) => setting}
   @argument[object]{a @class{gtk:map-list-model} object}
   @argument[setting]{a boolean whether a map function is set for this model}
   @begin{short}
-    The accessor for the @slot[gtk:map-list-model]{has-map} slot of the
-    @class{gtk:map-list-model} class checks if a map function is currently set
-    on @arg{object}.
+    The accessor for the @slot[gtk:map-list-model]{has-map} slot checks if a
+    map function is currently set on @arg{object}.
   @end{short}
   @see-class{gtk:map-list-model}")
 
@@ -159,14 +158,13 @@
 (setf (liber:alias-for-function 'map-list-model-item-type)
       "Accessor"
       (documentation 'map-list-model-item-type 'function)
- "@version{2025-08-17}
+ "@version{2026-08-30}
   @syntax{(gtk:map-list-model-item-type object) => gtype}
   @argument[object]{a @class{gtk:map-list-model} object}
   @argument[gtype]{a @class{g:type-t} type ID}
   @begin{short}
-    The accessor for the @slot[gtk:map-list-model]{item-type} slot of the
-    @class{gtk:map-list-model} class returns the type of items contained in the
-    list model.
+    The accessor for the @slot[gtk:map-list-model]{item-type} slot returns the
+    type of items contained in the list model.
   @end{short}
   Items must be subclasses of the @class{g:object} class.
 
@@ -191,14 +189,13 @@
 (setf (liber:alias-for-function 'map-list-model-model)
       "Accessor"
       (documentation 'map-list-model-model 'function)
- "@version{2025-09-25}
+ "@version{2026-08-30}
   @syntax{(gtk:map-list-model-model object) => model}
   @argument[object]{a @class{gtk:map-list-model} object}
   @argument[model]{a @class{g:list-model} object that gets mapped}
   @begin{short}
-    The accessor for the @slot[gtk:map-list-model]{model} slot of the
-    @class{gtk:map-list-model} class returns the model that is currently being
-    mapped or @code{nil} if none.
+    The accessor for the @slot[gtk:map-list-model]{model} slot returns the
+    model that is currently being mapped or @code{nil} if none.
   @end{short}
 
   GTK makes no effort to ensure that the model conforms to the item type
@@ -219,15 +216,14 @@
 (setf (liber:alias-for-function 'map-list-model-n-items)
       "Accessor"
       (documentation 'map-list-model-n-items 'function)
- "@version{2025-08-17}
+ "@version{2026-08-30}
   @syntax{(gtk:map-list-model-n-items object) => n-items}
   @argument[object]{a @class{gtk:map-list-model} object}
   @argument[n-items]{an unsigned integer for the number of items contained in
     the model}
   @begin{short}
-    The accessor for the @slot[gtk:map-list-model]{n-items} slot of the
-    @class{gtk:map-list-model} class returns the number of items contained in
-    the model.
+    The accessor for the @slot[gtk:map-list-model]{n-items} slot returns the
+    number of items contained in the model.
   @end{short}
   @see-class{g:map-list-model}
   @see-function{g:list-model-n-items}")

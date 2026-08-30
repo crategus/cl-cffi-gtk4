@@ -2,7 +2,7 @@
 ;;; gtk4.slice-list-model.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -131,14 +131,13 @@
 (setf (liber:alias-for-function 'slice-list-model-item-type)
       "Accessor"
       (documentation 'slice-list-model-item-type 'function)
- "@version{2025-08-13}
+ "@version{2026-08-17}
   @syntax{(gtk:slice-list-model-item-type object) => gtype}
   @argument[object]{a @class{gtk:slice-list-model} object}
   @argument[gtype]{a @class{g:type-t} type ID}
   @begin{short}
-    The accessor for the @slot[gtk:slice-list-model]{item-type} slot of the
-    @class{gtk:slice-list-model} class gets or sets the type of items contained
-    in the list model.
+    The accessor for the @slot[gtk:slice-list-model]{item-type} slot gets or
+    sets the type of items contained in the list model.
   @end{short}
   Items must be subclasses of the @class{g:object} class.
 
@@ -162,15 +161,14 @@
 (setf (liber:alias-for-function 'slice-list-model-model)
       "Accessor"
       (documentation 'slice-list-model-model 'function)
- "@version{2025-08-13}
+ "@version{2025-08-17}
   @syntax{(gtk:slice-list-model-model object) => model}
   @syntax{(setf (gtk:slice-list-model-model object) model)}
   @argument[object]{a @class{gtk:slice-list-model} object}
   @argument[model]{a @class{g:list-model} object to be sliced}
   @begin{short}
-    The accessor for the @slot[gtk:slice-list-model]{model} slot of the
-    @class{gtk:slice-list-model} class gets or sets the model that is  being
-    used to take slice from.
+    The accessor for the @slot[gtk:slice-list-model]{model} slot gets or sets
+    the model that is  being used to take slice from.
   @end{short}
   Returns @code{nil} if none. The item type of @arg{model} must conform to the
   item type of @arg{object}.
@@ -189,14 +187,14 @@
 (setf (liber:alias-for-function 'slice-list-model-n-items)
       "Accessor"
       (documentation 'slice-list-model-n-items 'function)
- "@version{2025-08-13}
+ "@version{2026-08-17}
   @syntax{(gtk:slice-list-model-n-items object) => n-items}
   @argument[object]{a @class{gtk:slice-list-model} object}
   @argument[n-items]{an unsigned integer for the number of items contained in
     the model}
   @begin{short}
-    The accessor for the @slot[gtk:slice-list-model]{n-items} slot of the
-    @class{gtk:slice-list-model} class gets the number of items.
+    The accessor for the @slot[gtk:slice-list-model]{n-items} slot gets the
+    number of items.
   @end{short}
   @see-class{g:slice-list-model}
   @see-function{g:list-model-n-items}")
@@ -213,15 +211,14 @@
 (setf (liber:alias-for-function 'slice-list-model-offset)
       "Accessor"
       (documentation 'slice-list-model-offset 'function)
- "@version{2025-08-13}
+ "@version{2026-08-17}
   @syntax{(gtk:slice-list-model-offset object) => offset}
   @syntax{(setf (gtk:slice-list-model-offset object) offset)}
   @argument[object]{a @class{gtk:slice-list-model} object}
   @argument[offset]{an integer for the offset}
   @begin{short}
-    The accessor for the @slot[gtk:slice-list-model]{offset} slot of the
-    @class{gtk:slice-list-model} class gets or sets the offset into the original
-    model for this slice.
+    The accessor for the @slot[gtk:slice-list-model]{offset} slot gets or sets
+    the offset into the original model for this slice.
   @end{short}
   If the offset is too large for the sliced model, @arg{object} will end up
   empty.
@@ -239,14 +236,14 @@
 (setf (liber:alias-for-function 'slice-list-model-size)
       "Accessor"
       (documentation 'slice-list-model-size 'function)
- "@version{2025-08-13}
+ "@version{2026-08-17}
   @syntax{(gtk:slice-list-model-size object) => size}
   @syntax{(setf (gtk:slice-list-model-size object) size)}
   @argument[object]{a @class{gtk:slice-list-model} object}
   @argument[size]{an unsigned integer for the size}
   @begin{short}
-    The accessor for the @slot[gtk:slice-list-model]{size} slot of the
-    @class{gtk:slice-list-model} class gets or sets the maximum size of slice.
+    The accessor for the @slot[gtk:slice-list-model]{size} slot gets or sets
+    the maximum size of slice.
   @end{short}
   @arg{object} will never have more items than @arg{size}. It can however have
   fewer items if the offset is too large or the model sliced from does not have

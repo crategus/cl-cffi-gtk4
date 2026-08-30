@@ -2,7 +2,7 @@
 ;;; gtk4.sort-list-model.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -167,15 +167,14 @@
 (setf (liber:alias-for-function 'sort-list-model-incremental)
       "Accessor"
       (documentation 'sort-list-model-incremental 'function)
- "@version{2025-08-17}
+ "@version{2026-08-17}
   @syntax{(gtk:sort-list-model-incremental object) => incremental}
   @syntax{(setf (gtk:sort-list-model-incremental object) incremental)}
   @argument[object]{a @class{gtk:sort-list-model} object}
   @argument[incremental]{a boolean whether incremental sorting is enabled}
   @begin{short}
-    The accessor for the @slot[gtk:sort-list-model]{incremental} slot of the
-    @class{gtk:sort-list-model} class gets or sets whether incremental sorting
-    was enabled.
+    The accessor for the @slot[gtk:sort-list-model]{incremental} slot gets or
+    sets whether incremental sorting was enabled.
   @end{short}
 
   When incremental sorting is enabled, the sort list model will not do a
@@ -210,9 +209,8 @@
   @argument[object]{a @class{gtk:sort-list-model} object}
   @argument[gtype]{a @class{g:type-t} type ID}
   @begin{short}
-    The accessor for the @slot[gtk:sort-list-model]{item-type} slot of the
-    @class{gtk:sort-list-model} class returns the type of items contained in
-    the list model.
+    The accessor for the @slot[gtk:sort-list-model]{item-type} slot returns the
+    type of items contained in the list model.
   @end{short}
   Items must be subclasses of the @class{g:object} class.
 
@@ -236,14 +234,14 @@
 (setf (liber:alias-for-function 'sort-list-model-model)
       "Accessor"
       (documentation 'sort-list-model-model 'function)
- "@version{2025-08-17}
+ "@version{2026-08-17}
   @syntax{(gtk:sort-list-model-model object) => model}
   @syntax{(setf (gtk:sort-list-model-model object) model)}
   @argument[object]{a @class{gtk:sort-list-model} object}
   @argument[model]{a @class{g:list-model} object to be sorted}
   @begin{short}
-    The accessor for the @slot[gtk:sort-list-model]{model} slot of the
-    @class{gtk:sort-list-model} class gets or sets the model to be sorted.
+    The accessor for the @slot[gtk:sort-list-model]{model} slot gets or sets
+    the model to be sorted.
   @end{short}
   Returns @code{nil} if none. The item type of @arg{model} must conform to the
   item type of @arg{object}.
@@ -262,15 +260,14 @@
 (setf (liber:alias-for-function 'sort-list-model-n-items)
       "Accessor"
       (documentation 'sort-list-model-n-items 'function)
- "@version{2025-08-17}
+ "@version{2026-08-17}
   @syntax{(gtk:sort-list-model-n-items object) => n-items}
   @argument[object]{a @class{gtk:sort-list-model} object}
   @argument[n-items]{an unsigned integer for the number of items contained in
     the model}
   @begin{short}
-    The accessor for the @slot[gtk:sort-list-model]{n-items} slot of the
-    @class{gtk:sort-list-model} class returns the number of items contained in
-    the model.
+    The accessor for the @slot[gtk:sort-list-model]{n-items} slot returns the
+    number of items contained in the model.
   @end{short}
   @see-class{g:sort-list-model}
   @see-function{g:list-model-n-items}")
@@ -287,15 +284,14 @@
 (setf (liber:alias-for-function 'sort-list-model-pending)
       "Accessor"
       (documentation 'sort-list-model-pending 'function)
- "@version{2025-08-17}
+ "@version{2026-08-17}
   @syntax{(gtk:sort-list-model-pending object) => pending}
   @argument[object]{a @class{gtk:sort-list-model} object}
   @argument[pending]{an unsigned integer for the estimate of unsorted items
     remaning}
   @begin{short}
-    The accessor for the @slot[gtk:sort-list-model]{pending} slot of the
-    @class{gtk:sort-list-model} class gets or sets the estimate of unsorted
-    items remaining.
+    The accessor for the @slot[gtk:sort-list-model]{pending} slot gets or sets
+    the estimate of unsorted items remaining.
   @end{short}
 
   The estimate is the number of items that would still need to be sorted to
@@ -328,15 +324,15 @@
 (setf (liber:alias-for-function 'sort-list-model-section-sorter)
       "Accessor"
       (documentation 'sort-list-model-section-sorter 'function)
- "@version{2025-08-17}
+ "@version{2026-08-17}
   @syntax{(gtk:sort-list-model-section-sorter object) => sorter}
   @syntax{(setf (gtk:sort-list-model-section-sorter object) sorter)}
   @argument[object]{a @class{gtk:sort-list-model} object}
   @argument[sorter]{a @class{gtk:sorter} object to sort @arg{object} with}
   @begin{short}
-    The accessor for the @slot[gtk:sort-list-model]{section-sorter} slot of the
-    @class{gtk:sort-list-model} class gets or sets the section sorter that is
-    used to sort items of the list model into sections.
+    The accessor for the @slot[gtk:sort-list-model]{section-sorter} slot gets
+    or sets the section sorter that is used to sort items of the list model
+    into sections.
   @end{short}
   @see-class{gtk:sort-list-model}
   @see-class{gtk:sorter}")
@@ -352,15 +348,14 @@
 (setf (liber:alias-for-function 'sort-list-model-sorter)
       "Accessor"
       (documentation 'sort-list-model-sorter 'function)
- "@version{2025-08-17}
+ "@version{2026-08-17}
   @syntax{(gtk:sort-list-model-sorter object) => sorter}
   @syntax{(setf (gtk:sort-list-model-sorter object) sorter)}
   @argument[object]{a @class{gtk:sort-list-model} object}
   @argument[sorter]{a @class{gtk:sorter} object to sort @arg{object} with}
   @begin{short}
-    The accessor for the @slot[gtk:sort-list-model]{sorter} slot of the
-    @class{gtk:sort-list-model} class gets or sets the sorter that is used to
-    sort @arg{object}.
+    The accessor for the @slot[gtk:sort-list-model]{sorter} slot gets or sets
+    the sorter that is used to sort @arg{object}.
   @end{short}
   @see-class{gtk:sort-list-model}
   @see-class{gtk:sorter}")

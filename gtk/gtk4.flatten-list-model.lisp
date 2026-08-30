@@ -2,7 +2,7 @@
 ;;; gtk4.flatten-list-model.lisp
 ;;;
 ;;; The documentation in this file is taken from the GTK 4 Reference Manual
-;;; version 4.20 and modified to document the Lisp binding to the GTK library,
+;;; version 4.22 and modified to document the Lisp binding to the GTK library,
 ;;; see <http://www.gtk.org>. The API documentation for the Lisp binding is
 ;;; available at <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -116,14 +116,13 @@
 (setf (liber:alias-for-function 'flatten-list-model-item-type)
       "Accessor"
       (documentation 'flatten-list-model-item-type 'function)
- "@version{2025-08-17}
+ "@version{2026-08-30}
   @syntax{(gtk:flatten-list-model-item-type object) => gtype}
   @argument[object]{a @class{gtk:flatten-list-model} object}
   @argument[gtype]{a @class{g:type-t} type ID}
   @begin{short}
-    The accessor for the @slot[gtk:flatten-list-model]{item-type} slot of the
-    @class{gtk:flatten-list-model} class returns the type of items contained in
-    the list model.
+    The accessor for the @slot[gtk:flatten-list-model]{item-type} slot returns
+    the type of items contained in the list model.
   @end{short}
   Items must be subclasses of the @class{g:object} class.
 
@@ -147,14 +146,14 @@
 (setf (liber:alias-for-function 'flatten-list-model-model)
       "Accessor"
       (documentation 'flatten-list-model-model 'function)
- "@version{2025-09-28}
+ "@version{2026-08-30}
   @syntax{(gtk:flatten-list-model-model object) => model}
   @syntax{(setf (gtk:flatten-list-model-model object) model)}
   @argument[object]{a @class{gtk:flatten-list-model} object}
   @argument[model]{a @class{g:list-model} object that gets flattened}
   @begin{short}
-    The accessor for the @slot[gtk:flatten-list-model]{model} slot of the
-    @class{gtk:flatten-list-model} class gets or sets the model to be flattened.
+    The accessor for the @slot[gtk:flatten-list-model]{model} slot gets or sets
+    the model to be flattened.
   @end{short}
   Returns @code{nil} if none.
   @see-class{gtk:flatten-list-model}
@@ -172,15 +171,14 @@
 (setf (liber:alias-for-function 'flatten-list-model-n-items)
       "Accessor"
       (documentation 'flatten-list-model-n-items 'function)
- "@version{2025-08-17}
+ "@version{2026-08-30}
   @syntax{(gtk:flatten-list-model-n-items object) => n-items}
   @argument[object]{a @class{gtk:flatten-list-model} object}
   @argument[n-items]{an unsigned integer for the number of items contained in
     the model}
   @begin{short}
-    The accessor for the @slot[gtk:flatten-list-model]{n-items} slot of the
-    @class{gtk:flatten-list-model} class returns the number of items contained
-    in the model.
+    The accessor for the @slot[gtk:flatten-list-model]{n-items} slot returns
+    the number of items contained in the model.
   @end{short}
   @see-class{gtk:flatten-list-model}
   @see-function{g:list-model-n-items}")
