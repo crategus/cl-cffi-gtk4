@@ -228,7 +228,18 @@
 ;;; gdk_keyval_to_unicode
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gdk_keyval_to_unicode" keyval-to-unicode) :uint32
+(cffi:define-foreign-type unichar ()
+  ()
+  (:actual-type :uint32)
+  (:simple-parser unichar))
+
+(defmethod cffi:translate-from-foreign (value (type unichar))
+  (code-char value))
+
+(defmethod cffi:translate-to-foreign (value (type unichar))
+  (char-code value))
+
+(cffi:defcfun ("gdk_keyval_to_unicode" keyval-to-unicode) unichar
  #+liber-documentation
  "@version{2025-08-02}
   @argument[keyval]{an unsigned integer for the key value}
@@ -264,7 +275,7 @@
     Convert from a ISO10646 character to a GDK key value.
   @end{short}
   @see-function{gdk:keyval-to-unicode}"
-  (unicode :uint32))
+  (unicode unichar))
 
 (export 'unicode-to-keyval)
 
